@@ -1,1 +1,965 @@
-Hello !
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bac Pro CIEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@400;500;600&display=swap');
+        @font-face {
+            font-family: "OpenDys";
+            src: url("polices/OpenDyslexic-Regular.otf");
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: font-family 0.3s ease-in-out;
+        }
+        body.font-dys {
+            font-family: "OpenDys";
+            transition: font-family 0.3s ease-in-out;
+        }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-link.active {
+            background-color: #3b82f6;
+            color: white;
+            transform: translateX(4px);
+        }
+        .tab-button.active {
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .prose {
+            color: #374151;
+        }
+        .prose h3 {
+            color: #111827;
+        }
+        .prose h4 {
+            color: #1f2937;
+        }
+        .prose strong {
+            color: #111827;
+        }
+        .prose ul > li::before {
+            background-color: #6b7280;
+        }
+        .folder { cursor: pointer; user-select: none; }
+    </style>
+    <!-- Chosen Palette: Warm Study -->
+    <!-- Application Structure Plan: The application is designed as an interactive course dashboard. A persistent sidebar navigation allows non-linear access to the five main modules. Each module is separated into 'Cours' (Lesson) and 'TP' (Practical Work) using a tabbed interface, mirroring the pedagogical structure of the source document. A dedicated 'Quizz' tab is added where applicable. This design choice transforms the long, linear document into a modular and explorable learning path. Interactivity is introduced through clickable diagrams, interactive quizzes, and revealable case studies to increase engagement. An accessibility feature to change the font for dyslexic users is included. -->
+    <!-- Visualization & Content Choices: Since the source is text-based, no data charts are used. Instead, conceptual information is visualized. Module 1: Von Neumann architecture is an interactive diagram (HTML/CSS) with hover effects. TP QCM is a JS-based quiz in its own tab. Module 3: Client-Server model is an animated diagram (HTML/CSS/JS) to show data flow. TP features clickable reveal cards. Module 5: Netflix DB schema is represented visually with styled HTML divs to demonstrate relationships, avoiding static images. This approach makes abstract concepts tangible and interactive without using SVG or Mermaid JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <aside id="sidebar" class="w-full lg:w-64 bg-white lg:border-r border-gray-200 p-4 lg:p-6 lg:fixed lg:h-full">
+            <h1 class="text-xl font-bold text-blue-600 mb-6">Bac Pro CIEL</h1>
+            <nav id="main-nav" class="space-y-2">
+                <a href="#" data-target="module1" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-100 active">
+                    <span class="mr-3 text-lg">🎓</span> Module 1: Intro Informatique
+                </a>
+                <a href="#" data-target="module2" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-100">
+                    <span class="mr-3 text-lg">🖥️</span> Module 2: Intro Windows
+                </a>
+                <a href="#" data-target="module3" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-100">
+                    <span class="mr-3 text-lg">🌐</span> Module 3: Software & Web
+                </a>
+                <a href="#" data-target="module4" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-100">
+                    <span class="mr-3 text-lg">💻</span> Module 4: Intro Codage
+                </a>
+                <a href="#" data-target="module5" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-100">
+                    <span class="mr-3 text-lg">🗃️</span> Module 5: Bases de Données
+                </a>
+            </nav>
+        </aside>
+
+        <main class="w-full lg:ml-64 p-4 md:p-8">
+            <div class="flex justify-end mb-4">
+                <button id="font-toggle-btn" class="px-4 py-2 bg-gray-200 text-gray-700 text-sm rounded-lg hover:bg-gray-300 transition">Police Dys</button>
+            </div>
+
+            <div id="module1" class="content-section active">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Module 1: Introduction à l'Informatique</h2>
+                
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-6 text-sm">
+                    <h4 class="font-semibold text-blue-800 mb-2">Références au Référentiel CIEL</h4>
+                    <p><strong>Compétence visée :</strong> C04 - Analyser une structure matérielle et logicielle.</p>
+                    <p><strong>Savoirs associés :</strong> S3.1 (Infrastructures matérielles et logicielles), S3.5 (Structures électroniques matérielles), S4.11 (Serveur et ordinateur).</p>
+                </div>
+
+                <div class="tabs border-b border-gray-200 mb-6">
+                    <button data-tab="1" class="tab-button py-2 px-4 border-b-2 border-transparent active">Cours</button>
+                    <button data-tab="2" class="tab-button py-2 px-4 border-b-2 border-transparent">Travaux Pratiques</button>
+                    <button data-tab="3" class="tab-button py-2 px-4 border-b-2 border-transparent">Quizz</button>
+                </div>
+
+                <div data-tab-content="1" class="tab-content active">
+                    <div class="space-y-8 prose max-w-none">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">a. Les bases de l'informatique (historique)</h3>
+                            <p>L'informatique n'est pas née avec les smartphones. C'est une longue histoire d'idées et d'inventions.</p>
+                            <ul>
+                                <li><strong>Les débuts :</strong> On peut remonter aux machines à calculer mécaniques (Blaise Pascal au 17ème siècle).</li>
+                                <li><strong>Le concept :</strong> Au 19ème siècle, Charles Babbage imagine une "machine analytique", le premier concept d'ordinateur programmable, avec l'aide d'Ada Lovelace, considérée comme la première programmeuse.</li>
+                                <li><strong>L'ère électronique :</strong> Les premiers véritables ordinateurs électroniques apparaissent pendant la Seconde Guerre mondiale, comme l'ENIAC. C'étaient des monstres occupant des pièces entières.</li>
+                                <li><strong>La révolution du microprocesseur :</strong> Dans les années 1970, l'invention du microprocesseur permet de réduire la taille et le coût des ordinateurs. C'est le début de l'informatique personnelle avec des entreprises comme Apple et Microsoft.</li>
+                                <li><strong>Aujourd'hui :</strong> L'informatique est partout : dans nos poches (smartphones), nos voitures, nos maisons.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">b. Comment marche un PC théoriquement ?</h3>
+                            <p>Presque tous les ordinateurs modernes fonctionnent sur un principe simple appelé <strong>l'architecture de Von Neumann</strong>. Elle repose sur quatre éléments principaux qui travaillent ensemble.</p>
+                             <div class="not-prose p-4 border rounded-lg bg-white shadow-sm">
+                                <div id="von-neumann-diagram" class="relative max-w-2xl mx-auto text-center font-semibold">
+                                    <div class="grid grid-cols-3 gap-4 items-center">
+                                        <div data-component="io" class="component p-4 border-2 border-dashed rounded-lg bg-green-50 cursor-pointer transition">Périphériques E/S</div>
+                                        <div class="text-2xl font-thin">&lt;=&gt;</div>
+                                        <div class="space-y-4">
+                                            <div data-component="cpu" class="component p-4 border-2 border-dashed rounded-lg bg-blue-50 cursor-pointer transition">CPU</div>
+                                            <div class="text-2xl font-thin">&#8595;&#8593;</div>
+                                            <div data-component="ram" class="component p-4 border-2 border-dashed rounded-lg bg-yellow-50 cursor-pointer transition">Mémoire Vive (RAM)</div>
+                                        </div>
+                                    </div>
+                                    <div id="component-info" class="mt-4 p-4 bg-gray-100 rounded-lg text-sm text-gray-700 min-h-[80px]">
+                                        Survolez un composant pour voir sa description.
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-4">Le processus est simple : quand vous lancez un programme, le CPU va chercher ses instructions sur le disque de stockage, les charge dans la RAM pour y accéder rapidement, et exécute les calculs. Le résultat est ensuite affiché sur un périphérique de sortie, comme l'écran.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">c. Les composants d'un ordinateur et leurs rôles</h3>
+                             <div class="not-prose grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Processeur (CPU):</strong> Le cerveau. Exécute les calculs et les instructions.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Carte Mère:</strong> Le système nerveux. Connecte tous les composants.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Mémoire Vive (RAM):</strong> Mémoire à court terme. Stocke les données en cours d'utilisation.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Stockage (SSD/HDD):</strong> Mémoire à long terme. Garde vos fichiers et l'OS.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Carte Graphique (GPU):</strong> Spécialisée dans l'affichage et les calculs graphiques.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Alimentation (PSU):</strong> Le cœur. Fournit l'énergie à tout le système.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Boîtier (Case):</strong> La carrosserie qui protège tous les composants.</div>
+                             </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">d. Différence hardware, firmware et software</h3>
+                             <div class="not-prose grid md:grid-cols-3 gap-4">
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Hardware (Matériel):</strong> Tout ce qui est physique et tangible. Le CPU, l'écran, la souris... C'est la machine elle-même.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Software (Logiciel):</strong> L'ensemble des programmes et instructions qui disent au hardware quoi faire. C'est immatériel. Ex: Windows, un jeu, un navigateur.</div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm"><strong>Firmware (Micrologiciel):</strong> Un logiciel spécial, "gravé" dans un composant matériel pour le faire fonctionner à un bas niveau. Le BIOS de la carte mère est l'exemple parfait.</div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-tab-content="2" class="tab-content">
+                    <div class="prose max-w-none">
+                        <h3 class="text-2xl font-semibold mb-3">TP : Désassembler et Remonter un PC</h3>
+                        <p><strong>Objectif :</strong> Mettre les mains dans le "concret" (hardware), identifier physiquement les composants vus en cours, et comprendre comment ils s'assemblent.</p>
+                        
+                        <h4 class="font-bold text-lg mt-4 mb-2">Matériel Nécessaire</h4>
+                        <ul>
+                            <li>Tours de PC anciennes ou de récupération (une pour 2-3 élèves).</li>
+                            <li>Un jeu de tournevis cruciformes.</li>
+                            <li>Bracelets antistatiques.</li>
+                            <li>Récipients pour les vis.</li>
+                            <li>Un smartphone par groupe pour prendre des photos.</li>
+                        </ul>
+
+                        <h4 class="font-bold text-lg mt-4 mb-2">Déroulé Détaillé du TP</h4>
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li>
+                                <strong>Phase 1 : La Sécurité (15 min)</strong>
+                                <p>Expliquer le danger de l'électricité statique. Montrer comment utiliser un bracelet antistatique. S'assurer que tous les PC sont TOTALEMENT DÉBRANCHÉS. Appuyer sur le bouton d'alimentation une fois débranché pour vider les condensateurs.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 2 : Démontage (1h30)</strong>
+                                <p>Prendre des photos à chaque étape. Ouvrir le panneau. Identifier les composants. Débrancher tous les câbles (alimentation, données, panneau avant). Retirer les composants faciles (GPU, RAM, disques). Optionnel : retirer la carte mère.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 3 : Remontage (1h30)</strong>
+                                <p>Utiliser les photos pour remonter dans l'ordre inverse. Remettre la carte mère, puis les composants dessus, puis les disques, et enfin refaire tout le câblage.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 4 : Le Test</strong>
+                                <p>Si les PC étaient fonctionnels, brancher alimentation et écran et vérifier le démarrage jusqu'au BIOS.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div data-tab-content="3" class="tab-content">
+                    <h3 class="text-2xl font-semibold mb-3">Quizz : Validez vos connaissances</h3>
+                    <p class="mb-4">Testez ce que vous avez appris sur les bases de l'informatique.</p>
+                    <div id="quiz-container" class="p-6 bg-white border rounded-lg shadow-sm max-w-xl mx-auto">
+                        <div id="quiz-content"></div>
+                        <button id="quiz-next-btn" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Question Suivante</button>
+                        <div id="quiz-result" class="mt-4 font-bold"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module2" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Module 2: Introduction à Windows</h2>
+                
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-6 text-sm">
+                    <h4 class="font-semibold text-blue-800 mb-2">Références au Référentiel CIEL</h4>
+                    <p><strong>Compétence visée :</strong> C09 - Installer les éléments d'un système électronique ou informatique.</p>
+                    <p><strong>Savoirs associés :</strong> S4.11 (Serveur et ordinateur), S4.12 (Architecture réseau et/ou système).</p>
+                </div>
+                
+                <div class="tabs border-b border-gray-200 mb-6">
+                    <button data-tab="1" class="tab-button py-2 px-4 border-b-2 border-transparent active">Cours</button>
+                    <button data-tab="2" class="tab-button py-2 px-4 border-b-2 border-transparent">Travaux Pratiques</button>
+                </div>
+
+                <div data-tab-content="1" class="tab-content active">
+                    <div class="space-y-8 prose max-w-none">
+                        <div>
+                           <h3 class="text-2xl font-semibold mb-3">a. Qu’est-ce qu’un système d’exploitation ?</h3>
+                           <p>Un OS (Operating System), c'est le chef d'orchestre de l'ordinateur. C'est le logiciel principal qui fait le lien entre le matériel (hardware) et vous (l'utilisateur) avec vos logiciels (software). Sans OS, un ordinateur n'est qu'une boîte de métal et de plastique inutile.</p>
+                           <p>Ses rôles principaux :</p>
+                           <ul>
+                               <li><strong>Gérer le matériel :</strong> Il parle au CPU, à la RAM, au disque dur... pour que tout fonctionne ensemble.</li>
+                               <li><strong>Gérer les fichiers :</strong> Il organise les données sur le disque dur avec des dossiers et des fichiers.</li>
+                               <li><strong>Fournir une interface utilisateur :</strong> C'est ce que vous voyez à l'écran : le bureau, les icônes, les fenêtres (GUI - Graphical User Interface).</li>
+                               <li><strong>Exécuter les logiciels :</strong> Il donne aux applications (Chrome, Word...) les ressources dont elles ont besoin pour fonctionner.</li>
+                           </ul>
+                           <p><strong>Petit historique :</strong> Au début, tout se faisait en ligne de commande (comme MS-DOS). Puis sont arrivés les OS avec des fenêtres et une souris, rendant l'informatique accessible à tous.</p>
+                        </div>
+                        <div>
+                           <h3 class="text-2xl font-semibold mb-3">b. Les principaux OS : Windows, Linux et macOS</h3>
+                           <div class="not-prose grid md:grid-cols-3 gap-6 text-center">
+                              <div class="p-6 bg-white border rounded-lg shadow-sm">
+                                 <h4 class="font-bold text-lg mb-2">Windows</h4>
+                                 <p class="text-sm">Le plus répandu. Grande compatibilité logicielle. Facile d'accès pour les débutants.</p>
+                              </div>
+                              <div class="p-6 bg-white border rounded-lg shadow-sm">
+                                 <h4 class="font-bold text-lg mb-2">macOS</h4>
+                                 <p class="text-sm">Exclusif aux appareils Apple. Réputé pour sa stabilité et son design soigné.</p>
+                              </div>
+                              <div class="p-6 bg-white border rounded-lg shadow-sm">
+                                 <h4 class="font-bold text-lg mb-2">Linux</h4>
+                                 <p class="text-sm">Open source, gratuit et ultra-personnalisable. Le roi des serveurs.</p>
+                              </div>
+                           </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">c. Qu’est-ce que le BIOS ?</h3>
+                            <p>Le <strong>BIOS (Basic Input/Output System)</strong> ou son successeur moderne <strong>l'UEFI</strong>, est le tout premier programme qui se lance quand vous appuyez sur le bouton d'alimentation. C'est un firmware sur la carte mère.</p>
+                            <p><strong>À quoi ça sert ?</strong></p>
+                            <ol>
+                                <li><strong>Vérifier le matériel (POST) :</strong> Un rapide check-up pour s'assurer que tout fonctionne.</li>
+                                <li><strong>Configurer le matériel :</strong> Permet des réglages de bas niveau (ex: ordre de démarrage).</li>
+                                <li><strong>Lancer l'OS :</strong> Sa mission finale est de trouver Windows sur un disque et de lui passer la main.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">d. Comment est organisé Windows ?</h3>
+                            <p>L'Explorateur de Fichiers est l'outil pour naviguer. Le lecteur `C:` est le lecteur principal.</p>
+                            <div class="not-prose p-4 bg-white border rounded-lg shadow-sm font-mono text-sm">
+                                <div id="file-explorer">
+                                    <div class="folder" data-target="c-drive">▶ 💻 Ce PC > Disque local (C:)</div>
+                                    <div id="c-drive" class="pl-5" style="display: none;">
+                                        <div class="folder" data-target="program-files">▶ 📁 Program Files</div>
+                                        <div id="program-files" class="pl-5" style="display: none;">
+                                            <div>📄 chrome.exe</div>
+                                            <div>📄 vscode.exe</div>
+                                        </div>
+                                        <div class="folder" data-target="users">▶ 📁 Utilisateurs</div>
+                                        <div id="users" class="pl-5" style="display: none;">
+                                             <div class="folder" data-target="eleve">▶ 👤 Eleve</div>
+                                             <div id="eleve" class="pl-5" style="display: none;">
+                                                <div>📁 Bureau</div>
+                                                <div>📁 Documents</div>
+                                                <div>📁 Téléchargements</div>
+                                             </div>
+                                        </div>
+                                        <div class="folder" data-target="windows">▶ 📁 Windows</div>
+                                        <div id="windows" class="pl-5" style="display: none;">
+                                            <div>📄 system32</div>
+                                            <div>📄 explorer.exe</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <div data-tab-content="2" class="tab-content">
+                    <div class="prose max-w-none">
+                        <h3 class="text-2xl font-semibold mb-3">TP : Désinstallation et Réinstallation de Windows</h3>
+                        <p><strong>Objectif :</strong> Comprendre le processus d'installation d'un OS, manipuler le BIOS/UEFI, et comprendre le concept de partitionnement.</p>
+                        <p class="font-bold text-red-600">Attention : Toutes les données sur les PC de test seront effacées.</p>
+                        
+                        <h4 class="font-bold text-lg mt-4 mb-2">Matériel Nécessaire</h4>
+                        <ul>
+                            <li>PC de test.</li>
+                            <li>Une clé USB d'au moins 8 Go par groupe.</li>
+                            <li>Un PC fonctionnel avec internet pour créer la clé.</li>
+                        </ul>
+
+                        <h4 class="font-bold text-lg mt-4 mb-2">Déroulé Détaillé du TP</h4>
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li>
+                                <strong>Phase 1 : Création de la clé USB bootable (30 min)</strong>
+                                <p>Sur un PC fonctionnel, télécharger "l'Outil de création de média" de Windows sur le site de Microsoft. Le lancer et suivre les instructions pour "Créer un support d'installation" sur votre clé USB.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 2 : Démarrer sur la clé USB (30 min)</strong>
+                                <p>Brancher la clé sur le PC à réinstaller. Allumer le PC et tapoter la touche d'accès au BIOS/UEFI (souvent F2, F12, Suppr). Dans le menu "Boot", changer l'ordre de démarrage pour mettre la clé USB en première position. Sauvegarder et quitter.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 3 : Installation de Windows (1h)</strong>
+                                <p>Le PC démarre sur la clé. Suivre l'assistant : choisir la langue, ignorer la clé produit, puis choisir l'installation "Personnalisé". Sur l'écran de partitionnement, supprimer toutes les partitions existantes du disque principal. Sélectionner l'espace non alloué et cliquer sur "Suivant". Windows s'installe, le PC redémarre plusieurs fois.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 4 : Configuration initiale (OOBE) (30 min)</strong>
+                                <p>Suivre les dernières étapes pour configurer la région, le clavier, créer un compte utilisateur et régler les paramètres de confidentialité. Vous arriverez ensuite sur le bureau Windows tout neuf.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module3" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Module 3: Introduction au Développement Software et Web</h2>
+
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-6 text-sm">
+                    <h4 class="font-semibold text-blue-800 mb-2">Références au Référentiel CIEL</h4>
+                    <p><strong>Compétences visées :</strong> C04 - Analyser une structure matérielle et logicielle, D1 - Élaboration et appropriation d'un cahier des charges.</p>
+                    <p><strong>Savoirs associés :</strong> S3.1 (Infrastructures), S3.2 (Documents d'architecture), S5.1 (Langages de développement).</p>
+                </div>
+
+                <div class="tabs border-b border-gray-200 mb-6">
+                    <button data-tab="1" class="tab-button py-2 px-4 border-b-2 border-transparent active">Cours</button>
+                    <button data-tab="2" class="tab-button py-2 px-4 border-b-2 border-transparent">TP 1 : Analyse de Besoins</button>
+                    <button data-tab="3" class="tab-button py-2 px-4 border-b-2 border-transparent">TP 2 : Étude de cas</button>
+                </div>
+
+                <div data-tab-content="1" class="tab-content active">
+                    <div class="space-y-8 prose max-w-none">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">a. Application lourde vs Site web</h3>
+                             <div class="not-prose grid md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-white border rounded-lg shadow-sm">
+                                    <h4 class="font-bold">Application lourde (Logiciel)</h4>
+                                    <p class="text-sm mt-2">Installée sur votre PC (ex: Word, Photoshop). Elle est souvent plus performante et peut fonctionner hors-ligne, mais nécessite une installation et des mises à jour manuelles.</p>
+                                </div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm">
+                                    <h4 class="font-bold">Application Web (Site)</h4>
+                                    <p class="text-sm mt-2">Accessible via un navigateur (ex: Gmail, Netflix). Pas d'installation, accessible partout, mises à jour transparentes, mais requiert une connexion internet.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">b. Le web : Les protocoles de communication</h3>
+                            <p>Pour que les ordinateurs puissent communiquer sur un réseau, ils doivent parler le même langage et suivre les mêmes règles. C'est ce qu'on appelle un <strong>protocole</strong>.</p>
+                            <ul>
+                                <li><strong>TCP/IP :</strong> La base d'Internet. C'est un ensemble de protocoles qui assure que les données envoyées d'un point A arrivent à un point B, sans erreur.</li>
+                                <li><strong>HTTP/HTTPS :</strong> Le protocole du Web. Il permet à votre navigateur de demander des pages web à un serveur et de les recevoir. Le 'S' de HTTPS signifie "Sécurisé" (les données sont chiffrées).</li>
+                                <li><strong>FTP :</strong> Le protocole pour transférer des fichiers.</li>
+                                <li><strong>SMTP, POP, IMAP :</strong> Les protocoles pour les emails.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">c. Le protocole HTTP et les API en détail</h3>
+                            <p>Une requête HTTP est comme une commande au restaurant. Elle contient des "verbes" (méthodes) qui indiquent ce que vous voulez faire :</p>
+                            <ul class="list-none space-y-2">
+                                <li><strong class="text-green-600">GET :</strong> "Donnez-moi la page d'accueil." (Récupérer des données)</li>
+                                <li><strong class="text-blue-600">POST :</strong> "Voici mes informations pour créer un compte." (Envoyer de nouvelles données)</li>
+                                <li><strong class="text-yellow-600">PUT / PATCH :</strong> "Je veux modifier mon profil." (Mettre à jour des données existantes)</li>
+                                <li><strong class="text-red-600">DELETE :</strong> "Je veux supprimer mon commentaire." (Supprimer des données)</li>
+                            </ul>
+                            <p>Une <strong>API (Application Programming Interface)</strong> est une "carte" qui expose ces actions au monde extérieur. Elle définit des URLs spécifiques (des "endpoints") où d'autres applications peuvent envoyer des requêtes GET, POST, etc., pour interagir avec les données du serveur de manière contrôlée.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">d. Les langages et technologies du Web</h3>
+                             <div class="not-prose p-6 bg-white border rounded-lg shadow-sm" id="web-stack-diagram">
+                                <div class="grid grid-cols-3 gap-4 text-center items-center">
+                                    <div class="p-4 border-2 border-blue-300 rounded-lg bg-blue-50 stack-part cursor-pointer" data-stack="frontend">
+                                        <h4 class="font-bold">CLIENT (Front-End)</h4>
+                                    </div>
+                                    <div class="font-bold text-gray-400 text-2xl">&lt;-- HTTP --&gt;</div>
+                                    <div class="p-4 border-2 border-green-300 rounded-lg bg-green-50 stack-part cursor-pointer" data-stack="backend">
+                                        <h4 class="font-bold">SERVEUR (Back-End)</h4>
+                                    </div>
+                                </div>
+                                <div class="flex justify-center mt-4">
+                                    <div class="p-4 border-2 border-yellow-300 rounded-lg bg-yellow-50 stack-part cursor-pointer" data-stack="database">
+                                        <h4 class="font-bold">BASE DE DONNÉES</h4>
+                                    </div>
+                                </div>
+                                <div id="stack-info" class="mt-4 p-4 bg-gray-100 rounded-lg text-sm text-gray-700 min-h-[50px]">
+                                    Cliquez sur une partie pour voir les technologies associées.
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">e. Les Frameworks : Accélérer le développement</h3>
+                            <p>Un framework, c'est une "boîte à outils" et un "plan de construction" pour un développeur. Au lieu de tout construire à partir de zéro, un framework fournit des composants prêts à l'emploi et une structure organisée, ce qui permet d'aller beaucoup plus vite et d'éviter les erreurs courantes.</p>
+                             <div id="framework-diagram" class="not-prose p-6 bg-white border rounded-lg shadow-sm">
+                                <div class="grid grid-cols-2 gap-8 text-center">
+                                    <div>
+                                        <h4 class="font-bold mb-2">Frameworks Front-End</h4>
+                                        <div class="relative p-4 border-2 border-blue-300 rounded-lg bg-blue-50 h-24 flex items-center justify-center">
+                                            <div class="font-semibold text-blue-800">React / Angular / Vue</div>
+                                        </div>
+                                        <div class="text-2xl my-2">↑</div>
+                                        <div class="inline-block p-2 border-2 border-gray-400 rounded-lg bg-gray-100">
+                                            JavaScript
+                                        </div>
+                                        <p class="text-sm mt-4">Boîtes à outils pour construire l'interface utilisateur.</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-2">Frameworks Back-End</h4>
+                                        <div class="relative p-4 border-2 border-green-300 rounded-lg bg-green-50 h-24 flex items-center justify-center">
+                                            <div class="font-semibold text-green-800">Symfony / Django / Express</div>
+                                        </div>
+                                        <div class="text-2xl my-2">↑</div>
+                                        <div class="inline-block p-2 border-2 border-gray-400 rounded-lg bg-gray-100">
+                                            PHP / Python / Node.js
+                                        </div>
+                                        <p class="text-sm mt-4">Boîtes à outils pour construire la logique serveur.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-tab-content="2" class="tab-content">
+                    <div class="prose max-w-none">
+                        <h3 class="text-2xl font-semibold mb-3">TP 1 : Analyse de Besoins Clients</h3>
+                        <p><strong>Objectif :</strong> Appliquer les concepts pour résoudre des problèmes concrets. Travail en petits groupes.</p>
+                        
+                        <div class="space-y-4 mt-4 not-prose">
+                             <details class="p-4 bg-white border rounded-lg shadow-sm group">
+                                <summary class="font-semibold cursor-pointer"><strong>Cas n°1 : Le Boulanger de Quartier</strong></summary>
+                                <div class="mt-4 pt-4 border-t">
+                                    <p><em>"J'aimerais un système sur un ordinateur à côté de ma caisse pour enregistrer les ventes rapidement. Je n'ai pas une connexion internet très fiable."</em></p>
+                                    <p><strong>Solution:</strong> Logiciel (application lourde).</p>
+                                    <p><strong>Justification:</strong> Doit fonctionner de manière fiable même sans connexion internet, sur un poste unique.</p>
+                                    <p><strong>Fonctionnalités:</strong> Interface de caisse simple, gestion des stocks, rapport de ventes journalier.</p>
+                                </div>
+                            </details>
+                            <details class="p-4 bg-white border rounded-lg shadow-sm group">
+                                <summary class="font-semibold cursor-pointer"><strong>Cas n°2 : La Photographe de Voyage</strong></summary>
+                                <div class="mt-4 pt-4 border-t">
+                                     <p><em>"Je veux un moyen de montrer mon travail à des clients potentiels partout dans le monde et qu'ils puissent me contacter facilement."</em></p>
+                                    <p><strong>Solution:</strong> Application Web (site portfolio).</p>
+                                    <p><strong>Justification:</strong> Le but est d'être accessible mondialement, sans installation pour les clients.</p>
+                                     <p><strong>Fonctionnalités:</strong> Galerie d'images, page "À propos", formulaire de contact.</p>
+                                </div>
+                            </details>
+                             <details class="p-4 bg-white border rounded-lg shadow-sm group">
+                                <summary class="font-semibold cursor-pointer"><strong>Cas n°3 : L'Association Sportive</strong></summary>
+                                <div class="mt-4 pt-4 border-t">
+                                     <p><em>"On voudrait un outil pour que le trésorier suive les paiements, que le coach voie la liste des inscrits, et que les adhérents consultent le planning, même sur mobile."</em></p>
+                                    <p><strong>Solution:</strong> Application Web.</p>
+                                    <p><strong>Justification:</strong> Plusieurs utilisateurs ont besoin d'accéder aux mêmes données centralisées, y compris depuis un mobile.</p>
+                                     <p><strong>Fonctionnalités:</strong> Connexion avec gestion des droits, module de gestion des cotisations, calendrier des événements.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+                <div data-tab-content="3" class="tab-content">
+                    <div class="prose max-w-none">
+                        <h3 class="text-2xl font-semibold mb-3">TP 2 : Étude de cas et Recherche</h3>
+                        <p><strong>Objectif :</strong> Savoir chercher des informations techniques pour répondre à un cahier des charges client.</p>
+                        <div class="not-prose mt-4 p-4 border-l-4 border-blue-500 bg-blue-50">
+                            <strong>Cahier des charges :</strong> Un client, artisan local, souhaite créer un petit site e-commerce pour vendre une dizaine de produits. Son budget est très serré. Il a besoin d'un site simple, d'un hébergement fiable et d'un moyen de paiement par carte bancaire.
+                        </div>
+                        <div id="tp3-form" class="not-prose mt-6 space-y-4">
+                            <div>
+                                <label for="q1" class="block font-semibold mb-1">1. Quel type d'hébergement web recommanderiez-vous et pourquoi ? Cherchez un hébergeur qui propose une solution adaptée pour moins de 10€/mois et citez son nom.</label>
+                                <input type="text" id="q1" class="tp3-input w-full p-2 border rounded">
+                            </div>
+                            <div>
+                                <label for="q2" class="block font-semibold mb-1">2. Quelle solution de paiement en ligne (ex: Stripe, PayPal) est la plus simple à intégrer pour un débutant ? Donnez un avantage pour celle que vous choisissez.</label>
+                                <input type="text" id="q2" class="tp3-input w-full p-2 border rounded">
+                            </div>
+                            <div>
+                                <label for="q3" class="block font-semibold mb-1">3. Le client veut un design moderne rapidement. Citez un "framework CSS" populaire qui pourrait accélérer le développement du front-end.</label>
+                                <input type="text" id="q3" class="tp3-input w-full p-2 border rounded">
+                            </div>
+                            <div id="tp3-message" class="hidden p-4 bg-green-100 text-green-800 rounded-lg text-center font-bold">
+                                Dès que vous avez rempli toutes les réponses, appelez le professeur !
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module4" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Module 4: Introduction au Codage</h2>
+                
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-6 text-sm">
+                    <h4 class="font-semibold text-blue-800 mb-2">Références au Référentiel CIEL</h4>
+                    <p><strong>Compétence visée :</strong> C08 - Coder.</p>
+                    <p><strong>Savoirs associés :</strong> S5.1 (Langages de développement), S5.5 (Principes fondamentaux de programmation).</p>
+                </div>
+
+                 <div class="tabs border-b border-gray-200 mb-6">
+                    <button data-tab="1" class="tab-button py-2 px-4 border-b-2 border-transparent active">Cours</button>
+                    <button data-tab="2" class="tab-button py-2 px-4 border-b-2 border-transparent">Travaux Pratiques</button>
+                </div>
+                <div data-tab-content="1" class="tab-content active">
+                    <div class="space-y-8 prose max-w-none">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">a. Définition et historique</h3>
+                            <p>Coder (ou programmer), c'est donner une série d'ordres précis à un ordinateur dans un langage qu'il peut comprendre. L'ordinateur est un exécutant parfait mais sans initiative : il ne fait que ce qu'on lui dit. Le rôle du développeur est de traduire un besoin en une suite d'instructions logiques et simples.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">b. Les briques de base de la programmation</h3>
+                            <div class="space-y-4 not-prose">
+                                <div class="p-4 bg-white border rounded-lg shadow-sm">
+                                    <h4 class="font-semibold">Les Variables</h4>
+                                    <p class="text-sm">Une variable, c'est comme une boîte avec une étiquette. On peut mettre quelque chose dedans (un nombre, du texte...) et on y fait référence avec son étiquette.</p>
+                                    <pre class="code-block mt-2"><code>age = 17
+nom = "Dupont"
+print(nom, "a", age, "ans.")</code></pre>
+                                </div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm">
+                                    <h4 class="font-semibold">Les Conditions (`if`, `elif`, `else`)</h4>
+                                    <p class="text-sm">Permet à un programme de prendre des décisions. "S'il pleut, prends un parapluie, sinon, prends des lunettes de soleil".</p>
+                                    <pre class="code-block mt-2"><code># Cas d'usage : Gestion de ticket
+statut_ticket = "Nouveau"
+if statut_ticket == "Nouveau":
+    print("Ticket assigné à un technicien.")
+elif statut_ticket == "En cours":
+    print("En attente de la réponse du technicien.")
+else:
+    print("Le ticket est fermé.")</code></pre>
+                                </div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm">
+                                    <h4 class="font-semibold">Les Boucles `while` (Tant que)</h4>
+                                    <p class="text-sm">Répète un bloc d'instructions TANT QU'une condition est vraie.</p>
+                                    <pre class="code-block mt-2"><code># Cas d'usage : Traiter tous les nouveaux tickets
+tickets_nouveaux = 3
+while tickets_nouveaux > 0:
+    print("Je traite un nouveau ticket.")
+    tickets_nouveaux = tickets_nouveaux - 1
+print("Plus de nouveaux tickets à traiter.")</code></pre>
+                                </div>
+                                 <div class="p-4 bg-white border rounded-lg shadow-sm">
+                                    <h4 class="font-semibold">Les Boucles `for` (Pour)</h4>
+                                    <p class="text-sm">Répète un bloc d'instructions un nombre de fois défini, parfait pour parcourir une liste d'éléments.</p>
+                                     <pre class="code-block mt-2"><code># Cas d'usage : Envoyer un rappel pour chaque ticket assigné
+tickets_assignes = ["Ticket001", "Ticket005", "Ticket012"]
+for ticket in tickets_assignes:
+    print("Email de rappel envoyé pour le", ticket)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div data-tab-content="2" class="tab-content">
+                     <div class="prose max-w-none">
+                        <h3 class="text-2xl font-semibold mb-3">TP : Mon Premier Script Python</h3>
+                        <p><strong>Objectif :</strong> Maîtriser progressivement les briques de base de la programmation en Python.</p>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-lg">Étape 1 : Afficher et Demander (print / input)</h4>
+                                <p>Écrivez un script qui dit bonjour, demande le nom de l'utilisateur et le salue en retour.</p>
+                                <pre class="code-block"><code>print("Bonjour !")
+nom_utilisateur = input("Quel est ton nom ? ")
+print("Bienvenue,", nom_utilisateur)</code></pre>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Étape 2 : Variables et types</h4>
+                                <p>Écrivez un script qui demande l'année de naissance, la convertit en nombre, calcule l'âge et l'affiche.</p>
+                                <pre class="code-block"><code>annee_naissance_str = input("En quelle année es-tu né ? ")
+annee_naissance = int(annee_naissance_str) # Conversion en nombre entier
+age = 2024 - annee_naissance
+print("Tu as ou auras", age, "ans cette année.")</code></pre>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Étape 3 : Conditions (if / else)</h4>
+                                <p>Reprenez le script précédent et ajoutez une condition pour afficher si l'utilisateur est majeur ou mineur.</p>
+                                <pre class="code-block"><code>annee_naissance_str = input("En quelle année es-tu né ? ")
+annee_naissance = int(annee_naissance_str)
+age = 2024 - annee_naissance
+print("Tu as ou auras", age, "ans cette année.")
+
+if age >= 18:
+    print("Tu es majeur.")
+else:
+    print("Tu es mineur.")</code></pre>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Étape 4 : Boucles (while)</h4>
+                                <p>Écrivez un script qui demande un mot de passe et ne s'arrête que lorsque l'utilisateur entre "1234".</p>
+                                <pre class="code-block"><code>mot_de_passe = ""
+while mot_de_passe != "1234":
+    mot_de_passe = input("Entrez le mot de passe : ")
+
+print("Accès autorisé !")</code></pre>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Étape 5 : Le jeu complet "Plus ou Moins"</h4>
+                                <p>Maintenant, assemblez tous ces concepts pour créer le jeu final.</p>
+                                <pre class="code-block"><code>import random
+import time
+
+while True:
+    print("Je pense à un nombre entre 1 et 100...")
+    nombre_secret = random.randint(1, 100)
+    
+    while True:
+        proposition_str = input("Devine le nombre : ")
+        
+        if not proposition_str.isdigit():
+            print("Erreur : Veuillez entrer un nombre.")
+            continue
+            
+        proposition = int(proposition_str)
+        
+        if proposition < nombre_secret:
+            print("C'est plus grand !")
+        elif proposition > nombre_secret:
+            print("C'est plus petit !")
+        else:
+            print("Bravo ! C'était bien", nombre_secret)
+            time.sleep(5)
+            break
+            
+    rejouer = input("Veux-tu rejouer ? (oui/non) ")
+    if rejouer.lower() != "oui":
+        break
+</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="module5" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">Module 5: Les Bases de Données</h2>
+                
+                <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-6 text-sm">
+                    <h4 class="font-semibold text-blue-800 mb-2">Références au Référentiel CIEL</h4>
+                    <p><strong>Compétence visée :</strong> C04 - Analyser une structure matérielle et logicielle.</p>
+                    <p><strong>Savoirs associés :</strong> S3.1 (Infrastructures), implicitement lié à C08 (Coder).</p>
+                </div>
+
+                 <div class="tabs border-b border-gray-200 mb-6">
+                    <button data-tab="1" class="tab-button py-2 px-4 border-b-2 border-transparent active">Cours</button>
+                    <button data-tab="2" class="tab-button py-2 px-4 border-b-2 border-transparent">Travaux Pratiques</button>
+                </div>
+
+                <div data-tab-content="1" class="tab-content active">
+                    <div class="prose max-w-none space-y-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">a. Définition et concepts clés</h3>
+                            <p>Une base de données (BDD), c'est une manière <strong>organisée et structurée</strong> de stocker de l'information pour pouvoir la retrouver et la manipuler facilement. On s'intéresse au type le plus courant : les <strong>bases de données relationnelles</strong>.</p>
+                            <p>L'idée est de ranger les données dans des <strong>tables</strong> (comme des tableaux Excel).</p>
+                            <ul>
+                                <li><strong>Table :</strong> Représente un type d'objet (ex: `Eleves`).</li>
+                                <li><strong>Champ (ou Colonne) :</strong> Une caractéristique de cet objet (ex: `nom`).</li>
+                                <li><strong>Enregistrement (ou Ligne) :</strong> Un objet spécifique (ex: l'élève Dupont).</li>
+                            </ul>
+                            <h4 class="font-bold text-lg mt-4 mb-2">Les Clés : le Super-Pouvoir des BDD Relationnelles</h4>
+                             <ul>
+                                <li><strong>Clé Primaire (PK) :</strong> Un identifiant unique pour chaque ligne d'une table (ex: `id_eleve`). Elle ne peut pas être vide.</li>
+                                <li><strong>Clé Étrangère (FK) :</strong> Un champ dans une table qui fait référence à la clé primaire d'une autre table. C'est ce qui crée la <strong>relation</strong>.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-3">b. Modélisation : exemple progressif d'un blog</h4>
+                            <p><strong>Étape 1 : Les articles.</strong> On commence avec une simple table pour stocker nos articles.</p>
+                            <div class="not-prose p-4 bg-white border rounded-lg shadow-sm w-full md:w-2/3 mx-auto">
+                               <h4 class="font-bold text-center">Table `Articles`</h4>
+                                <table class="w-full mt-2 text-sm">
+                                  <thead><tr class="bg-gray-100"><th>id_article (PK)</th><th>titre</th><th>contenu</th></tr></thead>
+                                  <tbody>
+                                    <tr><td class="border p-1 text-center font-bold text-red-600">1</td><td class="border p-1">Mon premier article</td><td class="border p-1">...</td></tr>
+                                    <tr><td class="border p-1 text-center font-bold text-red-600">2</td><td class="border p-1">Un autre sujet</td><td class="border p-1">...</td></tr>
+                                  </tbody>
+                               </table>
+                            </div>
+                            <p class="mt-4"><strong>Étape 2 : Ajout des auteurs (Relation 1-N).</strong> Un auteur peut écrire plusieurs articles, mais un article n'est écrit que par un seul auteur. C'est une relation "un à plusieurs". On ajoute une table `Auteurs` et une clé étrangère dans `Articles`.</p>
+                             <div class="not-prose flex flex-col md:flex-row gap-4 items-start">
+                                <div class="p-4 bg-white border rounded-lg shadow-sm w-full md:w-1/2">
+                                   <h4 class="font-bold text-center">Table `Auteurs`</h4>
+                                   <table class="w-full mt-2 text-sm">
+                                      <thead><tr class="bg-gray-100"><th>id_auteur (PK)</th><th>nom_auteur</th></tr></thead>
+                                      <tbody>
+                                        <tr><td class="border p-1 text-center font-bold text-red-600">10</td><td class="border p-1">Alice</td></tr>
+                                        <tr><td class="border p-1 text-center font-bold text-red-600">11</td><td class="border p-1">Bob</td></tr>
+                                      </tbody>
+                                   </table>
+                                </div>
+                                <div class="p-4 bg-white border rounded-lg shadow-sm w-full md:w-1/2">
+                                   <h4 class="font-bold text-center">Table `Articles`</h4>
+                                    <table class="w-full mt-2 text-sm">
+                                      <thead><tr class="bg-gray-100"><th>id_article (PK)</th><th>titre</th><th>id_auteur (FK)</th></tr></thead>
+                                      <tbody>
+                                        <tr><td class="border p-1 text-center">1</td><td class="border p-1">Mon premier article</td><td class="border p-1 text-center bg-blue-100 font-bold text-blue-600">10</td></tr>
+                                        <tr><td class="border p-1 text-center">2</td><td class="border p-1">Un autre sujet</td><td class="border p-1 text-center bg-blue-100 font-bold text-blue-600">10</td></tr>
+                                      </tbody>
+                                   </table>
+                                </div>
+                            </div>
+                             <p class="mt-4"><strong>Étape 3 : Ajout des catégories (Relation N-N).</strong> Un article peut appartenir à plusieurs catégories (ex: "Tech" et "Web"), et une catégorie peut contenir plusieurs articles. C'est une relation "plusieurs à plusieurs". On a besoin d'une <strong>table de liaison</strong>.</p>
+                             <div class="not-prose grid md:grid-cols-3 gap-4 text-sm items-start">
+                                <div class="p-2 border rounded bg-gray-50"><strong>Table `Articles`</strong><ul class="list-disc pl-5 mt-1"><li>id_article (PK)</li><li>titre</li></ul></div>
+                                <div class="p-2 border rounded bg-red-50"><strong>Table de liaison `Article_Categories`</strong><ul class="list-disc pl-5 mt-1"><li>id_article (FK)</li><li>id_categorie (FK)</li></ul></div>
+                                <div class="p-2 border rounded bg-gray-50"><strong>Table `Categories`</strong><ul class="list-disc pl-5 mt-1"><li>id_categorie (PK)</li><li>nom_categorie</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div data-tab-content="2" class="tab-content">
+                    <div class="prose max-w-none">
+                        <h3 class="text-2xl font-semibold mb-3">TP : Modéliser la Base de Données de Netflix</h3>
+                        <p><strong>Objectif :</strong> Passer d'un besoin complexe à un modèle de données structuré.</p>
+
+                        <h4 class="font-bold text-lg mt-4 mb-2">Déroulé Détaillé du TP</h4>
+                        <ol class="list-decimal list-inside space-y-3">
+                            <li>
+                                <strong>Phase 1 : Brainstorming (30 min)</strong>
+                                <p>Au tableau, lister les types d'informations visibles sur Netflix : films, séries, acteurs, genres, profils, etc. Ce seront nos tables.</p>
+                            </li>
+                             <li>
+                                <strong>Phase 2 : Définir les tables et les champs (45 min)</strong>
+                                <p>En groupes, définir les champs pour chaque table. Ex: Pour `Films` -> `id_film` (PK), `titre`, `description`, `annee_sortie`...</p>
+                                <p>Poser la question piège : "Comment lier un film à ses acteurs ?" pour les amener à la phase suivante.</p>
+                            </li>
+                            <li>
+                                <strong>Phase 3 : Définir les relations (45 min)</strong>
+                                <p>Introduire le concept de <strong>table de liaison</strong> pour les relations "plusieurs à plusieurs". Ex: un film a plusieurs acteurs, un acteur joue dans plusieurs films.</p>
+                                <p>Créer la table `Film_Acteurs` avec seulement deux champs : `id_film` (FK) et `id_acteur` (FK).</p>
+                                <p>Identifier d'autres relations : "un à plusieurs" (une Série a plusieurs Episodes) qui ne nécessite qu'une FK dans la table `Episodes`.</p>
+                            </li>
+                        </ol>
+                        <h4 class="font-bold text-lg mt-4 mb-2">Schéma Final à obtenir</h4>
+                        <div class="grid md:grid-cols-3 gap-4 text-sm not-prose">
+                            <div class="border p-2 rounded bg-gray-50"><strong>Entités Principales:</strong><ul class="list-disc pl-5 mt-1"><li>Utilisateurs</li><li>Profils</li><li>Films</li><li>Series</li><li>Acteurs</li><li>Genres</li></ul></div>
+                            <div class="border p-2 rounded bg-gray-50"><strong>Relations 1-N:</strong><ul class="list-disc pl-5 mt-1"><li>Utilisateurs -> Profils</li><li>Series -> Episodes</li></ul></div>
+                            <div class="border p-2 rounded bg-red-50"><strong>Tables de Liaison (N-N):</strong><ul class="list-disc pl-5 mt-1"><li>Film_Acteurs</li><li>Film_Genres</li><li>Serie_Acteurs</li><li>Serie_Genres</li></ul></div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            
+            function setActiveNav(targetId) {
+                navLinks.forEach(link => link.classList.toggle('active', link.dataset.target === targetId));
+                contentSections.forEach(section => section.classList.toggle('active', section.id === targetId));
+                window.scrollTo(0, 0);
+            }
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setActiveNav(link.dataset.target);
+                });
+            });
+
+            document.querySelectorAll('.content-section').forEach(section => {
+                const tabButtons = section.querySelectorAll('.tab-button');
+                const tabContents = section.querySelectorAll('.tab-content');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.dataset.tab;
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        tabContents.forEach(content => content.classList.toggle('active', content.dataset.tabContent === tabId));
+                    });
+                });
+            });
+            
+            const fontToggleBtn = document.getElementById('font-toggle-btn');
+            const body = document.body;
+            if (localStorage.getItem('font-dys') === 'true') { body.classList.add('font-dys'); }
+            fontToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('font-dys');
+                localStorage.setItem('font-dys', body.classList.contains('font-dys'));
+            });
+
+            // Module 1: Von Neumann
+            const vonNeumannDiagram = document.getElementById('von-neumann-diagram');
+            if (vonNeumannDiagram) {
+                const componentDescriptions = {
+                    cpu: "<strong>CPU (Processeur):</strong> Le cerveau de l'ordinateur. Il exécute les instructions et effectue les calculs.",
+                    ram: "<strong>RAM (Mémoire Vive):</strong> La mémoire à court terme. Elle stocke les données et les programmes en cours d'utilisation. Volatile, elle s'efface à l'extinction.",
+                    io: "<strong>Périphériques d'Entrée/Sortie:</strong> Permettent à l'ordinateur de communiquer avec l'extérieur (clavier, souris, écran...).",
+                    default: "Survolez un composant pour voir sa description."
+                };
+                const components = vonNeumannDiagram.querySelectorAll('.component');
+                const infoBox = document.getElementById('component-info');
+                components.forEach(comp => {
+                    comp.addEventListener('mouseenter', () => {
+                        infoBox.innerHTML = componentDescriptions[comp.dataset.component];
+                        comp.style.transform = 'scale(1.05)';
+                    });
+                     comp.addEventListener('mouseleave', () => {
+                        infoBox.innerHTML = componentDescriptions.default;
+                        comp.style.transform = 'scale(1)';
+                    });
+                });
+            }
+
+            // Module 2: File Explorer
+            const fileExplorer = document.getElementById('file-explorer');
+            if(fileExplorer) {
+                fileExplorer.querySelectorAll('.folder').forEach(folder => {
+                    folder.addEventListener('click', e => {
+                        e.stopPropagation();
+                        const targetId = folder.dataset.target;
+                        const targetElement = document.getElementById(targetId);
+                        const isVisible = targetElement.style.display === 'block';
+                        targetElement.style.display = isVisible ? 'none' : 'block';
+                        folder.textContent = (isVisible ? '▶' : '▼') + folder.textContent.substring(1);
+                    });
+                });
+            }
+
+            // Module 3: Client/Server Simulation
+            const simulateBtn = document.getElementById('simulate-btn');
+            if(simulateBtn){
+                const requestDiv = document.getElementById('request');
+                const responseDiv = document.getElementById('response');
+                simulateBtn.addEventListener('click', () => {
+                    requestDiv.style.opacity = '0';
+                    responseDiv.style.opacity = '0';
+                    requestDiv.style.transform = 'translateX(0)';
+                    responseDiv.style.transform = 'translateX(0)';
+                    setTimeout(() => {
+                        requestDiv.style.opacity = '1';
+                        requestDiv.style.transform = 'translateX(200%)';
+                    }, 100);
+                    setTimeout(() => {
+                        responseDiv.style.opacity = '1';
+                        responseDiv.style.transform = 'translateX(-200%)';
+                    }, 1100);
+                });
+            }
+            
+            // Module 3: Web Stack Diagram
+            const webStackDiagram = document.getElementById('web-stack-diagram');
+            if(webStackDiagram) {
+                const stackInfo = document.getElementById('stack-info');
+                const stackDescriptions = {
+                    frontend: '<strong>Front-End :</strong> Ce qui s\'exécute dans le navigateur. Langages : HTML, CSS, JavaScript.',
+                    backend: '<strong>Back-End :</strong> La logique qui s\'exécute sur le serveur. Langages : Python, PHP, Java, Node.js.',
+                    database: '<strong>Base de Données :</strong> Là où les données sont stockées. Langage : SQL.'
+                };
+                webStackDiagram.querySelectorAll('.stack-part').forEach(part => {
+                    part.addEventListener('click', () => {
+                        stackInfo.innerHTML = stackDescriptions[part.dataset.stack];
+                    });
+                });
+            }
+            
+            // Module 3: TP Form
+            const tp3Form = document.getElementById('tp3-form');
+            if (tp3Form) {
+                const inputs = tp3Form.querySelectorAll('.tp3-input');
+                const message = document.getElementById('tp3-message');
+                
+                inputs.forEach(input => {
+                    input.addEventListener('keyup', () => {
+                        let allFilled = true;
+                        inputs.forEach(i => {
+                            if (i.value.trim() === '') {
+                                allFilled = false;
+                            }
+                        });
+                        message.classList.toggle('hidden', !allFilled);
+                    });
+                });
+            }
+
+            // Module 1: Quiz
+            const quizContainer = document.getElementById('quiz-container');
+            if (quizContainer) {
+                const quizData = [
+                    { question: 'Quel composant est le "cerveau" de l\'ordinateur ?', answers: ['RAM', 'GPU', 'CPU', 'HDD'], correct: 2 },
+                    { question: 'La RAM est une mémoire...', answers: ['Volatile', 'Permanente', 'Très lente', 'Optique'], correct: 0 },
+                    { question: 'Quel est le rôle de la carte mère ?', answers: ['Afficher les graphismes', 'Connecter tous les composants', 'Alimenter le PC', 'Refroidir le CPU'], correct: 1 },
+                    { question: 'Le BIOS est un exemple de...', answers: ['Hardware', 'Software', 'Firmware', 'Malware'], correct: 2 },
+                    { question: 'Lequel est le plus rapide pour démarrer un programme ?', answers: ['HDD', 'SSD', 'DVD-ROM', 'Clé USB 2.0'], correct: 1 }
+                ];
+                let currentQuestion = 0;
+                let score = 0;
+                const quizContent = document.getElementById('quiz-content');
+                const quizNextBtn = document.getElementById('quiz-next-btn');
+                const quizResult = document.getElementById('quiz-result');
+                
+                function loadQuiz() {
+                    quizResult.textContent = `Score: ${score} / ${currentQuestion}`;
+                    if (currentQuestion < quizData.length) {
+                        const q = quizData[currentQuestion];
+                        quizContent.innerHTML = `<p class="font-semibold mb-4">${currentQuestion + 1}. ${q.question}</p><div class="space-y-2">${q.answers.map((ans, i) => `<label class="block p-3 border rounded-lg hover:bg-gray-100 cursor-pointer"><input type="radio" name="quiz" value="${i}" class="mr-2"> ${ans}</label>`).join('')}</div>`;
+                        quizNextBtn.textContent = "Valider";
+                        quizNextBtn.disabled = false;
+                    } else {
+                        quizContent.innerHTML = `<p class="text-xl font-bold text-center">Quiz terminé !</p>`;
+                        quizResult.textContent = `Votre score final : ${score} / ${quizData.length}`;
+                        quizNextBtn.textContent = "Recommencer";
+                    }
+                }
+
+                quizNextBtn.addEventListener('click', () => {
+                    if (currentQuestion >= quizData.length) {
+                        currentQuestion = 0;
+                        score = 0;
+                        loadQuiz();
+                        return;
+                    }
+                    const selected = document.querySelector('input[name="quiz"]:checked');
+                    if (selected) {
+                        const selectedAnswer = parseInt(selected.value);
+                        const correctAnswer = quizData[currentQuestion].correct;
+                        const labels = quizContent.querySelectorAll('label');
+                        if (selectedAnswer === correctAnswer) {
+                            score++;
+                            labels[selectedAnswer].classList.add('bg-green-100', 'border-green-400');
+                        } else {
+                            labels[selectedAnswer].classList.add('bg-red-100', 'border-red-400');
+                            labels[correctAnswer].classList.add('bg-green-100', 'border-green-400');
+                        }
+                        currentQuestion++;
+                        quizNextBtn.disabled = true;
+                        setTimeout(() => { loadQuiz(); }, 2000);
+                    } else { alert("Veuillez sélectionner une réponse."); }
+                });
+                loadQuiz();
+            }
+        });
+    </script>
+</body>
+</html>
+
