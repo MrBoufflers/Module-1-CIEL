@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+
+@font-face {
+    font-family: "OpenDys";
+    src: url("./polices/OpenDyslexic-Regular.otf");
+}
+body {
+    font-family: 'Inter', sans-serif;
+    transition: font-family 0.3s ease-in-out;
+}
+body.font-dys {
+    font-family: "OpenDys";
+    transition: font-family 0.3s ease-in-out;
+}
+.nav-link {
+    transition: all 0.2s ease-in-out;
+}
+.nav-link.active {
+    background-color: #3b82f6;
+    color: white;
+    transform: translateX(4px);
+}
+.tab-button.active {
+    border-bottom-color: #3b82f6;
+    color: #3b82f6;
+    font-weight: 600;
+}
+.content-section {
+    display: none;
+}
+.content-section.active {
+    display: block;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+.code-block {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+.prose {
+    color: #374151;
+}
+.prose h3 {
+    color: #111827;
+}
+.prose h4 {
+    color: #1f2937;
+}
+.prose strong {
+    color: #111827;
+}
+.prose ul > li::before {
+    background-color: #6b7280;
+}
+.folder { cursor: pointer; user-select: none; }
+
+h3 {
+    font-size: x-large;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
