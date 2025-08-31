@@ -71,7 +71,7 @@ const tpModule2Steps = [
             <li>Après le dernier redémarrage, Windows vous accueille avec un assistant de configuration.</li>
             <li>Suivez les étapes pour choisir votre région et la disposition du clavier.</li>
             <li>Connectez-vous au réseau si nécessaire.</li>
-            <li>Il vous sera demandé de vous connecter avec un compte Microsoft. Pour un PC de test, il est souvent plus simple de créer un compte local. Cherchez l'option "Options de connexion" > "Compte hors connexion" ou "Compte local".</li>
+            <li>Il vous sera demandé de vous connecter avec un compte Microsoft. Pour un PC de test, il est souvent plus simple de créer un compte local. Cherchez l'option "Options de connexion" {'>'} "Compte hors connexion" ou "Compte local".</li>
             <li>Choisissez un nom d'utilisateur et un mot de passe (ou laissez le mot de passe vide).</li>
             <li>Réglez les paramètres de confidentialité (vous pouvez désactiver la plupart des options de suivi).</li>
             <li>Windows va finaliser la préparation de votre session, et vous arriverez enfin sur un bureau Windows tout neuf et fonctionnel. Félicitations !</li>

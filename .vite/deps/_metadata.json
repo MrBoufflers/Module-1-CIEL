@@ -1,0 +1,34 @@
+{
+  "hash": "e8aed657",
+  "configHash": "ab809f45",
+  "lockfileHash": "fb0e18d0",
+  "browserHash": "f07bc19f",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "b9c3ec2a",
+      "needsInterop": true
+    },
+    "react-chrono": {
+      "src": "../../node_modules/react-chrono/dist/index.esm.js",
+      "file": "react-chrono.js",
+      "fileHash": "b97d0869",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "42604cae",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-4J6BLW67": {
+      "file": "chunk-4J6BLW67.js"
+    },
+    "chunk-WYQRYOQT": {
+      "file": "chunk-WYQRYOQT.js"
+    }
+  }
+}
