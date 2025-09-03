@@ -4,6 +4,7 @@ import { module2Content } from './modules/module2content.jsx';
 import { module3Content } from './modules/module3content.jsx';
 import { module4Content } from './modules/module4content.jsx';
 import { module5Content } from './modules/module5content.jsx';
+import { moduleBonusJV } from './modules/moduleBonusJV.jsx';
 
 export const courseData = [
   {
@@ -56,5 +57,15 @@ export const courseData = [
       savoirs: 'S3.1',
     },
     content: module5Content,
+  },
+    {
+    id: 'moduleBonus1',
+    title: "Jeux Video",
+    icon: "🎮",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser une structure matérielle et logicielle',
+      savoirs: 'S5.5, S5.1, S3.1, S3.6',
+    },
+    content: moduleBonusJV,
   },
 ];
