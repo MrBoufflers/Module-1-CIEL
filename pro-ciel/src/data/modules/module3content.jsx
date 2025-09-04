@@ -44,9 +44,37 @@ export const module3Content = {
             <h3>TP 1 : Analyse de Besoins Clients</h3>
             <p><strong>Objectif :</strong> Appliquer les concepts pour résoudre des problèmes concrets. Travail en petits groupes.</p>
             <div className="space-y-4 mt-4 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm group"><summary className="font-semibold cursor-pointer"><strong>Cas n°1 : Le Boulanger de Quartier</strong></summary><div className="mt-4 pt-4 border-t"><p><em>"J'aimerais un système sur un ordinateur à côté de ma caisse pour enregistrer les ventes rapidement. Je n'ai pas une connexion internet très fiable."</em></p><p><strong>Solution:</strong> Logiciel (application lourde).</p><p><strong>Justification:</strong> Doit fonctionner de manière fiable même sans connexion internet, sur un poste unique.</p><p><strong>Fonctionnalités:</strong> Interface de caisse simple, gestion des stocks, rapport de ventes journalier.</p></div></details>
-                <details className="p-4 bg-white border rounded-lg shadow-sm group"><summary className="font-semibold cursor-pointer"><strong>Cas n°2 : La Photographe de Voyage</strong></summary><div className="mt-4 pt-4 border-t"><p><em>"Je veux un moyen de montrer mon travail à des clients potentiels partout dans le monde et qu'ils puissent me contacter facilement."</em></p><p><strong>Solution:</strong> Application Web (site portfolio).</p><p><strong>Justification:</strong> Le but est d'être accessible mondialement, sans installation pour les clients.</p><p><strong>Fonctionnalités:</strong> Galerie d'images, page "À propos", formulaire de contact.</p></div></details>
-                <details className="p-4 bg-white border rounded-lg shadow-sm group"><summary className="font-semibold cursor-pointer"><strong>Cas n°3 : L'Association Sportive</strong></summary><div className="mt-4 pt-4 border-t"><p><em>"On voudrait un outil pour que le trésorier suive les paiements, que le coach voie la liste des inscrits, et que les adhérents consultent le planning, même sur mobile."</em></p><p><strong>Solution:</strong> Application Web.</p><p><strong>Justification:</strong> Plusieurs utilisateurs ont besoin d'accéder aux mêmes données centralisées, y compris depuis un mobile.</p><p><strong>Fonctionnalités:</strong> Connexion avec gestion des droits, module de gestion des cotisations, calendrier des événements.</p></div></details>
+                <details className="p-4 bg-white border rounded-lg shadow-sm group">
+                    <summary className="font-semibold cursor-pointer">
+                        <strong>Cas n°1 : Le Boulanger de Quartier</strong>
+                    </summary>
+                    <div className="mt-4 pt-4 border-t">
+                        <p><em>"J'aimerais un système sur un ordinateur à côté de ma caisse pour enregistrer les ventes rapidement. Je n'ai pas une connexion internet très fiable."</em></p>
+                        {/* <p><strong>Solution ?</strong> Logiciel (application lourde).</p>
+                        <p><strong>Justification:</strong> Doit fonctionner de manière fiable même sans connexion internet, sur un poste unique.</p>
+                        <p><strong>Fonctionnalités:</strong> Interface de caisse simple, gestion des stocks, rapport de ventes journalier.</p> */}
+                    </div>
+                </details>
+                <details className="p-4 bg-white border rounded-lg shadow-sm group">
+                    <summary className="font-semibold cursor-pointer">
+                        <strong>Cas n°2 : La Photographe de Voyage</strong>
+                    </summary>
+                    <div className="mt-4 pt-4 border-t">
+                        <p><em>"Je veux un moyen de montrer mon travail à des clients potentiels partout dans le monde et qu'ils puissent me contacter facilement."</em></p>
+                        {/* <p><strong>Solution:</strong> Application Web (site portfolio).</p><p><strong>Justification:</strong> Le but est d'être accessible mondialement, sans installation pour les clients.</p><p><strong>Fonctionnalités:</strong> Galerie d'images, page "À propos", formulaire de contact.</p> */}
+                    </div>
+                </details>
+                <details className="p-4 bg-white border rounded-lg shadow-sm group">
+                    <summary className="font-semibold cursor-pointer">
+                        <strong>Cas n°3 : L'Association Sportive</strong>
+                    </summary>
+                    <div className="mt-4 pt-4 border-t">
+                        <p><em>"On voudrait un outil pour que le trésorier suive les paiements, que le coach voie la liste des inscrits, et que les adhérents consultent le planning, même sur mobile."</em></p>
+                        {/* <p><strong>Solution:</strong> Application Web.</p>
+                        <p><strong>Justification:</strong> Plusieurs utilisateurs ont besoin d'accéder aux mêmes données centralisées, y compris depuis un mobile.</p>
+                        <p><strong>Fonctionnalités:</strong> Connexion avec gestion des droits, module de gestion des cotisations, calendrier des événements.</p> */}
+                    </div>
+                </details>
             </div>
             <h3 className="mt-8">TP 2 : Étude de cas et Recherche</h3>
             <p><strong>Objectif :</strong> Savoir chercher des informations techniques pour répondre à un cahier des charges client.</p>
