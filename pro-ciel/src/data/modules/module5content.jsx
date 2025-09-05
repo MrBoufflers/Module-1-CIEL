@@ -45,12 +45,12 @@ export const module5Content = {
                 <li><strong>Phase 2 : Définir les tables et les champs (45 min)</strong><p>En groupes, définir les champs pour chaque table. Ex: Pour `Films` -{'>'} `id_film` (PK), `titre`, `description`, `annee_sortie`...</p><p>Poser la question piège : "Comment lier un film à ses acteurs ?" pour les amener à la phase suivante.</p></li>
                 <li><strong>Phase 3 : Définir les relations (45 min)</strong><p>Introduire le concept de <strong>table de liaison</strong> pour les relations "plusieurs à plusieurs". Ex: un film a plusieurs acteurs, un acteur joue dans plusieurs films.</p><p>Créer la table `Film_Acteurs` avec seulement deux champs : `id_film` (FK) et `id_acteur` (FK).</p><p>Identifier d'autres relations : "un à plusieurs" (une Série a plusieurs Episodes) qui ne nécessite qu'une FK dans la table `Episodes`.</p></li>
             </ol>
-            <h4>Schéma Final à obtenir</h4>
+            {/* <h4>Schéma Final à obtenir</h4>
             <div className="grid md:grid-cols-3 gap-4 text-sm not-prose">
                 <div className="border p-2 rounded bg-gray-50"><strong>Entités Principales:</strong><ul className="list-disc pl-5 mt-1"><li>Utilisateurs</li><li>Profils</li><li>Films</li><li>Series</li><li>Acteurs</li><li>Genres</li></ul></div>
                 <div className="border p-2 rounded bg-gray-50"><strong>Relations 1-N:</strong><ul className="list-disc pl-5 mt-1"><li>Utilisateurs -{'>'} Profils</li><li>Series -{'>'} Episodes</li></ul></div>
                 <div className="border p-2 rounded bg-red-50"><strong>Tables de Liaison (N-N):</strong><ul className="list-disc pl-5 mt-1"><li>Film_Acteurs</li><li>Film_Genres</li><li>Serie_Acteurs</li><li>Serie_Genres</li></ul></div>
-            </div>
+            </div> */}
         </>
     )
 };
