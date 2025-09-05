@@ -128,7 +128,7 @@ export const module4Content = {
                     <Card className="bg-blue-50 border-blue-200">
                         <p>Pour le projet assigné à votre groupe, vous devez produire un unique fichier Python (`.py`) qui contient le code complet et fonctionnel de votre jeu. Le code doit être commenté pour expliquer les parties les plus importantes de votre logique.</p>
                         <ul className="list-disc list-inside mt-2 font-semibold">
-                            <li><strong>Outils :</strong> <a href='https://www.online-python.com/'>online-python</a></li>
+                            <li><strong>Outils :</strong> <a className='text-blue-500' href='https://www.online-python.com/'>online-python</a></li>
                             <li><strong>Livrable :</strong> Une fois votre code opérationnel, envoyer par mail le lien du code partagé ("Share", à côté de "Run").</li>
                         </ul>
                     </Card>

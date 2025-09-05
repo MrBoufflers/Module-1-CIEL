@@ -17,47 +17,47 @@ export const courseData = [
     },
     content: module1Content,
   },
-  {
-    id: 'module2',
-    title: "Intro Windows",
-    icon: "🖥️",
-    ref: {
-      competence: 'C09 - Installer les éléments d\'un système...',
-      savoirs: 'S4.11, S4.12',
-    },
-    content: module2Content,
-  },
-  {
-    id: 'module3',
-    title: "Software & Web",
-    icon: "🌐",
-    ref: {
-      competence: 'C04 & D1',
-      savoirs: 'S3.1, S3.2, S5.1',
-    },
-     content: module3Content,
-  },
-  {
-    id: 'module4',
-    title: "Intro Codage",
-    icon: "💻",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: module4Content,
+  // {
+  //   id: 'module2',
+  //   title: "Intro Windows",
+  //   icon: "🖥️",
+  //   ref: {
+  //     competence: 'C09 - Installer les éléments d\'un système...',
+  //     savoirs: 'S4.11, S4.12',
+  //   },
+  //   content: module2Content,
+  // },
+  // {
+  //   id: 'module3',
+  //   title: "Software & Web",
+  //   icon: "🌐",
+  //   ref: {
+  //     competence: 'C04 & D1',
+  //     savoirs: 'S3.1, S3.2, S5.1',
+  //   },
+  //    content: module3Content,
+  // },
+  // {
+  //   id: 'module4',
+  //   title: "Intro Codage",
+  //   icon: "💻",
+  //   ref: {
+  //     competence: 'C08 - Coder',
+  //     savoirs: 'S5.1, S5.5',
+  //   },
+  //   content: module4Content,
 
-  },
-  {
-    id: 'module5',
-    title: "Bases de Données",
-    icon: "🗃️",
-    ref: {
-      competence: 'C04 - Analyser...',
-      savoirs: 'S3.1',
-    },
-    content: module5Content,
-  },
+  // },
+  // {
+  //   id: 'module5',
+  //   title: "Bases de Données",
+  //   icon: "🗃️",
+  //   ref: {
+  //     competence: 'C04 - Analyser...',
+  //     savoirs: 'S3.1',
+  //   },
+  //   content: module5Content,
+  // },
     {
     id: 'moduleBonus1',
     title: "Jeux Video",
