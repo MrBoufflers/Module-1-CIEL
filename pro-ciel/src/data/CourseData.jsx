@@ -5,6 +5,7 @@ import { module3Content } from './modules/module3content.jsx';
 import { module4Content } from './modules/module4content.jsx';
 import { module5Content } from './modules/module5content.jsx';
 import { moduleBonusJV } from './modules/moduleBonusJV.jsx';
+import { moduleGitContent } from './modules/moduleGitContent.jsx';
 
 export const courseData = [
   {
@@ -17,26 +18,26 @@ export const courseData = [
     },
     content: module1Content,
   },
-  // {
-  //   id: 'module2',
-  //   title: "Intro Windows",
-  //   icon: "🖥️",
-  //   ref: {
-  //     competence: 'C09 - Installer les éléments d\'un système...',
-  //     savoirs: 'S4.11, S4.12',
-  //   },
-  //   content: module2Content,
-  // },
-  // {
-  //   id: 'module3',
-  //   title: "Software & Web",
-  //   icon: "🌐",
-  //   ref: {
-  //     competence: 'C04 & D1',
-  //     savoirs: 'S3.1, S3.2, S5.1',
-  //   },
-  //    content: module3Content,
-  // },
+  {
+    id: 'module2',
+    title: "Intro Windows",
+    icon: "🖥️",
+    ref: {
+      competence: 'C09 - Installer les éléments d\'un système...',
+      savoirs: 'S4.11, S4.12',
+    },
+    content: module2Content,
+  },
+  {
+    id: 'module3',
+    title: "Software & Web",
+    icon: "🌐",
+    ref: {
+      competence: 'C04 & D1',
+      savoirs: 'S3.1, S3.2, S5.1',
+    },
+     content: module3Content,
+  },
   // {
   //   id: 'module4',
   //   title: "Intro Codage",
@@ -67,5 +68,15 @@ export const courseData = [
       savoirs: 'S5.5, S5.1, S3.1, S3.6',
     },
     content: moduleBonusJV,
+  },
+   {
+    id: 'moduleGit',
+    title: "Git et Github",
+    icon: "🔀",
+    ref: {
+      competence: 'C03, C01, C08.',
+      savoirs: 'S2.10, S2.7, S1.2',
+    },
+    content: moduleGitContent,
   },
 ];
