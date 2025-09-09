@@ -27,13 +27,13 @@ const tpGitMaterials = [
 
 const tpGitSteps = [
   {
-    title: "Partie 1 : Configuration Initiale (30 min)",
+    title: "Partie 1 : Configuration Initiale",
     description: (
       <>
         <p>Avant de coder, nous devons nous assurer que Git et GitHub sont correctement configurés sur votre machine. C'est comme préparer ses outils avant de bricoler.</p>
         <ol>
-          <li><strong>Créer un compte GitHub :</strong> Si ce n'est pas déjà fait, allez sur <a href="https://github.com/join" target="_blank" rel="noopener noreferrer">github.com/join</a> et créez votre compte. C'est votre futur CV de développeur !</li>
-          <li><strong>Configurer Git :</strong> Ouvrez le terminal (Git Bash). Tapez les deux commandes suivantes en remplaçant les informations par les vôtres. Ces informations seront associées à tous vos futurs commits.
+          <li><strong>Créer un compte GitHub :</strong> Si ce n'est pas déjà fait, allez sur <a href="https://github.com/join" target="_blank" rel="noopener noreferrer">github.com/join</a> et créez votre compte.</li>
+          <li><strong>Configurer Git :</strong> Ouvrez le terminal (Git Bash). Tapez les deux commandes suivantes en remplaçant les informations par les vôtres.
             <pre className="code-block"><code>git config --global user.name "Votre Nom"
 git config --global user.email "votre.email@github.com"</code></pre>
           </li>
@@ -43,84 +43,119 @@ git config --global user.email "votre.email@github.com"</code></pre>
     )
   },
   {
-    title: "Partie 2 : Mon Premier Projet Solo (1h)",
+    title: "Partie 2 : Mon Projet Solo - La Machine à Remonter le Temps",
     description: (
       <>
-        <p>Nous allons maintenant utiliser Git pour suivre l'évolution d'un petit projet personnel : une page web de présentation.</p>
+        <p>Nous allons utiliser Git pour suivre l'évolution d'un petit projet, en adoptant les bonnes pratiques avec les branches et en apprenant à corriger nos erreurs.</p>
         <ol>
-          <li><strong>Création du projet :</strong> Sur votre bureau, créez un dossier nommé `mon-portfolio`. Ouvrez ce dossier avec VS Code.</li>
-          <li><strong>Initialisation de Git :</strong> Dans le terminal de VS Code, tapez <code>git init</code>. Cette commande crée le dépôt Git local (un sous-dossier caché `.git`).</li>
-          <li><strong>Premier Fichier :</strong> Créez un fichier `index.html` et ajoutez un titre simple : `<h1>Mon Portfolio</h1>`.</li>
-          <li><strong>Premier Commit :</strong> Suivez le cycle `add` -> `commit`.
-            <pre className="code-block"><code># Ajoute tous les fichiers modifiés à la "zone de préparation"
-git add .
-
-# Crée une sauvegarde (commit) avec un message descriptif
-git commit -m "Initial commit : Ajout de la structure de base HTML"</code></pre>
+          <li><strong>Initialisation :</strong> Créez un dossier `mon-portfolio` et initialisez Git avec <code>git init</code>.</li>
+          <li><strong>Le `.gitignore` :</strong> Créez un fichier `.gitignore`. À l'intérieur, écrivez `notes.txt`. Maintenant, créez un fichier `notes.txt`. Tapez `git status` : le fichier de notes est bien ignoré par Git ! C'est essentiel pour ignorer les fichiers qui ne doivent pas être partagés.</li>
+          <li><strong>Premier Commit :</strong> Créez `index.html` avec un titre `{"<h1>Mon Portfolio</h1>"}`. Faites votre premier commit sur la branche `main`.
+            <pre className="code-block"><code>git add .
+git commit -m "Initial commit: Ajout de la structure de base HTML"</code></pre>
           </li>
-          <li><strong>Création du Dépôt Distant :</strong> Allez sur votre profil GitHub. Créez un nouveau dépôt public nommé `mon-portfolio`. Ne cochez aucune case (pas de README, etc.).</li>
-          <li><strong>Lier le local au distant :</strong> GitHub vous donne des commandes à copier. Prenez celles qui commencent par `git remote add origin...` et `git branch -M main`.
-             <pre className="code-block"><code>git remote add origin https://github.com/VOTRE_PSEUDO/mon-portfolio.git
-git branch -M main</code></pre>
+          <li><strong>Création d'une Branche :</strong> Pour ajouter une biographie, créez une branche dédiée.
+            <pre className="code-block"><code>git checkout -b feature/ajout-bio</code></pre>
           </li>
-          <li><strong>Pousser votre travail :</strong> Envoyez vos commits locaux vers GitHub.
-            <pre className="code-block"><code>git push -u origin main</code></pre>
-            <p className="text-sm">Votre code est maintenant en ligne ! Allez vérifier sur la page de votre dépôt GitHub.</p>
+          <li><strong>Travail en Branche :</strong> Ajoutez une section biographie dans `index.html`. Faites un commit.
+            <pre className="code-block"><code>git add .
+git commit -m "feat: Ajout de la section biographie"</code></pre>
           </li>
+           <li><strong>Corriger le dernier commit :</strong> Oups, vous avez oublié d'ajouter votre âge. Modifiez le fichier, puis utilisez la commande `amend` pour ajouter cette modification au commit précédent sans en créer un nouveau.
+            <pre className="code-block"><code>git add .
+git commit --amend --no-edit</code></pre>
+          </li>
+          <li><strong>Explorer l'historique :</strong> Utilisez `git log --oneline --graph` pour voir votre historique. Repérez le hash de votre premier commit et utilisez `git show {"<hash_du_commit>"}` pour inspecter ses détails.</li>
+          <li><strong>Fusionner la Branche :</strong> Retournez sur `main` et fusionnez votre travail.
+            <pre className="code-block"><code>git checkout main
+git merge feature/ajout-bio</code></pre>
+          </li>
+          <li><strong>Synchronisation avec GitHub :</strong> Créez un dépôt `mon-portfolio` sur GitHub, liez-le avec `git remote add origin...` et poussez votre travail avec `git push -u origin main`.</li>
         </ol>
       </>
     )
   },
    {
-    title: "Partie 3 : Le Projet Collaboratif (1h30)",
+    title: "Partie 3 : Le Projet Collaboratif (puis inversion des rôles)",
     description: (
       <>
-        <p>C'est le cœur du métier de développeur : travailler en équipe. Mettez-vous en binôme. L'un sera le "Mainteneur" (propriétaire du projet), l'autre le "Collaborateur".</p>
+        <p>Mettez-vous en binôme. L'un sera le "Mainteneur", l'autre le "Collaborateur". Vous allez simuler un vrai cycle de développement en équipe. Une fois terminé, vous devez recommencer en changeant de rôle.</p>
         
-        <Heading level={4} className="!mt-6">Étape A : Le Mainteneur prépare le terrain</Heading>
+        <Heading level={4} className="!mt-6">Étape A : Préparation (Mainteneur)</Heading>
         <ol>
-            <li>Créez un nouveau dépôt sur GitHub nommé `projet-collab`.</li>
-            <li>Allez dans "Settings" {'>'} "Collaborators" et ajoutez votre binôme comme collaborateur.</li>
-            <li>Clonez ce dépôt vide sur votre PC : <code>git clone https://github.com/VOTRE_PSEUDO/projet-collab.git</code></li>
-            <li>Dedans, créez un fichier `liste.html` avec un titre simple. Faites un commit et poussez-le (`git add .`, `git commit -m "Init"`, `git push`).</li>
+            <li>Créez un dépôt `projet-collab` sur GitHub, ajoutez votre binôme comme collaborateur.</li>
+            <li>Clonez le projet, créez un `README.md`, commitez et pushez.</li>
+            <li>Sur GitHub, allez dans l'onglet "Issues" et créez un nouveau ticket : "Ajouter la liste des membres de l'équipe". Assignez-le à votre collaborateur.</li>
         </ol>
 
-        <Heading level={4} className="!mt-6">Étape B : Le Collaborateur ajoute une fonctionnalité</Heading>
+        <Heading level={4} className="!mt-6">Étape B : Développement (Collaborateur)</Heading>
         <ol>
-            <li>Acceptez l'invitation reçue par email. Clonez le projet sur votre propre PC.</li>
-            <li><strong>Créez une branche pour travailler :</strong> C'est l'étape la plus importante. Ne travaillez JAMAIS directement sur `main`.
-                <pre className="code-block"><code>git checkout -b ajout-ma-liste</code></pre>
+            <li>Acceptez l'invitation et clonez le projet.</li>
+            <li>Créez une branche nommée en fonction de l'issue (ex: `feature/1-liste-equipe`).
+                <pre className="code-block"><code>git checkout -b feature/1-liste-equipe</code></pre>
             </li>
-            <li>Modifiez `liste.html` pour y ajouter votre top 3 (films, jeux...).</li>
-            <li>Faites un commit sur votre branche : `git add .`, `git commit -m "Ajout de ma liste"`.</li>
-            <li>Poussez votre branche sur GitHub : `git push origin ajout-ma-liste`.</li>
-            <li>Allez sur GitHub. Un bandeau jaune apparaît : cliquez sur "Compare & pull request". Décrivez vos changements et créez la "Pull Request".</li>
+            <li>Modifiez le `README.md` pour y ajouter les noms des deux membres de l'équipe.</li>
+            <li>Faites un commit qui ferme automatiquement l'issue : `git commit -m "feat: Ajout de la liste des membres (closes #1)"`.</li>
+            <li>Poussez votre branche sur GitHub : `git push origin feature/1-liste-equipe`.</li>
+            <li>Sur GitHub, créez la "Pull Request".</li>
         </ol>
 
-        <Heading level={4} className="!mt-6">Étape C : Le Mainteneur valide le travail</Heading>
+        <Heading level={4} className="!mt-6">Étape C : Revue de Code et Fusion (Mainteneur)</Heading>
         <ol>
-            <li>Sur GitHub, allez dans l'onglet "Pull Requests". Regardez le travail de votre collègue.</li>
-            <li>Si tout est bon, cliquez sur "Merge pull request" puis "Confirm merge". Le travail du collaborateur est maintenant intégré à la branche `main`.</li>
-            <li>Sur votre PC, mettez à jour votre version locale :
-                 <pre className="code-block"><code>git checkout main
-git pull</code></pre>
-                 <p className="text-sm">Vous devriez voir apparaître la liste de votre collègue !</p>
-            </li>
+            <li>Sur la Pull Request, allez dans l'onglet "Files changed". Laissez un commentaire pour demander une modification (ex: "Peux-tu mettre les noms en gras ?"). Puis cliquez sur "Request changes".</li>
+            <li>**(Collaborateur)** : Faites la modification demandée, commitez (`git commit -m "style: Mise en gras des noms"`) et poussez à nouveau sur la même branche. La PR se met à jour.</li>
+            <li>**(Mainteneur)** : Approuvez les changements, puis cliquez sur "Merge pull request".</li>
+            <li>Mettez à jour votre projet local : `git checkout main` puis `git pull`.</li>
         </ol>
 
-        <Heading level={4} className="!mt-6 !text-red-600">Étape D : Le Conflit (Simulation)</Heading>
+        <Heading level={4} className="!mt-6 !text-purple-600">Étape D : On inverse les Rôles !</Heading>
         <ol>
-            <li>**Le Mainteneur :** Dans `liste.html`, changez le titre `{"<h1>"}`. Commitez et pushez sur `main`.</li>
-            <li>**Le Collaborateur :** SANS FAIRE `git pull`, changez le MÊME titre `{"<h1>"}` avec un texte différent. Commitez votre changement.</li>
-            <li>**Le Collaborateur :** Essayez de pousser (`git push`). Erreur ! Git vous dit de faire un `git pull` d'abord.</li>
-            <li>**Le Collaborateur :** Faites `git pull`. **CONFLIT !** Le terminal vous annonce un conflit de fusion.</li>
-            <li>Ouvrez `liste.html`. Vous verrez les marqueurs `{'<<<<<<<'}`, `=======`, `{'>>>>>>>'}`. C'est Git qui vous montre les deux versions contradictoires.</li>
-            <li>**Résolvez le conflit :** Éditez le fichier pour ne garder qu'une seule version du titre (ou une nouvelle version qui combine les deux). Supprimez les marqueurs de conflit.</li>
-            <li>Terminez la fusion : `git add .`, `git commit` (pas besoin de message, Git en propose un), et enfin `git push`. Le conflit est résolu !</li>
+            <li>Le Mainteneur devient le Collaborateur, et vice-versa.</li>
+            <li>Le **nouveau Mainteneur** crée une nouvelle issue sur GitHub (ex: "Ajouter un lien vers nos profils GitHub").</li>
+            <li>Le **nouveau Collaborateur** répète tout le processus de l'étape B et C : il crée une branche, fait le travail, crée une Pull Request, reçoit une demande de modification, la corrige, et attend la fusion.</li>
         </ol>
       </>
     )
   },
+  {
+    title: "Partie 4 : Bonus (Pour les plus rapides)",
+    description: (
+        <>
+            <p>Si vous avez terminé en avance, voici quelques défis pour approfondir vos compétences.</p>
+            <div className="space-y-4">
+                <Card>
+                    <Heading level={4} className="!text-green-700">Défi 1 : L'Archéologue du Code</Heading>
+                    <p className="text-sm mt-2">Apprenez à enquêter dans l'historique pour comprendre son évolution.</p>
+                    <ul className="list-disc list-inside text-sm mt-2">
+                        <li>Utilisez <code>git log --author="{'<nom_du_collègue>'}"</code> pour ne voir que les commits de votre binôme.</li>
+                        <li>Utilisez <code>git log -p README.md</code> pour voir l'historique complet des modifications pour ce fichier uniquement.</li>
+                        <li>Utilisez <code>git blame README.md</code> pour afficher, ligne par ligne, qui a écrit quoi et quand.</li>
+                    </ul>
+                </Card>
+                <Card>
+                    <Heading level={4} className="!text-green-700">Défi 2 : Le Voyage dans le Temps</Heading>
+                    <p className="text-sm mt-2">Apprenez à annuler un commit proprement sans détruire l'historique.</p>
+                     <ol className="list-decimal list-inside text-sm mt-2">
+                        <li>Repérez le hash du dernier commit fusionné sur `main` avec `git log`.</li>
+                        <li>Utilisez la commande <code>git revert {'<hash_du_commit>'}</code>. Git va créer un **nouveau commit** qui fait l'inverse du commit problématique.</li>
+                        <li>Regardez l'historique : le mauvais commit est toujours là, mais un nouveau "commit d'annulation" a été ajouté. Poussez ce nouveau commit.</li>
+                    </ol>
+                </Card>
+                 <Card>
+                    <Heading level={4} className="!text-green-700">Défi 3 : Le Nettoyage de Printemps (Avancé)</Heading>
+                    <p className="text-sm mt-2">Apprenez à "nettoyer" plusieurs petits commits en un seul avant de créer une Pull Request.</p>
+                    <ol className="list-decimal list-inside text-sm mt-2">
+                        <li>Créez une branche et faites 3 petits commits dessus (ex: "début", "correction typo", "ajout image").</li>
+                        <li>Utilisez <code>git rebase -i HEAD~3</code>.</li>
+                        <li>Dans l'éditeur qui s'ouvre, remplacez `pick` par `squash` (ou `s`) pour le deuxième et troisième commit. Sauvegardez.</li>
+                        <li>Git vous demande de rédiger un nouveau message de commit unique pour résumer les 3.</li>
+                        <li>Vérifiez votre `git log` : les 3 commits ont été fusionnés en un seul !</li>
+                    </ol>
+                </Card>
+            </div>
+        </>
+    )
+  }
 ];
 
 // La page complète du cours
@@ -177,6 +212,12 @@ export const moduleGitContent = {
                 command="git branch nouvelle-feature"
             />
             <GitConceptCard 
+                title="Checkout"
+                analogy="Se téléporter sur une branche"
+                description="La commande pour se déplacer d'une branche à une autre. Le raccourci '-b' permet de créer la branche ET de se déplacer dessus en une seule commande."
+                command="git checkout nouvelle-feature"
+            />
+            <GitConceptCard 
                 title="Merge (Fusionner)"
                 analogy="La réunion des univers"
                 description="Quand votre nouvelle fonctionnalité est terminée et testée dans sa branche, vous la 'fusionnez' (merge) dans la branche 'main' pour que tout le monde puisse en profiter."
@@ -197,9 +238,66 @@ export const moduleGitContent = {
         </div>
       </section>
 
+      <section>
+        <Heading level={2} className="border-b pb-2 mb-4">Partie 3 : Gérer les Dépôts Distants (Les "Remotes")</Heading>
+        <p>Un dépôt local sur votre machine peut être connecté à plusieurs dépôts distants. Chaque connexion est appelée un "remote". C'est comme avoir plusieurs services de cloud synchronisés avec le même dossier.</p>
+        <GitConceptCard 
+            title="Qu'est-ce que 'origin' ?"
+            analogy="Le surnom par défaut"
+            description="Quand vous clonez un projet depuis GitHub, Git crée automatiquement un remote nommé 'origin' qui pointe vers l'URL du dépôt sur GitHub. C'est une convention, un raccourci pratique. Vous pourriez l'appeler 'github' ou 'mon-cloud', mais tout le monde utilise 'origin'."
+        />
+          <Heading level={3} className="!mt-8">HTTPS vs. SSH : Comment se connecter ?</Heading>
+        <p>Pour lier votre dépôt local à GitHub, vous avez deux manières de vous authentifier. Le choix se fait au moment de copier l'URL depuis GitHub.</p>
+        <div className="grid md:grid-cols-2 gap-8 mt-4 not-prose">
+            <Card>
+                <Heading level={4} className="flex items-center">Connexion HTTPS</Heading>
+                <p className="mt-2 font-semibold text-sm italic text-gray-500">"Le mot de passe du site web"</p>
+                <p className="mt-2 text-sm text-gray-700">C'est la méthode la plus simple. À chaque `push` ou `pull`, Git vous demandera votre nom d'utilisateur et votre mot de passe GitHub (ou, de manière plus sécurisée, un "Personal Access Token" que vous pouvez générer dans les paramètres de votre compte).</p>
+                <pre className="mt-4 text-xs bg-gray-800 text-white p-2 rounded"><code>git remote add origin https://github.com/user/repo.git</code></pre>
+            </Card>
+             <Card>
+                <Heading level={4} className="flex items-center">Connexion SSH</Heading>
+                <p className="mt-2 font-semibold text-sm italic text-gray-500">"La clé de la maison"</p>
+                <p className="mt-2 text-sm text-gray-700">Plus sécurisée et plus pratique. Vous générez une "clé SSH" sur votre ordinateur et donnez la partie "publique" de la clé à GitHub. Votre ordinateur utilisera alors sa clé "privée" pour s'authentifier automatiquement, sans mot de passe.</p>
+                <pre className="mt-4 text-xs bg-gray-800 text-white p-2 rounded"><code>git remote add origin git@github.com:user/repo.git</code></pre>
+            </Card>
+        </div>
+        <div className="grid md:grid-cols-2 gap-6 not-prose mt-4">
+             <Card>
+                <Heading level={4}>Ajouter un remote</Heading>
+                <p className="text-sm mt-2">Connecte votre dépôt local à un dépôt distant existant. C'est ce que vous faites après un `git init`.</p>
+                <pre className="mt-4 text-xs bg-gray-800 text-white p-2 rounded"><code>git remote add origin https://...</code></pre>
+            </Card>
+            <Card>
+                <Heading level={4}>Lister / Supprimer les remotes</Heading>
+                <p className="text-sm mt-2">Pour voir tous vos remotes connectés (`git remote -v`) ou en supprimer un (`git remote remove {'<nom>'}`).</p>
+                <pre className="mt-4 text-xs bg-gray-800 text-white p-2 rounded"><code>git remote remove origin</code></pre>
+            </Card>
+        </div>
+      </section>
+
+      {/* Partie 4: Commandes Avancées */}
+      <section>
+        <Heading level={2} className="border-b pb-2 mb-4">Partie 4 : Commandes Avancées (Pour aller plus loin)</Heading>
+         <div className="grid md:grid-cols-2 gap-6 not-prose mt-4">
+            <GitConceptCard 
+                title="git rebase"
+                analogy="Réécrire l'histoire proprement"
+                description="Le 'rebase' permet de déplacer une série de commits pour qu'ils partent d'une nouvelle base. C'est une alternative au 'merge' qui garde un historique plus propre et linéaire, comme si vous aviez travaillé sans interruption après les autres."
+                command="git rebase main"
+            />
+            <GitConceptCard 
+                title="git cherry-pick"
+                analogy="Le copier-coller d'un commit"
+                description="Permet de prendre un commit spécifique d'une branche et de l'appliquer sur une autre. Très utile pour récupérer une correction de bug urgente sans avoir à fusionner toute la branche de fonctionnalités."
+                command="git cherry-pick {'<hash_du_commit>'}"
+            />
+        </div>
+      </section>
+
       {/* Partie 3: Le Workflow de base */}
       <section>
-        <Heading level={2} className="border-b pb-2 mb-4">Partie 3 : Le Workflow Quotidien</Heading>
+        <Heading level={2} className="border-b pb-2 mb-4">Partie 5 : Le Workflow Quotidien</Heading>
         <p>Le travail avec Git et GitHub suit un cycle très précis. Voici les 5 étapes que vous ferez des dizaines de fois par jour.</p>
         <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mt-6 not-prose">
             <Card className="text-center">
@@ -233,7 +331,7 @@ export const moduleGitContent = {
 
       {/* Partie 4: Pourquoi c'est essentiel */}
       <section>
-        <Heading level={2} className="border-b pb-2 mb-4">Partie 4 : Pourquoi c'est Essentiel pour votre Carrière ?</Heading>
+        <Heading level={2} className="border-b pb-2 mb-4">Partie 6 : Pourquoi c'est Essentiel pour votre Carrière ?</Heading>
         <div className="grid md:grid-cols-3 gap-4 not-prose mt-4">
             <Card>
                 <Heading level={4}>Travail d'Équipe</Heading>
