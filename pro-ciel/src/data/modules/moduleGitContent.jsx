@@ -33,11 +33,11 @@ const tpGitSteps = [
         <p>Avant de coder, nous devons nous assurer que Git et GitHub sont correctement configurés sur votre machine. C'est comme préparer ses outils avant de bricoler.</p>
         <ol>
           <li><strong>Créer un compte GitHub :</strong> Si ce n'est pas déjà fait, allez sur <a href="https://github.com/join" target="_blank" rel="noopener noreferrer">github.com/join</a> et créez votre compte.</li>
-          <li><strong>Configurer Git :</strong> Ouvrez le terminal (Git Bash). Tapez les deux commandes suivantes en remplaçant les informations par les vôtres.
-            <pre className="code-block"><code>git config --global user.name "Votre Nom"
+          <li><strong>Configurer Git :</strong> Ouvrez le terminal dans Visual Studio Code (Terminal {"->"} New Terminal ). Tapez les deux commandes suivantes en remplaçant les informations par les vôtres.
+            <pre className="code-block"><code>git config --global user.name "Votre Nom" <br/>
 git config --global user.email "votre.email@github.com"</code></pre>
           </li>
-          <li><strong>Vérifier la configuration :</strong> Tapez <code>git config --list</code> pour vérifier que votre nom et votre email ont bien été enregistrés.</li>
+          <li><strong>Vérifier la configuration :</strong> Tapez <code>`git config --list`</code> pour vérifier que votre nom et votre email ont bien été enregistrés.</li>
         </ol>
       </>
     )
@@ -46,31 +46,31 @@ git config --global user.email "votre.email@github.com"</code></pre>
     title: "Partie 2 : Mon Projet Solo - La Machine à Remonter le Temps",
     description: (
       <>
-        <p>Nous allons utiliser Git pour suivre l'évolution d'un petit projet, en adoptant les bonnes pratiques avec les branches et en apprenant à corriger nos erreurs.</p>
+        <p>Nous allons utiliser Git pour suivre l'évolution d'un petit projet, en adoptant les bonnes pratiques avec les branches et en apprenant à corriger nos erreurs.</p> <br/>
         <ol>
-          <li><strong>Initialisation :</strong> Créez un dossier `mon-portfolio` et initialisez Git avec <code>git init</code>.</li>
-          <li><strong>Le `.gitignore` :</strong> Créez un fichier `.gitignore`. À l'intérieur, écrivez `notes.txt`. Maintenant, créez un fichier `notes.txt`. Tapez `git status` : le fichier de notes est bien ignoré par Git ! C'est essentiel pour ignorer les fichiers qui ne doivent pas être partagés.</li>
-          <li><strong>Premier Commit :</strong> Créez `index.html` avec un titre `{"<h1>Mon Portfolio</h1>"}`. Faites votre premier commit sur la branche `main`.
-            <pre className="code-block"><code>git add .
-git commit -m "Initial commit: Ajout de la structure de base HTML"</code></pre>
-          </li>
-          <li><strong>Création d'une Branche :</strong> Pour ajouter une biographie, créez une branche dédiée.
+          <li><strong>1. Initialisation :</strong> Créez un dossier `mon-portfolio` et initialisez Git avec <code>git init</code>.</li> <br/>
+          <li><strong>2. Le `.gitignore` :</strong> Créez un fichier `.gitignore`. À l'intérieur, écrivez `notes.txt`. Maintenant, créez un fichier `notes.txt`. Tapez `git status` : le fichier de notes est bien ignoré par Git ! C'est essentiel pour ignorer les fichiers qui ne doivent pas être partagés.</li> <br/>
+          <li><strong>3. Premier Commit :</strong> Créez `index.html` avec un titre `{"<h1>Mon Portfolio</h1>"}`. Faites votre premier commit sur la branche `main` (ou `master`, faite un `git branch` pour savoir!).
+            <pre className="code-block"><code>git add . <br/>
+            git commit -m "Initial commit: Ajout de la structure de base HTML"</code></pre>
+          </li> <br/>
+          <li><strong>4. Création d'une Branche :</strong> Pour ajouter une biographie, créez une branche dédiée.
             <pre className="code-block"><code>git checkout -b feature/ajout-bio</code></pre>
-          </li>
-          <li><strong>Travail en Branche :</strong> Ajoutez une section biographie dans `index.html`. Faites un commit.
-            <pre className="code-block"><code>git add .
-git commit -m "feat: Ajout de la section biographie"</code></pre>
-          </li>
-           <li><strong>Corriger le dernier commit :</strong> Oups, vous avez oublié d'ajouter votre âge. Modifiez le fichier, puis utilisez la commande `amend` pour ajouter cette modification au commit précédent sans en créer un nouveau.
-            <pre className="code-block"><code>git add .
-git commit --amend --no-edit</code></pre>
-          </li>
-          <li><strong>Explorer l'historique :</strong> Utilisez `git log --oneline --graph` pour voir votre historique. Repérez le hash de votre premier commit et utilisez `git show {"<hash_du_commit>"}` pour inspecter ses détails.</li>
-          <li><strong>Fusionner la Branche :</strong> Retournez sur `main` et fusionnez votre travail.
-            <pre className="code-block"><code>git checkout main
+          </li> <br/>
+          <li><strong>5. Travail en Branche :</strong> Ajoutez une section biographie dans `index.html`. Faites un commit.
+            <pre className="code-block"><code>git add .  <br/>
+            git commit -m "feat: Ajout de la section biographie"</code></pre>
+          </li> <br/>
+           <li><strong>6. Corriger le dernier commit :</strong> Oups, vous avez oublié d'ajouter votre âge. Modifiez le fichier, puis utilisez la commande `amend` pour ajouter cette modification au commit précédent sans en créer un nouveau.
+            <pre className="code-block"><code>git add .  <br/>
+            git commit --amend --no-edit</code></pre>
+          </li> <br/>
+          <li><strong>7. Explorer l'historique :</strong> Utilisez `git log --oneline --graph` pour voir votre historique. Repérez le hash de votre premier commit et utilisez `git show {"<hash_du_commit>"}` pour inspecter ses détails.</li> <br/>
+          <li><strong>8. Fusionner la Branche :</strong> Retournez sur `main` et fusionnez votre travail.
+            <pre className="code-block"><code>git checkout main  <br/>
 git merge feature/ajout-bio</code></pre>
-          </li>
-          <li><strong>Synchronisation avec GitHub :</strong> Créez un dépôt `mon-portfolio` sur GitHub, liez-le avec `git remote add origin...` et poussez votre travail avec `git push -u origin main`.</li>
+          </li> <br/>
+          <li><strong>9. Synchronisation avec GitHub :</strong> Créez un dépôt `mon-portfolio` sur GitHub, liez-le avec `git remote add origin...` et poussez votre travail avec `git push -u origin main`.</li>
         </ol>
       </>
     )
@@ -208,7 +208,7 @@ export const moduleGitContent = {
             <GitConceptCard 
                 title="Branch (Branche)"
                 analogy="Un univers parallèle"
-                description="Une branche est une copie de votre projet où vous pouvez travailler sur une nouvelle fonctionnalité (ex: 'branche-connexion') sans casser la version principale (la branche 'main')."
+                description="Une branche est une copie de votre projet où vous pouvez travailler sur une nouvelle fonctionnalité (ex: 'branche-connexion') sans casser la version principale (la branche 'main'). Pour savoir quelles branches sont présentent : `git branch`"
                 command="git branch nouvelle-feature"
             />
             <GitConceptCard 
