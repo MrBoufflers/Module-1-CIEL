@@ -69,14 +69,14 @@ export const courseData = [
     },
     content: moduleBonusJV,
   },
-  //  {
-  //   id: 'moduleGit',
-  //   title: "Git et Github",
-  //   icon: "🔀",
-  //   ref: {
-  //     competence: 'C03, C01, C08.',
-  //     savoirs: 'S2.10, S2.7, S1.2',
-  //   },
-  //   content: moduleGitContent,
-  // },
+   {
+    id: 'moduleGit',
+    title: "Git et Github",
+    icon: "🔀",
+    ref: {
+      competence: 'C03, C01, C08.',
+      savoirs: 'S2.10, S2.7, S1.2',
+    },
+    content: moduleGitContent,
+  },
 ];
