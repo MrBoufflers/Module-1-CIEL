@@ -2,6 +2,8 @@ import React from 'react';
 import Heading from '../../components/atoms/Heading';
 import Card from '../../components/atoms/Card';
 import PracticalWork from '../../components/organisms/PraticalWork';
+import GitIdentif from '../../assets/images/gitIdentif.png'
+import NewRepo from "../../assets/images/newrepo.PNG"
 
 
 // Molécule pour un concept clé de Git
@@ -33,11 +35,15 @@ const tpGitSteps = [
         <p>Avant de coder, nous devons nous assurer que Git et GitHub sont correctement configurés sur votre machine. C'est comme préparer ses outils avant de bricoler.</p>
         <ol>
           <li><strong>Créer un compte GitHub :</strong> Si ce n'est pas déjà fait, allez sur <a href="https://github.com/join" target="_blank" rel="noopener noreferrer">github.com/join</a> et créez votre compte.</li>
+          <li>Si vous êtes plusieurs à utiliser le même ordinateur, il faut déjà supprimer les dernières informations d'identification, pour ce faire vous devez aller dans :</li> <br/>
+          <img src={GitIdentif} alt={"Gestionnaire d'identification"} className=" w-[50%] h-full m-auto" />
           <li><strong>Configurer Git :</strong> Ouvrez le terminal dans Visual Studio Code (Terminal {"->"} New Terminal ). Tapez les deux commandes suivantes en remplaçant les informations par les vôtres.
             <pre className="code-block"><code>git config --global user.name "Votre Nom" <br/>
 git config --global user.email "votre.email@github.com"</code></pre>
           </li>
-          <li><strong>Vérifier la configuration :</strong> Tapez <code>`git config --list`</code> pour vérifier que votre nom et votre email ont bien été enregistrés.</li>
+          <li><strong>Vérifier la configuration :</strong> Tapez cette commande pour vérifier que votre nom et votre email ont bien été enregistrés.</li>
+          <pre className="code-block"><code>git config --list</code></pre>
+          <li>Vous devriez voir vos identifiants (nom et email)</li>
         </ol>
       </>
     )
@@ -48,29 +54,66 @@ git config --global user.email "votre.email@github.com"</code></pre>
       <>
         <p>Nous allons utiliser Git pour suivre l'évolution d'un petit projet, en adoptant les bonnes pratiques avec les branches et en apprenant à corriger nos erreurs.</p> <br/>
         <ol>
-          <li><strong>1. Initialisation :</strong> Créez un dossier `mon-portfolio` et initialisez Git avec <code>git init</code>.</li> <br/>
-          <li><strong>2. Le `.gitignore` :</strong> Créez un fichier `.gitignore`. À l'intérieur, écrivez `notes.txt`. Maintenant, créez un fichier `notes.txt`. Tapez `git status` : le fichier de notes est bien ignoré par Git ! C'est essentiel pour ignorer les fichiers qui ne doivent pas être partagés.</li> <br/>
-          <li><strong>3. Premier Commit :</strong> Créez `index.html` avec un titre `{"<h1>Mon Portfolio</h1>"}`. Faites votre premier commit sur la branche `main` (ou `master`, faite un `git branch` pour savoir!).
-            <pre className="code-block"><code>git add . <br/>
-            git commit -m "Initial commit: Ajout de la structure de base HTML"</code></pre>
-          </li> <br/>
-          <li><strong>4. Création d'une Branche :</strong> Pour ajouter une biographie, créez une branche dédiée.
+          <li><strong>1. Initialisation :</strong> <br />
+            a. Créez un dossier `mon-portfolio-PRENOM-NOM` dans le dossier `Documents`
+          </li>
+          <li>b. Dans Visual Studio Code, ouvrez le dossier que vous venez de créer : `Files` -{">"} `Open Folder`</li>
+          <li>c. Il est maintenant temps d'initialiser git dans le dossier avec la commande :</li>
+          <pre className="code-block"><code>git init</code></pre> <br/>
+          <li><strong>2. Le `.gitignore` :</strong> <br />
+           a. Créez un fichier `.gitignore` (ne pas oublier le ".", c'est une extension) à partir de l'explorateur de fichier de VIsual Studio Code. <br />
+           b. À l'intérieur, écrivez `notes.txt`.</li>
+          <li>c.Maintenant, créez un fichier `notes.txt`. <br />
+           d. Tapez : <pre className='code-block'> <code>git status</code></pre> Si vous ne voyez pas le fichier notes.txt dans le terminal, le fichier de notes est bien ignoré par Git ! C'est essentiel pour ignorer les fichiers qui ne doivent pas être partagés.</li> <br/>
+          <li><strong>3. Premier Commit :</strong> <br />a. Créez le fichier `index.html`, toujours dans le même dossier <br />
+           b. Ajoutez un titre en HTML `{"<h1>Mon Portfolio</h1>"}`. <br />
+           c. Faites votre premier commit sur la branche `master`, pour ce faire, on commence par ajouter les fichiers au commit :
+            <pre className="code-block"><code>git add .</code></pre>
+            Ensuite on fait le commit avec son message :
+            <pre className="code-block"><code>git commit -m "Initial commit: Ajout de la structure de base HTML"</code></pre>
+          </li>
+          <li>Si vous n'avez pas d'erreur, votre premier commit est fait! Vos dernières modifications sont sauvegardées.</li> <br />
+          <li><strong>4. Création d'une Branche :</strong> <br />
+          Vous allez maintenant alimenter un peu votre portefolio en ajoutant une biographie. <br />
+           a. Pour ajouter une biographie, créez une branche dédiée :
             <pre className="code-block"><code>git checkout -b feature/ajout-bio</code></pre>
+           b. Faites la commande suivante pour vous assuer d'avoir bien créer votre nouvelle branch et s'assurer de bien être dedans :
+          <pre className="code-block"><code>git branch</code></pre>
+          Vous devriez voir la branch `feature/ajout-bio` en verte.
           </li> <br/>
-          <li><strong>5. Travail en Branche :</strong> Ajoutez une section biographie dans `index.html`. Faites un commit.
+          <li><strong>5. Travail en Branche :</strong> <br /> 
+           a. Ajoutez un nouveau titre pour votre nouvelle section de biographie dans `index.html` à la suite de votre titre H1: `{"<h2>Ma biographie</h2>"}`.
+           b. Maintenant nous allons sauvegarder ces modifications dans notre nouvelle branch en faisant un commit :
             <pre className="code-block"><code>git add .  <br/>
             git commit -m "feat: Ajout de la section biographie"</code></pre>
           </li> <br/>
-           <li><strong>6. Corriger le dernier commit :</strong> Oups, vous avez oublié d'ajouter votre âge. Modifiez le fichier, puis utilisez la commande `amend` pour ajouter cette modification au commit précédent sans en créer un nouveau.
+           <li><strong>6. Corriger le dernier commit :</strong> <br />
+            a. Oups, vous avez oublié d'ajouter votre âge! Modifiez le fichier `index.html` en ajoutant votre age à votre biographie `{"<p>J'ai 16ans</p>"}`, <br />
+            b. Puis utilisez la commande `amend` pour ajouter cette modification au commit précédent sans en créer un nouveau.
             <pre className="code-block"><code>git add .  <br/>
             git commit --amend --no-edit</code></pre>
           </li> <br/>
-          <li><strong>7. Explorer l'historique :</strong> Utilisez `git log --oneline --graph` pour voir votre historique. Repérez le hash de votre premier commit et utilisez `git show {"<hash_du_commit>"}` pour inspecter ses détails.</li> <br/>
-          <li><strong>8. Fusionner la Branche :</strong> Retournez sur `main` et fusionnez votre travail.
+          <li><strong>7. Explorer l'historique :</strong><br />
+           a. Vous ne savez plus où vous en êtes? Utilisez cette commande pour voir votre historique :
+           <pre className='code-block'><code> git log --oneline --graph</code></pre>
+            b. Repérez le hash de votre premier commit (l'identifiant composant de nombres et lettres) et utilisez cette commande pour inspecter ses détails :
+            <pre className="code-block"><code>git show {"<hash_du_commit>"}</code></pre> </li> <br/>
+          <li><strong>8. Fusionner la Branche :</strong> <br />
+          Vous êtes satisfait de votre travail sur cette branch, vous allez pouvoir retourner sur la branch `master` et fusionnez votre travail :
             <pre className="code-block"><code>git checkout main  <br/>
-git merge feature/ajout-bio</code></pre>
+             git merge feature/ajout-bio</code></pre>
           </li> <br/>
-          <li><strong>9. Synchronisation avec GitHub :</strong> Créez un dépôt `mon-portfolio` sur GitHub, liez-le avec `git remote add origin...` et poussez votre travail avec `git push -u origin main`.</li>
+          <li><strong>9. Synchronisation avec GitHub :</strong> <br />
+          Le local c'est bien, mais mettre votre projet sur Github c'est mieux! Pour ce faire : <br />
+           a. Créez un dépôt `mon-portfolio` sur GitHub ("New Repository") <br />
+           b. Une fois créé, copiez le lien HTTPS du repository
+           <img src={NewRepo} alt="Nouveau repository" />
+           c. Liez-le au local avec la commande : 
+           <pre className="code-block"><code>git remote add origin {"<lien_du_repo>"}</code></pre>
+           d. Identifiez-vous <br />
+           e. Maintenant que notre machine local et le repository sur Github sont liés, poussez votre travail avec : <br />
+           <pre className="code-block"><code></code>git push -u origin master</pre></li>
+           f. Bravo, votre projet est sur github ! Maintenant allez dans les paramètres de votre repository ("Settings"), ensuite dans "Collaborators", et ajouter "MrBoufflers".
         </ol>
       </>
     )
@@ -83,36 +126,41 @@ git merge feature/ajout-bio</code></pre>
         
         <Heading level={4} className="!mt-6">Étape A : Préparation (Mainteneur)</Heading>
         <ol>
-            <li>Créez un dépôt `projet-collab` sur GitHub, ajoutez votre binôme comme collaborateur.</li>
-            <li>Clonez le projet, créez un `README.md`, commitez et pushez.</li>
-            <li>Sur GitHub, allez dans l'onglet "Issues" et créez un nouveau ticket : "Ajouter la liste des membres de l'équipe". Assignez-le à votre collaborateur.</li>
+            <li>a. Créez un repository `projet-collab` sur GitHub, ajoutez votre binôme comme collaborateur.</li>
+            <li>b. Clonez le projet :
+              <pre className="code-block"><code>git clone {"<lien_du_repository>"}</code></pre> 
+              c. Créez un fichier `README.MD`. <br />
+              d. commitez et pushez.</li>
+            <li>e. Sur GitHub, allez dans l'onglet "Issues" et créez un nouveau ticket : "Ajouter la liste des membres de l'équipe". Assignez-le à votre collaborateur.</li>
         </ol>
 
         <Heading level={4} className="!mt-6">Étape B : Développement (Collaborateur)</Heading>
         <ol>
-            <li>Acceptez l'invitation et clonez le projet.</li>
-            <li>Créez une branche nommée en fonction de l'issue (ex: `feature/1-liste-equipe`).
+            <li>a.Acceptez l'invitation et clonez le projet.</li>
+            <li>b. Créez une branche nommée en fonction de l'issue (ex: `feature/1-liste-equipe`).
                 <pre className="code-block"><code>git checkout -b feature/1-liste-equipe</code></pre>
             </li>
-            <li>Modifiez le `README.md` pour y ajouter les noms des deux membres de l'équipe.</li>
-            <li>Faites un commit qui ferme automatiquement l'issue : `git commit -m "feat: Ajout de la liste des membres (closes #1)"`.</li>
-            <li>Poussez votre branche sur GitHub : `git push origin feature/1-liste-equipe`.</li>
-            <li>Sur GitHub, créez la "Pull Request".</li>
+            <li>c. Modifiez le `README.md` pour y ajouter les noms des deux membres de l'équipe.</li>
+            <li>d. Faites un commit qui ferme automatiquement l'issue :
+              <pre className="code-block"><code>git commit -m "feat: Ajout de la liste des membres (closes #1)"</code></pre></li>
+            <li>e. Poussez votre branche sur GitHub :
+              <pre className="code-block"><code>git push origin feature/1-liste-equipe</code></pre></li>
+            <li>f. Sur GitHub, créez la "Pull Request".</li>
         </ol>
 
         <Heading level={4} className="!mt-6">Étape C : Revue de Code et Fusion (Mainteneur)</Heading>
         <ol>
-            <li>Sur la Pull Request, allez dans l'onglet "Files changed". Laissez un commentaire pour demander une modification (ex: "Peux-tu mettre les noms en gras ?"). Puis cliquez sur "Request changes".</li>
-            <li>**(Collaborateur)** : Faites la modification demandée, commitez (`git commit -m "style: Mise en gras des noms"`) et poussez à nouveau sur la même branche. La PR se met à jour.</li>
-            <li>**(Mainteneur)** : Approuvez les changements, puis cliquez sur "Merge pull request".</li>
-            <li>Mettez à jour votre projet local : `git checkout main` puis `git pull`.</li>
+            <li>a. Sur la Pull Request, allez dans l'onglet "Files changed". Laissez un commentaire pour demander une modification (ex: "Peux-tu mettre les noms en gras ?"). Puis cliquez sur "Request changes".</li>
+            <li>b. **(Collaborateur)** : Faites la modification demandée, commitez (`git commit -m "style: Mise en gras des noms"`) et poussez à nouveau sur la même branche. La PR (Pull Request) se met à jour.</li>
+            <li>c. **(Mainteneur)** : Approuvez les changements, puis cliquez sur "Merge pull request".</li>
+            <li>d. Mettez à jour votre projet local : `git checkout main` puis `git pull`.</li>
         </ol>
 
         <Heading level={4} className="!mt-6 !text-purple-600">Étape D : On inverse les Rôles !</Heading>
         <ol>
-            <li>Le Mainteneur devient le Collaborateur, et vice-versa.</li>
-            <li>Le **nouveau Mainteneur** crée une nouvelle issue sur GitHub (ex: "Ajouter un lien vers nos profils GitHub").</li>
-            <li>Le **nouveau Collaborateur** répète tout le processus de l'étape B et C : il crée une branche, fait le travail, crée une Pull Request, reçoit une demande de modification, la corrige, et attend la fusion.</li>
+            <li>a. Le Mainteneur devient le Collaborateur, et vice-versa.</li>
+            <li>b. Le **nouveau Mainteneur** crée une nouvelle issue sur GitHub (ex: "Ajouter un lien vers nos profils GitHub").</li>
+            <li>c. Le **nouveau Collaborateur** répète tout le processus de l'étape B et C : il crée une branche, fait le travail, crée une Pull Request, reçoit une demande de modification, la corrige, et attend la fusion.</li>
         </ol>
       </>
     )
