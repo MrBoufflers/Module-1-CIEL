@@ -69,8 +69,8 @@ export const courseData = [
     },
     content: moduleBonusJV,
   },
-  {
-    id: 'moduleGit',
+    {
+     id: 'moduleGit',
      title: "Git et Github",
      icon: "🔀",
      ref: {
