@@ -4,13 +4,16 @@ import MainLayout from '../templates/MainLayout';
 import Sidebar from '../organisms/Sidebar';
 import ModuleContent from '../organisms/ModuleContent';
 import Button from '../atoms/Button';
+import HomePage from './HomePage'; 
 
+
+const allModules = Object.values(courseData).flat();
 
 export default function CoursePage() {
-  const [activeModuleId, setActiveModuleId] = useState(courseData[0].id);
+  // On s'assure de commencer sur un module qui existe
+  const [activeModuleId, setActiveModuleId] = useState('home')
+;
   const [isDyslexicFont, setDyslexicFont] = useState(false);
-  const [isDyslexicText, setDyslexicText] = useState("Police Dys");
-
   useEffect(() => {
     if (localStorage.getItem('font-dys') === 'true') {
       setDyslexicFont(true);
@@ -21,18 +24,18 @@ export default function CoursePage() {
   const handleFontToggle = () => {
     const newFontState = !isDyslexicFont;
     setDyslexicFont(newFontState);
-    newFontState  ? setDyslexicText("Police classique") : setDyslexicText("Police Dys")
     localStorage.setItem('font-dys', newFontState);
     document.body.classList.toggle('font-dys');
   };
 
-  const activeModule = courseData.find(m => m.id === activeModuleId);
+  // La recherche se fait maintenant sur la liste aplatie
+  const activeModule = allModules.find(m => m.id === activeModuleId);
 
   return (
     <MainLayout
       sidebar={
         <Sidebar
-          modules={courseData}
+          data={courseData}
           activeModuleId={activeModuleId}
           onModuleChange={setActiveModuleId}
         />
@@ -40,10 +43,13 @@ export default function CoursePage() {
       mainContent={
         <>
           <div className="flex justify-end mb-4">
-            <Button onClick={handleFontToggle} variant="secondary">{isDyslexicText}</Button>
+            <Button onClick={handleFontToggle} variant="secondary">Police Dys</Button>
           </div>
-          <ModuleContent module={activeModule} />
-        </>
+          {activeModuleId === 'home' ? (
+            <HomePage />
+          ) : (
+            <ModuleContent module={activeModule} />
+          )}        </>
       }
     />
   );
