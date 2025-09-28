@@ -2,12 +2,15 @@
 import { module1Content } from './modules/module1content.jsx';
 import { module2Content } from './modules/module2content.jsx';
 import { module3Content } from './modules/module3content.jsx';
-import { module4Content } from './modules/module4content.jsx';
-import { module5Content } from './modules/module5content.jsx';
+// import { module4Content } from './modules/module4content.jsx';
+// import { module5Content } from './modules/module5content.jsx';
 import { moduleBonusJV } from './modules/moduleBonusJV.jsx';
 import { moduleGitContent } from './modules/moduleGitContent.jsx';
 import { module6content } from './modules/module6content.jsx'
 import { module6TContent} from './modules/module6Tcontent.jsx'
+import { moduleCSScontent} from './modules/moduleCSScontent.jsx'
+import { moduleJSTcontent } from './modules/moduleJSTcontent';
+
 
 export const courseData = {
   troncCommun: [
@@ -64,6 +67,16 @@ export const courseData = {
      },
      content: module6content,
    },
+    {
+     id: 'moduleCSS',
+     title: "Introduction CSS",
+     icon: "🎨",
+     ref: {
+       competence: 'C03, C01, C08.',
+       savoirs: 'S1.2, S5.1, S2.10, S1.4',
+     },
+     content: moduleCSScontent,
+   },
     // Ajoutez ici les futurs modules de Première...
   ],
   terminale: [
@@ -86,6 +99,16 @@ export const courseData = {
       savoirs: 'S1.2, S5.1, S2.10, S1.4',
     },
     content: module6TContent,
+  },
+  {
+    id: 'moduleJST',
+    title: "Javascript",
+    icon: "🏗️",
+    ref: {
+      competence: 'C08, C03, C01',
+      savoirs: 'S1.2, S5.1, S2.10, S1.4',
+    },
+    content: moduleJSTcontent,
   },
      // Ajoutez ici les futurs modules de Terminale...
   ],
