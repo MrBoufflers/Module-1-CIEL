@@ -10,6 +10,7 @@ import { module6content } from './modules/module6content.jsx'
 import { module6TContent} from './modules/module6Tcontent.jsx'
 import { moduleCSScontent} from './modules/moduleCSScontent.jsx'
 import { moduleJSTcontent } from './modules/moduleJSTcontent';
+import {moduleIAcontent} from './modules/moduleIAcontent';
 
 
 export const courseData = {
@@ -109,6 +110,16 @@ export const courseData = {
       savoirs: 'S1.2, S5.1, S2.10, S1.4',
     },
     content: moduleJSTcontent,
+  },
+        {
+    id: 'moduleBonusIA',
+    title: "L'IA",
+    icon: "🎮",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser une structure matérielle et logicielle',
+      savoirs: 'S5.5, S5.1, S3.1, S3.6',
+    },
+    content: moduleIAcontent,
   },
      // Ajoutez ici les futurs modules de Terminale...
   ],
