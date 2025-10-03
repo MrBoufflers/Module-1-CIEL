@@ -119,7 +119,10 @@ git commit -m "feat: Exercices sur les fondamentaux JS terminés"</code></pre>
                     <Heading level={4}>Commit Final</Heading>
                     <p>Une fois votre défi réussi et testé, faites un dernier commit.</p>
                     <pre className="code-block"><code>git add . <br />
-git commit -m "feat: Défi logique du groupe X terminé"</code></pre>
+git commit -m "feat: Défi logique du groupe X terminé" <br />
+git push
+
+</code></pre>
                 </div>
             </>
         )
