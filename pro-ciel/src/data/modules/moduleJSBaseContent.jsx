@@ -102,7 +102,7 @@ git push</code></pre>
              <>
                 <p><strong>Objectif :</strong> Comprendre ce qu'est un objet, pourquoi on l'utilise, et comment le manipuler.</p>
                 <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Le "Pourquoi" (La Leçon) :</strong>
+                    <li><strong>Informations :</strong>
                         <ul className="list-disc list-inside ml-4 mt-2">
                             <li>Si on veut stocker un utilisateur, on pourrait faire : `const nom = "Dupont"`, `const prenom = "Alice"`, `const age = 17`. C'est lourd et les variables ne sont pas regroupées.</li>
                             <li>Un <strong>Objet</strong> (défini avec `{ }`) est une "super-variable" qui contient d'autres variables. On l'utilise pour modéliser une entité du monde réel (un utilisateur, un produit) en regroupant ses propriétés en un seul endroit.</li>
@@ -119,7 +119,7 @@ git push</code></pre>
 };`}</code></pre>
                              </li>
                              <li>Affichez l'objet entier : <code>console.log(moi);</code>. (Dépliez-le dans la console pour l'explorer).</li>
-                             <li>Pour lire une seule propriété, on utilise la **notation "point"** :
+                             <li>Pour lire une seule propriété, on utilise la notation "point" :
                                 <pre className="code-block"><code>console.log(moi.prenom); // Affiche "VotrePrénom"</code></pre>
                              </li>
                              <li><strong>Mini-Défi 1 :</strong> Affichez la phrase "Je m'appelle [VotrePrénom] [VotreNom]." en utilisant les propriétés de l'objet.</li>
@@ -148,7 +148,7 @@ git push</code></pre>
             <>
                 <p><strong>Objectif :</strong> Comprendre comment stocker et parcourir une *liste* de données.</p>
                 <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Le "Pourquoi" (La Leçon) :</strong>
+                    <li><strong>Informations :</strong>
                         <ul className="list-disc list-inside ml-4 mt-2">
                             <li>Un <strong>Tableau</strong> (défini avec `[ ]`) est une boîte qui contient une *liste* de valeurs. On l'utilise quand on a plusieurs éléments du même type (une liste de notes, une liste d'élèves...).</li>
                         </ul>
@@ -156,7 +156,7 @@ git push</code></pre>
                     <li><strong>Expérimentation (Tableaux Simples) :</strong>
                          <ul className="list-disc list-inside ml-4 mt-2">
                              <li>Créez un tableau de notes : `const notes = [12, 15, 9, 18];`</li>
-                             <li><strong>Accès (Le "Pourquoi") :</strong> On accède aux éléments par leur **indice** (leur position), qui commence **TOUJOURS à 0**. Le premier élément est à l'indice 0.
+                             <li><strong>Accès (Le "Pourquoi") :</strong> On accède aux éléments par leur indice (leur position), qui commence TOUJOURS à 0. Le premier élément est à l'indice 0.
                                 <pre className="code-block"><code>console.log(notes[0]); // Affiche 12
 console.log(notes[1]); // Affiche 15</code></pre>
                              </li>
@@ -167,7 +167,7 @@ console.log(notes[1]); // Affiche 15</code></pre>
                     </li>
                     <li><strong>Expérimentation (Boucle `for`) :</strong>
                          <ul className="list-disc list-inside ml-4 mt-2">
-                            <li>**Le Problème :** On veut afficher toutes les notes. On pourrait faire 4 `console.log`, mais si on ajoute une note, il faut modifier le code. C'est là que la boucle intervient.</li>
+                            <li>Le Problème : On veut afficher toutes les notes. On pourrait faire 4 `console.log`, mais si on ajoute une note, il faut modifier le code. C'est là que la boucle intervient.</li>
                             <li><strong>Décomposition de <code>{`for (let i = 0; i < notes.length; i++)`}</code> :</strong>
                                 <ul>
                                     <li><code>let i = 0;</code> : On crée un compteur `i` (pour "indice") qui commence à 0.</li>
@@ -209,9 +209,9 @@ git push</code></pre>
             <>
                 <p><strong>Objectif :</strong> Comprendre comment créer des blocs de code réutilisables pour éviter de se répéter.</p>
                  <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Le "Pourquoi" (La Leçon) :</strong>
+                    <li><strong>Informations :</strong>
                         <ul className="list-disc list-inside ml-4 mt-2">
-                            <li>Si on doit calculer une moyenne 10 fois, on ne va pas copier-coller 10 fois le même code. On crée une **Fonction** : un bloc de code qu'on nomme et qu'on peut "appeler" quand on en a besoin.</li>
+                            <li>Si on doit calculer une moyenne 10 fois, on ne va pas copier-coller 10 fois le même code. On crée une Fonction : un bloc de code qu'on nomme et qu'on peut "appeler" quand on en a besoin.</li>
                         </ul>
                     </li>
                     <li><strong>Expérimentation 1 : La fonction classique</strong>
@@ -231,15 +231,15 @@ console.log(salutationPourAlice); // Affiche "Bonjour Alice"`}</code></pre>
                     <li><strong>Expérimentation 2 : La fonction fléchée (étape par étape)</strong>
                          <ul className="list-disc list-inside ml-4 mt-2">
                              <li>La syntaxe <code>{'=>'}</code> est intimidante, mais c'est juste un raccourci. Voyons la transformation :</li>
-                             <li>**Étape A (Classique) :** <code>function addition(a, b) {`{ return a + b; }`}</code></li>
-                             <li>**Étape B (Stockée dans une const) :** <code>const addition = function(a, b) {`{ return a + b; }`};</code></li>
-                             <li>**Étape C (Fléchée) :** On enlève `function` et on ajoute `=>` après les parenthèses.
+                             <li>Étape A (Classique) : <code>function addition(a, b) {`{ return a + b; }`}</code></li>
+                             <li>Étape B (Stockée dans une const) : <code>const addition = function(a, b) {`{ return a + b; }`};</code></li>
+                             <li>Étape C (Fléchée) : On enlève `function` et on ajoute `=>` après les parenthèses.
                                 <pre className="code-block"><code>const addition = (a, b) => {`{ return a + b; }`};</code></pre>
                              </li>
                               <li><strong>Étape D (Raccourci magique) :</strong> Si la fonction ne fait *que* `return` une seule ligne, on peut enlever les accolades `{}` ET le mot `return`.
                                 <pre className="code-block"><code>const addition = (a, b) => a + b;</code></pre>
                              </li>
-                             <li>Analyse :** Les deux syntaxes (C et D) sont identiques ! La D est juste plus courte. Testez-la : <code>console.log( addition(10, 5) );</code> (Doit afficher 15).</li>
+                             <li>Analyse : Les deux syntaxes (C et D) sont identiques ! La D est juste plus courte. Testez-la : <code>console.log( addition(10, 5) );</code> (Doit afficher 15).</li>
                          </ul>
                     </li>
                      <li><strong>Mini-Défi :</strong>
@@ -262,7 +262,7 @@ git push
         )
     },
     {
-        title: "⭐ Bonus (Si le temps le permet)",
+        title: "⭐ Bonus",
         description: (
             <p>Maintenant que vous savez tout faire, créez une fonction `calculerMoyenne(tableauDeNotes)` qui prend un tableau (comme `notes`) en paramètre. À l'intérieur de cette fonction, utilisez une boucle `for` pour calculer la somme de toutes les notes, puis `return` la moyenne (somme / nombre de notes).</p>
         )
