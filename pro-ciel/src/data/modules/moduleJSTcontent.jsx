@@ -2,6 +2,7 @@ import React from 'react';
 import Heading from '../../components/atoms/Heading';
 import Card from '../../components/atoms/Card';
 import PracticalWork from '../../components/organisms/PraticalWork';
+import JavascriptTP2 from './moduleJSBaseContent';
 
 // Molécule pour un défi logique
 const ChallengeCard = ({ groupNumber, title, context, objective, example, hint }) => (
@@ -378,13 +379,16 @@ console.log(nombresPositifs); // Affiche [5, 0, 8]`
       </section>
     </div>
   ),
-  tp: (
+  tp2: (
     <PracticalWork 
       title={tpTitle}
       objective={tpObjective}
       materials={tpMaterials}
       steps={tpSteps}
     />
+  ),
+  tp: (
+    <JavascriptTP2/>
   )
 }
 

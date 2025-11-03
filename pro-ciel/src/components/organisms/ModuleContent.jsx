@@ -19,6 +19,9 @@ export default function ModuleContent({ module }) {
   if (module.content.quiz) {
     tabsConfig.push({ id: 'quiz', label: 'Quizz', content: module.content.quiz });
   }
+  if(module.content.tp2) {
+    tabsConfig.push({ id: 'tp2', label: 'Travaux Pratiques 2', content: <div className="prose max-w-none">{module.content.tp2}</div> });
+  }
 
   return (
     <div>
