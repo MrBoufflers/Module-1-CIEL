@@ -11,10 +11,21 @@ import { module6TContent} from './modules/module6Tcontent.jsx'
 import { moduleCSScontent} from './modules/moduleCSScontent.jsx'
 import { moduleJSTcontent } from './modules/moduleJSTcontent';
 import {moduleIAcontent} from './modules/moduleIAcontent';
+import {moduleOrientation} from './modules/moduleOrientation.jsx'
 
 
 export const courseData = {
   troncCommun: [
+    {
+    id: 'moduleOrientation',
+    title: "Guide de l'orientation",
+    icon: "🎓",
+    ref: {
+      competence: '',
+      savoirs: '',
+    },
+    content: moduleOrientation,
+  },
   {
     id: 'module1',
     title: "Intro Informatique",
