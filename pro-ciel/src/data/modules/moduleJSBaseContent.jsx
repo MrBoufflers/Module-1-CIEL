@@ -52,7 +52,7 @@ git push
         )
     },
     {
-        title: "Phase 2 : Mission 1 - Les Variables et Conditions",
+        title: "Phase 2 : Les Variables et Conditions",
         description: (
             <>
                 <p><strong>Objectif :</strong> Comprendre comment stocker des informations simples et comment le code peut prendre des décisions.</p>
@@ -97,7 +97,7 @@ git push</code></pre>
         )
     },
     {
-        title: "Phase 3 : Mission 2 - L'Objet (L'étape la plus importante)",
+        title: "Phase 3 : L'Objet (L'étape la plus importante)",
         description: (
              <>
                 <p><strong>Objectif :</strong> Comprendre ce qu'est un objet, pourquoi on l'utilise, et comment le manipuler.</p>
@@ -143,7 +143,7 @@ git push</code></pre>
         )
     },
     {
-        title: "Phase 4 : Mission 3 - Tableaux et Boucles",
+        title: "Phase 4 : Tableaux et Boucles",
         description: (
             <>
                 <p><strong>Objectif :</strong> Comprendre comment stocker et parcourir une *liste* de données.</p>
@@ -204,7 +204,7 @@ git push</code></pre>
         )
     },
  {
-        title: "Phase 5 : Mission 4 - Les Fonctions",
+        title: "Phase 5 : Les Fonctions",
         description: (
             <>
                 <p><strong>Objectif :</strong> Comprendre comment créer des blocs de code réutilisables pour éviter de se répéter.</p>
