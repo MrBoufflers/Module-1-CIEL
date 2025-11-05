@@ -88,14 +88,14 @@ const renderTable = (headers, data) => (
 </div>
 );
 
-  const parcoursupHeaders = ["Phase", "Dates Clés", "Actions Requises pour le Candidat", "Sources"];
+  const parcoursupHeaders = ["Phase", "Dates Clés", "Actions Requises pour le Candidat"];
   const parcoursupData = [
-    ["<strong>Phase 1 : Information</strong>", "À partir du 17 décembre 2025", "Consultation du moteur de recherche des formations (plus de 23 000 formations). Analyse des fiches détaillées : contenus, attendus, taux d'accès, débouchés, frais de scolarité, dates des JPO.", createSourceLink(3)],
-    ["<strong>Phase 2 : Inscription et Formulation des Vœux</strong>", "Du 19 janvier au 12 mars 2026 (inclus)", "Création du dossier candidat. Formulation des vœux (jusqu'à 10 vœux en formation initiale et 10 vœux supplémentaires en apprentissage) sans les classer.", createSourceLink(2) + createSourceLink(3)],
-    ["<strong>Phase 3 : Finalisation des Dossiers et Confirmation</strong>", "Du 13 mars au 1er avril 2026 (inclus)", 'Complétion du dossier pour chaque vœu (rédaction du "projet de formation motivé", renseignement de la rubrique "Activités et centres d\'intérêt"). Confirmation de chaque vœu individuellement. Un vœu non confirmé ne sera pas examiné.', createSourceLink(3) + createSourceLink(5)],
-    ["<strong>Phase 4 : Phase d'Admission Principale</strong>", "Du 2 juin au 11 juillet 2026 (inclus)", 'Réception des réponses des formations ("Oui", "Oui-si", "En attente", "Non"). Réponse obligatoire à chaque proposition dans les délais indiqués. Les délais sont suspendus durant les épreuves écrites du baccalauréat (12 au 19 juin 2026).', createSourceLink(2) + createSourceLink(4)],
-    ["<strong>Étape Intermédiaire Clé</strong>", "Du 5 au 8 juin 2026 (inclus)", "Classement obligatoire par ordre de préférence des vœux en attente que le candidat souhaite conserver. Cette étape est cruciale pour accélérer l'attribution des places.", createSourceLink(3) + createSourceLink(6)],
-    ["<strong>Phase 5 : Phase Complémentaire</strong>", "Du 11 juin au 10 septembre 2026 (inclus)", "Pour les candidats n'ayant reçu aucune proposition d'admission. Possibilité de formuler jusqu'à 10 nouveaux vœux dans les formations disposant encore de places vacantes.", createSourceLink(2) + createSourceLink(3)]
+    ["<strong>Phase 1 : Information</strong>", "À partir du 17 décembre 2025", "Consultation du moteur de recherche des formations (plus de 23 000 formations). Analyse des fiches détaillées : contenus, attendus, taux d'accès, débouchés, frais de scolarité, dates des JPO."],
+    ["<strong>Phase 2 : Inscription et Formulation des Vœux</strong>", "Du 19 janvier au 12 mars 2026 (inclus)", "Création du dossier candidat. Formulation des vœux (jusqu'à 10 vœux en formation initiale et 10 vœux supplémentaires en apprentissage) sans les classer."],
+    ["<strong>Phase 3 : Finalisation des Dossiers et Confirmation</strong>", "Du 13 mars au 1er avril 2026 (inclus)", 'Complétion du dossier pour chaque vœu (rédaction du "projet de formation motivé", renseignement de la rubrique "Activités et centres d\'intérêt"). Confirmation de chaque vœu individuellement. Un vœu non confirmé ne sera pas examiné.'],
+    ["<strong>Phase 4 : Phase d'Admission Principale</strong>", "Du 2 juin au 11 juillet 2026 (inclus)", 'Réception des réponses des formations ("Oui", "Oui-si", "En attente", "Non"). Réponse obligatoire à chaque proposition dans les délais indiqués. Les délais sont suspendus durant les épreuves écrites du baccalauréat (12 au 19 juin 2026).'],
+    ["<strong>Étape Intermédiaire Clé</strong>", "Du 5 au 8 juin 2026 (inclus)", "Classement obligatoire par ordre de préférence des vœux en attente que le candidat souhaite conserver. Cette étape est cruciale pour accélérer l'attribution des places."],
+    ["<strong>Phase 5 : Phase Complémentaire</strong>", "Du 11 juin au 10 septembre 2026 (inclus)", "Pour les candidats n'ayant reçu aucune proposition d'admission. Possibilité de formuler jusqu'à 10 nouveaux vœux dans les formations disposant encore de places vacantes."]
   ];
 
   const jpoHeaders = ["Établissement", "Adresse", "Formations Pertinentes", "Date(s) Annoncée(s)", "Statut de la Date", "Lien vers le site officiel"];
@@ -173,8 +173,8 @@ export const moduleOrientation = {
       </section>
 
       {/* Section 1 */}
-      <section>
-        <Heading level={2} id="section-1">Section 1 : Le Calendrier Stratégique de l'Orientation 2025-2026</Heading>
+      <section id="section-1">
+        <Heading level={2} >Section 1 : Le Calendrier Stratégique de l'Orientation 2025-2026</Heading>
         <p>La réussite d'un projet d'orientation repose sur une planification rigoureuse et le respect d'un calendrier précis. Cette section détaille les deux piliers temporels de l'année de Terminale : la procédure Parcoursup, qui centralise les candidatures dans l'enseignement supérieur, et l'agenda des journées portes ouvertes, des moments d'échange essentiels pour affiner ses choix.</p>
         
         <Heading level={3} id="section-1-1">1.1. L'Échéancier Détaillé de Parcoursup 2026</Heading>
@@ -195,8 +195,8 @@ export const moduleOrientation = {
       </section>
 
       {/* Section 2 */}
-      <section>
-        <Heading level={2} id="section-2">Section 2 : La Voie Privilégiée : Le Brevet de Technicien Supérieur (BTS)</Heading>
+      <section id="section-2">
+        <Heading level={2} >Section 2 : La Voie Privilégiée : Le Brevet de Technicien Supérieur (BTS)</Heading>
         <p>Pour un titulaire de Baccalauréat Professionnel, la poursuite d'études en Brevet de Technicien Supérieur (BTS) représente la voie la plus naturelle, la plus cohérente et la plus sécurisée. Ce diplôme a été spécifiquement pensé pour articuler les compétences pratiques du lycée professionnel avec les exigences techniques de l'enseignement supérieur.</p>
 
         <Heading level={3} id="section-2-1">2.1. Le BTS : Le Diplôme Conçu pour les Bacheliers Professionnels</Heading>
@@ -246,14 +246,14 @@ export const moduleOrientation = {
       </section>
 
       {/* Section 3 */}
-      <section>
-        <Heading level={2} id="section-3">Section 3 : Viser Plus Haut : Le Bachelor Universitaire de Technologie (BUT)</Heading>
+      <section id="section-3">
+        <Heading level={2}>Section 3 : Viser Plus Haut : Le Bachelor Universitaire de Technologie (BUT)</Heading>
         <p>Le Bachelor Universitaire de Technologie (BUT) est un diplôme plus récent, qui a remplacé le Diplôme Universitaire de Technologie (DUT) en le portant à un niveau Bac+3. Il représente une voie d'études ambitieuse, mais qui doit être abordée avec un grand réalisme par les bacheliers professionnels.</p>
 
         <Heading level={3} id="section-3-1">3.1. Le BUT : Un Défi Ambitieux pour les Bacheliers Professionnels</Heading>
         <p>Le BUT est un diplôme national de niveau 6 (Bac+3) préparé en trois ans au sein d'un Institut Universitaire de Technologie (IUT), une composante de l'université. Il confère le grade de Licence et valide l'obtention de 180 crédits ECTS. La pédagogie y est un équilibre entre enseignements théoriques fondamentaux, travaux pratiques et projets, avec une part importante accordée à l'expérience professionnelle via des stages longs ou l'alternance.</p>
         <Card className="bg-red-50 border-red-300 not-prose">
-            <Heading level={4} className="!text-red-800 !mt-0">L'Honnêteté Avant Tout : La Réalité Statistique de l'Admission</Heading>
+            <Heading level={4} className="!text-red-800 !mt-0">La Réalité Statistique de l'Admission</Heading>
             <p>Il est impératif d'aborder la question de l'admission en BUT avec la plus grande transparence. Les IUT, et en particulier l'IUT Lyon 1, sont des structures très sélectives. Leurs cursus sont conçus en continuité des baccalauréats généraux à spécialités scientifiques et des baccalauréats technologiques (principalement STI2D).<a href={sourceLinks[39]} target="_blank" rel="noopener noreferrer" className="text-blue-600 no-underline hover:underline">[source]</a> L'analyse des données d'admission de Parcoursup pour l'année 2024 est sans appel :</p>
             <ul className="list-disc list-inside">
                 <li>Pour le BUT GEII de l'IUT Lyon 1 (site Gratte-Ciel), sur 193 candidats admis, <strong>aucun n'était issu d'un baccalauréat professionnel (0%)</strong>. Les admis provenaient à 63% d'un bac technologique et à 37% d'un bac général.</li>
@@ -295,8 +295,8 @@ export const moduleOrientation = {
       </section>
 
       {/* Section 4 */}
-      <section>
-        <Heading level={2} id="section-4">Section 4 : Se Spécialiser et Construire sa Carrière</Heading>
+      <section id="section-4">
+        <Heading level={2}>Section 4 : Se Spécialiser et Construire sa Carrière</Heading>
         <p>L'obtention d'un premier diplôme post-bac n'est qu'une étape. Le secteur du numérique valorise la spécialisation et la mise à jour continue des compétences. La construction d'un parcours de carrière solide passe souvent par une poursuite d'études ciblée après le BTS, avant de s'insérer durablement sur le marché du travail.</p>
 
         <Heading level={3} id="section-4-1">4.1. Après le BTS : La Poursuite d'Études en Bac+3</Heading>
@@ -353,8 +353,8 @@ export const moduleOrientation = {
       </section>
 
       {/* Conclusion */}
-      <section>
-        <Heading level={2} id="conclusion">Conclusion et Recommandations Stratégiques</Heading>
+      <section id="conclusion">
+        <Heading level={2}>Conclusion et Recommandations Stratégiques</Heading>
         <p>Le parcours d'orientation post-Bac Pro CIEL dans la région lyonnaise est riche en opportunités, à condition d'être abordé avec méthode et réalisme. Les compétences acquises au lycée sont une base solide et recherchée, ouvrant la voie à des carrières passionnantes dans le secteur du numérique.</p>
 
         <Heading level={3} id="conclusion-1">Synthèse des Voies d'Avenir</Heading>
