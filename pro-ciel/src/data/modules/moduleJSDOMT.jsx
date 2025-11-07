@@ -178,16 +178,22 @@ const tpSteps = [
         description: (
             <>
                 <p><strong>Objectif :</strong> Lier notre script JavaScript et prouver qu'il communique avec le HTML.</p>
+                
                 <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Liaison du script :</strong>
+                    
+                     <li><strong>Liaison des fichiers :</strong>
                         <ul className="list-disc list-inside ml-4 mt-2">
-                            <li>Créez un fichier `script.js` dans votre dossier `mon-portfolio`.</li>
-                            <li>Ouvrez `index.html`. À quel endroit précis devez-vous placer la balise <code>{'<script src="script.js"></script>'}</code> pour être sûr que le DOM est chargé avant l'exécution du script ? (Relisez la **Section 1** du cours si besoin).</li>
+                            <li>Allez dans votre fichier index.html. Juste avant la balise de fermeture <code>{'</body>'}</code>, ajoutez la ligne <code>{'<script src="script.js"></script>'}</code>.</li>
                         </ul>
+                        <strong>Le "Pourquoi" :</strong> On place le script à la fin du body pour s'assurer que toute la page HTML est chargée avant que le JavaScript n'essaie de s'exécuter. C'est crucial pour le prochain TP où nous manipulerons le DOM.
+            
+             
                     </li>
                     <li><strong>Vérification :</strong>
                          <ul className="list-disc list-inside ml-4 mt-2">
-                             <li>Dans `script.js`, écrivez un <code>console.log("Script chargé !");</code>. Ouvrez votre page dans le navigateur et vérifiez que le message s'affiche dans la console (F12).</li>
+                            <li>Installer l'extension "Live Server".</li>
+                            <li>Cliquez droit sur `index.html` et sélectionnez "Open with Live Server". Ou cliquez sur le bouton "Go Live" en bas à droite de VS Code.</li>
+                            <li>Dans `script.js`, écrivez un <code>console.log("Script chargé !");</code>. Ouvrez votre page dans le navigateur et vérifiez que le message s'affiche dans la console (F12).</li>
                          </ul>
                     </li>
                     <li><strong>Défi - Rendre le titre cliquable :</strong>
@@ -213,6 +219,7 @@ git push</code></pre>
         description: (
              <>
                 <p><strong>Objectif :</strong> Maîtriser <code>classList.toggle()</code> pour changer le style de toute la page.</p>
+                <p>Pour comprendre et bien utiliser le CSS, il y a des notions de CSS avancées à comprendre. Vous devez aller dans le module CSS avancé et lire le cours!</p>
                 <ol className="list-[lower-alpha] ml-6 space-y-4">
                     <li><strong>Préparation HTML & CSS :</strong>
                         <ul className="list-disc list-inside ml-4 mt-2">
@@ -240,7 +247,7 @@ body.dark-mode .card {
                             <li>**3. Manipuler :** Dans le callback, vous devez cibler `document.body`. Quelle méthode de `classList` (vue en **Section 5**) permet de "basculer" (ajouter si absente, retirer si présente) la classe `dark-mode` en une seule ligne ?</li>
                          </ul>
                     </li>
-                     <li><strong>Bonus (si vous avez fini) :</strong>
+                     <li><strong>Defi - Changement de texte dynamiquement</strong>
                          <ul className="list-disc list-inside ml-4 mt-2">
                             <li>Dans le même `addEventListener`, ajoutez une condition `if...else`.</li>
                             <li>Utilisez `document.body.classList.contains('dark-mode')` pour vérifier si le mode sombre est *maintenant* activé.</li>

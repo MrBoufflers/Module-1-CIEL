@@ -233,11 +233,11 @@ console.log(salutationPourAlice); // Affiche "Bonjour Alice"`}</code></pre>
                              <li>La syntaxe <code>{'=>'}</code> est intimidante, mais c'est juste un raccourci. Voyons la transformation :</li>
                              <li>Étape A (Classique) : <code>function addition(a, b) {`{ return a + b; }`}</code></li>
                              <li>Étape B (Stockée dans une const) : <code>const addition = function(a, b) {`{ return a + b; }`};</code></li>
-                             <li>Étape C (Fléchée) : On enlève `function` et on ajoute `=>` après les parenthèses.
-                                <pre className="code-block"><code>const addition = (a, b) => {`{ return a + b; }`};</code></pre>
+                             <li>Étape C (Fléchée) : On enlève `function` et on ajoute `{"=>"}` après les parenthèses.
+                                <pre className="code-block"><code>const addition = (a, b) `{"=>"} {`{ return a + b; }`};</code></pre>
                              </li>
                               <li><strong>Étape D (Raccourci magique) :</strong> Si la fonction ne fait *que* `return` une seule ligne, on peut enlever les accolades `{}` ET le mot `return`.
-                                <pre className="code-block"><code>const addition = (a, b) => a + b;</code></pre>
+                                <pre className="code-block"><code>const addition = (a, b) `{"=>"} a + b;</code></pre>
                              </li>
                              <li>Analyse : Les deux syntaxes (C et D) sont identiques ! La D est juste plus courte. Testez-la : <code>console.log( addition(10, 5) );</code> (Doit afficher 15).</li>
                          </ul>
