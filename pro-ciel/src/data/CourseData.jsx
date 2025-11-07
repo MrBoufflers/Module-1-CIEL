@@ -12,6 +12,8 @@ import { moduleCSScontent} from './modules/moduleCSScontent.jsx'
 import { moduleJSTcontent } from './modules/moduleJSTcontent';
 import {moduleIAcontent} from './modules/moduleIAcontent';
 import {moduleOrientation} from './modules/moduleOrientation.jsx'
+import {moduleJS_DOM} from './modules/moduleJSDOM.jsx'
+import {moduleJS_DOM_Terminale} from './modules/moduleJSDOMT.jsx'
 
 
 export const courseData = {
@@ -89,6 +91,26 @@ export const courseData = {
      },
      content: moduleCSScontent,
    },
+  {
+    id: 'moduleJST',
+    title: "Javascript",
+    icon: "🏗️",
+    ref: {
+      competence: 'C08, C03, C01',
+      savoirs: 'S1.2, S5.1, S2.10, S1.4',
+    },
+    content: moduleJSTcontent,
+  },
+      {
+    id: 'moduleJSOM',
+    title: "Javascript & DOM",
+    icon: "🏗️",
+    ref: {
+      competence: 'C08, C03, C01',
+      savoirs: 'S1.2, S5.1, S2.10, S1.4',
+    },
+    content: moduleJS_DOM,
+  },
     // Ajoutez ici les futurs modules de Première...
   ],
   terminale: [
@@ -122,6 +144,17 @@ export const courseData = {
     },
     content: moduleJSTcontent,
   },
+  {
+    id: 'moduleJSDOMT',
+    title: "Javascript & DOM",
+    icon: "🏗️",
+    ref: {
+      competence: 'C08, C03, C01',
+      savoirs: 'S1.2, S5.1, S2.10, S1.4',
+    },
+    content: moduleJS_DOM_Terminale,
+  },
+
         {
     id: 'moduleBonusIA',
     title: "L'IA",
