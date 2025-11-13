@@ -1,6 +1,9 @@
 import React from 'react';
 import Heading from '../../components/atoms/Heading';
 import Card from '../../components/atoms/Card';
+import PracticalWork from '../../components/organisms/PraticalWork';
+
+
 
 // Base de données centralisée pour les URL des sources
 // Permet une maintenance plus facile
@@ -87,6 +90,94 @@ const renderTable = (headers, data) => (
     </table>
 </div>
 );
+
+
+const tpTitle = "TP : Exposé sur un Métier du Numérique";
+const tpObjective = "Rechercher, analyser et présenter un métier accessible après le Bac Pro CIEL (avec ou sans poursuite d'études). L'objectif est de concrétiser son projet d'orientation en se confrontant aux réalités du marché du travail (missions, compétences, formation, normes) et de valider la compétence C01.";
+const tpMaterials = [
+    "Ordinateur avec accès Internet.",
+    "Outil de création de diaporama (PowerPoint, Google Slides, etc.).",
+    "Le Guide d'Orientation (pour les pistes de métiers et de formations).",
+    "Sources de recherche : fiches métiers (Onisep, CIDJ), offres d'emploi (APEC, LinkedIn, Indeed)."
+];
+
+const evaluationHeaders = ["Critère d'Évaluation", "Exigence (basé sur la Compétence C01)"];
+const evaluationData = [
+  ["Clarté du Discours", "Le style, le ton et la terminologie sont adaptés (technique mais accessible). Le vocabulaire CIEL est utilisé correctement."],
+  ["Qualité de la Présentation", "La présentation (typographie, orthographe, lisibilité) est soignée. L'argumentation est structurée avec des enchaînements logiques."],
+  ["Maîtrise du Contenu", "L'argumentation est de qualité. Le groupe répond aux questions avec précision et pertinence, démontrant une maîtrise des savoirs."],
+  ["Gestion du Temps", "La présentation respecte strictly la durée impartie (15-20 minutes maximum)."]
+];
+
+const tpSteps = [
+    {
+        title: "Phase 1 : Recherche et Analyse du Métier",
+        description: (
+            <>
+                <p><strong>Problématique :</strong> Dans le cadre d'une réflexion sur votre poursuite d'études, vous devez présenter à vos pairs un métier (que vous souhaitez faire ou pas) qui vous sera accessible après le Bac Pro CIEL (avec ou sans poursuite d'études après le BTS).</p>
+                <p>Commencez par une phase de recherche approfondie en utilisant les ressources à votre disposition (fiches Onisep, offres d'emploi, guide d'orientation). Votre but est de collecter toutes les informations nécessaires pour couvrir les 5 sections de contenu exigées.</p>
+                <Card className="bg-red-50 border-red-300 not-prose">
+                    <p className="font-semibold text-red-800">ATTENTION : La recherche de sources (fiches métiers, offres d'emploi) est fondamentale et doit être citée lors de votre présentation.</p>
+                </Card>
+            </>
+        )
+    },
+    {
+        title: "Phase 2 : Contenu Exigé (Les 5 Sections)",
+        description: (
+            <>
+                <p>Votre exposé doit impérativement couvrir les <strong>cinq sections</strong> suivantes, en apportant un niveau de détail technique suffisant :</p>
+                <ol className="list-decimal list-inside space-y-3">
+                    <li><strong>Identification du Poste :</strong>
+                        <ul className="list-disc list-inside ml-6 text-base">
+                            <li>Intitulé précis du métier (ex: Technicien en cybersécurité opérationnelle...).</li>
+                            <li>Secteur d'activité (Industrie 4.0, Télécoms, Défense, Santé, etc.).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Missions Opérationnelles :</strong>
+                        <ul className="list-disc list-inside ml-6 text-base">
+                            <li>Description de 3 à 5 tâches quotidiennes claires.</li>
+                            <li>Explication de l'alignement de ces missions avec un ou plusieurs Pôles d'Activités du Bac Pro CIEL (Réalisation/Maintenance, Réseaux, ou Cybersécurité/Donnée).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Savoirs & Compétences Clés :</strong>
+                        <ul className="list-disc list-inside ml-6 text-base">
+                            <li>Identification de 3 Compétences CIEL (ex: C04, C09, C11...) directement mobilisées (justification obligatoire).</li>
+                            <li>Citer 2 à 3 savoirs associés spécifiques que le professionnel doit maîtriser (ex: Modèles OSI/IP, structures électroniques, langages de programmation...).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Parcours de Formation :</strong>
+                        <ul className="list-disc list-inside ml-6 text-base">
+                            <li>Présenter le niveau de qualification minimal requis (post-Bac).</li>
+                            <li>Détailler le parcours d'études après le Bac Pro CIEL (BTS, BUT, Licence Pro...).</li>
+                            <li>Évaluation des perspectives d'évolution de carrière.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Enjeux et Normes :</strong>
+                        <ul className="list-disc list-inside ml-6 text-base">
+                            <li>Analyse des défis technologiques et sociétaux liés au métier (Cybersécurité, IA, IoT, durabilité...).</li>
+                            <li>Citer au moins une norme ou une réglementation professionnelle importante (Ex: normes IPC pour le brasage, la réglementation RGPD pour la donnée, etc.).</li>
+                        </ul>
+                    </li>
+                </ol>
+            </>
+        )
+    },
+    {
+        title: "Phase 3 : Préparation du Support et Évaluation",
+        description: (
+            <>
+                <p>Une fois vos recherches terminées, construisez votre support de présentation et préparez votre oral en respectant les contraintes de format.</p>
+                <ul className="list-disc list-inside">
+                    <li><strong>Support obligatoire :</strong> Présentation numérique (diaporama soigné et professionnel).</li>
+                    <li><strong>Durée totale :</strong> 15 à 20 minutes (maximum, incluant 3 à 5 minutes de questions/réponses).</li>
+                </ul>
+                <p>L'évaluation s'appuiera sur la grille d'évaluation de la <strong>Compétence C01 : Communiquer en situation professionnelle</strong>.</p>
+                {renderTable(evaluationHeaders, evaluationData)}
+            </>
+        )
+    }
+];
 
   const parcoursupHeaders = ["Phase", "Dates Clés", "Actions Requises pour le Candidat"];
   const parcoursupData = [
@@ -382,6 +473,14 @@ export const moduleOrientation = {
       {/* La section des sources a été supprimée comme demandé */}
       
     </div>
+  ),
+  tp: (
+    <PracticalWork 
+      title={tpTitle}
+      objective={tpObjective}
+      materials={tpMaterials}
+      steps={tpSteps}
+    />
   )
 }
 
