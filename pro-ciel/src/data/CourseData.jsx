@@ -15,6 +15,7 @@ import {moduleOrientation} from './modules/moduleOrientation.jsx'
 import {moduleJS_DOM} from './modules/moduleJSDOM.jsx'
 import {moduleJS_DOM_Terminale} from './modules/moduleJSDOMT.jsx'
 import {CSSSelectorsCourse} from './modules/moduleCSSavance.jsx'
+import { moduleSite } from './modules/moduleSite.jsx';
 
 
 export const courseData = {
@@ -111,6 +112,17 @@ export const courseData = {
       savoirs: 'S1.2, S5.1, S2.10, S1.4',
     },
     content: moduleJS_DOM,
+  },
+  ,
+      {
+    id: 'moduleSite',
+    title: "Examen Web",
+    icon: "🌐",
+    ref: {
+      competence: 'C08, C03, C01',
+      savoirs: 'S1.2, S5.1, S2.10, S1.4',
+    },
+    content: moduleSite,
   },
     // Ajoutez ici les futurs modules de Première...
   ],
