@@ -20,6 +20,7 @@ import { modulePythonCours1 } from './modules/modulePythonCours1.jsx';
 import { modulePythonCours2 } from './modules/modulePythonCours2.jsx';
 import { moduleControleG1 } from './modules/moduleControleG1.jsx';
 import { moduleControleG2 } from './modules/moduleControleG2.jsx';
+import { moduleBDDCours1 } from './modules/moduleBDDCours1.jsx';
 
 
 export const courseData = {
@@ -138,6 +139,16 @@ export const courseData = {
     },
     content: modulePythonCours1,
   },
+  {
+    id: 'moduleBDDCours1',
+    title: "Conception BDD",
+    icon: "🗃️",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser',
+      savoirs: 'S5.1, S3.1',
+    },
+    content: moduleBDDCours1,
+  },
   // {
   //   id: 'modulePythonCours2',
   //   title: "Python - Avancé",
@@ -231,6 +242,16 @@ export const courseData = {
       savoirs: 'S5.5, S5.1, S3.1, S3.6',
     },
     content: moduleIAcontent,
+  },
+  {
+    id: 'moduleBDDCours1T',
+    title: "Conception BDD",
+    icon: "🗃️",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser',
+      savoirs: 'S5.1, S3.1',
+    },
+    content: moduleBDDCours1,
   },
      // Ajoutez ici les futurs modules de Terminale...
   ],
