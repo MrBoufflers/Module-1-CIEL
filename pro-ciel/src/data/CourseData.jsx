@@ -138,36 +138,36 @@ export const courseData = {
     },
     content: modulePythonCours1,
   },
-  {
-    id: 'modulePythonCours2',
-    title: "Python - Avancé",
-    icon: "🐍",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: modulePythonCours2,
-  },
-  {
-    id: 'moduleControleG1',
-    title: "Contrôle G1 - NetWatch",
-    icon: "📝",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: moduleControleG1,
-  },
-  {
-    id: 'moduleControleG2',
-    title: "Contrôle G2 - CyberGuard",
-    icon: "📝",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: moduleControleG2,
-  },
+  // {
+  //   id: 'modulePythonCours2',
+  //   title: "Python - Avancé",
+  //   icon: "🐍",
+  //   ref: {
+  //     competence: 'C08 - Coder',
+  //     savoirs: 'S5.1, S5.5',
+  //   },
+  //   content: modulePythonCours2,
+  // },
+  // {
+  //   id: 'moduleControleG1',
+  //   title: "Contrôle G1 - NetWatch",
+  //   icon: "📝",
+  //   ref: {
+  //     competence: 'C08 - Coder',
+  //     savoirs: 'S5.1, S5.5',
+  //   },
+  //   content: moduleControleG1,
+  // },
+  // {
+  //   id: 'moduleControleG2',
+  //   title: "Contrôle G2 - CyberGuard",
+  //   icon: "📝",
+  //   ref: {
+  //     competence: 'C08 - Coder',
+  //     savoirs: 'S5.1, S5.5',
+  //   },
+  //   content: moduleControleG2,
+  // },
     // Ajoutez ici les futurs modules de Première...
   ],
   terminale: [
