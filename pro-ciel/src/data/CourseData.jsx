@@ -16,6 +16,10 @@ import {moduleJS_DOM} from './modules/moduleJSDOM.jsx'
 import {moduleJS_DOM_Terminale} from './modules/moduleJSDOMT.jsx'
 import {CSSSelectorsCourse} from './modules/moduleCSSavance.jsx'
 import { moduleSite } from './modules/moduleSite.jsx';
+import { modulePythonCours1 } from './modules/modulePythonCours1.jsx';
+import { modulePythonCours2 } from './modules/modulePythonCours2.jsx';
+import { moduleControleG1 } from './modules/moduleControleG1.jsx';
+import { moduleControleG2 } from './modules/moduleControleG2.jsx';
 
 
 export const courseData = {
@@ -123,6 +127,46 @@ export const courseData = {
       savoirs: 'S1.2, S5.1, S2.10, S1.4',
     },
     content: moduleSite,
+  },
+  {
+    id: 'modulePythonCours1',
+    title: "Python - Les Bases",
+    icon: "🐍",
+    ref: {
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
+    },
+    content: modulePythonCours1,
+  },
+  {
+    id: 'modulePythonCours2',
+    title: "Python - Avancé",
+    icon: "🐍",
+    ref: {
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
+    },
+    content: modulePythonCours2,
+  },
+  {
+    id: 'moduleControleG1',
+    title: "Contrôle G1 - NetWatch",
+    icon: "📝",
+    ref: {
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
+    },
+    content: moduleControleG1,
+  },
+  {
+    id: 'moduleControleG2',
+    title: "Contrôle G2 - CyberGuard",
+    icon: "📝",
+    ref: {
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
+    },
+    content: moduleControleG2,
   },
     // Ajoutez ici les futurs modules de Première...
   ],
