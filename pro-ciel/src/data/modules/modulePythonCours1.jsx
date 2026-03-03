@@ -4,179 +4,303 @@ import Heading from '../../components/atoms/Heading';
 import Card from '../../components/atoms/Card';
 import GameChallenge from '../../components/molecules/GameChallenge';
 
-const tpTitle = 'TP : Mon Premier Script Python';
-const tpObjective = 'Maîtriser progressivement les briques de base de la programmation en Python : affichage, saisie, variables, conditions et boucles.';
+const tpTitle = 'TP : La Boîte à Outils du SysAdmin';
+const tpObjective = 'Créer un outil en ligne de commande (CLI) en Python qui permettra aux techniciens de faire rapidement des opérations courantes : conversion de stockage, vérification de ports et calcul réseau.';
 const tpMaterials = [
-    'Un navigateur web avec accès à online-python.com',
-    'Un cahier ou bloc-notes pour prendre des notes sur les concepts clés.',
+    'Un éditeur Python en ligne (learnpython.org/fr/ ou programiz.com/python-programming/online-compiler/)',
+    'Le cours sur les bases de Python (onglet Cours).',
 ];
 
 const tpSteps = [
     {
-        title: "Phase 1 : Afficher et Demander (print / input)",
+        title: "Contexte professionnel",
         description: (
             <>
-                <p><strong>Objectif :</strong> Comprendre comment afficher du texte et demander une information à l'utilisateur.</p>
-                <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Afficher un message :</strong>
-                        <p>La fonction <code>print()</code> permet d'écrire du texte dans le terminal.</p>
-                        <pre className="code-block"><code>{`print("Bonjour !")
-print("Je suis un programme Python.")`}</code></pre>
-                    </li>
-                    <li><strong>Demander une information :</strong>
-                        <p>La fonction <code>input()</code> met le programme en pause et attend que l'utilisateur tape quelque chose.</p>
-                        <pre className="code-block"><code>{`print("Bonjour !")
-nom_utilisateur = input("Quel est ton nom ? ")
-print("Bienvenue,", nom_utilisateur)`}</code></pre>
-                    </li>
-                    <li><strong>À vous :</strong> Écrivez un script qui demande le prénom ET le nom de l'utilisateur, puis affiche une phrase complète comme : "Bonjour Jean Dupont, bienvenue !"</li>
-                </ol>
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p>Vous êtes <strong>stagiaire</strong> dans le service informatique d'une entreprise. Votre tuteur vous demande de créer un petit outil en ligne de commande (CLI) qui permettra aux techniciens de faire rapidement des opérations courantes. L'outil doit être en Python et fonctionner dans un terminal.</p>
+                </div>
             </>
         )
     },
     {
-        title: "Phase 2 : Les Variables et les Types",
+        title: "Mission 1 — L'accueil (15 min)",
         description: (
             <>
-                <p><strong>Objectif :</strong> Comprendre comment stocker des données et les convertir d'un type à un autre.</p>
-                <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Les types de données :</strong>
-                        <ul className="list-disc list-inside ml-4 mt-2">
-                            <li><code>str</code> (texte) : <code>"Bonjour"</code></li>
-                            <li><code>int</code> (nombre entier) : <code>42</code></li>
-                            <li><code>float</code> (nombre décimal) : <code>3.14</code></li>
-                            <li><code>bool</code> (vrai/faux) : <code>True</code> ou <code>False</code></li>
+                <p><strong>Consigne :</strong> Créez un script qui :</p>
+                <ol className="list-decimal ml-6 space-y-2">
+                    <li>Affiche un message d'accueil stylé (avec des ═ ou des ─ pour faire un cadre)</li>
+                    <li>Demande le nom du technicien</li>
+                    <li>Affiche "Bienvenue [nom] ! Que voulez-vous faire ?"</li>
+                    <li>Affiche un menu numéroté :
+                        <ul className="list-disc list-inside ml-4 mt-1">
+                            <li>1. Convertisseur d'unités de stockage</li>
+                            <li>2. Vérificateur de port</li>
+                            <li>3. Calculateur d'adresses réseau</li>
+                            <li>4. Quitter</li>
                         </ul>
                     </li>
-                    <li><strong>Le piège de <code>input()</code> :</strong>
-                        <p><code>input()</code> renvoie TOUJOURS du texte (<code>str</code>). Pour faire des calculs, il faut convertir avec <code>int()</code> ou <code>float()</code>.</p>
-                        <pre className="code-block"><code>{`annee_naissance_str = input("En quelle année es-tu né ? ")
-annee_naissance = int(annee_naissance_str)
-age = 2025 - annee_naissance
-print("Tu as ou auras", age, "ans cette année.")`}</code></pre>
-                    </li>
-                    <li><strong>À vous :</strong> Écrivez un script qui demande la taille en centimètres, la convertit en mètres (division par 100) et affiche le résultat.</li>
                 </ol>
+                <pre className="code-block mt-4"><code>{`# Exemple d'affichage attendu :
+══════════════════════════════════════
+   🔧 BOÎTE À OUTILS SYSADMIN 🔧
+══════════════════════════════════════
+Votre nom : Lucas
+Bienvenue Lucas ! Que voulez-vous faire ?
+
+1. Convertisseur d'unités de stockage
+2. Vérificateur de port
+3. Calculateur d'adresses réseau
+4. Quitter
+
+Votre choix :`}</code></pre>
             </>
         )
     },
     {
-        title: "Phase 3 : Les Conditions (if / elif / else)",
+        title: "Mission 2 — Le convertisseur de stockage (20 min)",
         description: (
             <>
-                <p><strong>Objectif :</strong> Permettre au programme de prendre des décisions.</p>
-                <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Le principe :</strong>
-                        <p>"S'il pleut, prends un parapluie, sinon prends des lunettes de soleil." En Python :</p>
-                        <pre className="code-block"><code>{`meteo = input("Quel temps fait-il ? (pluie/soleil) ")
-
-if meteo == "pluie":
-    print("Prends un parapluie !")
-elif meteo == "soleil":
-    print("Prends des lunettes de soleil !")
-else:
-    print("Je ne connais pas cette météo.")`}</code></pre>
-                    </li>
-                    <li><strong>Les comparaisons :</strong>
-                        <ul className="list-disc list-inside ml-4 mt-2">
-                            <li><code>==</code> : est égal à</li>
-                            <li><code>!=</code> : est différent de</li>
-                            <li><code>{'>'}</code>, <code>{'<'}</code>, <code>{'>='}</code>, <code>{'<='}</code> : supérieur, inférieur, etc.</li>
-                        </ul>
-                    </li>
-                    <li><strong>À vous :</strong> Reprenez le script de l'âge (Phase 2) et ajoutez une condition pour afficher si l'utilisateur est majeur ({'>='} 18) ou mineur.
-                        <pre className="code-block"><code>{`annee_naissance = int(input("En quelle année es-tu né ? "))
-age = 2025 - annee_naissance
-print("Tu as ou auras", age, "ans cette année.")
-
-if age >= 18:
-    print("Tu es majeur.")
-else:
-    print("Tu es mineur.")`}</code></pre>
-                    </li>
+                <p><strong>Consigne :</strong> Si l'utilisateur choisit 1, le programme :</p>
+                <ol className="list-decimal ml-6 space-y-2">
+                    <li>Demande une valeur numérique</li>
+                    <li>Demande l'unité source (octets, Ko, Mo, Go, To)</li>
+                    <li>Convertit et affiche dans toutes les autres unités</li>
                 </ol>
+                <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mt-3">
+                    <p><strong>Rappel des conversions :</strong> 1 Ko = 1024 octets, 1 Mo = 1024 Ko, 1 Go = 1024 Mo, 1 To = 1024 Go</p>
+                </div>
+                <pre className="code-block mt-4"><code>{`# Exemple :
+Valeur : 2
+Unité (octets/Ko/Mo/Go/To) : Go
+--- Résultat ---
+2 Go = 2048 Mo
+2 Go = 2097152 Ko
+2 Go = 2147483648 octets
+2 Go = 0.00195 To`}</code></pre>
+                <p className="mt-3"><strong>Indice :</strong> Convertissez d'abord tout en octets, puis reconvertissez dans chaque unité.</p>
             </>
         )
     },
     {
-        title: "Phase 4 : Les Boucles (while et for)",
+        title: "Mission 3 — Le vérificateur de port (20 min)",
         description: (
             <>
-                <p><strong>Objectif :</strong> Répéter des actions automatiquement.</p>
-                <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>La boucle <code>while</code> (Tant que) :</strong>
-                        <p>Répète un bloc TANT QU'une condition est vraie. Idéal quand on ne sait pas combien de fois on doit répéter.</p>
-                        <pre className="code-block"><code>{`mot_de_passe = ""
-while mot_de_passe != "1234":
-    mot_de_passe = input("Entrez le mot de passe : ")
-
-print("Accès autorisé !")`}</code></pre>
-                    </li>
-                    <li><strong>La boucle <code>for</code> (Pour) :</strong>
-                        <p>Répète un bloc un nombre de fois défini ou parcourt une liste d'éléments.</p>
-                        <pre className="code-block"><code>{`# Compter de 1 à 5
-for i in range(1, 6):
-    print("Tour numéro", i)
-
-# Parcourir une liste
-fruits = ["pomme", "banane", "cerise"]
-for fruit in fruits:
-    print("J'aime les", fruit)`}</code></pre>
-                    </li>
-                    <li><strong>À vous :</strong> Écrivez un script qui demande un mot de passe. L'utilisateur a 3 tentatives maximum. S'il trouve le bon mot de passe, afficher "Bienvenue !". S'il échoue 3 fois, afficher "Compte bloqué."</li>
+                <p><strong>Consigne :</strong> Si l'utilisateur choisit 2, le programme :</p>
+                <ol className="list-decimal ml-6 space-y-2">
+                    <li>Demande un numéro de port</li>
+                    <li>Vérifie s'il est valide (entre 0 et 65535)</li>
+                    <li>Indique sa catégorie (well-known 0-1023, registered 1024-49151, dynamic 49152-65535)</li>
+                    <li>Si c'est un port connu, affiche le service associé</li>
                 </ol>
+                <div className="mt-4">
+                    <p><strong>Ports à reconnaître :</strong></p>
+                    <div className="overflow-x-auto mt-2">
+                        <table className="min-w-full text-sm border">
+                            <tbody>
+                                <tr><td className="border px-3 py-1">21</td><td className="border px-3 py-1">FTP</td><td className="border px-3 py-1">25</td><td className="border px-3 py-1">SMTP</td></tr>
+                                <tr><td className="border px-3 py-1">22</td><td className="border px-3 py-1">SSH</td><td className="border px-3 py-1">53</td><td className="border px-3 py-1">DNS</td></tr>
+                                <tr><td className="border px-3 py-1">23</td><td className="border px-3 py-1">Telnet</td><td className="border px-3 py-1">80</td><td className="border px-3 py-1">HTTP</td></tr>
+                                <tr><td className="border px-3 py-1">110</td><td className="border px-3 py-1">POP3</td><td className="border px-3 py-1">143</td><td className="border px-3 py-1">IMAP</td></tr>
+                                <tr><td className="border px-3 py-1">443</td><td className="border px-3 py-1">HTTPS</td><td className="border px-3 py-1">3306</td><td className="border px-3 py-1">MySQL</td></tr>
+                                <tr><td className="border px-3 py-1">3389</td><td className="border px-3 py-1">RDP</td><td className="border px-3 py-1">8080</td><td className="border px-3 py-1">HTTP alt</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p className="mt-3"><strong>Indice :</strong> Utilisez un système de conditions if/elif ou préparez un dictionnaire.</p>
             </>
         )
     },
     {
-        title: "Phase 5 : Le Jeu Complet - Plus ou Moins",
+        title: "Mission 4 — Le calculateur réseau simplifié (20 min)",
         description: (
             <>
-                <p><strong>Objectif :</strong> Assembler tous les concepts appris pour créer un vrai programme interactif.</p>
-                <ol className="list-[lower-alpha] ml-6 space-y-4">
-                    <li><strong>Les règles :</strong>
-                        <ul className="list-disc list-inside ml-4 mt-2">
-                            <li>L'ordinateur choisit un nombre secret entre 1 et 100.</li>
-                            <li>Le joueur propose un nombre.</li>
-                            <li>Le programme dit "C'est plus grand !" ou "C'est plus petit !"</li>
-                            <li>Le jeu continue jusqu'à ce que le joueur trouve.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Nouveau concept - <code>import</code> :</strong>
-                        <p>Pour générer un nombre aléatoire, on "importe" le module <code>random</code> de Python.</p>
-                    </li>
-                    <li><strong>Le code complet :</strong>
-                        <pre className="code-block"><code>{`import random
-import time
+                <p><strong>Consigne :</strong> Si l'utilisateur choisit 3, le programme :</p>
+                <ol className="list-decimal ml-6 space-y-2">
+                    <li>Demande une adresse IP (ex: "192.168.1.100")</li>
+                    <li>Demande un masque en notation CIDR (ex: 24)</li>
+                    <li>Affiche la classe de l'adresse (A, B, C, D, E) en se basant sur le premier octet</li>
+                    <li>Indique si c'est une adresse privée ou publique</li>
+                </ol>
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mt-3">
+                    <p><strong>Rappels :</strong></p>
+                    <ul className="list-disc list-inside ml-4 mt-1">
+                        <li>Classe A : 1-126 (privé : 10.0.0.0 - 10.255.255.255)</li>
+                        <li>Classe B : 128-191 (privé : 172.16.0.0 - 172.31.255.255)</li>
+                        <li>Classe C : 192-223 (privé : 192.168.0.0 - 192.168.255.255)</li>
+                        <li>127.x.x.x : loopback</li>
+                    </ul>
+                </div>
+                <pre className="code-block mt-4"><code>{`# Indice : utilisez .split(".") pour séparer l'adresse IP
+ip = "192.168.1.100"
+octets = ip.split(".")       # → ["192", "168", "1", "100"]
+premier_octet = int(octets[0])  # → 192`}</code></pre>
+            </>
+        )
+    },
+    {
+        title: "Mission 5 — La boucle principale (15 min)",
+        description: (
+            <>
+                <p><strong>Consigne :</strong> Faites en sorte que le programme ne s'arrête pas après une seule opération. Après chaque outil, il revient au menu principal. Le programme ne s'arrête que si l'utilisateur choisit 4 (Quitter).</p>
+                <p className="mt-3"><strong>Indice :</strong> Encadrez tout dans une boucle <code>while True:</code> avec un <code>break</code> quand le choix est 4.</p>
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg mt-4">
+                    <p><strong>Mission Bonus</strong> (pour les plus rapides) :</p>
+                    <ul className="list-disc list-inside ml-4 mt-1">
+                        <li>Ajoutez un outil 5 : "Générateur de mot de passe" qui demande la longueur souhaitée et génère un mot de passe aléatoire (<code>import random</code>)</li>
+                        <li>Ajoutez une gestion d'erreur : si l'utilisateur entre du texte au lieu d'un nombre, le programme ne plante pas (astuce : <code>try/except</code>)</li>
+                    </ul>
+                </div>
+            </>
+        )
+    },
+    {
+        title: "Correction complète",
+        description: (
+            <>
+                <p><strong>Code complet de la Boîte à Outils :</strong></p>
+                <pre className="code-block"><code>{`# ═══════════════════════════════════════════
+#   BOÎTE À OUTILS SYSADMIN — CORRECTION
+# ═══════════════════════════════════════════
 
+# --- ACCUEIL ---
+print("══════════════════════════════════════")
+print("   🔧 BOÎTE À OUTILS SYSADMIN 🔧   ")
+print("══════════════════════════════════════")
+nom = input("Votre nom : ")
+print(f"Bienvenue {nom} !")
+
+# --- BOUCLE PRINCIPALE ---
 while True:
-    print("Je pense à un nombre entre 1 et 100...")
-    nombre_secret = random.randint(1, 100)
+    print("\\n--- MENU PRINCIPAL ---")
+    print("1. Convertisseur d'unités de stockage")
+    print("2. Vérificateur de port")
+    print("3. Calculateur d'adresses réseau")
+    print("4. Quitter")
 
-    while True:
-        proposition_str = input("Devine le nombre : ")
+    choix = input("\\nVotre choix : ")
 
-        if not proposition_str.isdigit():
-            print("Erreur : Veuillez entrer un nombre.")
+    # --- OUTIL 1 : CONVERTISSEUR ---
+    if choix == "1":
+        print("\\n--- CONVERTISSEUR DE STOCKAGE ---")
+        valeur = float(input("Valeur : "))
+        unite = input("Unité (octets/Ko/Mo/Go/To) : ").strip()
+
+        # Conversion en octets d'abord
+        if unite == "octets":
+            octets = valeur
+        elif unite == "Ko":
+            octets = valeur * 1024
+        elif unite == "Mo":
+            octets = valeur * 1024 ** 2
+        elif unite == "Go":
+            octets = valeur * 1024 ** 3
+        elif unite == "To":
+            octets = valeur * 1024 ** 4
+        else:
+            print("Unité non reconnue !")
             continue
 
-        proposition = int(proposition_str)
+        # Affichage dans toutes les unités
+        print(f"\\n--- Résultat ---")
+        print(f"{valeur} {unite} = {octets} octets")
+        print(f"{valeur} {unite} = {octets / 1024:.2f} Ko")
+        print(f"{valeur} {unite} = {octets / 1024**2:.2f} Mo")
+        print(f"{valeur} {unite} = {octets / 1024**3:.5f} Go")
+        print(f"{valeur} {unite} = {octets / 1024**4:.8f} To")
 
-        if proposition < nombre_secret:
-            print("C'est plus grand !")
-        elif proposition > nombre_secret:
-            print("C'est plus petit !")
+    # --- OUTIL 2 : VÉRIFICATEUR DE PORT ---
+    elif choix == "2":
+        print("\\n--- VÉRIFICATEUR DE PORT ---")
+        port = int(input("Numéro de port : "))
+
+        if port < 0 or port > 65535:
+            print("❌ Port invalide ! (doit être entre 0 et 65535)")
+            continue
+
+        # Catégorie du port
+        if port <= 1023:
+            categorie = "Well-known (réservé)"
+        elif port <= 49151:
+            categorie = "Registered (enregistré)"
         else:
-            print("Bravo ! C'était bien", nombre_secret)
-            time.sleep(3)
-            break
+            categorie = "Dynamic/Private (dynamique)"
 
-    rejouer = input("Veux-tu rejouer ? (oui/non) ")
-    if rejouer.lower() != "oui":
-        break`}</code></pre>
-                    </li>
-                    <li><strong>Améliorations possibles :</strong> Ajoutez un compteur de tentatives et affichez le nombre de coups à la fin !</li>
-                </ol>
+        print(f"Port {port} — Catégorie : {categorie}")
+
+        # Services connus
+        if port == 21:
+            print("→ Service : FTP (transfert de fichiers)")
+        elif port == 22:
+            print("→ Service : SSH (connexion sécurisée)")
+        elif port == 23:
+            print("→ Service : Telnet (connexion non sécurisée)")
+        elif port == 25:
+            print("→ Service : SMTP (envoi d'emails)")
+        elif port == 53:
+            print("→ Service : DNS (résolution de noms)")
+        elif port == 80:
+            print("→ Service : HTTP (web)")
+        elif port == 110:
+            print("→ Service : POP3 (réception d'emails)")
+        elif port == 143:
+            print("→ Service : IMAP (réception d'emails)")
+        elif port == 443:
+            print("→ Service : HTTPS (web sécurisé)")
+        elif port == 3306:
+            print("→ Service : MySQL (base de données)")
+        elif port == 3389:
+            print("→ Service : RDP (bureau à distance)")
+        elif port == 8080:
+            print("→ Service : HTTP alternatif (proxy/dev)")
+        else:
+            print("→ Service : non référencé dans notre base")
+
+    # --- OUTIL 3 : CALCULATEUR RÉSEAU ---
+    elif choix == "3":
+        print("\\n--- CALCULATEUR RÉSEAU ---")
+        ip = input("Adresse IP (ex: 192.168.1.100) : ")
+        cidr = input("Masque CIDR (ex: 24) : ")
+
+        octets_ip = ip.split(".")
+        premier = int(octets_ip[0])
+
+        # Classe de l'adresse
+        if premier == 127:
+            classe = "Loopback"
+            privee = True
+        elif premier >= 1 and premier <= 126:
+            classe = "A"
+            privee = (premier == 10)
+        elif premier >= 128 and premier <= 191:
+            classe = "B"
+            deuxieme = int(octets_ip[1])
+            privee = (premier == 172 and deuxieme >= 16 and deuxieme <= 31)
+        elif premier >= 192 and premier <= 223:
+            classe = "C"
+            deuxieme = int(octets_ip[1])
+            privee = (premier == 192 and deuxieme == 168)
+        elif premier >= 224 and premier <= 239:
+            classe = "D (Multicast)"
+            privee = False
+        else:
+            classe = "E (Expérimentale)"
+            privee = False
+
+        print(f"\\nAdresse : {ip}/{cidr}")
+        print(f"Classe : {classe}")
+        if privee:
+            print("Type : Adresse privée (RFC 1918)")
+        else:
+            print("Type : Adresse publique")
+
+    # --- QUITTER ---
+    elif choix == "4":
+        print(f"\\nAu revoir {nom} ! 👋")
+        break
+
+    else:
+        print("❌ Choix invalide, veuillez réessayer.")`}</code></pre>
             </>
         )
     },
@@ -274,52 +398,374 @@ const gameChallengesData = [
 export const modulePythonCours1 = {
     course: (
         <>
-            <h3>a. Définition et historique</h3>
-            <p>Coder (ou programmer), c'est donner une série d'ordres précis à un ordinateur dans un langage qu'il peut comprendre. L'ordinateur est un exécutant parfait mais sans initiative : il ne fait que ce qu'on lui dit. Le rôle du développeur est de traduire un besoin en une suite d'instructions logiques et simples.</p>
-            <p><strong>Python</strong> est un langage créé en 1991 par Guido van Rossum. Il est connu pour sa syntaxe simple et lisible, ce qui en fait le langage idéal pour débuter. Il est utilisé dans de nombreux domaines : développement web, intelligence artificielle, automatisation, cybersécurité, science des données...</p>
+            <h3>Python, le couteau suisse du technicien CIEL</h3>
+            <p>Vous connaissez JavaScript. Vous savez faire des variables, des conditions, des boucles. Bonne nouvelle : <strong>vous savez déjà programmer</strong>. Maintenant, on va apprendre Python — et vous allez voir que c'est plus simple, plus lisible, et surtout c'est LE langage de la cybersécurité et de l'administration système.</p>
 
-            <h3>b. Les briques de base de la programmation</h3>
+            <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mt-4 not-prose">
+                <h4 className="font-semibold mb-2">Pourquoi Python en CIEL ?</h4>
+                <ul className="list-disc list-inside space-y-1 text-sm">
+                    <li>C'est le langage n°1 en <strong>cybersécurité</strong> (scripts d'audit, tests d'intrusion, analyse de logs)</li>
+                    <li>C'est le langage de l'<strong>automatisation système</strong> (scripts d'administration, gestion de serveurs)</li>
+                    <li>C'est le langage des <strong>outils réseau</strong> (Scapy, Nmap scripting, Wireshark plugins)</li>
+                    <li>Les outils comme Metasploit, Burp Suite sont écrits en Python</li>
+                    <li>C'est le langage le plus demandé dans les offres d'emploi IT</li>
+                </ul>
+            </div>
+
+            <h3>a. Premier programme et syntaxe de base</h3>
+
             <div className="space-y-4 not-prose">
                 <div className="p-4 bg-white border rounded-lg shadow-sm">
-                    <h4 className="font-semibold">Les Variables</h4>
-                    <p className="text-sm">Une variable, c'est comme une boîte avec une étiquette. On peut mettre quelque chose dedans (un nombre, du texte...) et on y fait référence avec son étiquette.</p>
-                    <pre className="code-block mt-2"><code>{`age = 17
-nom = "Dupont"
-print(nom, "a", age, "ans.")`}</code></pre>
+                    <h4 className="font-semibold mb-2">Hello World — JavaScript vs Python</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">JavaScript :</p>
+                            <pre className="code-block"><code>{`// JavaScript
+console.log("Hello World !");
+let nom = "CIEL";
+console.log("Bienvenue en " + nom);`}</code></pre>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">Python :</p>
+                            <pre className="code-block"><code>{`# Python
+print("Hello World !")
+nom = "CIEL"
+print("Bienvenue en " + nom)`}</code></pre>
+                        </div>
+                    </div>
                 </div>
-                <div className="p-4 bg-white border rounded-lg shadow-sm">
-                    <h4 className="font-semibold">Les Conditions (<code>if</code>, <code>elif</code>, <code>else</code>)</h4>
-                    <p className="text-sm">Permet à un programme de prendre des décisions. "S'il pleut, prends un parapluie, sinon, prends des lunettes de soleil".</p>
-                    <pre className="code-block mt-2"><code>{`# Cas d'usage : Gestion de ticket
-statut_ticket = "Nouveau"
-if statut_ticket == "Nouveau":
-    print("Ticket assigné à un technicien.")
-elif statut_ticket == "En cours":
-    print("En attente de la réponse du technicien.")
-else:
-    print("Le ticket est fermé.")`}</code></pre>
+
+                <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <h4 className="font-semibold mb-2">Ce qui change par rapport au JavaScript :</h4>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                        <li>Plus de point-virgule en fin de ligne</li>
+                        <li>{"Plus d'accolades { } → c'est l'indentation (les espaces) qui structure le code"}</li>
+                        <li>{"Plus de var / let / const → on écrit directement le nom de la variable"}</li>
+                        <li>{"console.log() → print()"}</li>
+                        <li>{"Les commentaires passent de // à #"}</li>
+                    </ul>
                 </div>
+
                 <div className="p-4 bg-white border rounded-lg shadow-sm">
-                    <h4 className="font-semibold">Les Boucles <code>while</code> (Tant que)</h4>
-                    <p className="text-sm">Répète un bloc d'instructions TANT QU'une condition est vraie.</p>
-                    <pre className="code-block mt-2"><code>{`# Cas d'usage : Traiter tous les nouveaux tickets
-tickets_nouveaux = 3
-while tickets_nouveaux > 0:
-    print("Je traite un nouveau ticket.")
-    tickets_nouveaux = tickets_nouveaux - 1
-print("Plus de nouveaux tickets à traiter.")`}</code></pre>
-                </div>
-                <div className="p-4 bg-white border rounded-lg shadow-sm">
-                    <h4 className="font-semibold">Les Boucles <code>for</code> (Pour)</h4>
-                    <p className="text-sm">Répète un bloc d'instructions un nombre de fois défini, parfait pour parcourir une liste d'éléments.</p>
-                    <pre className="code-block mt-2"><code>{`# Cas d'usage : Envoyer un rappel pour chaque ticket assigné
-tickets_assignes = ["Ticket001", "Ticket005", "Ticket012"]
-for ticket in tickets_assignes:
-    print("Email de rappel envoyé pour le", ticket)`}</code></pre>
+                    <h4 className="font-semibold mb-2">Les règles de base de Python :</h4>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                        <li>Une instruction par ligne (pas de ; pour séparer)</li>
+                        <li>Les commentaires commencent par <code>#</code></li>
+                        <li>Les noms de variables : en minuscules, avec des underscores (<code>mon_nombre</code>, <code>adresse_ip</code>)</li>
+                        <li>Python est sensible à la casse : <code>nom</code> et <code>Nom</code> sont deux variables différentes</li>
+                        <li>L'indentation est OBLIGATOIRE et fait partie de la syntaxe</li>
+                    </ul>
                 </div>
             </div>
 
-            <h3>c. Les outils</h3>
+            <h3>b. Variables, types et conversions</h3>
+
+            <div className="space-y-4 not-prose">
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">Les types de données en Python</h4>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full text-sm border">
+                            <thead>
+                                <tr className="bg-gray-100">
+                                    <th className="border px-3 py-2 text-left">Type Python</th>
+                                    <th className="border px-3 py-2 text-left">Équivalent JS</th>
+                                    <th className="border px-3 py-2 text-left">Exemple</th>
+                                    <th className="border px-3 py-2 text-left">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td className="border px-3 py-1"><code>int</code></td><td className="border px-3 py-1">Number</td><td className="border px-3 py-1">42</td><td className="border px-3 py-1">Nombre entier</td></tr>
+                                <tr><td className="border px-3 py-1"><code>float</code></td><td className="border px-3 py-1">Number</td><td className="border px-3 py-1">3.14</td><td className="border px-3 py-1">Nombre décimal</td></tr>
+                                <tr><td className="border px-3 py-1"><code>str</code></td><td className="border px-3 py-1">String</td><td className="border px-3 py-1">"hello"</td><td className="border px-3 py-1">Chaîne de caractères</td></tr>
+                                <tr><td className="border px-3 py-1"><code>bool</code></td><td className="border px-3 py-1">Boolean</td><td className="border px-3 py-1">True / False</td><td className="border px-3 py-1">Booléen (majuscule !)</td></tr>
+                                <tr><td className="border px-3 py-1"><code>list</code></td><td className="border px-3 py-1">Array</td><td className="border px-3 py-1">[1, 2, 3]</td><td className="border px-3 py-1">Liste (tableau)</td></tr>
+                                <tr><td className="border px-3 py-1"><code>dict</code></td><td className="border px-3 py-1">Object</td><td className="border px-3 py-1">{`{"cle": "val"}`}</td><td className="border px-3 py-1">Dictionnaire</td></tr>
+                                <tr><td className="border px-3 py-1"><code>None</code></td><td className="border px-3 py-1">null</td><td className="border px-3 py-1">None</td><td className="border px-3 py-1">Valeur nulle</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">Vérifier le type et convertir</h4>
+                    <pre className="code-block"><code>{`# Vérifier le type avec type()
+nombre = 42
+print(type(nombre))    # <class 'int'>
+
+texte = "Bonjour"
+print(type(texte))     # <class 'str'>
+
+# Les conversions de type (casting)
+int("42")        # 42
+float("3.14")    # 3.14
+str(42)          # "42"
+bool(0)          # False
+bool(1)          # True`}</code></pre>
+                </div>
+
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <h4 className="font-semibold mb-2">Les f-strings — La meilleure façon d'afficher</h4>
+                    <pre className="code-block"><code>{`# La concaténation classique (comme en JS)
+nom = "Lucas"
+age = 17
+print("Je m'appelle " + nom + " et j'ai " + str(age) + " ans")
+
+# Les f-strings (bien plus propre !)
+print(f"Je m'appelle {nom} et j'ai {age} ans")
+
+# On peut même faire des calculs dans les { }
+prix = 49.99
+quantite = 3
+print(f"Total : {prix * quantite} €")    # Total : 149.97 €`}</code></pre>
+                    <p className="text-sm mt-2">Les f-strings, c'est la façon moderne et recommandée. Mettez un <code>f</code> avant les guillemets et vos variables entre <code>{'{}'}</code>.</p>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">Récupérer une saisie utilisateur — input()</h4>
+                    <pre className="code-block"><code>{`# En JS : prompt() ou un formulaire HTML
+# En Python : input()
+
+nom = input("Quel est votre nom ? ")
+print(f"Bonjour {nom} !")
+
+# ATTENTION : input() renvoie TOUJOURS une chaîne (str)
+age = input("Quel est votre âge ? ")   # age est un str !
+
+# Il faut convertir si on veut un nombre
+age = int(input("Quel est votre âge ? "))
+print(type(age))                         # <class 'int'>`}</code></pre>
+                </div>
+            </div>
+
+            <h3>c. Les conditions : if / elif / else</h3>
+
+            <div className="space-y-4 not-prose">
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">JavaScript vs Python</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">JavaScript :</p>
+                            <pre className="code-block"><code>{`// JavaScript
+let port = 443;
+if (port === 80) {
+    console.log("HTTP");
+} else if (port === 443) {
+    console.log("HTTPS");
+} else {
+    console.log("Autre port");
+}`}</code></pre>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">Python :</p>
+                            <pre className="code-block"><code>{`# Python
+port = 443
+if port == 80:
+    print("HTTP")
+elif port == 443:
+    print("HTTPS")
+else:
+    print("Autre port")`}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <h4 className="font-semibold mb-2">L'indentation — C'est VITAL</h4>
+                    <pre className="code-block"><code>{`# CORRECT — le print est indenté (4 espaces)
+if True:
+    print("Ce code est dans le if")
+
+# ERREUR — Python va planter !
+if True:
+print("Pas d'indentation = erreur")
+# → IndentationError: expected an indented block`}</code></pre>
+                    <p className="text-sm mt-2">L'indentation n'est pas décorative en Python. C'est elle qui dit au programme quel code appartient à quel bloc. Règle : <strong>4 espaces</strong> par niveau.</p>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">Les opérateurs de comparaison</h4>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full text-sm border">
+                            <thead>
+                                <tr className="bg-gray-100">
+                                    <th className="border px-3 py-2 text-left">Python</th>
+                                    <th className="border px-3 py-2 text-left">JavaScript</th>
+                                    <th className="border px-3 py-2 text-left">Signification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td className="border px-3 py-1"><code>==</code></td><td className="border px-3 py-1"><code>===</code></td><td className="border px-3 py-1">Égal à</td></tr>
+                                <tr><td className="border px-3 py-1"><code>!=</code></td><td className="border px-3 py-1"><code>!==</code></td><td className="border px-3 py-1">Différent de</td></tr>
+                                <tr><td className="border px-3 py-1"><code>{'<'}</code></td><td className="border px-3 py-1"><code>{'<'}</code></td><td className="border px-3 py-1">Inférieur à</td></tr>
+                                <tr><td className="border px-3 py-1"><code>{'>'}</code></td><td className="border px-3 py-1"><code>{'>'}</code></td><td className="border px-3 py-1">Supérieur à</td></tr>
+                                <tr><td className="border px-3 py-1"><code>and</code></td><td className="border px-3 py-1"><code>&&</code></td><td className="border px-3 py-1">ET logique</td></tr>
+                                <tr><td className="border px-3 py-1"><code>or</code></td><td className="border px-3 py-1"><code>||</code></td><td className="border px-3 py-1">OU logique</td></tr>
+                                <tr><td className="border px-3 py-1"><code>not</code></td><td className="border px-3 py-1"><code>!</code></td><td className="border px-3 py-1">NON logique</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p className="text-sm mt-2">Python utilise les mots anglais <code>and</code>, <code>or</code>, <code>not</code> au lieu des symboles. C'est plus lisible.</p>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">L'opérateur <code>in</code> — Spécialité Python</h4>
+                    <pre className="code-block"><code>{`# Vérifier si une valeur est dans une liste
+ports_critiques = [22, 80, 443, 3306, 8080]
+port = int(input("Entrez un numéro de port : "))
+
+if port in ports_critiques:
+    print(f"⚠️ Le port {port} est un port critique !")
+else:
+    print(f"Le port {port} n'est pas dans la liste")`}</code></pre>
+                    <p className="text-sm mt-2">Cet opérateur <code>in</code> n'existe pas directement en JS (il faut utiliser <code>.includes()</code>). En Python, c'est natif et très utilisé.</p>
+                </div>
+            </div>
+
+            <h3>d. Les boucles : for et while</h3>
+
+            <div className="space-y-4 not-prose">
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">La boucle for — JavaScript vs Python</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">JavaScript :</p>
+                            <pre className="code-block"><code>{`// Boucle classique
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+
+// Boucle for...of
+let ports = [22, 80, 443];
+for (let port of ports) {
+    console.log(port);
+}`}</code></pre>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">Python :</p>
+                            <pre className="code-block"><code>{`# Boucle avec range()
+for i in range(5):
+    print(i)    # 0, 1, 2, 3, 4
+
+# Boucle sur une liste
+ports = [22, 80, 443]
+for port in ports:
+    print(port) # 22, 80, 443`}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">Comprendre range()</h4>
+                    <pre className="code-block"><code>{`# range(fin) → de 0 à fin-1
+for i in range(5):
+    print(i)           # 0, 1, 2, 3, 4
+
+# range(debut, fin) → de debut à fin-1
+for i in range(1, 6):
+    print(i)           # 1, 2, 3, 4, 5
+
+# range(debut, fin, pas) → avec un pas personnalisé
+for i in range(0, 20, 5):
+    print(i)           # 0, 5, 10, 15
+
+# Compte à rebours
+for i in range(10, 0, -1):
+    print(i)           # 10, 9, 8, ... 1`}</code></pre>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">La boucle while</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">JavaScript :</p>
+                            <pre className="code-block"><code>{`// JavaScript
+let tentatives = 0;
+while (tentatives < 3) {
+    console.log("Tentative "
+        + (tentatives + 1));
+    tentatives++;
+}`}</code></pre>
+                        </div>
+                        <div>
+                            <p className="text-sm font-semibold text-gray-500 mb-1">Python :</p>
+                            <pre className="code-block"><code>{`# Python
+tentatives = 0
+while tentatives < 3:
+    print(f"Tentative {tentatives + 1}")
+    tentatives += 1
+# Pas de ++ en Python ! += 1`}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="p-4 bg-white border rounded-lg shadow-sm">
+                    <h4 className="font-semibold mb-2">Boucle de connexion avec tentatives limitées</h4>
+                    <pre className="code-block"><code>{`mot_de_passe_correct = "CielPro2026"
+tentatives = 0
+max_tentatives = 3
+
+while tentatives < max_tentatives:
+    saisie = input("Mot de passe : ")
+    if saisie == mot_de_passe_correct:
+        print("✅ Accès autorisé !")
+        break    # sort de la boucle immédiatement
+    else:
+        tentatives += 1
+        restantes = max_tentatives - tentatives
+        print(f"❌ Incorrect. {restantes} tentative(s) restante(s)")
+
+if tentatives == max_tentatives:
+    print("🔒 Compte bloqué ! Trop de tentatives.")`}</code></pre>
+                </div>
+
+                <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <h4 className="font-semibold mb-2">break et continue</h4>
+                    <ul className="list-disc list-inside space-y-1 text-sm">
+                        <li><code>break</code> : sort immédiatement de la boucle (identique à JS)</li>
+                        <li><code>continue</code> : passe directement à l'itération suivante (identique à JS)</li>
+                    </ul>
+                    <pre className="code-block mt-2"><code>{`# Exemple avec continue — ignorer les ports réservés
+for port in range(75, 85):
+    if port == 80:
+        continue    # On saute le port 80
+    print(f"Scan du port {port}...")
+# Affiche : 75, 76, 77, 78, 79, 81, 82, 83, 84`}</code></pre>
+                </div>
+            </div>
+
+            <h3>e. Récapitulatif JS → Python</h3>
+
+            <div className="not-prose">
+                <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm border">
+                        <thead>
+                            <tr className="bg-gray-100">
+                                <th className="border px-3 py-2 text-left">Concept</th>
+                                <th className="border px-3 py-2 text-left">JavaScript</th>
+                                <th className="border px-3 py-2 text-left">Python</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td className="border px-3 py-1">Afficher</td><td className="border px-3 py-1"><code>console.log()</code></td><td className="border px-3 py-1"><code>print()</code></td></tr>
+                            <tr><td className="border px-3 py-1">Saisie utilisateur</td><td className="border px-3 py-1"><code>prompt()</code></td><td className="border px-3 py-1"><code>input()</code></td></tr>
+                            <tr><td className="border px-3 py-1">Déclarer une variable</td><td className="border px-3 py-1"><code>let x = 5;</code></td><td className="border px-3 py-1"><code>x = 5</code></td></tr>
+                            <tr><td className="border px-3 py-1">Commentaire</td><td className="border px-3 py-1"><code>{"// ou /* */"}</code></td><td className="border px-3 py-1"><code>#</code></td></tr>
+                            <tr><td className="border px-3 py-1">Égalité</td><td className="border px-3 py-1"><code>===</code></td><td className="border px-3 py-1"><code>==</code></td></tr>
+                            <tr><td className="border px-3 py-1">ET / OU / NON</td><td className="border px-3 py-1"><code>{"&& || !"}</code></td><td className="border px-3 py-1"><code>and or not</code></td></tr>
+                            <tr><td className="border px-3 py-1">Bloc de code</td><td className="border px-3 py-1"><code>{"{  }"}</code></td><td className="border px-3 py-1">indentation (4 espaces)</td></tr>
+                            <tr><td className="border px-3 py-1">else if</td><td className="border px-3 py-1"><code>else if</code></td><td className="border px-3 py-1"><code>elif</code></td></tr>
+                            <tr><td className="border px-3 py-1">Boucle for</td><td className="border px-3 py-1"><code>{"for(let i=0; i<n; i++)"}</code></td><td className="border px-3 py-1"><code>for i in range(n):</code></td></tr>
+                            <tr><td className="border px-3 py-1">Incrémenter</td><td className="border px-3 py-1"><code>i++</code></td><td className="border px-3 py-1"><code>i += 1</code></td></tr>
+                            <tr><td className="border px-3 py-1">Longueur</td><td className="border px-3 py-1"><code>.length</code></td><td className="border px-3 py-1"><code>len()</code></td></tr>
+                            <tr><td className="border px-3 py-1">Null / Booléens</td><td className="border px-3 py-1"><code>null, true, false</code></td><td className="border px-3 py-1"><code>None, True, False</code></td></tr>
+                            <tr><td className="border px-3 py-1">Template literals</td><td className="border px-3 py-1"><code>{"`${var}`"}</code></td><td className="border px-3 py-1"><code>{"f\"{var}\""}</code></td></tr>
+                            <tr><td className="border px-3 py-1">Fin de ligne</td><td className="border px-3 py-1"><code>;</code></td><td className="border px-3 py-1">rien</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h3>f. Les outils</h3>
             <p>Pour écrire et exécuter du Python facilement, nous utiliserons <a className='text-blue-500' href='https://www.online-python.com/'>online-python.com</a>. C'est un éditeur en ligne gratuit qui permet d'écrire et tester du code Python directement dans le navigateur, sans rien installer.</p>
         </>
     ),
