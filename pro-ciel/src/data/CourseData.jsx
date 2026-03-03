@@ -244,15 +244,25 @@ export const courseData = {
     content: moduleIAcontent,
   },
   {
-    id: 'moduleBDDCours1T',
-    title: "Conception BDD",
-    icon: "🗃️",
+    id: 'modulePythonCours1',
+    title: "Python - Les Bases",
+    icon: "🐍",
     ref: {
-      competence: 'C08 - Coder, C04 - Analyser',
-      savoirs: 'S5.1, S3.1',
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
     },
-    content: moduleBDDCours1,
+    content: modulePythonCours1,
   },
+  // {
+  //   id: 'moduleBDDCours1T',
+  //   title: "Conception BDD",
+  //   icon: "🗃️",
+  //   ref: {
+  //     competence: 'C08 - Coder, C04 - Analyser',
+  //     savoirs: 'S5.1, S3.1',
+  //   },
+  //   content: moduleBDDCours1,
+  // },
      // Ajoutez ici les futurs modules de Terminale...
   ],
   
