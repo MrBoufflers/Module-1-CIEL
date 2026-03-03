@@ -139,16 +139,16 @@ export const courseData = {
     },
     content: modulePythonCours1,
   },
-  {
-    id: 'moduleBDDCours1',
-    title: "Conception BDD",
-    icon: "🗃️",
-    ref: {
-      competence: 'C08 - Coder, C04 - Analyser',
-      savoirs: 'S5.1, S3.1',
-    },
-    content: moduleBDDCours1,
-  },
+  // {
+  //   id: 'moduleBDDCours1',
+  //   title: "Conception BDD",
+  //   icon: "🗃️",
+  //   ref: {
+  //     competence: 'C08 - Coder, C04 - Analyser',
+  //     savoirs: 'S5.1, S3.1',
+  //   },
+  //   content: moduleBDDCours1,
+  // },
   // {
   //   id: 'modulePythonCours2',
   //   title: "Python - Avancé",
