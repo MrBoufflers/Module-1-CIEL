@@ -303,7 +303,7 @@ premier_octet = int(octets[0])  # → 192`}</code></pre>
 //         print("❌ Choix invalide, veuillez réessayer.")`}</code></pre>
 //             </>
 //         )
-//     },
+    },
 ];
 
 const gameChallengesData = [
