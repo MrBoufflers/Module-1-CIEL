@@ -149,16 +149,16 @@ export const courseData = {
   //   },
   //   content: moduleBDDCours1,
   // },
-  // {
-  //   id: 'modulePythonCours2',
-  //   title: "Python - Avancé",
-  //   icon: "🐍",
-  //   ref: {
-  //     competence: 'C08 - Coder',
-  //     savoirs: 'S5.1, S5.5',
-  //   },
-  //   content: modulePythonCours2,
-  // },
+  {
+    id: 'modulePythonCours2',
+    title: "Python - Avancé",
+    icon: "🐍",
+    ref: {
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
+    },
+    content: modulePythonCours2,
+  },
   // {
   //   id: 'moduleControleG1',
   //   title: "Contrôle G1 - NetWatch",
