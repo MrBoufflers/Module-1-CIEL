@@ -253,6 +253,16 @@ export const courseData = {
     },
     content: modulePythonCours1,
   },
+    {
+    id: 'modulePythonCours2',
+    title: "Python - Avancé",
+    icon: "🐍",
+    ref: {
+      competence: 'C08 - Coder',
+      savoirs: 'S5.1, S5.5',
+    },
+    content: modulePythonCours2,
+  },
   // {
   //   id: 'moduleBDDCours1T',
   //   title: "Conception BDD",
