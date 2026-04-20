@@ -139,16 +139,16 @@ export const courseData = {
     },
     content: modulePythonCours1,
   },
-  // {
-  //   id: 'moduleBDDCours1',
-  //   title: "Conception BDD",
-  //   icon: "🗃️",
-  //   ref: {
-  //     competence: 'C08 - Coder, C04 - Analyser',
-  //     savoirs: 'S5.1, S3.1',
-  //   },
-  //   content: moduleBDDCours1,
-  // },
+  {
+    id: 'moduleBDDCours1',
+    title: "Conception BDD",
+    icon: "🗃️",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser',
+      savoirs: 'S5.1, S3.1',
+    },
+    content: moduleBDDCours1,
+  },
   {
     id: 'modulePythonCours2',
     title: "Python - Avancé",
@@ -263,17 +263,17 @@ export const courseData = {
     },
     content: modulePythonCours2,
   },
-  // {
-  //   id: 'moduleBDDCours1T',
-  //   title: "Conception BDD",
-  //   icon: "🗃️",
-  //   ref: {
-  //     competence: 'C08 - Coder, C04 - Analyser',
-  //     savoirs: 'S5.1, S3.1',
-  //   },
-  //   content: moduleBDDCours1,
-  // },
-     // Ajoutez ici les futurs modules de Terminale...
+  {
+    id: 'moduleBDDCours1T',
+    title: "Conception BDD",
+    icon: "🗃️",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser',
+      savoirs: 'S5.1, S3.1',
+    },
+    content: moduleBDDCours1,
+  },
+
   ],
   
 };
