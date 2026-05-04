@@ -130,195 +130,195 @@ Total équipements : 10
             </>
         )
     },
-    {
-        title: "Correction complète",
-        description: (
-            <>
-                <p><strong>Code complet du Générateur de Rapports :</strong></p>
-                <pre className="code-block"><code>{`from datetime import datetime
+//     {
+//         title: "Correction complète",
+//         description: (
+//             <>
+//                 <p><strong>Code complet du Générateur de Rapports :</strong></p>
+//                 <pre className="code-block"><code>{`from datetime import datetime
 
-# --- BASE DE DONNÉES ---
-parc = [
-    {"id": 1, "nom": "RTR-LYON-01", "type": "routeur", "marque": "Cisco", "ip": "192.168.1.1", "client": "TechnoLyon", "etat": "actif"},
-    {"id": 2, "nom": "SW-LYON-01", "type": "switch", "marque": "TP-Link", "ip": "192.168.1.2", "client": "TechnoLyon", "etat": "actif"},
-    {"id": 3, "nom": "AP-LYON-01", "type": "borne_wifi", "marque": "Ubiquiti", "ip": "192.168.1.10", "client": "TechnoLyon", "etat": "maintenance"},
-    {"id": 4, "nom": "FW-BIO-01", "type": "firewall", "marque": "Fortinet", "ip": "10.0.0.1", "client": "BioSanté", "etat": "actif"},
-    {"id": 5, "nom": "SRV-BIO-01", "type": "serveur", "marque": "Dell", "ip": "10.0.0.100", "client": "BioSanté", "etat": "actif"},
-    {"id": 6, "nom": "SRV-BIO-02", "type": "serveur", "marque": "HP", "ip": "10.0.0.101", "client": "BioSanté", "etat": "hors_service"},
-    {"id": 7, "nom": "SW-IND-01", "type": "switch", "marque": "Cisco", "ip": "172.16.0.2", "client": "IndusRhône", "etat": "actif"},
-    {"id": 8, "nom": "RTR-IND-01", "type": "routeur", "marque": "Cisco", "ip": "172.16.0.1", "client": "IndusRhône", "etat": "actif"},
-    {"id": 9, "nom": "AP-IND-01", "type": "borne_wifi", "marque": "Ubiquiti", "ip": "172.16.0.10", "client": "IndusRhône", "etat": "actif"},
-    {"id": 10, "nom": "FW-IND-01", "type": "firewall", "marque": "Fortinet", "ip": "172.16.0.254", "client": "IndusRhône", "etat": "maintenance"},
-]
+// # --- BASE DE DONNÉES ---
+// parc = [
+//     {"id": 1, "nom": "RTR-LYON-01", "type": "routeur", "marque": "Cisco", "ip": "192.168.1.1", "client": "TechnoLyon", "etat": "actif"},
+//     {"id": 2, "nom": "SW-LYON-01", "type": "switch", "marque": "TP-Link", "ip": "192.168.1.2", "client": "TechnoLyon", "etat": "actif"},
+//     {"id": 3, "nom": "AP-LYON-01", "type": "borne_wifi", "marque": "Ubiquiti", "ip": "192.168.1.10", "client": "TechnoLyon", "etat": "maintenance"},
+//     {"id": 4, "nom": "FW-BIO-01", "type": "firewall", "marque": "Fortinet", "ip": "10.0.0.1", "client": "BioSanté", "etat": "actif"},
+//     {"id": 5, "nom": "SRV-BIO-01", "type": "serveur", "marque": "Dell", "ip": "10.0.0.100", "client": "BioSanté", "etat": "actif"},
+//     {"id": 6, "nom": "SRV-BIO-02", "type": "serveur", "marque": "HP", "ip": "10.0.0.101", "client": "BioSanté", "etat": "hors_service"},
+//     {"id": 7, "nom": "SW-IND-01", "type": "switch", "marque": "Cisco", "ip": "172.16.0.2", "client": "IndusRhône", "etat": "actif"},
+//     {"id": 8, "nom": "RTR-IND-01", "type": "routeur", "marque": "Cisco", "ip": "172.16.0.1", "client": "IndusRhône", "etat": "actif"},
+//     {"id": 9, "nom": "AP-IND-01", "type": "borne_wifi", "marque": "Ubiquiti", "ip": "172.16.0.10", "client": "IndusRhône", "etat": "actif"},
+//     {"id": 10, "nom": "FW-IND-01", "type": "firewall", "marque": "Fortinet", "ip": "172.16.0.254", "client": "IndusRhône", "etat": "maintenance"},
+// ]
 
-# --- FONCTIONS UTILITAIRES ---
+// # --- FONCTIONS UTILITAIRES ---
 
-def afficher_equipement(equip):
-    icones = {"actif": "✅", "maintenance": "🔧", "hors_service": "❌"}
-    icone = icones.get(equip["etat"], "❓")
-    print(f"  {icone} {equip['nom']} ({equip['type']}) — {equip['ip']} — {equip['client']} — {equip['etat']}")
+// def afficher_equipement(equip):
+//     icones = {"actif": "✅", "maintenance": "🔧", "hors_service": "❌"}
+//     icone = icones.get(equip["etat"], "❓")
+//     print(f"  {icone} {equip['nom']} ({equip['type']}) — {equip['ip']} — {equip['client']} — {equip['etat']}")
 
-def compter_par_etat(parc):
-    compteur = {"actif": 0, "maintenance": 0, "hors_service": 0}
-    for equip in parc:
-        etat = equip["etat"]
-        if etat in compteur:
-            compteur[etat] += 1
-    return compteur
+// def compter_par_etat(parc):
+//     compteur = {"actif": 0, "maintenance": 0, "hors_service": 0}
+//     for equip in parc:
+//         etat = equip["etat"]
+//         if etat in compteur:
+//             compteur[etat] += 1
+//     return compteur
 
-def filtrer_par_client(parc, nom_client):
-    resultat = []
-    for equip in parc:
-        if equip["client"] == nom_client:
-            resultat.append(equip)
-    return resultat
+// def filtrer_par_client(parc, nom_client):
+//     resultat = []
+//     for equip in parc:
+//         if equip["client"] == nom_client:
+//             resultat.append(equip)
+//     return resultat
 
-def compter_par_type(parc):
-    compteur = {}
-    for equip in parc:
-        t = equip["type"]
-        if t in compteur:
-            compteur[t] += 1
-        else:
-            compteur[t] = 1
-    return compteur
+// def compter_par_type(parc):
+//     compteur = {}
+//     for equip in parc:
+//         t = equip["type"]
+//         if t in compteur:
+//             compteur[t] += 1
+//         else:
+//             compteur[t] = 1
+//     return compteur
 
-def compter_par_marque(parc):
-    compteur = {}
-    for equip in parc:
-        m = equip["marque"]
-        if m in compteur:
-            compteur[m] += 1
-        else:
-            compteur[m] = 1
-    return compteur
+// def compter_par_marque(parc):
+//     compteur = {}
+//     for equip in parc:
+//         m = equip["marque"]
+//         if m in compteur:
+//             compteur[m] += 1
+//         else:
+//             compteur[m] = 1
+//     return compteur
 
-def equipements_critiques(parc):
-    critiques = []
-    for equip in parc:
-        if equip["etat"] in ["maintenance", "hors_service"]:
-            critiques.append(equip)
-    return critiques
+// def equipements_critiques(parc):
+//     critiques = []
+//     for equip in parc:
+//         if equip["etat"] in ["maintenance", "hors_service"]:
+//             critiques.append(equip)
+//     return critiques
 
-def obtenir_clients(parc):
-    clients = []
-    for equip in parc:
-        if equip["client"] not in clients:
-            clients.append(equip["client"])
-    return clients
+// def obtenir_clients(parc):
+//     clients = []
+//     for equip in parc:
+//         if equip["client"] not in clients:
+//             clients.append(equip["client"])
+//     return clients
 
-def generer_rapport(parc):
-    print("══════════════════════════════════════════")
-    print("   📊 RAPPORT PARC INFORMATIQUE NETSECURE")
-    print("══════════════════════════════════════════")
-    print(f"Date : {datetime.now().strftime('%d/%m/%Y %H:%M')}")
+// def generer_rapport(parc):
+//     print("══════════════════════════════════════════")
+//     print("   📊 RAPPORT PARC INFORMATIQUE NETSECURE")
+//     print("══════════════════════════════════════════")
+//     print(f"Date : {datetime.now().strftime('%d/%m/%Y %H:%M')}")
 
-    etats = compter_par_etat(parc)
-    print(f"\\n--- RÉSUMÉ GÉNÉRAL ---")
-    print(f"Total équipements : {len(parc)}")
-    print(f"  ✅ Actifs : {etats['actif']}")
-    print(f"  🔧 En maintenance : {etats['maintenance']}")
-    print(f"  ❌ Hors service : {etats['hors_service']}")
+//     etats = compter_par_etat(parc)
+//     print(f"\\n--- RÉSUMÉ GÉNÉRAL ---")
+//     print(f"Total équipements : {len(parc)}")
+//     print(f"  ✅ Actifs : {etats['actif']}")
+//     print(f"  🔧 En maintenance : {etats['maintenance']}")
+//     print(f"  ❌ Hors service : {etats['hors_service']}")
 
-    types = compter_par_type(parc)
-    print(f"\\n--- PAR TYPE ---")
-    for t, nb in types.items():
-        print(f"  {t} : {nb}")
+//     types = compter_par_type(parc)
+//     print(f"\\n--- PAR TYPE ---")
+//     for t, nb in types.items():
+//         print(f"  {t} : {nb}")
 
-    marques = compter_par_marque(parc)
-    print(f"\\n--- PAR MARQUE ---")
-    for m, nb in marques.items():
-        print(f"  {m} : {nb}")
+//     marques = compter_par_marque(parc)
+//     print(f"\\n--- PAR MARQUE ---")
+//     for m, nb in marques.items():
+//         print(f"  {m} : {nb}")
 
-    critiques = equipements_critiques(parc)
-    print(f"\\n--- ÉQUIPEMENTS CRITIQUES ({len(critiques)}) ---")
-    for equip in critiques:
-        afficher_equipement(equip)
+//     critiques = equipements_critiques(parc)
+//     print(f"\\n--- ÉQUIPEMENTS CRITIQUES ({len(critiques)}) ---")
+//     for equip in critiques:
+//         afficher_equipement(equip)
 
-    clients = obtenir_clients(parc)
-    print(f"\\n--- PAR CLIENT ---")
-    for client in clients:
-        equips_client = filtrer_par_client(parc, client)
-        nb_actifs = sum(1 for e in equips_client if e["etat"] == "actif")
-        nb_autres = len(equips_client) - nb_actifs
-        print(f"[{client}] {len(equips_client)} équipements ({nb_actifs} actifs, {nb_autres} autres)")
+//     clients = obtenir_clients(parc)
+//     print(f"\\n--- PAR CLIENT ---")
+//     for client in clients:
+//         equips_client = filtrer_par_client(parc, client)
+//         nb_actifs = sum(1 for e in equips_client if e["etat"] == "actif")
+//         nb_autres = len(equips_client) - nb_actifs
+//         print(f"[{client}] {len(equips_client)} équipements ({nb_actifs} actifs, {nb_autres} autres)")
 
-    print("══════════════════════════════════════════")
+//     print("══════════════════════════════════════════")
 
-# --- MENU INTERACTIF ---
+// # --- MENU INTERACTIF ---
 
-def chercher_equipement(parc, recherche):
-    resultats = []
-    for equip in parc:
-        if recherche.lower() in equip["nom"].lower() or recherche in equip["ip"]:
-            resultats.append(equip)
-    return resultats
+// def chercher_equipement(parc, recherche):
+//     resultats = []
+//     for equip in parc:
+//         if recherche.lower() in equip["nom"].lower() or recherche in equip["ip"]:
+//             resultats.append(equip)
+//     return resultats
 
-def ajouter_equipement(parc):
-    print("\\n--- AJOUTER UN ÉQUIPEMENT ---")
-    nouvel_id = max(e["id"] for e in parc) + 1
-    nom = input("Nom : ")
-    type_equip = input("Type (routeur/switch/borne_wifi/firewall/serveur) : ")
-    marque = input("Marque : ")
-    ip = input("Adresse IP : ")
-    client = input("Client : ")
-    etat = input("État (actif/maintenance/hors_service) : ")
+// def ajouter_equipement(parc):
+//     print("\\n--- AJOUTER UN ÉQUIPEMENT ---")
+//     nouvel_id = max(e["id"] for e in parc) + 1
+//     nom = input("Nom : ")
+//     type_equip = input("Type (routeur/switch/borne_wifi/firewall/serveur) : ")
+//     marque = input("Marque : ")
+//     ip = input("Adresse IP : ")
+//     client = input("Client : ")
+//     etat = input("État (actif/maintenance/hors_service) : ")
 
-    nouveau = {
-        "id": nouvel_id, "nom": nom, "type": type_equip,
-        "marque": marque, "ip": ip, "client": client, "etat": etat
-    }
-    parc.append(nouveau)
-    print(f"✅ Équipement {nom} ajouté avec l'ID {nouvel_id}")
+//     nouveau = {
+//         "id": nouvel_id, "nom": nom, "type": type_equip,
+//         "marque": marque, "ip": ip, "client": client, "etat": etat
+//     }
+//     parc.append(nouveau)
+//     print(f"✅ Équipement {nom} ajouté avec l'ID {nouvel_id}")
 
-# --- PROGRAMME PRINCIPAL ---
-print("══════════════════════════════════════")
-print("   🔧 GESTIONNAIRE DE PARC NETSECURE")
-print("══════════════════════════════════════")
+// # --- PROGRAMME PRINCIPAL ---
+// print("══════════════════════════════════════")
+// print("   🔧 GESTIONNAIRE DE PARC NETSECURE")
+// print("══════════════════════════════════════")
 
-while True:
-    print("\\n--- MENU ---")
-    print("1. Rapport complet")
-    print("2. Chercher un équipement")
-    print("3. Équipements d'un client")
-    print("4. Équipements critiques")
-    print("5. Ajouter un équipement")
-    print("6. Quitter")
+// while True:
+//     print("\\n--- MENU ---")
+//     print("1. Rapport complet")
+//     print("2. Chercher un équipement")
+//     print("3. Équipements d'un client")
+//     print("4. Équipements critiques")
+//     print("5. Ajouter un équipement")
+//     print("6. Quitter")
 
-    choix = input("\\nVotre choix : ")
+//     choix = input("\\nVotre choix : ")
 
-    if choix == "1":
-        generer_rapport(parc)
-    elif choix == "2":
-        recherche = input("Nom ou IP à chercher : ")
-        resultats = chercher_equipement(parc, recherche)
-        if resultats:
-            for equip in resultats:
-                afficher_equipement(equip)
-        else:
-            print("Aucun résultat.")
-    elif choix == "3":
-        client = input("Nom du client : ")
-        equips = filtrer_par_client(parc, client)
-        if equips:
-            for equip in equips:
-                afficher_equipement(equip)
-        else:
-            print("Client non trouvé.")
-    elif choix == "4":
-        critiques = equipements_critiques(parc)
-        for equip in critiques:
-            afficher_equipement(equip)
-    elif choix == "5":
-        ajouter_equipement(parc)
-    elif choix == "6":
-        print("Au revoir ! 👋")
-        break
-    else:
-        print("Choix invalide.")`}</code></pre>
-            </>
-        )
-    },
+//     if choix == "1":
+//         generer_rapport(parc)
+//     elif choix == "2":
+//         recherche = input("Nom ou IP à chercher : ")
+//         resultats = chercher_equipement(parc, recherche)
+//         if resultats:
+//             for equip in resultats:
+//                 afficher_equipement(equip)
+//         else:
+//             print("Aucun résultat.")
+//     elif choix == "3":
+//         client = input("Nom du client : ")
+//         equips = filtrer_par_client(parc, client)
+//         if equips:
+//             for equip in equips:
+//                 afficher_equipement(equip)
+//         else:
+//             print("Client non trouvé.")
+//     elif choix == "4":
+//         critiques = equipements_critiques(parc)
+//         for equip in critiques:
+//             afficher_equipement(equip)
+//     elif choix == "5":
+//         ajouter_equipement(parc)
+//     elif choix == "6":
+//         print("Au revoir ! 👋")
+//         break
+//     else:
+//         print("Choix invalide.")`}</code></pre>
+//             </>
+//         )
+//     },
 ];
 
 export const modulePythonCours2 = {

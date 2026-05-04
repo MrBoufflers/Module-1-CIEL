@@ -6,7 +6,7 @@ const tpObjective = 'Concevoir un schéma de base de données complet à partir 
 const tpMaterials = [
     'Un cahier ou un éditeur de texte pour dessiner les schémas.',
     'Le cours sur la conception de base de données (onglet Cours).',
-    'Un crayon et une gomme (si travail sur papier).',
+    'https://dbdiagram.io/home',
 ];
 
 const tpSteps = [
@@ -225,7 +225,7 @@ statut         : VARCHAR(50)  -- texte (en attente, expédiée, livrée...)`}</c
                 <p className="mt-2"><strong>Consigne :</strong> Identifiez les 3 entités et listez leurs attributs avec les types de données.</p>
             </div>
 
-            <div className="mt-3 space-y-3 not-prose">
+            {/* <div className="mt-3 space-y-3 not-prose">
                 <details className="p-4 bg-white border rounded-lg shadow-sm">
                     <summary className="font-semibold cursor-pointer">Correction exercice 1</summary>
                     <div className="mt-3 space-y-3">
@@ -253,7 +253,7 @@ technicien        : VARCHAR(100)`}</code></pre>
                         </div>
                     </div>
                 </details>
-            </div>
+            </div> */}
 
             {/* Partie 2 */}
             <h3 className="mt-8">Partie 2 — La clé primaire</h3>
@@ -272,14 +272,14 @@ technicien        : VARCHAR(100)`}</code></pre>
             <p>La clé primaire se note avec le symbole <strong>PK</strong> (Primary Key) ou en soulignant le nom du champ.</p>
             <pre className="code-block mt-2"><code>{`clients (PK id, nom, prenom, email, adresse, date_inscription)`}</code></pre>
 
-            <div className="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
+            {/* <div className="mt-4 p-4 bg-indigo-50 border border-indigo-200 rounded-lg">
                 <h4 className="font-semibold mb-2">Question flash :</h4>
                 <p>« Dans une table <code>eleves</code>, pourquoi est-ce une mauvaise idée d’utiliser le nom de l’élève comme clé primaire ? »</p>
                 <details className="mt-2">
                     <summary className="cursor-pointer text-blue-600 font-semibold">Voir la réponse</summary>
                     <p className="mt-1">Deux élèves peuvent avoir le même nom. De plus, un nom peut contenir des erreurs ou être modifié (mariage, correction).</p>
                 </details>
-            </div>
+            </div> */}
 
             {/* Partie 3 */}
             <h3 className="mt-8">Partie 3 — Les clés étrangères et les relations</h3>
@@ -345,7 +345,7 @@ produits (PK id, nom, description, prix, stock)`}</code></pre>
                 </ol>
             </div>
 
-            <div className="mt-3 not-prose">
+            {/* <div className="mt-3 not-prose">
                 <details className="p-4 bg-white border rounded-lg shadow-sm">
                     <summary className="font-semibold cursor-pointer">Correction exercice 2</summary>
                     <div className="mt-3">
@@ -364,7 +364,7 @@ ordinateurs (PK id, numero_serie, marque, modele, etat, FK salle_id)
 interventions (PK id, date_intervention, description, technicien, FK ordinateur_id)`}</code></pre>
                     </div>
                 </details>
-            </div>
+            </div> */}
 
             {/* Partie 4 */}
             <h3 className="mt-8">Partie 4 — Les règles d’une bonne conception</h3>
@@ -431,7 +431,7 @@ interventions (PK id, date_intervention, description, technicien, FK ordinateur_
   Prix Total      : DECIMAL`}</code></pre>
             </div>
 
-            <div className="mt-3 not-prose">
+            {/* <div className="mt-3 not-prose">
                 <details className="p-4 bg-white border rounded-lg shadow-sm">
                     <summary className="font-semibold cursor-pointer">Correction exercice 3</summary>
                     <ol className="list-decimal ml-6 mt-3 space-y-2 text-sm">
@@ -443,7 +443,7 @@ interventions (PK id, date_intervention, description, technicien, FK ordinateur_
                         <li>Le prix total <strong>ne devrait pas être stocké</strong> — il se calcule à partir des lignes de commande</li>
                     </ol>
                 </details>
-            </div>
+            </div> */}
 
             {/* Partie 5 */}
             <h3 className="mt-8">Partie 5 — Dessiner un schéma complet</h3>

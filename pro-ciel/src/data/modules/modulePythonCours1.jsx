@@ -153,156 +153,156 @@ premier_octet = int(octets[0])  # → 192`}</code></pre>
                 </div>
             </>
         )
-    },
-    {
-        title: "Correction complète",
-        description: (
-            <>
-                <p><strong>Code complet de la Boîte à Outils :</strong></p>
-                <pre className="code-block"><code>{`# ═══════════════════════════════════════════
-#   BOÎTE À OUTILS SYSADMIN — CORRECTION
-# ═══════════════════════════════════════════
+//     },
+//     {
+//         title: "Correction complète",
+//         description: (
+//             <>
+//                 <p><strong>Code complet de la Boîte à Outils :</strong></p>
+//                 <pre className="code-block"><code>{`# ═══════════════════════════════════════════
+// #   BOÎTE À OUTILS SYSADMIN — CORRECTION
+// # ═══════════════════════════════════════════
 
-# --- ACCUEIL ---
-print("══════════════════════════════════════")
-print("   🔧 BOÎTE À OUTILS SYSADMIN 🔧   ")
-print("══════════════════════════════════════")
-nom = input("Votre nom : ")
-print(f"Bienvenue {nom} !")
+// # --- ACCUEIL ---
+// print("══════════════════════════════════════")
+// print("   🔧 BOÎTE À OUTILS SYSADMIN 🔧   ")
+// print("══════════════════════════════════════")
+// nom = input("Votre nom : ")
+// print(f"Bienvenue {nom} !")
 
-# --- BOUCLE PRINCIPALE ---
-while True:
-    print("\\n--- MENU PRINCIPAL ---")
-    print("1. Convertisseur d'unités de stockage")
-    print("2. Vérificateur de port")
-    print("3. Calculateur d'adresses réseau")
-    print("4. Quitter")
+// # --- BOUCLE PRINCIPALE ---
+// while True:
+//     print("\\n--- MENU PRINCIPAL ---")
+//     print("1. Convertisseur d'unités de stockage")
+//     print("2. Vérificateur de port")
+//     print("3. Calculateur d'adresses réseau")
+//     print("4. Quitter")
 
-    choix = input("\\nVotre choix : ")
+//     choix = input("\\nVotre choix : ")
 
-    # --- OUTIL 1 : CONVERTISSEUR ---
-    if choix == "1":
-        print("\\n--- CONVERTISSEUR DE STOCKAGE ---")
-        valeur = float(input("Valeur : "))
-        unite = input("Unité (octets/Ko/Mo/Go/To) : ").strip()
+//     # --- OUTIL 1 : CONVERTISSEUR ---
+//     if choix == "1":
+//         print("\\n--- CONVERTISSEUR DE STOCKAGE ---")
+//         valeur = float(input("Valeur : "))
+//         unite = input("Unité (octets/Ko/Mo/Go/To) : ").strip()
 
-        # Conversion en octets d'abord
-        if unite == "octets":
-            octets = valeur
-        elif unite == "Ko":
-            octets = valeur * 1024
-        elif unite == "Mo":
-            octets = valeur * 1024 ** 2
-        elif unite == "Go":
-            octets = valeur * 1024 ** 3
-        elif unite == "To":
-            octets = valeur * 1024 ** 4
-        else:
-            print("Unité non reconnue !")
-            continue
+//         # Conversion en octets d'abord
+//         if unite == "octets":
+//             octets = valeur
+//         elif unite == "Ko":
+//             octets = valeur * 1024
+//         elif unite == "Mo":
+//             octets = valeur * 1024 ** 2
+//         elif unite == "Go":
+//             octets = valeur * 1024 ** 3
+//         elif unite == "To":
+//             octets = valeur * 1024 ** 4
+//         else:
+//             print("Unité non reconnue !")
+//             continue
 
-        # Affichage dans toutes les unités
-        print(f"\\n--- Résultat ---")
-        print(f"{valeur} {unite} = {octets} octets")
-        print(f"{valeur} {unite} = {octets / 1024:.2f} Ko")
-        print(f"{valeur} {unite} = {octets / 1024**2:.2f} Mo")
-        print(f"{valeur} {unite} = {octets / 1024**3:.5f} Go")
-        print(f"{valeur} {unite} = {octets / 1024**4:.8f} To")
+//         # Affichage dans toutes les unités
+//         print(f"\\n--- Résultat ---")
+//         print(f"{valeur} {unite} = {octets} octets")
+//         print(f"{valeur} {unite} = {octets / 1024:.2f} Ko")
+//         print(f"{valeur} {unite} = {octets / 1024**2:.2f} Mo")
+//         print(f"{valeur} {unite} = {octets / 1024**3:.5f} Go")
+//         print(f"{valeur} {unite} = {octets / 1024**4:.8f} To")
 
-    # --- OUTIL 2 : VÉRIFICATEUR DE PORT ---
-    elif choix == "2":
-        print("\\n--- VÉRIFICATEUR DE PORT ---")
-        port = int(input("Numéro de port : "))
+//     # --- OUTIL 2 : VÉRIFICATEUR DE PORT ---
+//     elif choix == "2":
+//         print("\\n--- VÉRIFICATEUR DE PORT ---")
+//         port = int(input("Numéro de port : "))
 
-        if port < 0 or port > 65535:
-            print("❌ Port invalide ! (doit être entre 0 et 65535)")
-            continue
+//         if port < 0 or port > 65535:
+//             print("❌ Port invalide ! (doit être entre 0 et 65535)")
+//             continue
 
-        # Catégorie du port
-        if port <= 1023:
-            categorie = "Well-known (réservé)"
-        elif port <= 49151:
-            categorie = "Registered (enregistré)"
-        else:
-            categorie = "Dynamic/Private (dynamique)"
+//         # Catégorie du port
+//         if port <= 1023:
+//             categorie = "Well-known (réservé)"
+//         elif port <= 49151:
+//             categorie = "Registered (enregistré)"
+//         else:
+//             categorie = "Dynamic/Private (dynamique)"
 
-        print(f"Port {port} — Catégorie : {categorie}")
+//         print(f"Port {port} — Catégorie : {categorie}")
 
-        # Services connus
-        if port == 21:
-            print("→ Service : FTP (transfert de fichiers)")
-        elif port == 22:
-            print("→ Service : SSH (connexion sécurisée)")
-        elif port == 23:
-            print("→ Service : Telnet (connexion non sécurisée)")
-        elif port == 25:
-            print("→ Service : SMTP (envoi d'emails)")
-        elif port == 53:
-            print("→ Service : DNS (résolution de noms)")
-        elif port == 80:
-            print("→ Service : HTTP (web)")
-        elif port == 110:
-            print("→ Service : POP3 (réception d'emails)")
-        elif port == 143:
-            print("→ Service : IMAP (réception d'emails)")
-        elif port == 443:
-            print("→ Service : HTTPS (web sécurisé)")
-        elif port == 3306:
-            print("→ Service : MySQL (base de données)")
-        elif port == 3389:
-            print("→ Service : RDP (bureau à distance)")
-        elif port == 8080:
-            print("→ Service : HTTP alternatif (proxy/dev)")
-        else:
-            print("→ Service : non référencé dans notre base")
+//         # Services connus
+//         if port == 21:
+//             print("→ Service : FTP (transfert de fichiers)")
+//         elif port == 22:
+//             print("→ Service : SSH (connexion sécurisée)")
+//         elif port == 23:
+//             print("→ Service : Telnet (connexion non sécurisée)")
+//         elif port == 25:
+//             print("→ Service : SMTP (envoi d'emails)")
+//         elif port == 53:
+//             print("→ Service : DNS (résolution de noms)")
+//         elif port == 80:
+//             print("→ Service : HTTP (web)")
+//         elif port == 110:
+//             print("→ Service : POP3 (réception d'emails)")
+//         elif port == 143:
+//             print("→ Service : IMAP (réception d'emails)")
+//         elif port == 443:
+//             print("→ Service : HTTPS (web sécurisé)")
+//         elif port == 3306:
+//             print("→ Service : MySQL (base de données)")
+//         elif port == 3389:
+//             print("→ Service : RDP (bureau à distance)")
+//         elif port == 8080:
+//             print("→ Service : HTTP alternatif (proxy/dev)")
+//         else:
+//             print("→ Service : non référencé dans notre base")
 
-    # --- OUTIL 3 : CALCULATEUR RÉSEAU ---
-    elif choix == "3":
-        print("\\n--- CALCULATEUR RÉSEAU ---")
-        ip = input("Adresse IP (ex: 192.168.1.100) : ")
-        cidr = input("Masque CIDR (ex: 24) : ")
+//     # --- OUTIL 3 : CALCULATEUR RÉSEAU ---
+//     elif choix == "3":
+//         print("\\n--- CALCULATEUR RÉSEAU ---")
+//         ip = input("Adresse IP (ex: 192.168.1.100) : ")
+//         cidr = input("Masque CIDR (ex: 24) : ")
 
-        octets_ip = ip.split(".")
-        premier = int(octets_ip[0])
+//         octets_ip = ip.split(".")
+//         premier = int(octets_ip[0])
 
-        # Classe de l'adresse
-        if premier == 127:
-            classe = "Loopback"
-            privee = True
-        elif premier >= 1 and premier <= 126:
-            classe = "A"
-            privee = (premier == 10)
-        elif premier >= 128 and premier <= 191:
-            classe = "B"
-            deuxieme = int(octets_ip[1])
-            privee = (premier == 172 and deuxieme >= 16 and deuxieme <= 31)
-        elif premier >= 192 and premier <= 223:
-            classe = "C"
-            deuxieme = int(octets_ip[1])
-            privee = (premier == 192 and deuxieme == 168)
-        elif premier >= 224 and premier <= 239:
-            classe = "D (Multicast)"
-            privee = False
-        else:
-            classe = "E (Expérimentale)"
-            privee = False
+//         # Classe de l'adresse
+//         if premier == 127:
+//             classe = "Loopback"
+//             privee = True
+//         elif premier >= 1 and premier <= 126:
+//             classe = "A"
+//             privee = (premier == 10)
+//         elif premier >= 128 and premier <= 191:
+//             classe = "B"
+//             deuxieme = int(octets_ip[1])
+//             privee = (premier == 172 and deuxieme >= 16 and deuxieme <= 31)
+//         elif premier >= 192 and premier <= 223:
+//             classe = "C"
+//             deuxieme = int(octets_ip[1])
+//             privee = (premier == 192 and deuxieme == 168)
+//         elif premier >= 224 and premier <= 239:
+//             classe = "D (Multicast)"
+//             privee = False
+//         else:
+//             classe = "E (Expérimentale)"
+//             privee = False
 
-        print(f"\\nAdresse : {ip}/{cidr}")
-        print(f"Classe : {classe}")
-        if privee:
-            print("Type : Adresse privée (RFC 1918)")
-        else:
-            print("Type : Adresse publique")
+//         print(f"\\nAdresse : {ip}/{cidr}")
+//         print(f"Classe : {classe}")
+//         if privee:
+//             print("Type : Adresse privée (RFC 1918)")
+//         else:
+//             print("Type : Adresse publique")
 
-    # --- QUITTER ---
-    elif choix == "4":
-        print(f"\\nAu revoir {nom} ! 👋")
-        break
+//     # --- QUITTER ---
+//     elif choix == "4":
+//         print(f"\\nAu revoir {nom} ! 👋")
+//         break
 
-    else:
-        print("❌ Choix invalide, veuillez réessayer.")`}</code></pre>
-            </>
-        )
+//     else:
+//         print("❌ Choix invalide, veuillez réessayer.")`}</code></pre>
+//             </>
+//         )
     },
 ];
 
