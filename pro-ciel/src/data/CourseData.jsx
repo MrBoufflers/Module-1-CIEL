@@ -21,6 +21,7 @@ import { modulePythonCours2 } from './modules/modulePythonCours2.jsx';
 import { moduleControleG1 } from './modules/moduleControleG1.jsx';
 import { moduleControleG2 } from './modules/moduleControleG2.jsx';
 import { moduleBDDCours1 } from './modules/moduleBDDCours1.jsx';
+import { moduleBDDCours2 } from './modules/moduleBDDCours2.jsx';
 
 
 export const courseData = {
@@ -139,18 +140,7 @@ export const courseData = {
     },
     content: modulePythonCours1,
   },
-
   {
-    id: 'modulePythonCours2',
-    title: "Python - Avancé",
-    icon: "🐍",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: modulePythonCours2,
-  },
-    {
     id: 'moduleBDDCours1',
     title: "Conception BDD",
     icon: "🗃️",
@@ -160,6 +150,26 @@ export const courseData = {
     },
     content: moduleBDDCours1,
   },
+  {
+    id: 'moduleBDDCours2',
+    title: "Langage SQL",
+    icon: "🗃️",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser',
+      savoirs: 'S5.1, S3.1',
+    },
+    content: moduleBDDCours2,
+  },
+  // {
+  //   id: 'modulePythonCours2',
+  //   title: "Python - Avancé",
+  //   icon: "🐍",
+  //   ref: {
+  //     competence: 'C08 - Coder',
+  //     savoirs: 'S5.1, S5.5',
+  //   },
+  //   content: modulePythonCours2,
+  // },
   // {
   //   id: 'moduleControleG1',
   //   title: "Contrôle G1 - NetWatch",
@@ -245,26 +255,6 @@ export const courseData = {
     content: moduleIAcontent,
   },
   {
-    id: 'modulePythonCours1',
-    title: "Python - Les Bases",
-    icon: "🐍",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: modulePythonCours1,
-  },
-    {
-    id: 'modulePythonCours2',
-    title: "Python - Avancé",
-    icon: "🐍",
-    ref: {
-      competence: 'C08 - Coder',
-      savoirs: 'S5.1, S5.5',
-    },
-    content: modulePythonCours2,
-  },
-  {
     id: 'moduleBDDCours1T',
     title: "Conception BDD",
     icon: "🗃️",
@@ -274,7 +264,17 @@ export const courseData = {
     },
     content: moduleBDDCours1,
   },
-
+  {
+    id: 'moduleBDDCours2T',
+    title: "Langage SQL",
+    icon: "🗃️",
+    ref: {
+      competence: 'C08 - Coder, C04 - Analyser',
+      savoirs: 'S5.1, S3.1',
+    },
+    content: moduleBDDCours2,
+  },
+     // Ajoutez ici les futurs modules de Terminale...
   ],
   
 };

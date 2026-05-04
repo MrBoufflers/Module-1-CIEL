@@ -31,6 +31,10 @@ const tpSteps = [
                 <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg mt-3">
                     <p><strong>Indice :</strong> Il y a au minimum <strong>4 entités</strong>. Attention, les techniciens sont aussi une entité !</p>
                 </div>
+                <div className="mt-4 p-4 bg-gray-50 border rounded-lg">
+                    <p className="font-semibold mb-2">Aide si besoin :</p>
+                    <p>Les 4 entités principales sont : <code>clients</code> (les entreprises), <code>equipements</code>, <code>tickets</code>, <code>techniciens</code>.</p>
+                </div>
                 <div className="mt-4">
                     <p><strong>Pour chaque entité, précisez :</strong></p>
                     <ul className="list-disc list-inside ml-4 mt-2">
@@ -50,6 +54,7 @@ const tpSteps = [
                 <ol className="list-decimal ml-6 space-y-1">
                     <li>Le type de relation (1-1, 1-N, ou N-N)</li>
                     <li>De quel côté va la clé étrangère</li>
+                    <li>Justifiez votre choix en une phrase</li>
                 </ol>
 
                 <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
@@ -96,12 +101,12 @@ const tpSteps = [
                     <li>Les noms respectent les <strong>conventions</strong> ? (minuscules, underscores, pluriel pour les tables)</li>
                     <li>Chaque table a une <strong>clé primaire</strong> ?</li>
                 </ol>
-                <p className="mt-3">Corrigez votre schéma si nécessaire.</p>
+                <p className="mt-3">Corrigez votre schéma si nécessaire. <strong>Notez les corrections que vous avez faites.</strong></p>
             </>
         )
     },
     {
-        title: "Mission 5 — Évolution du besoin",
+        title: "Mission Bonus — Évolution du besoin (pour les plus rapides)",
         description: (
             <>
                 <div className="p-4 bg-orange-50 border border-orange-200 rounded-lg">
@@ -208,7 +213,7 @@ statut         : VARCHAR(50)  -- texte (en attente, expédiée, livrée...)`}</c
                         <tr><td className="border border-gray-300 px-4 py-2"><code>TEXT</code></td><td className="border border-gray-300 px-4 py-2">Texte long</td><td className="border border-gray-300 px-4 py-2">description, commentaire</td></tr>
                         <tr><td className="border border-gray-300 px-4 py-2"><code>DATE</code></td><td className="border border-gray-300 px-4 py-2">Date (AAAA-MM-JJ)</td><td className="border border-gray-300 px-4 py-2">date de naissance</td></tr>
                         <tr><td className="border border-gray-300 px-4 py-2"><code>DATETIME</code></td><td className="border border-gray-300 px-4 py-2">Date et heure</td><td className="border border-gray-300 px-4 py-2">horodatage de connexion</td></tr>
-                        <tr><td className="border border-gray-300 px-4 py-2"><code>DECIMAL</code></td><td className="border border-gray-300 px-4 py-2">Nombre décimal précis</td><td className="border border-gray-300 px-4 py-2">prix (10,2 → 99999999.99)</td></tr>
+                        <tr><td className="border border-gray-300 px-4 py-2"><code>DECIMAL(p,s)</code></td><td className="border border-gray-300 px-4 py-2">Nombre décimal précis</td><td className="border border-gray-300 px-4 py-2">prix (10,2 → 99999999.99)</td></tr>
                         <tr><td className="border border-gray-300 px-4 py-2"><code>BOOLEAN</code></td><td className="border border-gray-300 px-4 py-2">Vrai ou Faux</td><td className="border border-gray-300 px-4 py-2">actif, vérifié</td></tr>
                     </tbody>
                 </table>
