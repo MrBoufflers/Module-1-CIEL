@@ -33,7 +33,7 @@ techniciens (🔑 id, nom, prenom, email, telephone, specialite)`}</code></pre>
         )
     },
     {
-        title: "Mission 1 — Création des tables (25 min)",
+        title: "Mission 1 — Création des tables",
         description: (
             <>
                 <p><strong>Consigne :</strong> Écrivez les 4 commandes <code>CREATE TABLE</code> dans l'ordre correct. Respectez ces règles :</p>
@@ -56,59 +56,11 @@ techniciens (🔑 id, nom, prenom, email, telephone, specialite)`}</code></pre>
                         <li><code>tickets.equipement_id</code> : peut être NULL (ticket pas lié à un équipement)</li>
                     </ul>
                 </div>
-                <details className="mt-4 p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Voir la correction</summary>
-                    <pre className="code-block mt-3"><code>{`CREATE TABLE clients (
-    id              INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom_entreprise  VARCHAR(200) NOT NULL,
-    adresse         TEXT,
-    telephone       VARCHAR(20),
-    email_contact   VARCHAR(255) UNIQUE NOT NULL,
-    secteur_activite VARCHAR(100)
-);
-
-CREATE TABLE techniciens (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    nom         VARCHAR(100) NOT NULL,
-    prenom      VARCHAR(100) NOT NULL,
-    email       VARCHAR(255) UNIQUE NOT NULL,
-    telephone   VARCHAR(20),
-    specialite  VARCHAR(100)
-);
-
-CREATE TABLE equipements (
-    id                INTEGER PRIMARY KEY AUTOINCREMENT,
-    type              VARCHAR(50) NOT NULL,
-    marque            VARCHAR(100),
-    modele            VARCHAR(100),
-    numero_serie      VARCHAR(100) UNIQUE,
-    date_installation DATE,
-    adresse_ip        VARCHAR(45),
-    client_id         INTEGER NOT NULL,
-    FOREIGN KEY (client_id) REFERENCES clients(id)
-);
-
-CREATE TABLE tickets (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    titre         VARCHAR(200) NOT NULL,
-    description   TEXT,
-    date_ouverture DATE NOT NULL DEFAULT CURRENT_DATE,
-    date_cloture  DATE,
-    priorite      VARCHAR(20) NOT NULL DEFAULT 'moyenne',
-    statut        VARCHAR(30) NOT NULL DEFAULT 'ouvert',
-    client_id     INTEGER NOT NULL,
-    equipement_id INTEGER,
-    technicien_id INTEGER,
-    FOREIGN KEY (client_id)    REFERENCES clients(id),
-    FOREIGN KEY (equipement_id) REFERENCES equipements(id),
-    FOREIGN KEY (technicien_id) REFERENCES techniciens(id)
-);`}</code></pre>
-                </details>
             </>
         )
     },
     {
-        title: "Mission 2 — Insertion des données (20 min)",
+        title: "Mission 2 — Insertion des données",
         description: (
             <>
                 <p><strong>Consigne :</strong> Peuplez la base avec des données réalistes. Insérez dans l'ordre :</p>
@@ -118,64 +70,12 @@ CREATE TABLE tickets (
                     <li><strong>6 équipements</strong> répartis chez les clients (routeurs, switchs, serveurs, firewalls — marques réelles : Cisco, Fortinet, Dell, HP...)</li>
                     <li><strong>5 tickets</strong> avec différents statuts (ouvert, en_cours, resolu) et priorités (basse, moyenne, haute, critique)</li>
                 </ol>
-                <details className="mt-4 p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Voir la correction</summary>
-                    <pre className="code-block mt-3"><code>{`-- Clients
-INSERT INTO clients (nom_entreprise, adresse, telephone,
-                     email_contact, secteur_activite) VALUES
-('TechnoLyon SAS', '45 rue Garibaldi, 69003 Lyon',
- '04 72 00 11 22', 'contact@technolyon.fr', 'Informatique'),
-('BioSanté SARL', '12 av. Berthelot, 69007 Lyon',
- '04 72 33 44 55', 'info@biosante.fr', 'Santé'),
-('IndusRhône SA', '8 zone industrielle, 69400 Villefranche',
- '04 74 66 77 88', 'it@indusrhone.fr', 'Industrie');
-
--- Techniciens
-INSERT INTO techniciens (nom, prenom, email, telephone, specialite) VALUES
-('Martin', 'Lucas', 'l.martin@netsecure.fr', '06 11 22 33 44', 'Réseaux'),
-('Benali', 'Sarah', 's.benali@netsecure.fr', '06 22 33 44 55', 'Sécurité'),
-('Nguyen', 'Thomas', 't.nguyen@netsecure.fr', '06 33 44 55 66', 'Systèmes');
-
--- Équipements
-INSERT INTO equipements (type, marque, modele, numero_serie,
-                         date_installation, adresse_ip, client_id) VALUES
-('routeur',  'Cisco',   'ISR 1100',      'CSC-2024-001',
- '2024-03-15', '192.168.1.1',  1),
-('switch',   'TP-Link', 'TL-SG108',      'TPL-2024-042',
- '2024-03-15', '192.168.1.2',  1),
-('firewall', 'Fortinet','FortiGate 40F', 'FGT-2024-033',
- '2024-01-20', '10.0.0.1',     2),
-('serveur',  'Dell',    'PowerEdge T150','DEL-2023-899',
- '2023-11-10', '10.0.0.100',   2),
-('switch',   'Cisco',   'CBS350-8T',     'CSC-2025-012',
- '2025-01-08', '172.16.0.2',   3),
-('routeur',  'Cisco',   'ISR 1100',      'CSC-2024-099',
- '2024-06-01', '172.16.0.1',   3);
-
--- Tickets
-INSERT INTO tickets (titre, description, priorite, statut,
-                     client_id, equipement_id, technicien_id) VALUES
-('Perte WiFi intermittente',
- 'Déconnexions fréquentes dans le bureau B',
- 'haute', 'en_cours', 1, 1, 1),
-('MàJ firmware firewall urgente',
- 'CVE critique détectée, patch disponible',
- 'critique', 'ouvert', 2, 3, 2),
-('Serveur lent au démarrage',
- 'Plus de 10 min pour démarrer',
- 'moyenne', 'resolu', 2, 4, 3),
-('Installation switch atelier',
- 'Nouveau switch pour extension réseau',
- 'basse', 'ouvert', 3, 5, 1),
-('Tentative intrusion détectée',
- 'Alertes IDS sur port 22',
- 'critique', 'en_cours', 2, 3, 2);`}</code></pre>
-                </details>
+                
             </>
         )
     },
     {
-        title: "Mission 3 — Requêtes de consultation (30 min)",
+        title: "Mission 3 — Requêtes de consultation",
         description: (
             <>
                 <p><strong>Consigne :</strong> Écrivez les requêtes SQL suivantes. Chaque requête doit retourner des données correctes.</p>
@@ -207,67 +107,6 @@ INSERT INTO tickets (titre, description, priorite, statut,
                     <li>Clôturez un ticket (statut → <code>'resolu'</code> + date de clôture)</li>
                     <li>Réassignez tous les tickets <code>'ouvert'</code> d'un technicien à un autre</li>
                 </ol>
-
-                <details className="mt-4 p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Voir la correction</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1. Équipements de type routeur
-SELECT * FROM equipements WHERE type = 'routeur';
-
--- 2. Tickets ouverts ou en cours
-SELECT * FROM tickets WHERE statut IN ('ouvert', 'en_cours');
-
--- 3. Équipements installés après le 01/01/2024
-SELECT * FROM equipements WHERE date_installation > '2024-01-01';
-
--- 4. Tickets haute/critique, triés
-SELECT * FROM tickets
-WHERE priorite IN ('haute', 'critique')
-ORDER BY priorite DESC;
-
--- 5. Équipements avec nom du client (jointure)
-SELECT e.type, e.marque, e.modele, c.nom_entreprise
-FROM equipements e
-INNER JOIN clients c ON e.client_id = c.id;
-
--- 6. Tickets avec client et technicien
-SELECT t.titre, c.nom_entreprise, tech.prenom, tech.nom
-FROM tickets t
-INNER JOIN clients c ON t.client_id = c.id
-INNER JOIN techniciens tech ON t.technicien_id = tech.id;
-
--- 7. Tickets encore ouverts avec nom du client
-SELECT t.titre, t.statut, c.nom_entreprise
-FROM tickets t
-INNER JOIN clients c ON t.client_id = c.id
-WHERE t.date_cloture IS NULL;
-
--- 8. Nombre d'équipements par client
-SELECT c.nom_entreprise, COUNT(e.id) AS nb_equipements
-FROM clients c
-INNER JOIN equipements e ON e.client_id = c.id
-GROUP BY c.id;
-
--- 9. Nombre de tickets par technicien
-SELECT tech.nom, tech.prenom, COUNT(t.id) AS nb_tickets
-FROM techniciens tech
-INNER JOIN tickets t ON t.technicien_id = tech.id
-GROUP BY tech.id;
-
--- 10. Nombre de tickets par statut
-SELECT statut, COUNT(*) AS nombre
-FROM tickets
-GROUP BY statut;
-
--- 11. Clôturer un ticket
-UPDATE tickets
-SET statut = 'resolu', date_cloture = CURRENT_DATE
-WHERE id = 3;
-
--- 12. Réassigner les tickets ouverts
-UPDATE tickets
-SET technicien_id = 3
-WHERE technicien_id = 1 AND statut = 'ouvert';`}</code></pre>
-                </details>
             </>
         )
     },
@@ -280,33 +119,7 @@ WHERE technicien_id = 1 AND statut = 'ouvert';`}</code></pre>
                     <li>Affichez les clients qui <strong>n'ont aucun ticket ouvert</strong></li>
                     <li>Affichez pour chaque client : le <strong>nombre d'équipements ET le nombre de tickets</strong></li>
                 </ol>
-                <details className="mt-4 p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Voir la correction</summary>
-                    <pre className="code-block mt-3"><code>{`-- 13. Technicien avec le plus de tickets
-SELECT tech.nom, tech.prenom, COUNT(t.id) AS nb_tickets
-FROM techniciens tech
-INNER JOIN tickets t ON t.technicien_id = tech.id
-GROUP BY tech.id
-ORDER BY nb_tickets DESC
-LIMIT 1;
-
--- 14. Clients sans ticket ouvert
-SELECT c.nom_entreprise
-FROM clients c
-WHERE c.id NOT IN (
-    SELECT client_id FROM tickets WHERE statut = 'ouvert'
-);
-
--- 15. Équipements et tickets par client
-SELECT
-    c.nom_entreprise,
-    COUNT(DISTINCT e.id) AS nb_equipements,
-    COUNT(DISTINCT t.id) AS nb_tickets
-FROM clients c
-LEFT JOIN equipements e ON e.client_id = c.id
-LEFT JOIN tickets t ON t.client_id = c.id
-GROUP BY c.id;`}</code></pre>
-                </details>
+                
             </>
         )
     },
@@ -483,38 +296,7 @@ interventions (🔑 id, date_intervention DATE, description TEXT,
                     <li>Les clés étrangères déclarées avec <code>FOREIGN KEY ... REFERENCES</code></li>
                 </ul>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 1</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1. D'abord les tables sans dépendance
-CREATE TABLE salles (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    numero    VARCHAR(10) NOT NULL,
-    batiment  VARCHAR(50) NOT NULL,
-    nb_postes INTEGER NOT NULL DEFAULT 0
-);
-
-CREATE TABLE ordinateurs (
-    id           INTEGER PRIMARY KEY AUTOINCREMENT,
-    numero_serie VARCHAR(100) NOT NULL,
-    marque       VARCHAR(50),
-    modele       VARCHAR(100),
-    etat         VARCHAR(30) NOT NULL DEFAULT 'fonctionnel',
-    salle_id     INTEGER NOT NULL,
-    FOREIGN KEY (salle_id) REFERENCES salles(id)
-);
-
--- 2. Ensuite les tables qui dépendent des précédentes
-CREATE TABLE interventions (
-    id                INTEGER PRIMARY KEY AUTOINCREMENT,
-    date_intervention DATE NOT NULL DEFAULT CURRENT_DATE,
-    description       TEXT,
-    technicien        VARCHAR(100),
-    ordinateur_id     INTEGER NOT NULL,
-    FOREIGN KEY (ordinateur_id) REFERENCES ordinateurs(id)
-);`}</code></pre>
-                </details>
-            </div>
+            
 
             {/* ======================== PARTIE 2 ======================== */}
             <h3 className="mt-8">Partie 2 — INSERT INTO : insérer des données</h3>
@@ -560,30 +342,7 @@ VALUES ('Dupont', 'Marie', 'marie.dupont@email.com',
                 </ol>
                 <p className="mt-2 text-sm">Utilisez des données cohérentes avec un lycée (marques : Dell, HP, Lenovo ; états : fonctionnel, en panne, en maintenance).</p>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 2</summary>
-                    <pre className="code-block mt-3"><code>{`-- Salles
-INSERT INTO salles (numero, batiment, nb_postes) VALUES
-('101', 'Atelier A', 20),
-('102', 'Atelier A', 18),
-('201', 'Atelier B', 24);
-
--- Ordinateurs
-INSERT INTO ordinateurs (numero_serie, marque, modele, etat, salle_id) VALUES
-('DELL-2024-001', 'Dell', 'OptiPlex 5090', 'fonctionnel', 1),
-('DELL-2024-002', 'Dell', 'OptiPlex 5090', 'en panne', 1),
-('HP-2023-042', 'HP', 'ProDesk 600', 'fonctionnel', 1),
-('HP-2023-043', 'HP', 'ProDesk 600', 'en maintenance', 2),
-('LNVO-2022-007', 'Lenovo', 'ThinkCentre M75q', 'fonctionnel', 3);
-
--- Interventions
-INSERT INTO interventions (description, technicien, ordinateur_id) VALUES
-('Écran noir au démarrage — vérification alimentation', 'Lucas Martin', 2),
-('Remplacement ventilateur processeur', 'Sarah Benali', 4),
-('Mise à jour BIOS et nettoyage', 'Lucas Martin', 1);`}</code></pre>
-                </details>
-            </div>
+            
 
             {/* ======================== PARTIE 3 ======================== */}
             <h3 className="mt-8">Partie 3 — SELECT : lire des données</h3>
@@ -668,27 +427,7 @@ SELECT * FROM clients WHERE email LIKE '%gmail%';`}</code></pre>
                     <li>Afficher les interventions dont la description contient le mot <code>'ventilateur'</code></li>
                 </ol>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 3</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1.
-SELECT * FROM ordinateurs WHERE salle_id = 1;
-
--- 2.
-SELECT * FROM ordinateurs WHERE etat != 'fonctionnel';
-
--- 3.
-SELECT * FROM ordinateurs WHERE marque IN ('Dell', 'HP');
--- ou :
-SELECT * FROM ordinateurs WHERE marque = 'Dell' OR marque = 'HP';
-
--- 4.
-SELECT * FROM salles WHERE nb_postes > 20;
-
--- 5.
-SELECT * FROM interventions WHERE description LIKE '%ventilateur%';`}</code></pre>
-                </details>
-            </div>
+           
 
             {/* 3.3 */}
             <h4 className="mt-6 font-semibold">3.3 — ORDER BY : trier les résultats</h4>
@@ -720,22 +459,7 @@ SELECT * FROM ordinateurs ORDER BY id DESC LIMIT 1;`}</code></pre>
                     <li>Afficher les ordinateurs fonctionnels, triés par salle</li>
                 </ol>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 4</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1.
-SELECT * FROM ordinateurs ORDER BY marque ASC;
-
--- 2.
-SELECT * FROM salles ORDER BY nb_postes DESC;
-
--- 3.
-SELECT * FROM interventions ORDER BY date_intervention DESC LIMIT 2;
-
--- 4.
-SELECT * FROM ordinateurs WHERE etat = 'fonctionnel' ORDER BY salle_id ASC;`}</code></pre>
-                </details>
-            </div>
+           
 
             {/* 3.5 */}
             <h4 className="mt-6 font-semibold">3.5 — Fonctions d'agrégation : COUNT, SUM, AVG, MIN, MAX</h4>
@@ -797,30 +521,7 @@ GROUP BY batiment;`}</code></pre>
                     <li>Compter combien d'interventions a réalisé chaque technicien</li>
                 </ol>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 5</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1.
-SELECT salle_id, COUNT(*) AS nb_ordinateurs
-FROM ordinateurs
-GROUP BY salle_id;
-
--- 2.
-SELECT etat, COUNT(*) AS nombre
-FROM ordinateurs
-GROUP BY etat;
-
--- 3.
-SELECT batiment, AVG(nb_postes) AS moyenne_postes
-FROM salles
-GROUP BY batiment;
-
--- 4.
-SELECT technicien, COUNT(*) AS nb_interventions
-FROM interventions
-GROUP BY technicien;`}</code></pre>
-                </details>
-            </div>
+           
 
             {/* ======================== PARTIE 4 ======================== */}
             <h3 className="mt-8">Partie 4 — UPDATE et DELETE : modifier et supprimer</h3>
@@ -875,24 +576,7 @@ DELETE FROM ordinateurs;`}</code></pre>
                     <li>Modifiez le technicien de l'intervention n°1 (remplacez son nom par le vôtre)</li>
                 </ol>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 6</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1.
-UPDATE ordinateurs SET etat = 'fonctionnel' WHERE id = 4;
-
--- 2.
-UPDATE salles SET nb_postes = 22 WHERE numero = '101';
-
--- 3.
-INSERT INTO ordinateurs (numero_serie, marque, etat, salle_id)
-VALUES ('TEST-999', 'Test', 'fonctionnel', 1);
-DELETE FROM ordinateurs WHERE numero_serie = 'TEST-999';
-
--- 4.
-UPDATE interventions SET technicien = 'VotreNom' WHERE id = 1;`}</code></pre>
-                </details>
-            </div>
+            
 
             {/* ======================== PARTIE 5 ======================== */}
             <h3 className="mt-8">Partie 5 — INNER JOIN : combiner plusieurs tables</h3>
@@ -964,40 +648,7 @@ INNER JOIN salles s ON o.salle_id = s.id;`}</code></pre>
                     <li>Comptez combien d'ordinateurs il y a dans chaque bâtiment (jointure + GROUP BY)</li>
                 </ol>
             </div>
-            <div className="mt-3 not-prose">
-                <details className="p-4 bg-white border rounded-lg shadow-sm">
-                    <summary className="font-semibold cursor-pointer">Correction exercice 7</summary>
-                    <pre className="code-block mt-3"><code>{`-- 1.
-SELECT o.numero_serie, o.marque, o.etat, s.numero, s.batiment
-FROM ordinateurs o
-INNER JOIN salles s ON o.salle_id = s.id;
-
--- 2.
-SELECT o.numero_serie, o.marque, s.numero AS salle, s.batiment
-FROM ordinateurs o
-INNER JOIN salles s ON o.salle_id = s.id
-WHERE o.etat = 'en panne'
-ORDER BY s.batiment ASC;
-
--- 3.
-SELECT i.date_intervention, i.description, i.technicien, o.numero_serie
-FROM interventions i
-INNER JOIN ordinateurs o ON i.ordinateur_id = o.id;
-
--- 4.
-SELECT i.date_intervention, i.description, i.technicien,
-       o.numero_serie, s.numero AS salle
-FROM interventions i
-INNER JOIN ordinateurs o ON i.ordinateur_id = o.id
-INNER JOIN salles s ON o.salle_id = s.id;
-
--- 5.
-SELECT s.batiment, COUNT(o.id) AS nb_ordinateurs
-FROM ordinateurs o
-INNER JOIN salles s ON o.salle_id = s.id
-GROUP BY s.batiment;`}</code></pre>
-                </details>
-            </div>
+            
 
             {/* ======================== RÉCAPITULATIF ======================== */}
             <h3 className="mt-8">Récapitulatif — L'ordre d'une requête SELECT complète</h3>
