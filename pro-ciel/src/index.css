@@ -178,6 +178,19 @@ body {
   box-shadow: 0 3px 12px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
+/* ---------- SIDEBAR LINKS ---------- */
+.sidebar-link {
+  color: var(--text-muted);
+}
+.sidebar-link:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+.sidebar-link-active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
 /* ---------- SECTION TITLE ---------- */
 .section-title {
   font-size: 18px;
