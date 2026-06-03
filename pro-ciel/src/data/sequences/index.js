@@ -1,8 +1,12 @@
-// Sequence index — aggregates all sequences and orders them by level.
-// For now this is a placeholder; Step 4 will populate it with S1 and S4.
-// Each entry: { meta, course, tp } imported from its file.
+import { s1Ordinateur } from './premiere/s1-ordinateur.js';
+import { s2Logiciels } from './premiere/s2-logiciels.js';
+import { s4Html } from './premiere/s4-html.js';
 
-const sequences = [];
+const sequences = [
+  s1Ordinateur,
+  s2Logiciels,
+  s4Html,
+];
 
 export default sequences;
 
