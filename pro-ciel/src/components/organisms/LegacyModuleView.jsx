@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 export default function LegacyModuleView({ module }) {
+  const [activeTab, setActiveTab] = useState('cours');
+
   if (!module) return null;
 
   const tabsConfig = [
@@ -14,7 +16,6 @@ export default function LegacyModuleView({ module }) {
     tabsConfig.push({ id: 'tp2', label: 'TP 2', content: module.content.tp2 });
   }
 
-  const [activeTab, setActiveTab] = useState('cours');
   const activeContent = tabsConfig.find(t => t.id === activeTab)?.content;
 
   return (

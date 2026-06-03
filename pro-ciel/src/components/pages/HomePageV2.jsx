@@ -24,13 +24,13 @@ export default function HomePageV2() {
       </div>
 
       <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
-        {levels.map(({ path, label, icon: Icon, desc }) => (
-          <Link key={path} to={path}
+        {levels.map((level) => (
+          <Link key={level.path} to={level.path}
             className="glass rounded-2xl p-6 no-underline transition-all hover:scale-[1.02]"
             style={{ textDecoration: 'none' }}>
-            <Icon size={32} style={{ color: 'var(--accent)' }} stroke={1.5} />
-            <h2 className="text-lg font-semibold mt-3" style={{ color: 'var(--text)' }}>{label}</h2>
-            <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{desc}</p>
+            <level.icon size={32} style={{ color: 'var(--accent)' }} stroke={1.5} />
+            <h2 className="text-lg font-semibold mt-3" style={{ color: 'var(--text)' }}>{level.label}</h2>
+            <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{level.desc}</p>
           </Link>
         ))}
       </div>

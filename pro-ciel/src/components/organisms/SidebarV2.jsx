@@ -65,15 +65,15 @@ export default function SidebarV2({ isOpen, onClose }) {
             Accueil
           </NavLink>
 
-          {sections.map(({ key, label, icon: Icon, path }) => {
-            const isRessources = key === 'ressources';
-            const seqs = isRessources ? [] : getSequencesByNiveau(key);
-            const isSectionActive = location.pathname.startsWith(path);
+          {sections.map((section) => {
+            const isRessources = section.key === 'ressources';
+            const seqs = isRessources ? [] : getSequencesByNiveau(section.key);
+            const isSectionActive = location.pathname.startsWith(section.path);
 
             return (
-              <div key={key} className="mt-2">
+              <div key={section.key} className="mt-2">
                 <button
-                  onClick={() => toggleSection(key)}
+                  onClick={() => toggleSection(section.key)}
                   className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors"
                   style={{
                     background: isSectionActive ? 'color-mix(in srgb, var(--accent) 12%, transparent)' : 'transparent',
@@ -83,20 +83,20 @@ export default function SidebarV2({ isOpen, onClose }) {
                     textAlign: 'left',
                   }}
                 >
-                  <Icon size={18} stroke={1.5} />
-                  <span className="flex-1">{label}</span>
+                  <section.icon size={18} stroke={1.5} />
+                  <span className="flex-1">{section.label}</span>
                   <IconChevronRight
                     size={14}
                     stroke={2}
                     style={{
                       color: 'var(--text-muted)',
-                      transform: openSection === key ? 'rotate(90deg)' : 'none',
+                      transform: openSection === section.key ? 'rotate(90deg)' : 'none',
                       transition: 'transform 0.2s',
                     }}
                   />
                 </button>
 
-                {openSection === key && (
+                {openSection === section.key && (
                   <div className="ml-4 mt-1 pl-3" style={{ borderLeft: '2px solid var(--border)' }}>
                     {isRessources ? (
                       <>
@@ -140,7 +140,7 @@ export default function SidebarV2({ isOpen, onClose }) {
                       seqs.map((seq) => (
                         <NavLink
                           key={seq.meta.id}
-                          to={`/${key}/${seq.meta.id}/cours`}
+                          to={`/${section.key}/${seq.meta.id}/cours`}
                           onClick={onClose}
                           className={({ isActive }) =>
                             `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors no-underline ${isActive ? 'sidebar-link-active' : 'sidebar-link'}`
@@ -155,7 +155,7 @@ export default function SidebarV2({ isOpen, onClose }) {
                       ))
                     ) : (
                       <Link
-                        to={path}
+                        to={section.path}
                         onClick={onClose}
                         className="block px-3 py-2 text-sm no-underline"
                         style={{ color: 'var(--text-muted)', textDecoration: 'none' }}
