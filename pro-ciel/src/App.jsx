@@ -6,6 +6,8 @@ import SidebarV2 from './components/organisms/SidebarV2';
 import HomePageV2 from './components/pages/HomePageV2';
 import NiveauPage from './components/pages/NiveauPage';
 import SequencePage from './components/pages/SequencePage';
+import RessourcesPage from './components/pages/RessourcesPage';
+import LegacyModulePage from './components/pages/LegacyModulePage';
 import TestBlocksPage from './components/pages/TestBlocksPage';
 
 function AppLayout({ children }) {
@@ -39,6 +41,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePageV2 />} />
         <Route path="/test-blocks" element={<TestBlocksPage />} />
+        <Route path="/ressources" element={<RessourcesPage />} />
+        <Route path="/ressources/:id" element={<LegacyModulePage />} />
         <Route path="/:niveau" element={<NiveauPage />} />
         <Route path="/:niveau/:seqId" element={<SequencePage />} />
         <Route path="/:niveau/:seqId/:tab" element={<SequencePage />} />

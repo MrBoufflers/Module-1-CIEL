@@ -9,6 +9,7 @@ import {
   IconX,
 } from '@tabler/icons-react';
 import { getSequencesByNiveau } from '../../data/sequences/index';
+import legacyModules from '../../data/legacyModules';
 
 const sections = [
   { key: 'premiere', label: 'Première', icon: IconSchool, path: '/premiere' },
@@ -65,7 +66,8 @@ export default function SidebarV2({ isOpen, onClose }) {
           </NavLink>
 
           {sections.map(({ key, label, icon: Icon, path }) => {
-            const seqs = getSequencesByNiveau(key);
+            const isRessources = key === 'ressources';
+            const seqs = isRessources ? [] : getSequencesByNiveau(key);
             const isSectionActive = location.pathname.startsWith(path);
 
             return (
@@ -96,7 +98,45 @@ export default function SidebarV2({ isOpen, onClose }) {
 
                 {openSection === key && (
                   <div className="ml-4 mt-1 pl-3" style={{ borderLeft: '2px solid var(--border)' }}>
-                    {seqs.length > 0 ? (
+                    {isRessources ? (
+                      <>
+                        <NavLink
+                          to="/ressources"
+                          end
+                          onClick={onClose}
+                          className={({ isActive }) =>
+                            `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors no-underline ${isActive ? 'sidebar-link-active' : 'sidebar-link'}`
+                          }
+                          style={{ textDecoration: 'none' }}
+                        >
+                          Tous les modules
+                        </NavLink>
+                        {legacyModules.slice(0, 8).map(mod => (
+                          <NavLink
+                            key={mod.id}
+                            to={`/ressources/${mod.id}`}
+                            onClick={onClose}
+                            className={({ isActive }) =>
+                              `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors no-underline ${isActive ? 'sidebar-link-active' : 'sidebar-link'}`
+                            }
+                            style={{ textDecoration: 'none' }}
+                          >
+                            <span className="flex-shrink-0">{mod.icon}</span>
+                            <span className="truncate">{mod.title}</span>
+                          </NavLink>
+                        ))}
+                        {legacyModules.length > 8 && (
+                          <Link
+                            to="/ressources"
+                            onClick={onClose}
+                            className="block px-3 py-2 text-xs no-underline"
+                            style={{ color: 'var(--text-muted)', textDecoration: 'none' }}
+                          >
+                            + {legacyModules.length - 8} autres…
+                          </Link>
+                        )}
+                      </>
+                    ) : seqs.length > 0 ? (
                       seqs.map((seq) => (
                         <NavLink
                           key={seq.meta.id}
