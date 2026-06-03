@@ -4,6 +4,7 @@ import FooterV2 from './components/organisms/FooterV2';
 import HomePageV2 from './components/pages/HomePageV2';
 import NiveauPage from './components/pages/NiveauPage';
 import SequencePage from './components/pages/SequencePage';
+import TestBlocksPage from './components/pages/TestBlocksPage';
 
 function AppLayout({ children }) {
   return (
@@ -24,6 +25,7 @@ export default function App() {
     <AppLayout>
       <Routes>
         <Route path="/" element={<HomePageV2 />} />
+        <Route path="/test-blocks" element={<TestBlocksPage />} />
         <Route path="/:niveau" element={<NiveauPage />} />
         <Route path="/:niveau/:seqId" element={<SequencePage />} />
         <Route path="/:niveau/:seqId/:tab" element={<SequencePage />} />
