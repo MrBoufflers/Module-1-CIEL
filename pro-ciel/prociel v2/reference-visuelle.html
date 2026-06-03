@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro CIEL V2 — Référence visuelle (à destination de Claude Code)</title>
+<style>
+  /* ============================================================
+     RÉFÉRENCE VISUELLE — NE PAS INTÉGRER TEL QUEL DANS LE SITE.
+     Ce fichier fige l'apparence cible (glassmorphisme, dark+light,
+     couleur fonctionnelle bleu=cours / violet=TP) validée avec
+     l'enseignant. Claude Code doit REPRODUIRE ce rendu dans React
+     + Tailwind, pas copier ce CSS verbatim.
+     Bascule thème (clair/sombre) et mode (cours/TP) en haut.
+     ============================================================ */
+
+  :root {
+    --grad-brand: linear-gradient(120deg, #4f7cff, #9b5cff);
+    --accent-course: #4f7cff;
+    --accent-course-strong: #2c4fc4;
+    --accent-tp: #9b5cff;
+    --accent-tp-strong: #7e3fd6;
+    --code-bg: #0d1117;
+    --code-header-bg: #161b22;
+    --radius: 14px;
+    --status-done: #06d6a0;
+    --status-current: #ffd166;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* ---- DARK (défaut) ---- */
+  body[data-theme="dark"] {
+    --bg: #0a0b14;
+    --text: #eef0fb;
+    --text-muted: #9aa0c0;
+    --surface: rgba(255,255,255,0.05);
+    --surface-2: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.10);
+    --halo-opacity: 0.42;
+    --code-text: #c9d1d9;
+  }
+  /* ---- LIGHT ---- */
+  body[data-theme="light"] {
+    --bg: #eef0f8;
+    --text: #1a1c2e;
+    --text-muted: #5b6080;
+    --surface: rgba(255,255,255,0.85);
+    --surface-2: rgba(255,255,255,0.7);
+    --border: rgba(0,0,0,0.08);
+    --halo-opacity: 0.28;
+    --code-text: #c9d1d9; /* le code reste sombre dans les deux thèmes */
+  }
+
+  /* Accent fonctionnel : bleu en mode cours, violet en mode TP */
+  body[data-mode="course"] { --accent: var(--accent-course); --accent-strong: var(--accent-course-strong); }
+  body[data-mode="tp"]     { --accent: var(--accent-tp);     --accent-strong: var(--accent-tp-strong); }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    transition: background .4s, color .4s;
+    padding: 24px; line-height: 1.6;
+  }
+
+  /* Police dyslexie : ajoutée via data-dys="on" (OpenDyslexic dans le vrai site) */
+  body[data-dys="on"] { letter-spacing: .03em; word-spacing: .12em; }
+  body[data-dys="on"] .stage, body[data-dys="on"] p { line-height: 1.9; }
+
+  .controls {
+    max-width: 860px; margin: 0 auto 20px; display: flex; gap: 18px;
+    flex-wrap: wrap; align-items: center; font-size: 14px;
+  }
+  .controls .group { display: flex; gap: 6px; align-items: center; }
+  .controls button {
+    border: 1px solid var(--border); background: var(--surface);
+    color: var(--text); padding: 6px 12px; border-radius: 8px; cursor: pointer;
+    font-size: 13px;
+  }
+  .controls button.active { background: var(--grad-brand); color: #fff; border-color: transparent; }
+  .controls .label { color: var(--text-muted); }
+
+  .stage {
+    max-width: 860px; margin: 0 auto; position: relative;
+    border-radius: 20px; overflow: hidden;
+    background: var(--bg); border: 1px solid var(--border);
+  }
+  .halo { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; transition: all .5s; }
+  .halo.one { width: 340px; height: 340px; top: -120px; left: -80px; background: var(--accent-course); opacity: var(--halo-opacity); }
+  .halo.two { width: 300px; height: 300px; bottom: -110px; right: -60px; background: var(--accent-tp); opacity: var(--halo-opacity); }
+  body[data-mode="tp"] .halo.one { background: var(--accent-tp); }
+  body[data-mode="tp"] .halo.two { background: #6a6cff; }
+
+  .inner { position: relative; padding: 20px 24px; }
+
+  .topbar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .logo {
+    width: 40px; height: 40px; border-radius: 12px; background: var(--grad-brand);
+    display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700;
+    box-shadow: 0 4px 18px rgba(106,108,255,.45); flex-shrink: 0;
+  }
+  .brand { font-size: 17px; font-weight: 600;
+    background: var(--grad-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .brand-sub { font-size: 12px; color: var(--text-muted); }
+  .chip {
+    margin-left: auto; font-size: 12px; font-weight: 600; padding: 6px 13px;
+    border-radius: 9px; color: var(--accent); background: color-mix(in srgb, var(--accent) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .badge {
+    display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 8px;
+    color: var(--accent); background: color-mix(in srgb, var(--accent) 15%, transparent); margin-bottom: 8px;
+  }
+  h1.title { font-size: 23px; font-weight: 600; margin: 4px 0; }
+  .filrouge { font-size: 14px; color: var(--text-muted); font-style: italic; }
+
+  .tabs {
+    display: inline-flex; gap: 4px; margin: 18px 0 22px; padding: 4px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .tabs .tab { font-size: 14px; color: var(--text-muted); padding: 7px 17px; border-radius: 8px; cursor: pointer; }
+  .tabs .tab.active { color: #fff; background: var(--grad-brand); box-shadow: 0 3px 12px color-mix(in srgb, var(--accent) 40%, transparent); }
+
+  h2.section { font-size: 18px; font-weight: 600; border-left: 3px solid var(--accent); padding-left: 12px; margin: 0 0 12px; }
+  p.prose { font-size: 16px; margin: 0 0 16px; }
+
+  /* Encadrés info */
+  .info { border-radius: var(--radius); padding: 13px 16px; margin: 0 0 16px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .info .info-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .info.analogie { background: color-mix(in srgb, var(--accent-tp) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent-tp) 35%, transparent); }
+  .info.analogie .info-title { color: var(--accent-tp); }
+  .info.astuce { background: color-mix(in srgb, var(--accent-course) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent-course) 35%, transparent); }
+  .info.astuce .info-title { color: var(--accent-course); }
+  .info.attention { background: rgba(255,140,60,.12); border: 1px solid rgba(255,140,60,.4); }
+  .info.attention .info-title { color: #e08a3c; }
+
+  /* Bloc de code (toujours sombre) */
+  .code { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 0 0 16px; }
+  .code .code-head { background: var(--code-header-bg); padding: 7px 14px; font-size: 12px; color: #8b949e;
+    border-bottom: 1px solid rgba(255,255,255,.06); font-family: ui-monospace, monospace; }
+  .code pre { margin: 0; padding: 12px 16px; font-family: ui-monospace, monospace; font-size: 13px;
+    line-height: 1.6; overflow-x: auto; color: var(--code-text); }
+  .dot { display: inline-block; }
+  .t-tag { color: #7ee787; } .t-attr { color: #79c0ff; } .t-val { color: #a5d6ff; } .t-com { color: #8b949e; }
+
+  /* Cartes */
+  .cards { display: grid; gap: 10px; }
+  .cards.c2 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .card code { color: var(--accent); font-family: ui-monospace, monospace; font-size: 13px; }
+  .card p { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Étapes TP */
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin: 0 0 12px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .step.current { border: 1.5px solid color-mix(in srgb, var(--accent-tp) 60%, transparent);
+    box-shadow: 0 6px 24px color-mix(in srgb, var(--accent-tp) 25%, transparent);
+    background: color-mix(in srgb, var(--accent-tp) 10%, transparent); }
+  .step.locked { opacity: .55; }
+  .step-head { display: flex; align-items: center; gap: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--grad-brand); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .step-num.locked { background: var(--surface-2); color: var(--text-muted); }
+  .step-title { font-size: 15px; font-weight: 600; }
+  .status { margin-left: auto; font-size: 12px; padding: 3px 10px; border-radius: 8px; }
+  .status.done { color: var(--status-done); background: color-mix(in srgb, var(--status-done) 15%, transparent); border: 1px solid color-mix(in srgb, var(--status-done) 40%, transparent); }
+  .status.current { color: #a06a00; background: color-mix(in srgb, var(--status-current) 18%, transparent); border: 1px solid color-mix(in srgb, var(--status-current) 45%, transparent); }
+  body[data-theme="dark"] .status.current { color: var(--status-current); }
+  .validate { background: color-mix(in srgb, var(--accent-tp) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent-tp) 35%, transparent);
+    border-radius: 9px; padding: 10px 12px; margin-top: 10px; }
+  .validate .v-title { font-size: 12px; font-weight: 600; color: var(--accent-tp); margin-bottom: 6px; }
+  .validate code { display: block; background: var(--code-bg); color: #7ee787; font-family: ui-monospace, monospace;
+    font-size: 12px; padding: 8px 10px; border-radius: 6px; margin-bottom: 8px; }
+  .validate button { background: var(--grad-brand); color: #fff; border: none; border-radius: 8px; padding: 7px 14px; font-size: 13px; cursor: pointer; }
+  .hidden { display: none; }
+</style>
+</head>
+<body data-theme="dark" data-mode="course" data-dys="off">
+
+  <div class="controls">
+    <div class="group">
+      <span class="label">Thème :</span>
+      <button id="t-dark" class="active" onclick="setTheme('dark')">Sombre</button>
+      <button id="t-light" onclick="setTheme('light')">Clair</button>
+    </div>
+    <div class="group">
+      <span class="label">Mode :</span>
+      <button id="m-course" class="active" onclick="setMode('course')">Cours</button>
+      <button id="m-tp" onclick="setMode('tp')">TP</button>
+    </div>
+    <div class="group">
+      <span class="label">Accessibilité :</span>
+      <button id="dys" onclick="toggleDys()">Police dyslexie</button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="halo one"></div>
+    <div class="halo two"></div>
+    <div class="inner">
+
+      <div class="topbar">
+        <div class="logo">PC</div>
+        <div>
+          <div class="brand">Pro CIEL</div>
+          <div class="brand-sub">Première · Séquence 4</div>
+        </div>
+        <span class="chip" id="chip">Cours</span>
+      </div>
+
+      <span class="badge" id="badge">S4 · HTML</span>
+      <h1 class="title">HTML : le squelette du web</h1>
+      <p class="filrouge">Tu sais versionner avec Git (S3). Ici, tu produis tes premières pages.</p>
+
+      <div class="tabs">
+        <span class="tab active" id="tab-course" onclick="setMode('course')">Cours</span>
+        <span class="tab" id="tab-tp" onclick="setMode('tp')">TP</span>
+      </div>
+
+      <!-- ===== CONTENU COURS ===== -->
+      <div id="content-course">
+        <h2 class="section">Partie 1 — Qu'est-ce que le HTML ?</h2>
+        <p class="prose">Le HTML n'est pas un langage de programmation, mais un langage de balisage. Son but : décrire et structurer le contenu d'une page.</p>
+
+        <div class="info analogie">
+          <div class="info-title">Analogie</div>
+          <div>Le HTML est le plan de l'architecte : il définit les pièces, pas la couleur des murs.</div>
+        </div>
+
+        <div class="code">
+          <div class="code-head"><span style="color:#ff6b6b">&#9679;</span> <span style="color:#ffd166">&#9679;</span> <span style="color:#06d6a0">&#9679;</span> &nbsp;index.html</div>
+          <pre><span class="t-com">&lt;!DOCTYPE html&gt;</span>
+<span class="t-tag">&lt;html</span> <span class="t-attr">lang</span>=<span class="t-val">"fr"</span><span class="t-tag">&gt;</span>
+  <span class="t-tag">&lt;title&gt;</span>Ma page<span class="t-tag">&lt;/title&gt;</span>
+<span class="t-tag">&lt;/html&gt;</span></pre>
+        </div>
+
+        <h2 class="section">Partie 2 — Les balises de contenu</h2>
+        <div class="cards c2">
+          <div class="card"><code>&lt;h1&gt;…&lt;h6&gt;</code><p>Les titres, du plus au moins important.</p></div>
+          <div class="card"><code>&lt;p&gt;</code><p>Un paragraphe de texte.</p></div>
+          <div class="card"><code>&lt;a href&gt;</code><p>Un lien hypertexte.</p></div>
+          <div class="card"><code>&lt;img src alt&gt;</code><p>Une image, avec texte alternatif.</p></div>
+        </div>
+      </div>
+
+      <!-- ===== CONTENU TP ===== -->
+      <div id="content-tp" class="hidden">
+        <h2 class="section">Mission — Le site de ton chef-d'œuvre</h2>
+        <p class="prose">Construis un mini-site multi-pages en HTML, versionné sur GitHub. Tu valides chaque étape avant de passer à la suivante.</p>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Initialisation & page d'accueil</div>
+            <span class="status done">validé</span>
+          </div>
+        </div>
+
+        <div class="step current">
+          <div class="step-head">
+            <div class="step-num">2</div>
+            <div class="step-title">Page « Détails » & navigation</div>
+            <span class="status current">en cours</span>
+          </div>
+          <p style="font-size:14px; color:var(--text-muted); margin:8px 0 0;">Crée <code>details.html</code> et relie les pages avec un menu identique partout.</p>
+          <div class="validate">
+            <div class="v-title">Pour valider cette étape</div>
+            <code>git commit -m "feat: navigation" && git push</code>
+            <button>Prévenir le professeur</button>
+          </div>
+        </div>
+
+        <div class="step locked">
+          <div class="step-head">
+            <div class="step-num locked">3</div>
+            <div class="step-title" style="color:var(--text-muted)">Page « Contact » & déploiement</div>
+            <span class="status" style="color:var(--text-muted)">verrouillé</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  function setTheme(t){
+    document.body.dataset.theme = t;
+    document.getElementById('t-dark').classList.toggle('active', t==='dark');
+    document.getElementById('t-light').classList.toggle('active', t==='light');
+  }
+  function setMode(m){
+    document.body.dataset.mode = m;
+    const isC = m==='course';
+    document.getElementById('content-course').classList.toggle('hidden', !isC);
+    document.getElementById('content-tp').classList.toggle('hidden', isC);
+    document.getElementById('m-course').classList.toggle('active', isC);
+    document.getElementById('m-tp').classList.toggle('active', !isC);
+    document.getElementById('tab-course').classList.toggle('active', isC);
+    document.getElementById('tab-tp').classList.toggle('active', !isC);
+    document.getElementById('chip').textContent = isC ? 'Cours' : 'TP';
+  }
+  function toggleDys(){
+    const on = document.body.dataset.dys === 'on';
+    document.body.dataset.dys = on ? 'off' : 'on';
+    document.getElementById('dys').classList.toggle('active', !on);
+  }
+</script>
+</body>
+</html>
