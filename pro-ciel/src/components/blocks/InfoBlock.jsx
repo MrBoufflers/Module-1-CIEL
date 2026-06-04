@@ -1,20 +1,20 @@
 import { renderInline } from '../../lib/inlineMarkdown';
 
-const variantLabels = {
-  analogie: 'Analogie',
+const INFO_LABEL = {
   astuce: 'Astuce',
+  analogie: 'Analogie',
   attention: 'Attention',
   definition: 'Définition',
 };
 
 export default function InfoBlock({ variant = 'definition', title, content }) {
-  const label = title || variantLabels[variant] || variant;
   return (
-    <div className={`info-box ${variant} mb-4`}>
-      <div className="info-title">{label}</div>
-      <div style={{ fontSize: 14, color: 'var(--text)' }}>
-        {renderInline(content)}
+    <div className={`info-box ${variant}`}>
+      <div className="info-title">
+        <span className="mark" />
+        {title || INFO_LABEL[variant] || variant}
       </div>
+      <div className="info-content">{renderInline(content)}</div>
     </div>
   );
 }

@@ -1,38 +1,40 @@
 import { Link } from 'react-router-dom';
-import { IconSchool, IconCode, IconDeviceDesktop } from '@tabler/icons-react';
+import { getSequencesByNiveau } from '../../data/sequences/index';
+
+const levels = [
+  { id: 'premiere', num: 'Niveau 2', title: 'Première', desc: 'Du matériel au logiciel, puis du versioning au développement web.', path: '/premiere' },
+  { id: 'terminale', num: 'Niveau 3', title: 'Terminale', desc: 'Déploiement, cybersécurité appliquée et projet chef-d’œuvre.', path: '/terminale', soon: true },
+  { id: 'ressources', num: 'Ressources', title: 'Ressources', desc: 'Cours bonus et ressources complémentaires.', path: '/ressources' },
+];
 
 export default function HomePageV2() {
-  const levels = [
-    { path: '/premiere', label: 'Première', icon: IconSchool, desc: 'Séquences de Première CIEL' },
-    { path: '/terminale', label: 'Terminale', icon: IconCode, desc: 'Séquences de Terminale CIEL' },
-    { path: '/ressources', label: 'Ressources', icon: IconDeviceDesktop, desc: 'Cours bonus et ressources' },
-  ];
-
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6">
-      <div className="text-center mb-16">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
-          style={{ background: 'var(--grad-brand)', boxShadow: '0 4px 24px rgba(106,108,255,.45)' }}>
-          <span className="text-white text-2xl font-bold">PC</span>
-        </div>
-        <h1 className="text-4xl font-bold mb-3">
-          <span className="text-gradient">Pro CIEL</span>
-        </h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-          Bac Pro Cybersécurité, Informatique, Électronique — partie informatique
-        </p>
-      </div>
-
-      <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
-        {levels.map((level) => (
-          <Link key={level.path} to={level.path}
-            className="glass rounded-2xl p-6 no-underline transition-all hover:scale-[1.02]"
-            style={{ textDecoration: 'none' }}>
-            <level.icon size={32} style={{ color: 'var(--accent)' }} stroke={1.5} />
-            <h2 className="text-lg font-semibold mt-3" style={{ color: 'var(--text)' }}>{level.label}</h2>
-            <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>{level.desc}</p>
-          </Link>
-        ))}
+    <div className="home reveal">
+      <div className="home-logo">PC</div>
+      <h1>Apprendre le numérique,<br /><span className="grad">étape par étape.</span></h1>
+      <p className="sub">Le parcours CIEL en fil rouge : du matériel au déploiement web, une séquence à la fois.</p>
+      <div className="levels">
+        {levels.map((level) => {
+          const seqs = level.id !== 'ressources' ? getSequencesByNiveau(level.id) : [];
+          const count = level.id === 'ressources' ? 'Voir tout' : `${seqs.length} séquence${seqs.length > 1 ? 's' : ''}`;
+          return (
+            <Link
+              key={level.id}
+              to={level.path}
+              className={`level-card${level.soon ? ' soon' : ' active'}`}
+            >
+              <div className="lc-num">{level.num}</div>
+              <div className="lc-title">{level.title}</div>
+              <div className="lc-desc">{level.desc}</div>
+              <div className="lc-foot">
+                <span className="lc-count">{level.soon ? 'Bientôt disponible' : count}</span>
+                {!level.soon && (
+                  <span className="lc-arrow"><span className="arrow-r" /></span>
+                )}
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

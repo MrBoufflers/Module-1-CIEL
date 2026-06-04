@@ -16,20 +16,18 @@ function AppLayout({ children }) {
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-x-hidden">
-      <div className="halo halo-blue" style={{ position: 'fixed', top: -120, left: -80 }} />
-      <div className="halo halo-violet" style={{ position: 'fixed', bottom: -110, right: -60 }} />
-
+    <div className="app">
       <HeaderV2 onMenuToggle={toggleSidebar} />
-
-      <div className="flex flex-1 relative z-10">
+      <div className="shell">
         <SidebarV2 isOpen={sidebarOpen} onClose={closeSidebar} />
-        <div className="flex-1 flex flex-col min-w-0">
-          <main className="flex-grow">
+        <main className="main">
+          <div className="halo one" />
+          <div className="halo two" />
+          <div className="page">
             {children}
-          </main>
+          </div>
           <FooterV2 />
-        </div>
+        </main>
       </div>
     </div>
   );

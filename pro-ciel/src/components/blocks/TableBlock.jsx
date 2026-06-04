@@ -1,10 +1,11 @@
 import { renderInline } from '../../lib/inlineMarkdown';
 
 export default function TableBlock({ headers, rows }) {
+  const hasHead = headers && headers.some(h => h !== '');
   return (
-    <div className="mb-4 overflow-x-auto">
+    <div className="table-wrap">
       <table className="table-v2">
-        {headers && (
+        {hasHead && (
           <thead>
             <tr>
               {headers.map((h, i) => <th key={i}>{renderInline(h)}</th>)}
@@ -15,7 +16,7 @@ export default function TableBlock({ headers, rows }) {
           {rows?.map((row, ri) => (
             <tr key={ri}>
               {row.map((cell, ci) => (
-                <td key={ci} style={{ color: 'var(--text)' }}>{renderInline(cell)}</td>
+                <td key={ci}>{renderInline(cell)}</td>
               ))}
             </tr>
           ))}

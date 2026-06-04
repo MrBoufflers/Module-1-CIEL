@@ -12,7 +12,9 @@ export default function SequencePage() {
   const seq = getSequence(niveau, seqId);
 
   useEffect(() => {
-    setMode(tab === 'tp' ? 'tp' : 'course');
+    if (tab === 'tp') setMode('tp');
+    else if (tab === 'eval') setMode('eval');
+    else setMode('course');
     return () => setMode('course');
   }, [tab, setMode]);
 
@@ -22,12 +24,14 @@ export default function SequencePage() {
 
   if (!seq) {
     return (
-      <div className="max-w-4xl mx-auto py-10 px-6">
-        <div className="glass rounded-2xl p-8 text-center" style={{ color: 'var(--text-muted)' }}>
-          <p className="text-lg mb-2">Séquence introuvable</p>
-          <p className="text-sm">La séquence « {seqId} » n'existe pas dans le niveau « {niveau} ».</p>
+      <div className="seq-wrap">
+        <div className="info-box definition" style={{ textAlign: 'center' }}>
+          <div className="info-content">
+            <p style={{ fontSize: 18, marginBottom: 8 }}>Séquence introuvable</p>
+            <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>La séquence « {seqId} » n'existe pas dans le niveau « {niveau} ».</p>
+          </div>
         </div>
-        <Link to={`/${niveau}`} className="inline-block mt-6 text-sm no-underline" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+        <Link to={`/${niveau}`} style={{ display: 'inline-block', marginTop: 24, fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>
           ← Retour à la liste
         </Link>
       </div>
@@ -40,41 +44,45 @@ export default function SequencePage() {
   const tabs = [
     { key: 'cours', label: 'Cours' },
     { key: 'tp', label: 'TP' },
-    ...(hasEval ? [{ key: 'eval', label: 'Éval' }] : []),
+    ...(hasEval ? [{ key: 'eval', label: 'Évaluation' }] : []),
   ];
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-6">
-      <div className="mb-2">
-        <span className="badge">{meta.sequence} · {meta.theme}</span>
-      </div>
-      <h1 className="text-2xl font-semibold mb-1" style={{ color: 'var(--text)' }}>
-        {meta.title}
-      </h1>
-      {meta.filRouge && (
-        <p className="italic text-sm mb-1" style={{ color: 'var(--text-muted)' }}>
-          {meta.filRouge}
-        </p>
-      )}
-      <div className="flex flex-wrap gap-3 mt-2 mb-6 text-xs" style={{ color: 'var(--text-muted)' }}>
-        {meta.duree && <span>Durée : {meta.duree}</span>}
-        {meta.ref?.competences && <span>Compétences : {meta.ref.competences.join(', ')}</span>}
-        {meta.ref?.savoirs && <span>Savoirs : {meta.ref.savoirs.join(', ')}</span>}
-      </div>
+    <div className="seq-wrap">
+      <header className="seq-header reveal">
+        <span className="badge"><span className="dot" />{meta.sequence} · {meta.theme}</span>
+        <h1 className="seq-title">{meta.title}</h1>
+        {meta.filRouge && <p className="seq-filrouge">{meta.filRouge}</p>}
+        <div className="seq-meta-row">
+          {meta.duree && (
+            <span className="meta-pill"><span className="k">Durée</span><b>{meta.duree}</b></span>
+          )}
+          {meta.niveau && (
+            <span className="meta-pill"><span className="k">Niveau</span><b>{meta.niveau === 'premiere' ? 'Première' : 'Terminale'}</b></span>
+          )}
+          {meta.ref?.competences && (
+            <span className="meta-pill"><span className="k">Compétences</span><b>{meta.ref.competences.join(', ')}</b></span>
+          )}
+          {meta.ref?.savoirs && (
+            <span className="meta-pill"><span className="k">Savoirs</span><b>{meta.ref.savoirs.join(', ')}</b></span>
+          )}
+        </div>
+      </header>
 
-      <div className="tabs-segmented mb-8">
+      <div className="tabs" role="tablist">
         {tabs.map(({ key, label }) => (
           <NavLink
             key={key}
             to={`/${niveau}/${seqId}/${key}`}
-            className={({ isActive }) => `tab-item ${isActive ? 'active' : ''}`}
+            className={({ isActive }) => `tab${isActive ? ' active' : ''}`}
+            role="tab"
           >
             {label}
           </NavLink>
         ))}
       </div>
 
-      <div>
+      <div key={tab}>
         {tab === 'cours' && seq.course && (
           <BlockRenderer blocks={seq.course} />
         )}
@@ -82,7 +90,7 @@ export default function SequencePage() {
           <TpStepper tp={seq.tp} />
         )}
         {tab === 'eval' && hasEval && (
-          <EvalInfo evalInfo={meta.evalInfo} />
+          <EvalInfo evalInfo={meta.evalInfo} meta={meta} />
         )}
       </div>
     </div>
