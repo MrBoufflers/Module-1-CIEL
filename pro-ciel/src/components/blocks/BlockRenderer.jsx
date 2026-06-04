@@ -26,7 +26,7 @@ export default function BlockRenderer({ blocks }) {
   if (!blocks || !Array.isArray(blocks)) return null;
 
   return (
-    <div className="blocks">
+    <div className="space-y-6">
       {blocks.map((block, i) => {
         if (!block || !block.type) return null;
         const Component = BLOCK_MAP[block.type];

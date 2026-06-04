@@ -8,7 +8,7 @@ export default function ComponentBlock({ name }) {
     return null;
   }
   return (
-    <div className="mb-4">
+    <div>
       <Suspense fallback={
         <div className="glass rounded-xl p-6 text-center" style={{ color: 'var(--text-muted)' }}>
           Chargement…
