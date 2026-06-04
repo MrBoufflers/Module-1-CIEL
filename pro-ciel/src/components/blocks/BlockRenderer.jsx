@@ -26,7 +26,7 @@ export default function BlockRenderer({ blocks }) {
   if (!blocks || !Array.isArray(blocks)) return null;
 
   return (
-    <div className="flex flex-col">
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {blocks.map((block, i) => {
         if (!block || !block.type) return null;
         const Component = BLOCK_MAP[block.type];
@@ -35,10 +35,9 @@ export default function BlockRenderer({ blocks }) {
           return null;
         }
         const isSection = block.type === 'section';
-        const isFirst = i === 0;
-        const spacing = isFirst ? '' : isSection ? 'mt-14' : 'mt-6';
+        const marginTop = i === 0 ? 0 : isSection ? 56 : 24;
         return (
-          <div key={i} className={spacing}>
+          <div key={i} style={{ marginTop }}>
             <Component {...block} />
           </div>
         );
