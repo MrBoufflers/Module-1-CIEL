@@ -13,7 +13,7 @@ export default function SemanticLayoutDiagram() {
         <div className="p-4 rounded mb-2" style={{ background: 'color-mix(in srgb, var(--status-done) 12%, transparent)', border: '1px solid color-mix(in srgb, var(--status-done) 35%, transparent)' }}>
           <p className="font-bold" style={{ color: 'var(--status-done)' }}>&lt;section&gt;</p>
           <div className="p-4 rounded mt-2" style={{ background: 'color-mix(in srgb, var(--status-current) 12%, transparent)', border: '1px solid color-mix(in srgb, var(--status-current) 35%, transparent)' }}>
-            <p className="font-bold" style={{ color: '#a06a00' }}>&lt;article&gt;</p>
+            <p className="font-bold" style={{ color: 'var(--status-current)' }}>&lt;article&gt;</p>
           </div>
         </div>
         <div className="p-4 rounded" style={{ background: 'color-mix(in srgb, var(--status-done) 12%, transparent)', border: '1px solid color-mix(in srgb, var(--status-done) 35%, transparent)' }}>
