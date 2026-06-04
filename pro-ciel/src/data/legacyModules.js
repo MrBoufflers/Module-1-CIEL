@@ -1,5 +1,7 @@
 import { courseData } from './CourseData.jsx';
 
+const VISIBLE_IDS = ['moduleOrientation'];
+
 const allLegacy = [];
 
 const levelLabels = {
@@ -10,6 +12,7 @@ const levelLabels = {
 
 for (const [levelKey, modules] of Object.entries(courseData)) {
   for (const mod of modules) {
+    if (!VISIBLE_IDS.includes(mod.id)) continue;
     allLegacy.push({ ...mod, level: levelKey, levelLabel: levelLabels[levelKey] || levelKey });
   }
 }

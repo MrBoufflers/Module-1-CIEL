@@ -40,17 +40,18 @@ export default function SequencePage() {
 
   const { meta } = seq;
   const hasEval = !!meta.evalInfo;
+  const hasTp = !!seq.tp;
 
   const tabs = [
     { key: 'cours', label: 'Cours' },
-    { key: 'tp', label: 'TP' },
+    ...(hasTp ? [{ key: 'tp', label: 'TP' }] : []),
     ...(hasEval ? [{ key: 'eval', label: 'Évaluation' }] : []),
   ];
 
   return (
     <div className="seq-wrap">
       <header className="seq-header reveal">
-        <span className="badge"><span className="dot" />{meta.sequence} · {meta.theme}</span>
+        <span className="badge"><span className="dot" />{meta.sequence ? `${meta.sequence} · ` : ''}{meta.theme}</span>
         <h1 className="seq-title">{meta.title}</h1>
         {meta.filRouge && <p className="seq-filrouge">{meta.filRouge}</p>}
         <div className="seq-meta-row">
@@ -58,7 +59,7 @@ export default function SequencePage() {
             <span className="meta-pill"><span className="k">Durée</span><b>{meta.duree}</b></span>
           )}
           {meta.niveau && (
-            <span className="meta-pill"><span className="k">Niveau</span><b>{meta.niveau === 'premiere' ? 'Première' : 'Terminale'}</b></span>
+            <span className="meta-pill"><span className="k">Niveau</span><b>{{ premiere: 'Première', terminale: 'Terminale', ressources: 'Ressources' }[meta.niveau] || meta.niveau}</b></span>
           )}
           {meta.ref?.competences && (
             <span className="meta-pill"><span className="k">Compétences</span><b>{meta.ref.competences.join(', ')}</b></span>

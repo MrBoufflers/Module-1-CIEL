@@ -1,9 +1,16 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { getLegacyModule } from '../../data/legacyModules';
+import { getSequence } from '../../data/sequences/index';
 import LegacyModuleView from '../organisms/LegacyModuleView';
 
 export default function LegacyModulePage() {
   const { id } = useParams();
+
+  const seq = getSequence('ressources', id);
+  if (seq) {
+    return <Navigate to={`/ressources/${id}/cours`} replace />;
+  }
+
   const module = getLegacyModule(id);
 
   if (!module) {

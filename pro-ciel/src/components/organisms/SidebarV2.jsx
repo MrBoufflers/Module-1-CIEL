@@ -10,6 +10,7 @@ const sidebarSections = [
 
 export default function SidebarV2({ isOpen, onClose }) {
   const location = useLocation();
+  const resourceSeqs = getSequencesByNiveau('ressources');
 
   return (
     <>
@@ -79,21 +80,31 @@ export default function SidebarV2({ isOpen, onClose }) {
           })}
 
           <div className="side-group">
-            <div className="side-label"><span>Ressources</span></div>
+            <div className="side-label">
+              <span>Ressources</span>
+              {(resourceSeqs.length + legacyModules.length) > 0 && (
+                <span className="count">{resourceSeqs.length + legacyModules.length}</span>
+              )}
+            </div>
             <div className="side-links">
-              <NavLink
-                to="/ressources"
-                end
-                onClick={onClose}
-                className={({ isActive }) => `side-link${isActive ? ' active' : ''}`}
-              >
-                <span className="seq-badge" style={{ fontSize: 11 }}>R</span>
-                <span className="seq-meta-side">
-                  <span className="t">Tous les modules</span>
-                  <span className="s">Cours bonus</span>
-                </span>
-              </NavLink>
-              {legacyModules.slice(0, 6).map(mod => (
+              {resourceSeqs.map((seq) => {
+                const isActive = location.pathname.includes(`/ressources/${seq.meta.id}`);
+                return (
+                  <NavLink
+                    key={seq.meta.id}
+                    to={`/ressources/${seq.meta.id}/cours`}
+                    onClick={onClose}
+                    className={`side-link${isActive ? ' active' : ''}`}
+                  >
+                    <span className="seq-badge" style={{ fontSize: 11 }}>R</span>
+                    <span className="seq-meta-side">
+                      <span className="t">{seq.meta.title}</span>
+                      <span className="s">{seq.meta.theme}</span>
+                    </span>
+                  </NavLink>
+                );
+              })}
+              {legacyModules.map(mod => (
                 <NavLink
                   key={mod.id}
                   to={`/ressources/${mod.id}`}
@@ -106,16 +117,6 @@ export default function SidebarV2({ isOpen, onClose }) {
                   </span>
                 </NavLink>
               ))}
-              {legacyModules.length > 6 && (
-                <Link
-                  to="/ressources"
-                  onClick={onClose}
-                  className="side-link"
-                  style={{ color: 'var(--text-faint)', fontSize: 12 }}
-                >
-                  + {legacyModules.length - 6} autres...
-                </Link>
-              )}
             </div>
           </div>
         </nav>
