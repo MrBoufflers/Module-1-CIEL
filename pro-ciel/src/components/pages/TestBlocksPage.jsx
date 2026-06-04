@@ -152,7 +152,7 @@ const testBlocks = [
 
 export default function TestBlocksPage() {
   return (
-    <div className="max-w-4xl mx-auto py-10 px-6">
+    <div className="seq-wrap">
       <BlockRenderer blocks={testBlocks} />
     </div>
   );

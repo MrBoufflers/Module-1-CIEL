@@ -8,12 +8,14 @@ export default function LegacyModulePage() {
 
   if (!module) {
     return (
-      <div className="max-w-4xl mx-auto py-10 px-6">
-        <div className="glass rounded-2xl p-8 text-center" style={{ color: 'var(--text-muted)' }}>
-          <p className="text-lg mb-2">Module introuvable</p>
-          <p className="text-sm">Le module « {id} » n'existe pas dans les ressources.</p>
+      <div className="seq-wrap">
+        <div className="info-box definition" style={{ textAlign: 'center' }}>
+          <div className="info-content">
+            <p style={{ fontSize: 18, marginBottom: 8 }}>Module introuvable</p>
+            <p style={{ fontSize: 14, color: 'var(--text-muted)' }}>Le module « {id} » n'existe pas dans les ressources.</p>
+          </div>
         </div>
-        <Link to="/ressources" className="inline-block mt-6 text-sm no-underline" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+        <Link to="/ressources" style={{ display: 'inline-block', marginTop: 24, fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>
           ← Retour aux ressources
         </Link>
       </div>
@@ -21,8 +23,8 @@ export default function LegacyModulePage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-6">
-      <Link to="/ressources" className="inline-block mb-4 text-sm no-underline" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+    <div className="seq-wrap">
+      <Link to="/ressources" style={{ display: 'inline-block', marginBottom: 20, fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>
         ← Ressources
       </Link>
       <LegacyModuleView module={module} />

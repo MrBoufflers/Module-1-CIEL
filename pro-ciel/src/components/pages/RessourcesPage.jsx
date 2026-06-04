@@ -11,9 +11,11 @@ export default function RessourcesPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-6">
-      <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--text)' }}>Ressources</h1>
-      <p style={{ color: 'var(--text-muted)' }} className="mb-8">
+    <div className="seq-wrap">
+      <h1 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: 10 }}>
+        Ressources
+      </h1>
+      <p style={{ color: 'var(--text-muted)', marginBottom: 40, fontSize: 16 }}>
         Cours, TP et exercices des modules précédents (format V1).
       </p>
 
@@ -22,28 +24,25 @@ export default function RessourcesPage() {
         if (!mods || mods.length === 0) return null;
 
         return (
-          <div key={levelKey} className="mb-8">
-            <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text)' }}>
-              {mods[0].levelLabel}
-            </h2>
-            <div className="space-y-2">
+          <div key={levelKey} style={{ marginBottom: 32 }}>
+            <div className="side-label" style={{ paddingLeft: 0, marginBottom: 14, fontSize: 12 }}>
+              <span>{mods[0].levelLabel}</span>
+              <span className="count">{mods.length}</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {mods.map(mod => (
                 <Link
                   key={mod.id}
                   to={`/ressources/${mod.id}`}
-                  className="glass rounded-xl p-4 flex items-center gap-3 no-underline transition-all hover:scale-[1.01]"
-                  style={{ textDecoration: 'none' }}
+                  className="side-link"
+                  style={{ padding: '14px 16px', borderRadius: 'var(--radius)', textDecoration: 'none', border: '1px solid var(--border)' }}
                 >
-                  <span className="text-xl flex-shrink-0">{mod.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium truncate" style={{ color: 'var(--text)' }}>
-                      {mod.title}
-                    </div>
-                    <div className="text-xs mt-0.5 truncate" style={{ color: 'var(--text-muted)' }}>
-                      {mod.ref.competence}
-                    </div>
-                  </div>
-                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>→</span>
+                  <span style={{ fontSize: 18, flexShrink: 0 }}>{mod.icon}</span>
+                  <span className="seq-meta-side" style={{ flex: 1 }}>
+                    <span className="t" style={{ fontSize: 14 }}>{mod.title}</span>
+                    <span className="s">{mod.ref.competence}</span>
+                  </span>
+                  <span className="arrow-r" style={{ color: 'var(--text-muted)' }} />
                 </Link>
               ))}
             </div>
@@ -51,7 +50,7 @@ export default function RessourcesPage() {
         );
       })}
 
-      <Link to="/" className="inline-block mt-4 text-sm no-underline" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
+      <Link to="/" style={{ display: 'inline-block', marginTop: 16, fontSize: 14, color: 'var(--accent)', textDecoration: 'none' }}>
         ← Retour à l'accueil
       </Link>
     </div>

@@ -1,15 +1,14 @@
 export default function ImageBlock({ src, alt, caption }) {
   return (
-    <figure className="mb-4">
+    <figure>
       <img
         src={src}
         alt={alt || ''}
-        className="rounded-lg w-full"
-        style={{ border: '1px solid var(--border)' }}
+        style={{ width: '100%', borderRadius: 'var(--radius)', border: '1px solid var(--border)' }}
         loading="lazy"
       />
       {caption && (
-        <figcaption className="text-center mt-2" style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+        <figcaption style={{ textAlign: 'center', marginTop: 10, fontSize: 13, color: 'var(--text-muted)' }}>
           {caption}
         </figcaption>
       )}
