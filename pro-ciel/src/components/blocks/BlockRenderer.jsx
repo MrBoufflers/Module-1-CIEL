@@ -8,6 +8,7 @@ import ImageBlock from './ImageBlock';
 import ListBlock from './ListBlock';
 import ComponentBlock from './ComponentBlock';
 import TableBlock from './TableBlock';
+import ExerciseBlock from './ExerciseBlock';
 
 const BLOCK_MAP = {
   hero: HeroBlock,
@@ -20,6 +21,7 @@ const BLOCK_MAP = {
   list: ListBlock,
   component: ComponentBlock,
   table: TableBlock,
+  exercise: ExerciseBlock,
 };
 
 export default function BlockRenderer({ blocks }) {
