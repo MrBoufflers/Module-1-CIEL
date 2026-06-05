@@ -3,6 +3,8 @@ import { s2Logiciels } from './premiere/s2-logiciels.js';
 import { s3Git } from './premiere/s3-git.js';
 import { s4Html } from './premiere/s4-html.js';
 import { s5Css } from './premiere/s5-css.js';
+import { s6JsBase } from './premiere/s6-js-base.js';
+import { s7JsDom } from './premiere/s7-js-dom.js';
 import { resWord } from './ressources/res-word.js';
 import { resExcel } from './ressources/res-excel.js';
 import { resPowerpoint } from './ressources/res-powerpoint.js';
@@ -13,6 +15,8 @@ const sequences = [
   s3Git,
   s4Html,
   s5Css,
+  s6JsBase,
+  s7JsDom,
   resWord,
   resExcel,
   resPowerpoint,
