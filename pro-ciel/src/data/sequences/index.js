@@ -5,6 +5,9 @@ import { s4Html } from './premiere/s4-html.js';
 import { s5Css } from './premiere/s5-css.js';
 import { s6JsBase } from './premiere/s6-js-base.js';
 import { s7JsDom } from './premiere/s7-js-dom.js';
+import { s8Python1 } from './premiere/s8-python1.js';
+import { s9Python2 } from './premiere/s9-python2.js';
+import { s10Cyber } from './premiere/s10-cyber.js';
 import { resWord } from './ressources/res-word.js';
 import { resExcel } from './ressources/res-excel.js';
 import { resPowerpoint } from './ressources/res-powerpoint.js';
@@ -17,6 +20,9 @@ const sequences = [
   s5Css,
   s6JsBase,
   s7JsDom,
+  s8Python1,
+  s9Python2,
+  s10Cyber,
   resWord,
   resExcel,
   resPowerpoint,
