@@ -1,6 +1,6 @@
 # Séquence S1 — C'est quoi un ordinateur ?
 
-**Niveau :** Première · **Durée :** 3 h (1 h cours · 1 h TP démontage · 1 h évaluation QCM)
+**Niveau :** Première · **Durée :** 3 h (1 h cours · 1 h TP démontage · 1 h évaluation QCM — papier ou formulaire en ligne)
 **Thème :** Matériel & systèmes
 **Compétences :** C04 (Analyser une structure matérielle et logicielle) — niveau Découverte
 **Place dans le fil rouge :** C'est le tout premier contact. Avant d'écrire la moindre ligne de code, on comprend la machine sur laquelle on va travailler. En S2 on verra les logiciels qui tournent dessus, en S3 on apprendra à versionner notre travail.
@@ -112,19 +112,19 @@ La sécurité commence par le matériel.
 - PC, serveur et smartphone sont tous des ordinateurs, avec des usages différents.
 - Sécurité : la machine est la première ligne de défense (ports, verrouillage de session).
 
-**Ressources autorisées (réutilisables en évaluation) :** la frise historique et le diagramme de Von Neumann du cours.
+**Ressources autorisées (en évaluation) :** aucune.
 
 ---
 
-## PARTIE TP (1 h) — Démontage, remontage et identification
+## PARTIE TP (1 h) — Démontage, identification et remontage
 
-> **Cas particulier : TP physique.** Ce TP ne produit pas de code, donc il ne passe pas par GitHub. La validation se fait par **observation directe du professeur** et par une **fiche d'identification des composants** remplie par l'élève. Chaque élève travaille **individuellement** sur son poste (PC de récupération).
+> **Cas particulier : TP physique.** Ce TP ne produit pas de code, donc il ne passe pas par GitHub. La validation se fait par **observation directe du professeur** et par une **identification orale des composants** faite par l'élève devant le professeur. Chaque élève travaille **individuellement** sur son poste (PC de récupération).
 
-**Mission :** ouvrir une unité centrale, identifier physiquement les composants vus en cours, les retirer puis les remonter correctement, et vérifier que la machine redémarre.
+**Mission :** ouvrir une unité centrale, démonter les composants amovibles, puis appeler le professeur pour identifier oralement les composants vus en cours, avant de tout remonter correctement et de vérifier que la machine redémarre.
 
-**Matériel par élève :** une tour de PC de récupération, un tournevis cruciforme, un bracelet antistatique, un petit récipient pour les vis, une fiche d'identification à compléter.
+**Matériel par élève :** une tour de PC de récupération, un tournevis cruciforme, un bracelet antistatique, un petit récipient pour les vis.
 
-### Étape 1 — Sécurité et préparation *(validation obligatoire avant de continuer)*
+### Étape 1 — Sécurité *(validation obligatoire avant de continuer)*
 La sécurité d'abord. Avant toute manipulation :
 - Comprendre l'électricité statique (ESD) : invisible, indolore, mais qui peut détruire un composant.
 - Porter le bracelet antistatique, pince reliée à une partie métallique non peinte du boîtier.
@@ -132,30 +132,30 @@ La sécurité d'abord. Avant toute manipulation :
 
 **Validé quand :** le professeur a vérifié le port du bracelet et le débranchement.
 
-### Étape 2 — Observation et identification
-Avant de toucher : ouvrir le boîtier et **remplir la fiche d'identification** — repérer et nommer le CPU (sous le ventirad), la RAM, le stockage, la carte mère, la carte graphique si présente, l'alimentation.
+### Étape 2 — Ouverture et démontage
+Ouvrir le boîtier, puis retirer les composants amovibles dans l'ordre, en **prenant une photo à chaque étape** (pour le remontage) : carte graphique, barrettes de RAM, câbles de données du stockage. *(On ne démonte pas le CPU ni le ventirad.)*
 
-**Validé quand :** la fiche est correctement remplie (vérifiée par le professeur).
+**Validé quand :** le boîtier est ouvert et les composants amovibles sont retirés proprement, rangés, sans forçage.
 
-### Étape 3 — Démontage méthodique
-Retirer les composants amovibles dans l'ordre, en **prenant une photo à chaque étape** (pour le remontage) : carte graphique, barrettes de RAM, câbles de données du stockage. *(On ne démonte pas le CPU ni le ventirad.)*
+### Étape 3 — Appel du professeur et identification orale
+Appeler le professeur. Devant lui, **identifier oralement** chaque composant et expliquer son rôle : le CPU (sous le ventirad), la RAM, le stockage, la carte mère, la carte graphique si présente, l'alimentation.
 
-**Validé quand :** les composants sont retirés proprement, rangés, sans forçage.
+**Validé quand :** les composants ont été identifiés correctement à l'oral devant le professeur.
 
 ### Étape 4 — Remontage et test
 Remonter dans l'ordre inverse en s'aidant des photos. Réinsérer la RAM jusqu'au « clic », la carte graphique dans son port, rebrancher les câbles. Puis test minimal : alimentation + écran + clavier, allumer.
 
 **Validé quand :** la machine démarre et atteint le POST/BIOS (les composants y sont reconnus). C'est la réussite de la mission.
 
-**Critères de réussite globaux :** respect de la sécurité ESD, fiche correctement remplie, manipulation soignée, machine fonctionnelle au redémarrage. *(Évaluation bienveillante : une tentative sérieuse mais imparfaite au remontage n'annule pas le travail d'identification.)*
+**Critères de réussite globaux :** respect de la sécurité ESD, composants correctement identifiés à l'oral, manipulation soignée, machine fonctionnelle au redémarrage. *(Évaluation bienveillante : une tentative sérieuse mais imparfaite au remontage n'annule pas le travail d'identification.)*
 
 ---
 
 ## PARTIE ÉVALUATION (1 h) — QCM
 
-> Format QCM, sur poste (le composant `Quiz` existant est réutilisé et enrichi). Évalue **C04** au niveau Découverte : reconnaître les composants, comprendre leur rôle, distinguer les types de machines. Deux variantes de mêmes difficulté et structure (G1/G2) avec questions mélangées pour éviter la copie.
+> Format QCM **hors site** (papier ou formulaire en ligne). Évalue **C04** au niveau Découverte : reconnaître les composants, comprendre leur rôle, distinguer les types de machines. **Aucune ressource autorisée.** La fiche élève (sans corrigé) est fournie dans `S1-QCM.md`.
 
-Banque de questions proposée (à répartir entre G1 et G2) :
+Banque de questions proposée :
 
 1. Quel composant est le « cerveau » de l'ordinateur ? — RAM / GPU / **CPU** / Disque dur
 2. La mémoire vive (RAM) est une mémoire... — **Volatile** / Permanente / Optique / Mécanique

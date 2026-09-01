@@ -93,9 +93,20 @@ Bénéfices : le professeur écrit du contenu lisible sans toucher au style ; l'
 { type: 'table',
   headers: ['', 'Colonne A', 'Colonne B'],
   rows: [ ['Libellé ligne 1', 'valeur', 'valeur'], ['Libellé ligne 2', 'valeur', 'valeur'] ] }
+
+// Exercice intégré au cours (mini-exercice de 5-15 min fait immédiatement après une notion).
+// Visuellement distinct : icône crayon, couleur dédiée, encadré reconnaissable.
+// Le 'body' utilise la grammaire de blocs standard (prose, list, code…).
+// IMPORTANT : PAS de champ correction/solution. La correction se fait à l'oral en classe.
+{ type: 'exercise',
+  title: "Exercice 1 — Créer le squelette HTML",
+  body: [
+    { type: 'prose', content: 'Consigne...' },
+    { type: 'list', ordered: true, items: ['Étape 1', 'Étape 2'] },
+  ] }
 ```
 
-> Claude Code doit concevoir le `BlockRenderer` de façon **extensible** : ajouter un nouveau type de bloc plus tard ne doit pas casser l'existant. Les types listés ci-dessus (`hero`, `section`, `prose`, `info`, `code`, `cards`, `image`, `list`, `component`, `table`) sont ceux nécessaires au Lot 1 ; d'autres viendront (`quiz`, `video`, etc.).
+> Claude Code doit concevoir le `BlockRenderer` de façon **extensible** : ajouter un nouveau type de bloc plus tard ne doit pas casser l'existant. Les types listés ci-dessus (`hero`, `section`, `prose`, `info`, `code`, `cards`, `image`, `list`, `component`, `table`, `exercise`) sont ceux nécessaires au Lot 1 ; d'autres viendront (`quiz`, `video`, etc.).
 
 #### Exemple de données de cours (extrait réel, séquence HTML)
 
