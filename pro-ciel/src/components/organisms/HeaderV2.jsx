@@ -17,10 +17,10 @@ export default function HeaderV2({ onMenuToggle }) {
         <IconMenu2 size={18} stroke={1.5} />
       </button>
 
-      <Link to="/" className="logo" style={{ textDecoration: 'none', cursor: 'pointer' }}>PC</Link>
+      <Link to="/" className="logo" style={{ textDecoration: 'none', cursor: 'pointer' }}>CIEL</Link>
       <div className="brand-wrap">
         <span className="brand">Pro CIEL</span>
-        <span className="brand-sub">{isHome ? 'Parcours numérique' : 'Bac Pro CIEL'}</span>
+        <span className="brand-sub">{"Plateforme d'apprentissage du Bac Pro CIEL"}</span>
       </div>
 
       <div className="spacer" />
