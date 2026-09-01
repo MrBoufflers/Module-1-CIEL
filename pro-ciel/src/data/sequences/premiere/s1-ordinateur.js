@@ -11,10 +11,10 @@
 //   GitHub. La propriété tp.kind = 'physical' indique au composant d'affichage de
 //   NE PAS afficher d'encadré commit/push, mais un encadré « validation par le
 //   professeur » à la place. La validation de chaque étape se fait par observation
-//   directe (et fiche d'identification papier).
-// - L'évaluation est en PAPIER (hors site). L'onglet « Éval » n'affiche donc pas de
-//   sujet : seulement le bloc meta.evalInfo (format, durée, compétence, ressources
-//   autorisées). Aucun contenu de QCM ne doit figurer dans le code du site.
+//   directe (identification orale des composants devant le professeur).
+// - L'évaluation est HORS site (papier ou formulaire en ligne). L'onglet « Éval »
+//   n'affiche donc pas de sujet : seulement le bloc meta.evalInfo (format, durée,
+//   compétence). Aucun contenu de QCM ne doit figurer dans le code du site.
 // =============================================================================
 
 export const s1Ordinateur = {
@@ -35,11 +35,11 @@ export const s1Ordinateur = {
       "La surface d'attaque matérielle (ports, périphériques) et pourquoi on verrouille " +
       "sa session.",
     evalInfo: {
-      format: 'QCM papier (questions à choix + justifications + schéma à compléter)',
+      format: 'QCM (questions à choix + justifications + schéma à compléter)',
       duree: '1 h',
       competence: 'C04 (Découverte)',
-      ressourcesAutorisees: ['Frise historique du cours', 'Diagramme de Von Neumann du cours'],
-      note: "Évaluation réalisée en classe sur support papier — aucun sujet n'est publié sur le site.",
+      ressourcesAutorisees: ['Aucune'],
+      note: "Évaluation réalisée en classe sur papier ou via un formulaire en ligne — aucun sujet n'est publié sur le site.",
     },
   },
 
@@ -130,18 +130,6 @@ export const s1Ordinateur = {
           content: "Voici les pièces que tu retrouveras dans (presque) toutes les machines.",
         },
         { type: 'component', name: 'ComponentShowcase' },
-        {
-          type: 'cards',
-          columns: 3,
-          items: [
-            { title: 'Processeur (CPU)', text: "Le cerveau : il exécute les instructions et fait les calculs." },
-            { title: 'Mémoire vive (RAM)', text: "La mémoire de travail : rapide mais volatile (tout s'efface à l'extinction)." },
-            { title: 'Stockage (SSD / disque dur)', text: "La mémoire permanente : plus lente, mais conserve les données éteint." },
-            { title: 'Carte mère', text: "La colonne vertébrale : elle relie et fait communiquer tous les composants." },
-            { title: 'Carte graphique (GPU)', text: "Spécialisée dans l'affichage et les calculs graphiques." },
-            { title: 'Alimentation', text: "Convertit le courant du secteur pour nourrir chaque composant." },
-          ],
-        },
         {
           type: 'info',
           variant: 'attention',
@@ -259,10 +247,10 @@ export const s1Ordinateur = {
   // ---------------------------------------------------------------------------
   tp: {
     kind: 'physical', // <- IMPORTANT : pas d'encadré commit/push ; validation par le prof
-    title: 'Démontage, remontage et identification',
+    title: 'Démontage, identification et remontage',
     mission:
-      "Ouvrir une unité centrale, identifier physiquement les composants vus en cours, les " +
-      "retirer puis les remonter correctement, et vérifier que la machine redémarre.",
+      "Ouvrir une unité centrale, démonter les composants amovibles, appeler le professeur pour " +
+      "les nommer à l'oral, puis tout remonter et vérifier que la machine redémarre.",
     prerequis: [
       'Cours S1 suivi',
       'Poste de travail individuel (1 tour de récupération par élève)',
@@ -272,11 +260,10 @@ export const s1Ordinateur = {
       'Un tournevis cruciforme',
       'Un bracelet antistatique',
       'Un petit récipient pour les vis',
-      'Une fiche d\u2019identification des composants à compléter',
     ],
     criteres: [
       'Respect des règles de sécurité (ESD)',
-      'Fiche d\u2019identification correctement remplie',
+      'Composants correctement nommés à l\u2019oral devant le professeur',
       'Manipulation soignée, sans forçage',
       'Machine fonctionnelle au redémarrage (POST/BIOS atteint)',
     ],
@@ -305,27 +292,14 @@ export const s1Ordinateur = {
         done: 'Le professeur a vérifié le port du bracelet et le débranchement complet.',
       },
       {
-        title: 'Observation et identification',
+        title: 'Ouverture et démontage',
         body: [
           {
             type: 'prose',
             content:
-              "Avant de toucher quoi que ce soit : ouvre le boîtier et **remplis la fiche " +
-              "d'identification**. Repère et nomme le CPU (sous le ventirad), la RAM, le stockage, " +
-              "la carte mère, la carte graphique si présente, et l'alimentation.",
-          },
-        ],
-        done: 'La fiche d\u2019identification est correctement remplie (vérifiée par le professeur).',
-      },
-      {
-        title: 'Démontage méthodique',
-        body: [
-          {
-            type: 'prose',
-            content:
-              "Retire les composants amovibles dans l'ordre, en **prenant une photo à chaque " +
-              "étape** (utile pour le remontage) : carte graphique, barrettes de RAM, câbles de " +
-              "données du stockage.",
+              "Ouvre le boîtier, puis retire les composants amovibles dans l'ordre, en **prenant " +
+              "une photo à chaque étape** (utile pour le remontage) : carte graphique, barrettes de " +
+              "RAM, câbles de données du stockage.",
           },
           {
             type: 'info',
@@ -333,7 +307,20 @@ export const s1Ordinateur = {
             content: "On ne démonte pas le processeur ni son ventirad dans ce TP.",
           },
         ],
-        done: 'Les composants sont retirés proprement, rangés, sans forçage.',
+        done: 'Le boîtier est ouvert et les composants amovibles sont retirés proprement, rangés, sans forçage.',
+      },
+      {
+        title: 'Appel du professeur et identification orale',
+        body: [
+          {
+            type: 'prose',
+            content:
+              "Appelle le professeur. À l'oral, **nomme chaque composant** et explique brièvement " +
+              "son rôle : le CPU (sous le ventirad), la RAM, le stockage, la carte mère, la carte " +
+              "graphique si présente, et l'alimentation.",
+          },
+        ],
+        done: 'Le professeur a validé l\u2019identification orale de tous les composants.',
       },
       {
         title: 'Remontage et test',

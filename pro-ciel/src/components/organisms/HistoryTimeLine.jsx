@@ -93,7 +93,6 @@ export default function HistoryTimeline() {
   return (
     <div style={{
       width: '100%',
-      height: '100vh',
       padding: 20,
       borderRadius: 'var(--radius-lg)',
       background: 'var(--surface)',
@@ -118,7 +117,8 @@ export default function HistoryTimeline() {
           cardTitle: '1.1rem',
           title: '1rem',
         }}
-        scrollable
+        cardHeight={140}
+        disableToolbar
       />
     </div>
   );
