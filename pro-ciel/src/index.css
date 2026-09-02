@@ -634,7 +634,6 @@ body {
    RESPONSIVE
    ============================================================= */
 @media (max-width: 920px) {
-  .sidebar { display: none; }
   .fx-body { grid-template-columns: 1fr; }
   .fx-tree { border-right: none; border-bottom: 1px solid var(--border); max-height: 200px; }
 }

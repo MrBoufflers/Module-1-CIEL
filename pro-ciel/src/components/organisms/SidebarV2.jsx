@@ -23,14 +23,14 @@ export default function SidebarV2({ isOpen, onClose }) {
 
       <aside
         className={`
-          fixed top-0 left-0 z-40 h-full
+          fixed top-0 left-0 z-40 h-full pointer-events-none
           flex flex-col transition-transform duration-300
           lg:translate-x-0
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
         style={{ width: 'var(--sidebar-w)' }}
       >
-        <nav className="sidebar" style={{ position: 'fixed', top: 'var(--header-h)', height: 'calc(100vh - var(--header-h))' }}>
+        <nav className="sidebar" style={{ position: 'fixed', top: 'var(--header-h)', height: 'calc(100vh - var(--header-h))', pointerEvents: 'auto' }}>
           <div className="flex items-center justify-between mb-4 lg:hidden">
             <span className="brand" style={{ fontSize: 16 }}>Navigation</span>
             <button onClick={onClose} className="icon-btn" style={{ width: 32, height: 32 }}>
