@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { IconRocket } from '@tabler/icons-react';
 import { getSequencesByNiveau } from '../../data/sequences/index';
 
 const levelLabels = {
@@ -28,21 +29,26 @@ export default function NiveauPage() {
 
       {seqs.length > 0 ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {seqs.map((seq) => (
-            <Link
-              key={seq.meta.id}
-              to={`/${niveau}/${seq.meta.id}/cours`}
-              className="side-link active"
-              style={{ padding: '16px 20px', borderRadius: 'var(--radius)', textDecoration: 'none' }}
-            >
-              <span className="seq-badge">{seq.meta.sequence}</span>
-              <span className="seq-meta-side" style={{ flex: 1 }}>
-                <span className="t" style={{ fontSize: 15 }}>{seq.meta.title}</span>
-                <span className="s">{seq.meta.theme} · {seq.meta.duree}</span>
-              </span>
-              <span className="arrow-r" style={{ color: 'var(--text-muted)' }} />
-            </Link>
-          ))}
+          {seqs.map((seq) => {
+            const isSpecial = !seq.meta.sequence;
+            return (
+              <Link
+                key={seq.meta.id}
+                to={`/${niveau}/${seq.meta.id}/cours`}
+                className={`side-link active${isSpecial ? ' special' : ''}`}
+                style={{ padding: '16px 20px', borderRadius: 'var(--radius)', textDecoration: 'none' }}
+              >
+                <span className="seq-badge">
+                  {isSpecial ? <IconRocket size={17} stroke={1.8} /> : seq.meta.sequence}
+                </span>
+                <span className="seq-meta-side" style={{ flex: 1 }}>
+                  <span className="t" style={{ fontSize: 15 }}>{seq.meta.title}</span>
+                  <span className="s">{seq.meta.theme} · {seq.meta.duree}</span>
+                </span>
+                <span className="arrow-r" style={{ color: 'var(--text-muted)' }} />
+              </Link>
+            );
+          })}
         </div>
       ) : (
         <div className="info-box definition" style={{ textAlign: 'center' }}>
