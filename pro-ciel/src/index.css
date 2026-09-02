@@ -247,6 +247,11 @@ body {
 .main {
   flex: 1; min-width: 0; position: relative;
   min-height: calc(100vh - var(--header-h));
+  overflow-x: clip; /* rogne les halos décoratifs qui débordent à droite */
+}
+/* Desktop : la sidebar (fixe) occupe la gauche, on décale le contenu pour éviter le chevauchement */
+@media (min-width: 1024px) {
+  .main { margin-left: var(--sidebar-w); }
 }
 .halo { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; transition: background .5s; }
 .halo.one { width: 460px; height: 460px; top: -160px; left: -120px; background: var(--accent-course); opacity: var(--halo-opacity); }
@@ -633,6 +638,25 @@ body {
 /* =============================================================
    RESPONSIVE
    ============================================================= */
+/* Le burger n'apparaît qu'en mode tiroir (sidebar non permanente). Défini ici,
+   après .icon-btn, pour l'emporter sur son display:flex (Tailwind lg:hidden est
+   neutralisé par la CSS custom en Tailwind v4). */
+.burger-btn { display: flex; }
+.header .h-actions { flex-shrink: 0; }
+.header .seg { flex-shrink: 0; }
+@media (min-width: 1024px) {
+  .burger-btn { display: none; }
+}
+
+/* En dessous de la sidebar permanente : header allégé pour tenir dans la largeur
+   de l'écran (titre/sous-titre masqués, thème en icônes seules). */
+@media (max-width: 1023.98px) {
+  .header { gap: 10px; padding: 0 14px; }
+  .header .brand-wrap { display: none; }
+  .seg-label { display: none; }
+  .seg button { padding: 6px 9px; }
+}
+
 @media (max-width: 920px) {
   .fx-body { grid-template-columns: 1fr; }
   .fx-tree { border-right: none; border-bottom: 1px solid var(--border); max-height: 200px; }
