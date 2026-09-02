@@ -24,7 +24,7 @@ export default function HeaderV2({ onMenuToggle }) {
       </Link>
       <div className="brand-wrap">
         <span className="brand">Pro CIEL</span>
-        <span className="brand-sub">{"Plateforme d'apprentissage du Bac Pro CIEL"}</span>
+        <span className="brand-sub">{"La plateforme d'apprentissage numérique"}</span>
       </div>
 
       <div className="spacer" />

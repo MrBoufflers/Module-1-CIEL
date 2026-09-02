@@ -4,7 +4,7 @@ import logoProCiel from '../../assets/images/PRO-CIEL-LOGO-V2.png';
 
 const levels = [
   { id: 'premiere', num: 'Niveau 2', title: 'Première', desc: 'Du matériel au logiciel, puis du versioning au développement web.', path: '/premiere' },
-  { id: 'terminale', num: 'Niveau 3', title: 'Terminale', desc: 'Déploiement, cybersécurité appliquée et projet chef-d’œuvre.', path: '/terminale', soon: true },
+  { id: 'terminale', num: 'Niveau 3', title: 'Terminale', desc: 'Déploiement, cybersécurité appliquée et projet chef-d’œuvre.', path: '/terminale' },
   { id: 'ressources', num: 'Ressources', title: 'Ressources', desc: 'Cours bonus et ressources complémentaires.', path: '/ressources' },
 ];
 
