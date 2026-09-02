@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { IconSun, IconMoon, IconMenu2 } from '@tabler/icons-react';
 import { useTheme } from '../../lib/useTheme';
+import logoProCiel from '../../assets/images/PRO-CIEL-LOGO-V2.png';
 
 export default function HeaderV2({ onMenuToggle }) {
   const { theme, dys, setTheme, toggleDys } = useTheme();
@@ -17,7 +18,9 @@ export default function HeaderV2({ onMenuToggle }) {
         <IconMenu2 size={18} stroke={1.5} />
       </button>
 
-      <Link to="/" className="logo" style={{ textDecoration: 'none', cursor: 'pointer' }}>CIEL</Link>
+      <Link to="/" className="logo-link" style={{ textDecoration: 'none', cursor: 'pointer', flexShrink: 0 }}>
+        <img src={logoProCiel} alt="Pro CIEL" style={{ height: 44, width: 'auto', display: 'block' }} />
+      </Link>
       <div className="brand-wrap">
         <span className="brand">Pro CIEL</span>
         <span className="brand-sub">{"Plateforme d'apprentissage du Bac Pro CIEL"}</span>

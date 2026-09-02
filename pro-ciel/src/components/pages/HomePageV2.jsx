@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getSequencesByNiveau } from '../../data/sequences/index';
+import logoProCiel from '../../assets/images/PRO-CIEL-LOGO-V2.png';
 
 const levels = [
   { id: 'premiere', num: 'Niveau 2', title: 'Première', desc: 'Du matériel au logiciel, puis du versioning au développement web.', path: '/premiere' },
@@ -10,7 +11,7 @@ const levels = [
 export default function HomePageV2() {
   return (
     <div className="home reveal">
-      <div className="home-logo">PC</div>
+      <img className="home-logo-img" src={logoProCiel} alt="Pro CIEL" style={{ height: 96, width: 'auto', display: 'block', margin: '0 auto 30px' }} />
       <h1>Apprendre le numérique,<br /><span className="grad">étape par étape.</span></h1>
       <p className="sub">Le parcours CIEL en fil rouge : du matériel au déploiement web, une séquence à la fois.</p>
       <div className="levels">
