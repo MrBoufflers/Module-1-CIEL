@@ -1,12 +1,12 @@
-export const ts7Ia = {
+export const ts8Ia = {
   meta: {
-    id: 'ia', sequence: 'S7', niveau: 'terminale',
+    id: 'ia', sequence: 'S8', niveau: 'terminale',
     title: "L'intelligence artificielle : comprendre, utiliser, situer", icon: 'brain', duree: '9 h',
     theme: 'Intelligence artificielle',
     filRouge: "L'IA est partout : dans les outils qu'on utilise, dans les métiers qu'on prépare. Cette séquence démystifie le sujet : comment ça marche vraiment, comment s'en servir, et quelles sont les limites.",
     ref: { competences: ['C01', 'C04', 'C03'], savoirs: ['S3.4', 'S4.1'] },
     cyber: "Biais des modèles, données d'entraînement, vie privée, désinformation générée par IA.",
-    evalInfo: { format: 'Exposé oral + dossier écrit (veille technologique sur un sujet IA)', duree: '3 h (préparation) + oral', competence: 'C01 (Application) · C03 (Application)', ressourcesAutorisees: ['Recherche Internet', 'Le cours S7'], note: "Évaluation en classe entière (exposés)." },
+    evalInfo: { format: 'Exposé oral + dossier écrit (veille technologique sur un sujet IA)', duree: '3 h (préparation) + oral', competence: 'C01 (Application) · C03 (Application)', ressourcesAutorisees: ['Recherche Internet', 'Le cours S8'], note: "Évaluation en classe entière (exposés)." },
   },
   course: [
     { type: 'hero', title: "L'IA : comprendre, utiliser, situer", subtitle: "Ni magie ni menace : l'IA est un outil puissant avec des forces, des limites et des responsabilités. Comprenons ce qu'elle est vraiment." },
@@ -122,7 +122,7 @@ export const ts7Ia = {
     kind: 'physical',
     title: 'Exposé de veille technologique IA',
     mission: "Préparer et présenter un exposé de veille technologique sur un sujet lié à l'IA, avec dossier écrit et présentation orale.",
-    prerequis: ['Cours T-S7 suivi', 'Sujet validé par le professeur'],
+    prerequis: ['Cours T-S8 suivi', 'Sujet validé par le professeur'],
     criteres: ['Dossier écrit structuré (1-2 pages)', 'Sources citées et vérifiées', 'Exposé oral clair (5-10 min)', 'Diapositives lisibles (peu de texte)', 'Capacité à répondre aux questions'],
     note: "L'exposé est noté (C01 communication + C03 veille). Barème : dossier 8 pts, oral 8 pts, réponses aux questions 4 pts.",
     steps: [

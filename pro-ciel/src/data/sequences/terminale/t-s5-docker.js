@@ -1,12 +1,12 @@
-export const ts4Docker = {
+export const ts5Docker = {
   meta: {
-    id: 'docker', sequence: 'S4', niveau: 'terminale',
+    id: 'docker', sequence: 'S5', niveau: 'terminale',
     title: 'Conteneuriser : Docker', icon: 'box', duree: '9 h',
     theme: 'Infrastructure',
     filRouge: "L'app tourne sur ta machine. Mais elle ne tournera pas forcément sur celle du prof, ni sur un serveur. Docker résout ce problème : il emballe tout (code + dépendances + config) dans un conteneur identique partout.",
     ref: { competences: ['C09', 'C04'], savoirs: ['S2.1', 'S5.2'] },
     cyber: "Images officielles vs images piégées. Ne jamais mettre de secrets dans un Dockerfile.",
-    evalInfo: { format: 'Évaluation pratique (conteneuriser une app et la lancer)', duree: '3 h', competence: 'C09 (Application)', ressourcesAutorisees: ['Docker docs', 'Le cours S4'], note: "Évaluation réalisée en classe." },
+    evalInfo: { format: 'Évaluation pratique (conteneuriser une app et la lancer)', duree: '3 h', competence: 'C09 (Application)', ressourcesAutorisees: ['Docker docs', 'Le cours S5'], note: "Évaluation réalisée en classe." },
   },
   course: [
     { type: 'hero', title: 'Docker : « ça marche sur ma machine » n\u2019existe plus', subtitle: "Un conteneur embarque ton app avec tout ce dont elle a besoin. Même environnement partout : dev, test, production." },
@@ -77,7 +77,7 @@ export const ts4Docker = {
     kind: 'digital',
     title: 'Conteneuriser son projet',
     mission: "Conteneuriser l'intégralité de ton projet (API + BDD + front) avec Docker et Docker Compose.",
-    prerequis: ['Cours T-S4 suivi', 'Docker installé', 'Projet T-S2 + T-S3 fonctionnels'],
+    prerequis: ['Cours T-S5 suivi', 'Docker installé', 'Projet T-S2, T-S3 et T-S4 fonctionnels'],
     criteres: ['Dockerfile fonctionnel', 'docker-compose.yml avec au moins 2 services', 'L\u2019app tourne entièrement dans Docker', 'Commits réguliers'],
     bonus: "Ajouter un service front-end (conteneur séparé pour le build React) dans le Compose.",
     steps: [

@@ -1,12 +1,12 @@
-export const ts5Production = {
+export const ts6Production = {
   meta: {
-    id: 'production', sequence: 'S5', niveau: 'terminale',
+    id: 'production', sequence: 'S6', niveau: 'terminale',
     title: 'Mettre en production : serveur web & déploiement', icon: 'cloud-upload', duree: '9 h',
     theme: 'Infrastructure & déploiement',
     filRouge: "L'app tourne dans Docker sur ta machine. On la met en ligne sur un vrai serveur accessible au monde. C'est la mise en production : le moment où le code devient un service.",
     ref: { competences: ['C09', 'C10', 'C04'], savoirs: ['S2.1', 'S5.2'] },
     cyber: "HTTPS en production, pare-feu, mises à jour, principe du moindre privilège.",
-    evalInfo: { format: 'Évaluation pratique (déployer une app conteneurisée)', duree: '3 h', competence: 'C09 (Application) · C10 (Application)', ressourcesAutorisees: ['Documentation en ligne', 'Le cours S5'], note: "Évaluation réalisée en classe." },
+    evalInfo: { format: 'Évaluation pratique (déployer une app conteneurisée)', duree: '3 h', competence: 'C09 (Application) · C10 (Application)', ressourcesAutorisees: ['Documentation en ligne', 'Le cours S6'], note: "Évaluation réalisée en classe." },
   },
   course: [
     { type: 'hero', title: 'Mise en production', subtitle: "Le code qui ne tourne que sur ta machine n'a aucune valeur. La mise en production, c'est le passage de l'artisanat au service." },
@@ -79,7 +79,7 @@ export const ts5Production = {
     kind: 'digital',
     title: 'Déployer son projet',
     mission: "Mettre en production l'application conteneurisée sur un serveur accessible.",
-    prerequis: ['Cours T-S5 suivi', 'Docker Compose fonctionnel (T-S4)', 'Accès au serveur de test (si disponible)'],
+    prerequis: ['Cours T-S6 suivi', 'Docker Compose fonctionnel (T-S5)', 'Accès au serveur de test (si disponible)'],
     criteres: ['App accessible depuis l\u2019extérieur', 'HTTPS configuré (ou justifié si impossible)', 'Workflow branches utilisé', 'Commits réguliers'],
     bonus: "Mettre en place un déploiement automatisé (GitHub Actions : à chaque push sur main, le serveur se met à jour).",
     steps: [
