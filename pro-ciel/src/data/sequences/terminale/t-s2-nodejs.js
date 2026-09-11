@@ -877,7 +877,8 @@ export const ts2Nodejs = {
     title: "Construire l'API REST de son projet",
     mission:
       "Livrer une API REST complète (CRUD) sur une ressource de ton projet fil rouge, avec des " +
-      "données stockées en mémoire, testée avec un client HTTP.",
+      "données stockées en mémoire, testée avec un client HTTP. Suis les étapes : chacune montre " +
+      "exactement comment faire, avec le code à écrire et comment le tester.",
     prerequis: ['Cours T-S2 suivi', 'Node.js + npm installés', 'Dépôt GitHub Classroom du projet'],
     materiel: ['Node.js', 'VS Code', 'Un client HTTP (Thunder Client, Insomnia ou équivalent)'],
     criteres: [
@@ -888,46 +889,143 @@ export const ts2Nodejs = {
       'Validation des données reçues (pas de confiance au client)',
       'Commits réguliers avec messages clairs',
     ],
-    bonus: "Ajouter une route de recherche `GET /ressource?nom=...` qui filtre le tableau avec `req.query`.",
+    bonus: "Ajouter une route de recherche `GET /produits?nom=...` qui filtre le tableau avec `req.query`.",
     steps: [
       {
-        title: 'Initialisation du projet',
+        title: 'Étape 1 — Créer et lancer le projet',
         body: [
-          { type: 'list', ordered: true, items: [
-            "Dans le dépôt Classroom, crée un dossier `api/`, place-toi dedans, `npm init -y`.",
-            "Installe Express (`npm install express`).",
-            "Ajoute un script `\"dev\": \"node --watch serveur.js\"` et un `.gitignore` avec `node_modules/`.",
-            "Crée `serveur.js` avec un serveur Express minimal qui répond sur `GET /`.",
-          ]},
+          { type: 'info', variant: 'astuce', title: 'Choisis ta ressource',
+            content: "Dans tout ce TP on prend l'exemple d'une ressource **`produits`**. Remplace partout `produits` par la ressource de TON projet (livres, recettes, joueurs, tâches...). Le principe est identique." },
+          { type: 'prose', content: "**1.1** — Dans ton dépôt GitHub Classroom, crée un dossier `api/`, ouvre un terminal dedans, et initialise le projet :" },
+          { type: 'code', language: 'bash', title: 'Terminal (dans le dossier api/)', code:
+            'npm init -y            # cree un package.json minimal\n' +
+            'npm install express    # installe Express (apparait dans dependencies)' },
+          { type: 'prose', content: "**1.2** — Ouvre `package.json` et ajoute un script `dev` dans la section `scripts` (il permet de lancer le serveur et de le relancer tout seul à chaque enregistrement) :" },
+          { type: 'code', language: 'json', title: 'package.json (extrait)', code:
+            '"scripts": {\n' +
+            '  "dev": "node --watch serveur.js"\n' +
+            '}' },
+          { type: 'prose', content: "**1.3** — Crée un fichier `.gitignore` pour ne jamais pousser `node_modules` :" },
+          { type: 'code', language: 'bash', title: '.gitignore', code: 'node_modules/' },
+          { type: 'prose', content: "**1.4** — Crée `serveur.js` avec un serveur Express minimal :" },
+          { type: 'code', language: 'js', title: 'serveur.js', code:
+            'const express = require("express");\n' +
+            'const app = express();\n' +
+            '\n' +
+            '// Route de test : GET /\n' +
+            'app.get("/", (req, res) => {\n' +
+            '  res.json({ message: "Mon API fonctionne" });\n' +
+            '});\n' +
+            '\n' +
+            '// On demarre le serveur sur le port 3000\n' +
+            'app.listen(3000, () => {\n' +
+            '  console.log("Serveur sur http://localhost:3000");\n' +
+            '});' },
+          { type: 'prose', content: "**1.5** — Lance le serveur avec `npm run dev`, puis ouvre `http://localhost:3000` dans le navigateur : tu dois voir `{ \"message\": \"Mon API fonctionne\" }`." },
+          { type: 'info', variant: 'attention', title: 'Erreur EADDRINUSE ?',
+            content: "Si tu vois `EADDRINUSE`, c'est qu'un autre serveur tourne déjà sur le port 3000. Arrête-le (Ctrl+C dans son terminal) avant de relancer." },
         ],
-        done: "Le serveur démarre avec `npm run dev` et répond sur http://localhost:3000.",
+        done: "Le serveur démarre avec `npm run dev` et `GET /` renvoie du JSON dans le navigateur.",
         validation: { commit: 'git commit -m "chore: init API Express"' },
       },
       {
-        title: 'Données en mémoire + routes de lecture',
+        title: 'Étape 2 — Les données en mémoire + la route liste (GET)',
         body: [
-          { type: 'list', ordered: true, items: [
-            "Déclare un tableau `let <ressource> = [ ... ]` avec 3 entrées de test (chacune avec un `id`).",
-            "Implémente `GET /<ressource>` (toute la liste) et `GET /<ressource>/:id` (une seule).",
-            "Renvoie un **404** si l'`id` n'existe pas.",
-            "Teste les deux routes dans le navigateur et vérifie le JSON renvoyé.",
-          ]},
+          { type: 'prose', content: "**2.1** — En haut de `serveur.js` (après `const app = express();`), déclare ton tableau de données. Chaque élément a un `id` unique :" },
+          { type: 'code', language: 'js', title: 'serveur.js (les donnees)', code:
+            'let produits = [\n' +
+            '  { id: 1, nom: "Clavier", prix: 25 },\n' +
+            '  { id: 2, nom: "Souris", prix: 15 },\n' +
+            '  { id: 3, nom: "Ecran", prix: 120 }\n' +
+            '];' },
+          { type: 'prose', content: "**2.2** — Ajoute la route qui renvoie **toute la liste**. `res.json(produits)` convertit le tableau en JSON et l'envoie :" },
+          { type: 'code', language: 'js', title: 'serveur.js (route liste)', code:
+            '// GET /produits -> renvoie tout le tableau\n' +
+            'app.get("/produits", (req, res) => {\n' +
+            '  res.json(produits);\n' +
+            '});' },
+          { type: 'prose', content: "**2.3** — Enregistre (le serveur redémarre tout seul grâce à `--watch`), puis ouvre `http://localhost:3000/produits` dans le navigateur : tu dois voir les 3 produits en JSON." },
         ],
-        done: "Les routes GET renvoient du JSON, avec un 404 quand la ressource est absente.",
-        validation: { commit: 'git commit -m "feat: donnees en memoire + routes GET"' },
+        done: "`GET /produits` affiche le tableau complet en JSON dans le navigateur.",
+        validation: { commit: 'git commit -m "feat: donnees en memoire + route GET liste"' },
       },
       {
-        title: 'Création et suppression (CRUD complet)',
+        title: 'Étape 3 — Lire un seul élément (GET /:id) et gérer le 404',
         body: [
+          { type: 'prose', content: "**3.1** — On veut une route `GET /produits/2` qui renvoie **un seul** produit. Le `:id` est une partie variable du chemin : Express la range dans `req.params.id`. Comme elle arrive sous forme de texte, on la convertit en nombre avec `Number(...)`, puis on cherche le produit avec `.find(...)` :" },
+          { type: 'code', language: 'js', title: 'serveur.js (un seul produit)', code:
+            '// GET /produits/2 -> renvoie le produit dont l id vaut 2\n' +
+            'app.get("/produits/:id", (req, res) => {\n' +
+            '  const id = Number(req.params.id);            // ":id" arrive en texte -> on convertit\n' +
+            '  const produit = produits.find((p) => p.id === id);\n' +
+            '  if (!produit) {                              // rien trouve\n' +
+            '    return res.status(404).json({ erreur: "Produit introuvable" });\n' +
+            '  }\n' +
+            '  res.json(produit);\n' +
+            '});' },
+          { type: 'info', variant: 'attention', title: 'Pourquoi Number() ?',
+            content: "`req.params.id` est **toujours une chaîne** (`\"2\"`). Si tu compares `\"2\" === 2` c'est `false`. `Number(req.params.id)` transforme `\"2\"` en `2` pour que la comparaison marche." },
+          { type: 'prose', content: "**3.2** — Teste les deux cas dans le navigateur : `http://localhost:3000/produits/1` (tu vois le clavier) et `http://localhost:3000/produits/999` (tu vois `{ \"erreur\": \"Produit introuvable\" }` avec un statut 404)." },
+        ],
+        done: "`GET /produits/1` renvoie un produit ; `GET /produits/999` renvoie une erreur 404.",
+        validation: { commit: 'git commit -m "feat: route GET par id avec 404"' },
+      },
+      {
+        title: 'Étape 4 — Créer un élément (POST) : lire le corps, valider, 201',
+        body: [
+          { type: 'prose', content: "**4.1** — Pour qu'Express sache lire le **corps JSON** envoyé par le client, ajoute cette ligne **une seule fois**, juste après `const app = express();` :" },
+          { type: 'code', language: 'js', title: 'serveur.js (activer la lecture du corps)', code:
+            'app.use(express.json()); // permet de lire req.body en JSON' },
+          { type: 'prose', content: "**4.2** — Ajoute la route de création. On **ne fait jamais confiance au client** : on vérifie que le `nom` est présent (sinon **400**). Sinon on crée le produit et on répond **201** (créé) :" },
+          { type: 'code', language: 'js', title: 'serveur.js (creer un produit)', code:
+            '// POST /produits -> ajoute un produit envoye dans le corps de la requete\n' +
+            'app.post("/produits", (req, res) => {\n' +
+            '  if (!req.body.nom) {                          // donnee obligatoire manquante\n' +
+            '    return res.status(400).json({ erreur: "Le nom est obligatoire" });\n' +
+            '  }\n' +
+            '  const nouveau = {\n' +
+            '    id: produits.length + 1,\n' +
+            '    nom: req.body.nom,\n' +
+            '    prix: req.body.prix\n' +
+            '  };\n' +
+            '  produits.push(nouveau);                       // on ajoute au tableau\n' +
+            '  res.status(201).json(nouveau);                // 201 = cree\n' +
+            '});' },
+          { type: 'prose', content: "**4.3** — Un POST ne se teste pas dans la barre d'adresse du navigateur (elle ne fait que des GET). On utilise un **client HTTP** comme **Thunder Client** (extension VS Code). Marche à suivre :" },
           { type: 'list', ordered: true, items: [
-            "Ajoute `app.use(express.json())` pour lire le corps des requêtes.",
-            "Implémente `POST /<ressource>` : valide les données (**400** si invalide), sinon crée et réponds **201**.",
-            "Implémente `DELETE /<ressource>/:id` (**404** si absent).",
-            "Teste POST et DELETE avec ton client HTTP, puis vérifie le résultat avec un GET.",
+            "Installe l'extension **Thunder Client** dans VS Code, puis ouvre-la (icône éclair à gauche).",
+            "Clique **New Request**. Choisis la méthode **POST** et saisis l'URL `http://localhost:3000/produits`.",
+            "Va dans l'onglet **Body**, choisis **JSON**, et colle : `{ \"nom\": \"Casque\", \"prix\": 40 }`.",
+            "Clique **Send** : tu dois recevoir le produit créé avec un statut **201**.",
+            "Refais un `GET http://localhost:3000/produits` : le casque apparaît dans la liste.",
+            "Teste la validation : renvoie un POST avec un corps **vide** `{}` → tu dois obtenir un statut **400**.",
           ]},
         ],
-        done: "L'API CRUD complète fonctionne et renvoie les bons codes de statut.",
-        validation: { commit: 'git commit -m "feat: routes POST et DELETE (CRUD complet)" && git push' },
+        done: "`POST /produits` crée un produit (201), refuse un corps invalide (400), et le nouvel élément apparaît dans `GET /produits`.",
+        validation: { commit: 'git commit -m "feat: route POST avec validation (201/400)"' },
+      },
+      {
+        title: 'Étape 5 — Supprimer un élément (DELETE) et finaliser',
+        body: [
+          { type: 'prose', content: "**5.1** — Pour supprimer, on cherche la **position** de l'élément dans le tableau avec `.findIndex(...)`, puis on le retire avec `.splice(position, 1)`. Si l'`id` n'existe pas, on répond **404** :" },
+          { type: 'code', language: 'js', title: 'serveur.js (supprimer un produit)', code:
+            '// DELETE /produits/2 -> supprime le produit n 2\n' +
+            'app.delete("/produits/:id", (req, res) => {\n' +
+            '  const id = Number(req.params.id);\n' +
+            '  const index = produits.findIndex((p) => p.id === id);\n' +
+            '  if (index === -1) {                           // -1 = pas trouve\n' +
+            '    return res.status(404).json({ erreur: "Produit introuvable" });\n' +
+            '  }\n' +
+            '  produits.splice(index, 1);                    // retire 1 element a cette position\n' +
+            '  res.status(200).json({ message: "Produit supprime" });\n' +
+            '});' },
+          { type: 'prose', content: "**5.2** — Teste dans Thunder Client : méthode **DELETE**, URL `http://localhost:3000/produits/1`, **Send** → statut 200. Refais `GET /produits` : le produit a disparu. Teste aussi un `id` inexistant (`/produits/999`) → statut **404**." },
+          { type: 'prose', content: "**5.3** — Tu as maintenant les **4 routes CRUD**. Vérifie une dernière fois chaque code de statut (200, 201, 400, 404), fais un commit final et pousse ton travail sur GitHub Classroom." },
+          { type: 'info', variant: 'astuce', title: 'Bonus (facultatif)',
+            content: "Ajoute une recherche : `GET /produits?nom=Clavier`. Récupère `req.query.nom` et renvoie `produits.filter((p) => p.nom === req.query.nom)`. C'est le rôle de `req.query`." },
+        ],
+        done: "L'API CRUD complète fonctionne (GET liste, GET par id, POST, DELETE) avec les bons codes de statut, et le tout est poussé sur GitHub.",
+        validation: { commit: 'git commit -m "feat: route DELETE (CRUD complet)" && git push' },
       },
     ],
   },
