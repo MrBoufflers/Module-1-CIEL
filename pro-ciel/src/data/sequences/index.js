@@ -9,12 +9,13 @@ import { s8Python1 } from './premiere/s8-python1.js';
 import { s9Python2 } from './premiere/s9-python2.js';
 import { s10Cyber } from './premiere/s10-cyber.js';
 import { ts1Reprise } from './terminale/t-s1-reprise.js';
-import { ts2NodejsBdd } from './terminale/t-s2-nodejs-bdd.js';
-import { ts3React } from './terminale/t-s3-react.js';
-import { ts4Docker } from './terminale/t-s4-docker.js';
-import { ts5Production } from './terminale/t-s5-production.js';
-import { ts6Maintenance } from './terminale/t-s6-maintenance.js';
-import { ts7Ia } from './terminale/t-s7-ia.js';
+import { ts2Nodejs } from './terminale/t-s2-nodejs.js';
+import { ts3Bdd } from './terminale/t-s3-bdd.js';
+import { ts4React } from './terminale/t-s4-react.js';
+import { ts5Docker } from './terminale/t-s5-docker.js';
+import { ts6Production } from './terminale/t-s6-production.js';
+import { ts7Maintenance } from './terminale/t-s7-maintenance.js';
+import { ts8Ia } from './terminale/t-s8-ia.js';
 import { resWord } from './ressources/res-word.js';
 import { resExcel } from './ressources/res-excel.js';
 import { resPowerpoint } from './ressources/res-powerpoint.js';
@@ -31,12 +32,13 @@ const sequences = [
   s9Python2,
   s10Cyber,
   ts1Reprise,
-  ts2NodejsBdd,
-  ts3React,
-  ts4Docker,
-  ts5Production,
-  ts6Maintenance,
-  ts7Ia,
+  ts2Nodejs,
+  ts3Bdd,
+  ts4React,
+  ts5Docker,
+  ts6Production,
+  ts7Maintenance,
+  ts8Ia,
   resWord,
   resExcel,
   resPowerpoint,

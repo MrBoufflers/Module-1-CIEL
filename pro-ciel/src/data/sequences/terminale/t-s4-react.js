@@ -1,12 +1,12 @@
-export const ts3React = {
+export const ts4React = {
   meta: {
-    id: 'react', sequence: 'S3', niveau: 'terminale',
+    id: 'react', sequence: 'S4', niveau: 'terminale',
     title: 'Frameworks modernes : React', icon: 'brand-react', duree: '12 h',
     theme: 'Développement front-end',
     filRouge: "L'API existe (S2). On construit maintenant l'interface qui l'utilise : React, le framework le plus demandé du marché, qui structure le front-end en composants réutilisables.",
     ref: { competences: ['C08', 'C04'], savoirs: ['S3.1', 'S3.2'] },
     cyber: "Ne jamais injecter du HTML brut (dangerouslySetInnerHTML). Valider les données reçues de l'API.",
-    evalInfo: { format: 'Contrôle pratique (créer une mini-app React connectée à une API)', duree: '3 h', competence: 'C08 (Application)', ressourcesAutorisees: ['React docs', 'Le cours S3'], note: "Évaluation réalisée en classe." },
+    evalInfo: { format: 'Contrôle pratique (créer une mini-app React connectée à une API)', duree: '3 h', competence: 'C08 (Application)', ressourcesAutorisees: ['React docs', 'Le cours S4'], note: "Évaluation réalisée en classe." },
   },
   course: [
     { type: 'hero', title: 'React : construire des interfaces modernes', subtitle: "Fini le DOM à la main. React découpe l'interface en composants autonomes et réactifs : tu décris ce que tu veux voir, React s'occupe de mettre à jour l'écran." },
@@ -98,7 +98,7 @@ export const ts3React = {
     kind: 'digital',
     title: 'Le front-end React du projet annuel',
     mission: "Construire l'interface React de ton projet, connectée à l'API Express de S2.",
-    prerequis: ['Cours T-S3 suivi', 'API T-S2 fonctionnelle', 'React + Vite installés'],
+    prerequis: ['Cours T-S4 suivi', 'API T-S2 fonctionnelle', 'React + Vite installés'],
     criteres: ['Au moins 3 composants séparés', 'Données chargées depuis l\u2019API', 'State et props utilisés correctement', 'Interface lisible et organisée', 'Commits réguliers'],
     bonus: "Ajouter React Router pour naviguer entre plusieurs pages (npm install react-router-dom).",
     steps: [

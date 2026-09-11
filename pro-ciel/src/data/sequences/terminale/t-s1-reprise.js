@@ -1,6 +1,6 @@
 // =============================================================================
-// Terminale S1 — Reprise & cadrage du projet annuel (9 h)
-// 3 exercices intégrés. TP digital. C04 Application, C03 Application.
+// Terminale S1 — Reprise & cadrage du projet annuel (3 h)
+// 3 exercices intégrés. Sans TP ni évaluation de fin : le cadrage est évalué au fil de l'année.
 // =============================================================================
 
 export const ts1Reprise = {
@@ -10,21 +10,15 @@ export const ts1Reprise = {
     niveau: 'terminale',
     title: 'Reprise & cadrage du projet annuel',
     icon: 'rocket',
-    duree: '9 h',
+    duree: '3 h',
     theme: 'Reprise & projet',
     filRouge:
       "Retour de vacances. On repart du site de Première (HTML/CSS/JS) et on le transforme " +
-      "en vraie application : back-end, base de données, déploiement. Cette séquence cadre " +
-      "le projet annuel et remet les outils en marche.",
+      "en vraie application : back-end, base de données, déploiement. Cette séquence pose le " +
+      "cadre du projet annuel — un cadrage qui se complétera au fil des séquences, pas une " +
+      "étape évaluée une fois pour toutes.",
     ref: { competences: ['C04', 'C03', 'C09'], savoirs: ['S2.2', 'S5.2'] },
     cyber: "Analyse de risque initiale du projet (ce qu'on protège, contre quoi).",
-    evalInfo: {
-      format: 'Évaluation pratique : cadrage de projet + architecture argumentée',
-      duree: '3 h',
-      competence: 'C04 (Application) · C03 (Application)',
-      ressourcesAutorisees: ['Tous les cours de Première', 'Documentation en ligne'],
-      note: "Évaluation réalisée en classe.",
-    },
   },
 
   course: [
@@ -38,11 +32,11 @@ export const ts1Reprise = {
       blocks: [
         { type: 'table', headers: ['Compétence', 'Acquis de Première', 'Ce qu\u2019on ajoute en Terminale'],
           rows: [
-            ['HTML/CSS', 'Pages structurées, sémantiques, responsives', 'Interface React (S3)'],
+            ['HTML/CSS', 'Pages structurées, sémantiques, responsives', 'Interface React (S4)'],
             ['JavaScript', 'Logique pure + manipulation DOM', 'Node.js côté serveur (S2)'],
-            ['Python', 'Variables, fonctions, fichiers, données', 'IA et automatisation (S7)'],
-            ['Git/GitHub', 'Commits, push, Classroom', 'Branches, workflow déploiement (S5)'],
-            ['Cybersécurité', 'Posture, HTTPS, validation', 'Sécurité serveur, production (S5-S6)'],
+            ['Python', 'Variables, fonctions, fichiers, données', 'IA et automatisation (S8)'],
+            ['Git/GitHub', 'Commits, push, Classroom', 'Branches, workflow déploiement (S6)'],
+            ['Cybersécurité', 'Posture, HTTPS, validation', 'Sécurité serveur, production (S6-S7)'],
           ] },
       ],
     },
@@ -55,10 +49,10 @@ export const ts1Reprise = {
           "Pas de base de données, pas de compte utilisateur, pas de contenu qui change selon " +
           "le visiteur. Cette année on ajoute les couches manquantes :" },
         { type: 'cards', columns: 2, items: [
-          { title: 'Le front-end (S3)', text: "L'interface que l'utilisateur voit. On passe du HTML/JS à la main à un framework moderne (React) qui structure l'interface en composants réutilisables." },
+          { title: 'Le front-end (S4)', text: "L'interface que l'utilisateur voit. On passe du HTML/JS à la main à un framework moderne (React) qui structure l'interface en composants réutilisables." },
           { title: 'Le back-end (S2)', text: "Le serveur qui traite les demandes : une API en Node.js qui reçoit les requêtes du front, interroge la base de données, et renvoie les résultats." },
-          { title: 'La base de données (S2)', text: "Le stockage permanent et structuré des données (utilisateurs, contenus, paramètres). On apprend la conception + le SQL." },
-          { title: 'Le déploiement (S4-S5)', text: "Mettre tout ça en ligne sur un vrai serveur, accessible au monde. Docker pour conteneuriser, puis mise en production." },
+          { title: 'La base de données (S3)', text: "Le stockage permanent et structuré des données (utilisateurs, contenus, paramètres). On apprend la conception + le SQL." },
+          { title: 'Le déploiement (S5-S6)', text: "Mettre tout ça en ligne sur un vrai serveur, accessible au monde. Docker pour conteneuriser, puis mise en production." },
         ]},
         { type: 'info', variant: 'analogie', title: 'Analogie — Le restaurant complet',
           content: "En Première, tu avais une vitrine avec le menu affiché (site statique). Maintenant tu construis le restaurant entier : la cuisine (back-end), le réfrigérateur (base de données), le service en salle (API), et l'adresse dans la rue (déploiement)." },
@@ -146,50 +140,12 @@ export const ts1Reprise = {
         ]},
       ],
     },
+    {
+      type: 'section', title: 'Un document vivant',
+      blocks: [
+        { type: 'info', variant: 'astuce', title: 'Le cahier des charges se construit toute l\u2019année',
+          content: "Le cadrage produit ici n'est pas figé : c'est un document vivant. À chaque séquence tu le reprends et le complètes (nouvelles fonctionnalités, choix techniques, jalons ajustés). Il n'est donc pas évalué en fin de séquence, mais tout au long de l'année, à mesure que le projet prend forme." },
+      ],
+    },
   ],
-
-  tp: {
-    kind: 'digital',
-    title: 'Cadrage et planification du projet',
-    mission: "Produire le document de cadrage du projet annuel : besoin, fonctionnalités, backlog, jalons, et architecture cible.",
-    prerequis: ['Cours T-S1 suivi', 'Environnement vérifié', 'Dépôt Terminale créé'],
-    criteres: ['Besoin clairement formulé', 'Fonctionnalités listées et priorisées', 'Backlog en tâches concrètes', 'Schéma d\u2019architecture', 'Commits réguliers'],
-    bonus: "Rédiger un README.md professionnel pour le dépôt (description du projet, technologies, installation).",
-    steps: [
-      {
-        title: 'Document de cadrage',
-        body: [
-          { type: 'list', ordered: true, items: [
-            'Crée un fichier `PROJET.md` à la racine du dépôt.',
-            'Écris les sections : Besoin, Fonctionnalités (liste priorisée), Architecture cible (texte + schéma ASCII ou image), Technologies utilisées.',
-          ]},
-        ],
-        done: 'Le fichier PROJET.md est complet et lisible.',
-        validation: { commit: 'git commit -m "docs: cadrage du projet"' },
-      },
-      {
-        title: 'Backlog et jalons',
-        body: [
-          { type: 'list', ordered: true, items: [
-            'Dans PROJET.md, ajoute une section Backlog avec la liste des tâches concrètes.',
-            'Ajoute une section Jalons avec les grandes étapes et leurs dates cibles (S2 = back-end, S3 = front-end, S4 = Docker, S5 = production).',
-          ]},
-        ],
-        done: 'Le backlog et les jalons sont documentés.',
-        validation: { commit: 'git commit -m "docs: backlog et jalons"' },
-      },
-      {
-        title: 'Mise en route technique',
-        body: [
-          { type: 'list', ordered: true, items: [
-            'Initialise le projet : `npm init -y` pour créer le `package.json`.',
-            'Crée la structure de dossiers de base (`src/`, `public/`, `docs/`).',
-            'Crée un `README.md` avec le nom du projet, une description d\u2019une phrase, et les instructions d\u2019installation.',
-          ]},
-        ],
-        done: 'Le dépôt est initialisé avec npm, structuré et documenté.',
-        validation: { commit: 'git commit -m "chore: initialisation du projet" && git push' },
-      },
-    ],
-  },
 };

@@ -1,12 +1,12 @@
-export const ts6Maintenance = {
+export const ts7Maintenance = {
   meta: {
-    id: 'maintenance', sequence: 'S6', niveau: 'terminale',
+    id: 'maintenance', sequence: 'S7', niveau: 'terminale',
     title: 'Maintenir & faire évoluer en production', icon: 'tool', duree: '9 h',
     theme: 'Maintenance & évolution',
-    filRouge: "L'app est en production (S5). Mais un logiciel ne s'arrête jamais : bugs à corriger, fonctionnalités à ajouter, performances à surveiller, sécurité à maintenir. C'est le quotidien du métier.",
+    filRouge: "L'app est en production (S6). Mais un logiciel ne s'arrête jamais : bugs à corriger, fonctionnalités à ajouter, performances à surveiller, sécurité à maintenir. C'est le quotidien du métier.",
     ref: { competences: ['C08', 'C09', 'C10'], savoirs: ['S2.2', 'S5.2'] },
     cyber: "Veille sécurité, gestion des vulnérabilités, mises à jour critiques.",
-    evalInfo: { format: 'Évaluation pratique (corriger un bug + ajouter une fonctionnalité sur un code existant)', duree: '3 h', competence: 'C08 (Application) · C10 (Application)', ressourcesAutorisees: ['Documentation en ligne', 'Le cours S6'], note: "Évaluation réalisée en classe." },
+    evalInfo: { format: 'Évaluation pratique (corriger un bug + ajouter une fonctionnalité sur un code existant)', duree: '3 h', competence: 'C08 (Application) · C10 (Application)', ressourcesAutorisees: ['Documentation en ligne', 'Le cours S7'], note: "Évaluation réalisée en classe." },
   },
   course: [
     { type: 'hero', title: 'Maintenir & faire évoluer', subtitle: "80% du temps d'un développeur se passe sur du code existant, pas du code neuf. Apprendre à lire, corriger et améliorer du code, c'est la compétence la plus demandée du métier." },
@@ -93,7 +93,7 @@ export const ts6Maintenance = {
     kind: 'digital',
     title: 'Maintenance de son projet',
     mission: "Corriger des bugs, ajouter une fonctionnalité, et auditer les dépendances de ton projet en production.",
-    prerequis: ['Cours T-S6 suivi', 'Projet déployé (T-S5)'],
+    prerequis: ['Cours T-S7 suivi', 'Projet déployé (T-S6)'],
     criteres: ['Bugs corrigés avec des commits fix:', 'Fonctionnalité ajoutée via une branche', 'Audit npm effectué', 'Aucune régression introduite'],
     bonus: "Mettre en place un log structuré (horodaté, avec niveau info/warn/error) dans ton API.",
     steps: [
