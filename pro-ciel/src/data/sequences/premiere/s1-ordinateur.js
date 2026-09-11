@@ -11,10 +11,10 @@
 //   GitHub. La propriété tp.kind = 'physical' indique au composant d'affichage de
 //   NE PAS afficher d'encadré commit/push, mais un encadré « validation par le
 //   professeur » à la place. La validation de chaque étape se fait par observation
-//   directe (identification orale des composants devant le professeur).
-// - L'évaluation est HORS site (papier ou formulaire en ligne). L'onglet « Éval »
-//   n'affiche donc pas de sujet : seulement le bloc meta.evalInfo (format, durée,
-//   compétence). Aucun contenu de QCM ne doit figurer dans le code du site.
+//   directe (dont une identification orale des composants devant le professeur).
+// - L'évaluation est HORS SITE (papier ou formulaire en ligne). L'onglet « Éval » n'affiche donc pas de
+//   sujet : seulement le bloc meta.evalInfo (format, durée, compétence, ressources
+//   autorisées). Aucun contenu de QCM ne doit figurer dans le code du site.
 // =============================================================================
 
 export const s1Ordinateur = {
@@ -35,7 +35,7 @@ export const s1Ordinateur = {
       "La surface d'attaque matérielle (ports, périphériques) et pourquoi on verrouille " +
       "sa session.",
     evalInfo: {
-      format: 'QCM (questions à choix + justifications + schéma à compléter)',
+      format: 'QCM papier (questions à choix + justifications + schéma à compléter)',
       duree: '1 h',
       competence: 'C04 (Découverte)',
       ressourcesAutorisees: ['Aucune'],
@@ -249,8 +249,9 @@ export const s1Ordinateur = {
     kind: 'physical', // <- IMPORTANT : pas d'encadré commit/push ; validation par le prof
     title: 'Démontage, identification et remontage',
     mission:
-      "Ouvrir une unité centrale, démonter les composants amovibles, appeler le professeur pour " +
-      "les nommer à l'oral, puis tout remonter et vérifier que la machine redémarre.",
+      "Ouvrir une unité centrale, démonter les composants amovibles, puis appeler le " +
+      "professeur pour identifier oralement les composants vus en cours, avant de tout " +
+      "remonter correctement et de vérifier que la machine redémarre.",
     prerequis: [
       'Cours S1 suivi',
       'Poste de travail individuel (1 tour de récupération par élève)',
@@ -263,7 +264,7 @@ export const s1Ordinateur = {
     ],
     criteres: [
       'Respect des règles de sécurité (ESD)',
-      'Composants correctement nommés à l\u2019oral devant le professeur',
+      'Composants correctement identifiés à l\u2019oral devant le professeur',
       'Manipulation soignée, sans forçage',
       'Machine fonctionnelle au redémarrage (POST/BIOS atteint)',
     ],
@@ -272,7 +273,7 @@ export const s1Ordinateur = {
       "pas le travail d'identification.",
     steps: [
       {
-        title: 'Sécurité et préparation',
+        title: 'Sécurité',
         body: [
           {
             type: 'list',
@@ -304,7 +305,7 @@ export const s1Ordinateur = {
           {
             type: 'info',
             variant: 'astuce',
-            content: "On ne démonte pas le processeur ni son ventirad dans ce TP.",
+            content: "On ne démonte pas le processeur (CPU) ni son ventirad dans ce TP.",
           },
         ],
         done: 'Le boîtier est ouvert et les composants amovibles sont retirés proprement, rangés, sans forçage.',
@@ -315,12 +316,12 @@ export const s1Ordinateur = {
           {
             type: 'prose',
             content:
-              "Appelle le professeur. À l'oral, **nomme chaque composant** et explique brièvement " +
-              "son rôle : le CPU (sous le ventirad), la RAM, le stockage, la carte mère, la carte " +
-              "graphique si présente, et l'alimentation.",
+              "Appelle le professeur. Devant lui, **identifie oralement** chaque composant et " +
+              "explique son rôle : le CPU (sous le ventirad), la RAM, le stockage, la carte mère, " +
+              "la carte graphique si présente, et l'alimentation.",
           },
         ],
-        done: 'Le professeur a validé l\u2019identification orale de tous les composants.',
+        done: 'Les composants ont été identifiés correctement à l\u2019oral devant le professeur.',
       },
       {
         title: 'Remontage et test',

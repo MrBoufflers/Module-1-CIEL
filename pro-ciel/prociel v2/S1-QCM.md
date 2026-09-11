@@ -1,141 +1,114 @@
-# Bac Pro CIEL — Première · Évaluation S1
+# Évaluation S1 — C'est quoi un ordinateur ? (QCM)
 
-## C'est quoi un ordinateur ?
+**Nom / Prénom :** ..................................................  **Classe :** ...............  **Date :** ...............
 
-**Durée : 1 h · Noté sur 20 · Compétence évaluée : C04**
+**Durée :** 1 h · **Barème :** 1 point par bonne réponse, noté sur 10, pas de point négatif.
+**Support :** papier ou formulaire en ligne.
+**Ressources autorisées : aucune.**
 
-> Version « fiche élève » — sans corrigé. Support utilisable en impression papier
-> ou en report dans un formulaire en ligne (Google Forms).
-> **Aucune ressource autorisée.**
-
-Nom : ............................................  Prénom : ............................................  Note : ......... / 20
-
-**Consigne** : coche la bonne réponse pour chaque question du QCM (une seule réponse).
-Réponds ensuite aux questions de justification en faisant des phrases. Le diagramme est à compléter.
+> Consignes : lis bien chaque question, coche **une seule** réponse par question (sauf indication contraire), puis complète le schéma de la dernière partie.
 
 ---
 
-### Partie A — QCM (12 points)
+## Partie 1 — Questions à choix (10 points)
 
-**1. Quel composant est le « cerveau » de l'ordinateur, celui qui exécute les instructions ?**
-- ☐ a. La RAM
-- ☐ b. Le processeur (CPU)
-- ☐ c. La carte graphique
-- ☐ d. Le disque dur
+**1. Quel composant est le « cerveau » de l'ordinateur ?**
+- [ ] RAM
+- [ ] GPU
+- [ ] CPU
+- [ ] Disque dur
 
-**2. La mémoire vive (RAM) est une mémoire :**
-- ☐ a. Volatile (s'efface à l'extinction)
-- ☐ b. Permanente
-- ☐ c. Optique
-- ☐ d. Mécanique
+**2. La mémoire vive (RAM) est une mémoire...**
+- [ ] Volatile
+- [ ] Permanente
+- [ ] Optique
+- [ ] Mécanique
 
-**3. Quel est le rôle principal de la carte mère ?**
-- ☐ a. Afficher les images
-- ☐ b. Relier et faire communiquer les composants
-- ☐ c. Stocker les fichiers
-- ☐ d. Refroidir le processeur
+**3. Quel est le rôle de la carte mère ?**
+- [ ] Afficher les graphismes
+- [ ] Relier tous les composants
+- [ ] Alimenter le PC
+- [ ] Refroidir le CPU
 
-**4. Le BIOS / UEFI est un exemple de :**
-- ☐ a. Matériel (hardware)
-- ☐ b. Logiciel d'application
-- ☐ c. Micrologiciel (firmware)
-- ☐ d. Virus
+**4. Le BIOS/UEFI est un exemple de...**
+- [ ] Matériel
+- [ ] Logiciel
+- [ ] Micrologiciel (firmware)
+- [ ] Virus
 
-**5. Lequel de ces supports conserve les données même éteint ?**
-- ☐ a. La RAM
-- ☐ b. Le SSD
-- ☐ c. Le cache du processeur
-- ☐ d. Les registres
+**5. Lequel conserve les données quand l'ordinateur est éteint ?**
+- [ ] La RAM
+- [ ] Le SSD
+- [ ] Le processeur
+- [ ] Le cache
 
-**6. Dans l'architecture de Von Neumann, où sont chargées les données en cours d'utilisation ?**
-- ☐ a. Sur le disque de stockage
-- ☐ b. Dans la mémoire vive (RAM)
-- ☐ c. Dans l'alimentation
-- ☐ d. Sur l'écran
+**6. Dans l'architecture de Von Neumann, que fait le CPU ?**
+- [ ] Stocke les fichiers
+- [ ] Exécute les instructions
+- [ ] Affiche l'image
+- [ ] Alimente la carte mère
 
-**7. Quelle machine est conçue pour fonctionner en continu et rendre un service à d'autres ordinateurs ?**
-- ☐ a. Un smartphone
-- ☐ b. Un serveur
-- ☐ c. Un PC de bureau
-- ☐ d. Une tablette
+**7. Quelle machine est conçue pour fonctionner 24h/24 et servir d'autres ordinateurs ?**
+- [ ] Un smartphone
+- [ ] Un serveur
+- [ ] Un PC de bureau
+- [ ] Une tablette
 
-**8. Lequel de ces éléments est un logiciel (software) ?**
-- ☐ a. L'écran
-- ☐ b. Le navigateur web
-- ☐ c. La souris
-- ☐ d. La carte graphique
+**8. Lequel relève du *logiciel* (software) ?**
+- [ ] L'écran
+- [ ] La souris
+- [ ] Le navigateur web
+- [ ] La carte graphique
 
-**9. Pourquoi verrouiller sa session quand on s'éloigne de son poste ?**
-- ☐ a. Pour économiser la batterie
-- ☐ b. Pour empêcher l'accès à ses données
-- ☐ c. Pour éteindre l'écran
-- ☐ d. Pour accélérer la machine
+**9. Pourquoi verrouiller sa session quand on quitte son poste ?**
+- [ ] Pour économiser la batterie
+- [ ] Pour empêcher l'accès à ses données
+- [ ] Pour éteindre l'écran
+- [ ] Pour accélérer le PC
 
-**10. Qu'appelle-t-on la « surface d'attaque » matérielle d'une machine ?**
-- ☐ a. La taille de son écran
-- ☐ b. Ses points d'entrée physiques (ports, périphériques)
-- ☐ c. La puissance de son processeur
-- ☐ d. Sa mémoire totale
-
-**11. Quelle affirmation est correcte ?**
-- ☐ a. La RAM est plus lente mais permanente
-- ☐ b. Le stockage est plus rapide que la RAM
-- ☐ c. La RAM est rapide mais volatile
-- ☐ d. Le CPU sert à stocker les fichiers
-
-**12. Le terme « hardware » désigne :**
-- ☐ a. Les programmes installés
-- ☐ b. Tout ce qui est physique dans la machine
-- ☐ c. Le système d'exploitation
-- ☐ d. Les fichiers de l'utilisateur
+**10. Qu'est-ce qu'une « surface d'attaque » matérielle ?**
+- [ ] La taille de l'écran
+- [ ] Les points d'entrée physiques (ports, périphériques)
+- [ ] La puissance du CPU
+- [ ] La vitesse du disque
 
 ---
 
-### Partie B — Questions à justifier (4 points)
+## Partie 2 — Justifie (bonus / à l'oral selon la consigne du professeur)
 
-**1.** Explique avec tes mots la différence entre la RAM et le stockage (SSD/disque dur).
-Donne un exemple concret de ce que fait chacun quand tu lances un programme.
+En une phrase, explique la différence entre la **RAM** et le **stockage** :
 
-<br><br>
+.................................................................................................................
 
-**2.** Un camarade dit : « Mon smartphone, ce n'est pas un ordinateur. » A-t-il raison ?
-Justifie ta réponse en citant au moins deux points communs avec un PC.
-
-<br><br>
-
-**3.** Pourquoi dit-on que brancher une clé USB inconnue sur un poste peut être un risque
-de sécurité ? Explique en une ou deux phrases.
-
-<br><br>
-
-**4.** Range ces trois mémoires de la plus rapide à la plus lente, et explique brièvement
-ton classement : RAM, SSD, registres du processeur.
-
-<br><br>
+.................................................................................................................
 
 ---
 
-### Partie C — Schéma à compléter (4 points)
+## Partie 3 — Schéma à compléter : l'architecture de Von Neumann
 
-Complète le schéma de l'architecture de Von Neumann : place les 4 étiquettes au bon
-endroit, puis indique d'une flèche le chemin suivi par une instruction au lancement
-d'un programme.
-
-**Étiquettes à replacer :** Processeur (CPU) — Mémoire vive (RAM) — Stockage — Entrées/Sorties
+Place les quatre éléments au bon endroit à partir de la liste : **Processeur (CPU)** · **Mémoire vive (RAM)** · **Stockage** · **Entrées / Sorties**.
 
 ```
-   +--------------------+        +--------------------+
-   |   ..............   |        |   ..............   |
-   +--------------------+        +--------------------+
-
-   +--------------------+        +--------------------+
-   |   ..............   |        |   ..............   |
-   +--------------------+        +--------------------+
-
-   Unité centrale — les composants ci-dessus échangent entre eux.
+        +---------------------------+
+        |                           |
+        |   (1) ..................  |
+        |                           |
+        +-------------+-------------+
+                      |
+      +---------------+---------------+
+      |               |               |
++-----v-----+   +-----v-----+   +-----v-----+
+|           |   |           |   |           |
+| (2) ..... |   | (3) ..... |   | (4) ..... |
+|           |   |           |   |           |
++-----------+   +-----------+   +-----------+
 ```
+
+- (1) : ..............................................
+- (2) : ..............................................
+- (3) : ..............................................
+- (4) : ..............................................
 
 ---
 
-> **Note enseignant** : le corrigé n'est volontairement pas inclus dans ce dépôt (public).
-> Une seconde version équivalente (Groupe 2) existe dans `Evaluation_S1.docx`.
+*Fiche élève — aucun corrigé n'est fourni sur ce document.*

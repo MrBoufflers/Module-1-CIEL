@@ -1,5 +1,5 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { IconX } from '@tabler/icons-react';
+import { IconX, IconRocket } from '@tabler/icons-react';
 import { getSequencesByNiveau } from '../../data/sequences/index';
 import legacyModules from '../../data/legacyModules';
 
@@ -23,14 +23,14 @@ export default function SidebarV2({ isOpen, onClose }) {
 
       <aside
         className={`
-          fixed top-0 left-0 z-40 h-full
+          fixed top-0 left-0 z-40 h-full pointer-events-none
           flex flex-col transition-transform duration-300
           lg:translate-x-0
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
         style={{ width: 'var(--sidebar-w)' }}
       >
-        <nav className="sidebar" style={{ position: 'fixed', top: 'var(--header-h)', height: 'calc(100vh - var(--header-h))' }}>
+        <nav className="sidebar" style={{ position: 'fixed', top: 'var(--header-h)', height: 'calc(100vh - var(--header-h))', pointerEvents: 'auto' }}>
           <div className="flex items-center justify-between mb-4 lg:hidden">
             <span className="brand" style={{ fontSize: 16 }}>Navigation</span>
             <button onClick={onClose} className="icon-btn" style={{ width: 32, height: 32 }}>
@@ -49,17 +49,20 @@ export default function SidebarV2({ isOpen, onClose }) {
                 <div className="side-links">
                   {seqs.length > 0 ? seqs.map((seq) => {
                     const isActive = location.pathname.includes(`/${section.key}/${seq.meta.id}`);
+                    const isSpecial = !seq.meta.sequence;
                     return (
                       <NavLink
                         key={seq.meta.id}
                         to={`/${section.key}/${seq.meta.id}/cours`}
                         onClick={onClose}
-                        className={`side-link${isActive ? ' active' : ''}`}
+                        className={`side-link${isSpecial ? ' special' : ''}${isActive ? ' active' : ''}`}
                       >
-                        <span className="seq-badge">{seq.meta.sequence}</span>
+                        <span className="seq-badge">
+                          {isSpecial ? <IconRocket size={16} stroke={1.8} /> : seq.meta.sequence}
+                        </span>
                         <span className="seq-meta-side">
                           <span className="t">{seq.meta.title}</span>
-                          <span className="s">{seq.meta.sequence} · {seq.meta.theme}</span>
+                          <span className="s">{isSpecial ? seq.meta.theme : `${seq.meta.sequence} · ${seq.meta.theme}`}</span>
                         </span>
                       </NavLink>
                     );

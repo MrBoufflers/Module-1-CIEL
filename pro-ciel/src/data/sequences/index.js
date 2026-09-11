@@ -8,6 +8,7 @@ import { s7JsDom } from './premiere/s7-js-dom.js';
 import { s8Python1 } from './premiere/s8-python1.js';
 import { s9Python2 } from './premiere/s9-python2.js';
 import { s10Cyber } from './premiere/s10-cyber.js';
+import { projetAnnuel } from './terminale/t-projet-annuel.js';
 import { ts1Reprise } from './terminale/t-s1-reprise.js';
 import { ts2Nodejs } from './terminale/t-s2-nodejs.js';
 import { ts3Bdd } from './terminale/t-s3-bdd.js';
@@ -31,6 +32,7 @@ const sequences = [
   s8Python1,
   s9Python2,
   s10Cyber,
+  projetAnnuel,
   ts1Reprise,
   ts2Nodejs,
   ts3Bdd,
