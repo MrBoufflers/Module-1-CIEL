@@ -551,6 +551,9 @@ body {
 .step-body { margin-top: 16px; padding-top: 4px; }
 .step-body > * + * { margin-top: 16px; }
 
+.inline-link { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+.inline-link:hover { opacity: .8; }
+
 .validate-box {
   background: color-mix(in srgb, var(--status-done) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--status-done) 32%, transparent);

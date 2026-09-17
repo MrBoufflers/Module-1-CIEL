@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CODE_STYLE = {
   color: 'var(--accent)',
@@ -55,6 +56,26 @@ function parseInline(text) {
         out.push(<em key={out.length}>{parseInline(text.slice(i + 1, end))}</em>);
         i = end + 1;
         continue;
+      }
+    }
+
+    // [texte](url) — lien interne (react-router) ou externe (nouvel onglet)
+    if (ch === '[') {
+      const close = text.indexOf(']', i + 1);
+      if (close !== -1 && text[close + 1] === '(') {
+        const paren = text.indexOf(')', close + 2);
+        if (paren !== -1) {
+          flush();
+          const label = parseInline(text.slice(i + 1, close));
+          const href = text.slice(close + 2, paren);
+          if (href.startsWith('/')) {
+            out.push(<Link key={out.length} to={href} className="inline-link">{label}</Link>);
+          } else {
+            out.push(<a key={out.length} href={href} target="_blank" rel="noopener noreferrer" className="inline-link">{label}</a>);
+          }
+          i = paren + 1;
+          continue;
+        }
       }
     }
 

@@ -629,6 +629,13 @@ export const ts2Nodejs = {
             "malveillant. **Vérifie toujours** les données reçues avant de les utiliser (ici : on refuse " +
             "avec un `400` si le nom manque). C'est le premier réflexe de sécurité d'un back-end.",
         },
+        {
+          type: 'info', variant: 'astuce', title: 'Comment tester un POST ?',
+          content:
+            "Un `POST` ne se teste **pas** dans la barre d'adresse du navigateur (elle ne fait que des " +
+            "`GET`). Il te faut un **client HTTP** comme Insomnia. Guide pas à pas pour tester ton API " +
+            "(GET, POST, PUT, DELETE) : [Insomnia — Tester une API CRUD](/ressources/insomnia).",
+        },
       ],
     },
     {
