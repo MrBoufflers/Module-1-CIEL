@@ -846,7 +846,7 @@ export const ts2Nodejs = {
       title: 'Exercice 12 — Constater la limite de la mémoire',
       body: [
         { type: 'list', ordered: true, items: [
-          "Avec ton API, ajoute un produit via un POST (avec Thunder Client ou un autre client HTTP).",
+          "Avec ton API, ajoute un produit via un POST (avec Insomnia ou un autre client HTTP).",
           "Vérifie qu'il apparaît dans `GET /produits`.",
           "**Arrête** le serveur, puis **relance-le**. Refais `GET /produits`.",
           "Que constates-tu ? Explique pourquoi, et écris en une phrase ce qui nous manque pour régler ça.",
@@ -880,7 +880,7 @@ export const ts2Nodejs = {
       "données stockées en mémoire, testée avec un client HTTP. Suis les étapes : chacune montre " +
       "exactement comment faire, avec le code à écrire et comment le tester.",
     prerequis: ['Cours T-S2 suivi', 'Node.js + npm installés', 'Dépôt GitHub Classroom du projet'],
-    materiel: ['Node.js', 'VS Code', 'Un client HTTP (Thunder Client, Insomnia ou équivalent)'],
+    materiel: ['Node.js', 'VS Code', 'Insomnia (client HTTP à installer depuis insomnia.rest)'],
     criteres: [
       "package.json + script `dev` + `.gitignore` (node_modules exclu)",
       'Au moins les 4 routes CRUD (GET liste, GET par id, POST, DELETE)',
@@ -991,12 +991,13 @@ export const ts2Nodejs = {
             '  produits.push(nouveau);                       // on ajoute au tableau\n' +
             '  res.status(201).json(nouveau);                // 201 = cree\n' +
             '});' },
-          { type: 'prose', content: "**4.3** — Un POST ne se teste pas dans la barre d'adresse du navigateur (elle ne fait que des GET). On utilise un **client HTTP** comme **Thunder Client** (extension VS Code). Marche à suivre :" },
+          { type: 'prose', content: "**4.3** — Un POST ne se teste pas dans la barre d'adresse du navigateur (elle ne fait que des GET). On utilise un **client HTTP** comme **Insomnia** (une application à installer). Marche à suivre :" },
           { type: 'list', ordered: true, items: [
-            "Installe l'extension **Thunder Client** dans VS Code, puis ouvre-la (icône éclair à gauche).",
-            "Clique **New Request**. Choisis la méthode **POST** et saisis l'URL `http://localhost:3000/produits`.",
-            "Va dans l'onglet **Body**, choisis **JSON**, et colle : `{ \"nom\": \"Casque\", \"prix\": 40 }`.",
-            "Clique **Send** : tu dois recevoir le produit créé avec un statut **201**.",
+            "Télécharge et installe **Insomnia** depuis `insomnia.rest`, puis ouvre l'application.",
+            "Crée une requête : bouton **+** puis **HTTP Request** (dans une Collection).",
+            "Choisis la méthode **POST** et saisis l'URL `http://localhost:3000/produits`.",
+            "Ouvre l'onglet **Body**, choisis **JSON**, et colle : `{ \"nom\": \"Casque\", \"prix\": 40 }`.",
+            "Clique **Send** : tu dois recevoir le produit créé, avec le statut **201** affiché en haut de la réponse.",
             "Refais un `GET http://localhost:3000/produits` : le casque apparaît dans la liste.",
             "Teste la validation : renvoie un POST avec un corps **vide** `{}` → tu dois obtenir un statut **400**.",
           ]},
@@ -1019,13 +1020,46 @@ export const ts2Nodejs = {
             '  produits.splice(index, 1);                    // retire 1 element a cette position\n' +
             '  res.status(200).json({ message: "Produit supprime" });\n' +
             '});' },
-          { type: 'prose', content: "**5.2** — Teste dans Thunder Client : méthode **DELETE**, URL `http://localhost:3000/produits/1`, **Send** → statut 200. Refais `GET /produits` : le produit a disparu. Teste aussi un `id` inexistant (`/produits/999`) → statut **404**." },
-          { type: 'prose', content: "**5.3** — Tu as maintenant les **4 routes CRUD**. Vérifie une dernière fois chaque code de statut (200, 201, 400, 404), fais un commit final et pousse ton travail sur GitHub Classroom." },
+          { type: 'prose', content: "**5.2** — Teste dans Insomnia : méthode **DELETE**, URL `http://localhost:3000/produits/1`, **Send** → statut 200. Refais `GET /produits` : le produit a disparu. Teste aussi un `id` inexistant (`/produits/999`) → statut **404**." },
+          { type: 'prose', content: "**5.3** — Tu as maintenant les **4 routes CRUD** pour `produits`. Vérifie chaque code de statut (200, 201, 400, 404), puis commit. La dernière étape va te demander de refaire tout ça, seul, sur un autre sujet." },
           { type: 'info', variant: 'astuce', title: 'Bonus (facultatif)',
             content: "Ajoute une recherche : `GET /produits?nom=Clavier`. Récupère `req.query.nom` et renvoie `produits.filter((p) => p.nom === req.query.nom)`. C'est le rôle de `req.query`." },
         ],
-        done: "L'API CRUD complète fonctionne (GET liste, GET par id, POST, DELETE) avec les bons codes de statut, et le tout est poussé sur GitHub.",
-        validation: { commit: 'git commit -m "feat: route DELETE (CRUD complet)" && git push' },
+        done: "L'API `produits` CRUD complète fonctionne (GET liste, GET par id, POST, DELETE) avec les bons codes de statut.",
+        validation: { commit: 'git commit -m "feat: API produits CRUD complete"' },
+      },
+      {
+        title: 'Étape 6 — À toi de jouer : la bibliothèque de jeux (entraînement type contrôle)',
+        body: [
+          { type: 'info', variant: 'attention', title: 'Cette fois, sans le code',
+            content: "Ici on te donne seulement le **cahier des charges**, pas le code. Tu as tout ce qu'il faut dans le cours et les étapes 1 à 5 pour y arriver seul : c'est exactement le type d'exercice attendu au contrôle du S2. Attention : ce n'est **pas** un copier-coller de `produits` — la ressource est différente et certaines règles sont nouvelles." },
+          { type: 'prose', content: "**Contexte.** Tu construis l'API d'une **bibliothèque de jeux vidéo**. Repars d'un projet propre (nouveau dossier `api-jeux`, `npm init`, Express, `serveur.js`, comme à l'étape 1)." },
+          { type: 'prose', content: "**La ressource `jeux` (en mémoire).** Chaque jeu est un objet avec ces champs — plus riche que `produits`, à toi d'adapter :" },
+          { type: 'list', ordered: false, items: [
+            "`id` : nombre unique",
+            "`titre` : texte (obligatoire)",
+            "`plateforme` : texte (ex. \"PC\", \"Switch\", \"PS5\")",
+            "`genre` : texte (ex. \"RPG\", \"Plateforme\")",
+            "`note` : nombre **sur 20** (entre 0 et 20)",
+            "`termine` : booléen (`true` si le jeu est fini, `false` sinon)",
+          ]},
+          { type: 'prose', content: "Déclare **3 jeux** de départ dans le tableau. Puis implémente les routes suivantes :" },
+          { type: 'list', ordered: true, items: [
+            "**`GET /jeux`** : renvoie toute la liste.",
+            "**`GET /jeux/:id`** : renvoie un seul jeu, ou **404** s'il n'existe pas.",
+            "**`GET /jeux?termine=true`** : renvoie uniquement les jeux terminés (utilise `req.query` et `filter`).",
+            "**`POST /jeux`** : crée un jeu. Refuse (**400**) si le `titre` manque **ou** si la `note` n'est pas comprise entre 0 et 20. Refuse (**409**) si un jeu porte déjà ce `titre`. Sinon **201** avec le jeu créé.",
+            "**`PUT /jeux/:id`** : modifie un jeu existant à partir des données reçues (**404** si l'id n'existe pas, **400** si les données sont invalides).",
+            "**`DELETE /jeux/:id`** : supprime un jeu (**404** si l'id n'existe pas).",
+          ]},
+          { type: 'info', variant: 'attention', title: 'Trois points qui demandent de réfléchir (pas de copier-coller)',
+            content: "**1. L'`id` unique.** N'utilise **pas** `jeux.length + 1` : après une suppression, ça recrée un id déjà pris. Trouve un moyen d'obtenir un id vraiment unique (indice : pense au plus grand id existant). **2. Le code 409.** Il n'est pas dans le cours : cherche ce que signifie **409 Conflict** et sers-t'en pour le doublon de titre. **3. Le `PUT`.** On ne l'a jamais codé ensemble : à toi de transposer ce que tu sais du `GET /:id` (retrouver le jeu) et du `POST` (valider les données)." },
+          { type: 'prose', content: "**Teste chaque route dans Insomnia** et vérifie les codes de statut : **200** (lecture/modif/suppression OK), **201** (création), **400** (données invalides), **404** (id absent), **409** (titre déjà pris). Quand tout fonctionne, commit et pousse sur GitHub Classroom." },
+          { type: 'info', variant: 'astuce', title: 'Pour aller plus loin (facultatif)',
+            content: "Ajoute une route `GET /jeux/genre/:genre` qui renvoie tous les jeux d'un genre donné, ou une route qui renvoie la **moyenne des notes** de ta bibliothèque." },
+        ],
+        done: "L'API `jeux` complète fonctionne : GET (liste + filtre `termine`), GET/:id, POST (avec 400 et 409), PUT, DELETE, chacune avec le bon code de statut. Le tout est poussé sur GitHub.",
+        validation: { commit: 'git commit -m "feat: API bibliotheque de jeux (CRUD complet)" && git push' },
       },
     ],
   },
