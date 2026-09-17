@@ -558,7 +558,7 @@ body {
 }
 .validate-box .v-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--status-done); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 .validate-box .v-text { font-size: 14.5px; line-height: 1.6; color: var(--text); }
-.validate-box code {
+.validate-box > code {
   display: block;
   background: var(--code-bg);
   color: #7ee787;
