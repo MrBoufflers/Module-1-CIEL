@@ -17,6 +17,7 @@ import { ts5Docker } from './terminale/t-s5-docker.js';
 import { ts6Production } from './terminale/t-s6-production.js';
 import { ts7Maintenance } from './terminale/t-s7-maintenance.js';
 import { ts8Ia } from './terminale/t-s8-ia.js';
+import { resInsomnia } from './ressources/res-insomnia.js';
 import { resWord } from './ressources/res-word.js';
 import { resExcel } from './ressources/res-excel.js';
 import { resPowerpoint } from './ressources/res-powerpoint.js';
@@ -41,6 +42,7 @@ const sequences = [
   ts6Production,
   ts7Maintenance,
   ts8Ia,
+  resInsomnia,
   resWord,
   resExcel,
   resPowerpoint,

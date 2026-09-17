@@ -551,6 +551,9 @@ body {
 .step-body { margin-top: 16px; padding-top: 4px; }
 .step-body > * + * { margin-top: 16px; }
 
+.inline-link { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+.inline-link:hover { opacity: .8; }
+
 .validate-box {
   background: color-mix(in srgb, var(--status-done) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--status-done) 32%, transparent);
@@ -558,7 +561,7 @@ body {
 }
 .validate-box .v-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--status-done); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 .validate-box .v-text { font-size: 14.5px; line-height: 1.6; color: var(--text); }
-.validate-box code {
+.validate-box > code {
   display: block;
   background: var(--code-bg);
   color: #7ee787;
