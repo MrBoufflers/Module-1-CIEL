@@ -22,7 +22,7 @@ export const s4Html = {
       "Le HTTPS, ce que voit (et ne voit pas) l'utilisateur, données affichées vs cachées.",
     evalInfo: {
       format: 'Contrôle pratique sur poste (coder une page HTML conforme à un cahier des charges)',
-      duree: '1 h 30',
+      duree: '3 h',
       competence: 'C08 (Découverte)',
       ressourcesAutorisees: ['MDN Web Docs', 'Le cours S4'],
       note: "Évaluation réalisée en classe — aucun sujet n'est publié sur le site.",
@@ -82,10 +82,10 @@ export const s4Html = {
         { type: 'code', language: 'html', title: 'Le squelette de départ',
           code:
             '<!DOCTYPE html>\n<html lang="fr">\n<head>\n' +
-            '  <meta charset="UTF-8">\n' +
-            '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
-            '  <title>Titre de ma page</title>\n' +
-            '</head>\n<body>\n  <!-- Contenu visible ici -->\n</body>\n</html>' },
+            '\t<meta charset="UTF-8">\n' +
+            '\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+            '\t<title>Titre de ma page</title>\n' +
+            '</head>\n<body>\n\t<!-- Contenu visible ici -->\n</body>\n</html>' },
         { type: 'list', ordered: false, items: [
           '`<!DOCTYPE html>` : déclare du HTML5.',
           '`<html lang="fr">` : le conteneur de toute la page, en français.',
@@ -191,17 +191,17 @@ export const s4Html = {
             '<!-- CORRECT : la derniere ouverte est la premiere fermee -->\n' +
             '<p><strong>Bonjour</strong></p>' },
         { type: 'prose', content:
-          "L'**indentation**, c'est décaler le code de **2 espaces à chaque niveau d'imbrication**. " +
+          "L'**indentation**, c'est décaler le code d'une **tabulation** (la touche **Tab**) à chaque niveau d'imbrication. " +
           "Ça ne change **rien** pour le navigateur, mais ça rend l'**arborescence** lisible d'un coup " +
           "d'œil : on voit immédiatement qui est enfant de qui. C'est **primordial** en équipe et pour " +
           "se relire." },
         { type: 'code', language: 'html', title: 'Bien indenté = arborescence visible',
           code:
             '<main>\n' +
-            '  <section>\n' +
-            '    <h2>Mon titre</h2>\n' +
-            '    <p>Un paragraphe.</p>\n' +
-            '  </section>\n' +
+            '\t<section>\n' +
+            '\t\t<h2>Mon titre</h2>\n' +
+            '\t\t<p>Un paragraphe.</p>\n' +
+            '\t</section>\n' +
             '</main>' },
         { type: 'info', variant: 'astuce', title: 'Laisse VS Code indenter pour toi',
           content: "Dans VS Code, **formate automatiquement** tout le fichier avec **Maj+Alt+F** (Windows) " +
@@ -220,15 +220,16 @@ export const s4Html = {
             '<main>\n' +
             '<section>\n' +
             '<h2>Mes jeux préférés</h2>\n' +
+            '<p><strong>Mon jeu favori : Zelda</p></strong>\n' +
             '<ul>\n' +
-            '<li><em>Zelda</li></em>\n' +
             '<li>Minecraft</li>\n' +
+            '<li>Mario</li>\n' +
             '</ul>\n' +
             '</section>\n' +
             '</main>' },
         { type: 'list', ordered: true, items: [
           "Corrige l'**imbrication** : trouve la ligne où deux balises se **croisent** et remets-les dans le bon ordre.",
-          'Corrige l’**indentation** : 2 espaces par niveau (à la main, puis vérifie avec **Maj+Alt+F**).',
+          'Corrige l’**indentation** : une **tabulation** (Tab) par niveau, puis vérifie avec **Maj+Alt+F**.',
           'Ouvre dans le navigateur : la liste doit s’afficher correctement.',
         ]},
       ],
@@ -247,6 +248,21 @@ export const s4Html = {
           { code: '<ul> <ol> <li>', text: 'Des listes : ul à puces, ol numérotée, li pour chaque élément.' },
           { code: '<strong> <em>', text: 'Mettre en valeur : strong (importance), em (emphase).' },
         ]},
+        { type: 'code', language: 'html', title: 'Chaque balise en action',
+          code:
+            '<h1>Titre principal de la page</h1>\n' +
+            '<h2>Un sous-titre</h2>\n\n' +
+            '<p>Un paragraphe avec du <strong>texte important</strong> et du <em>texte en emphase</em>.</p>\n\n' +
+            '<a href="https://developer.mozilla.org">Un lien vers MDN</a>\n\n' +
+            '<img src="chat.jpg" alt="Un chat roux">\n\n' +
+            '<ul>\n' +
+            '\t<li>Une puce</li>\n' +
+            '\t<li>Une autre puce</li>\n' +
+            '</ul>\n\n' +
+            '<ol>\n' +
+            '\t<li>Premiere etape</li>\n' +
+            '\t<li>Deuxieme etape</li>\n' +
+            '</ol>' },
         { type: 'info', variant: 'astuce', title: 'Hiérarchie des titres',
           content: "Les titres suivent une **hiérarchie logique** : un seul `<h1>` (le sujet de la page), " +
           "puis des `<h2>` pour les grandes parties, des `<h3>` à l'intérieur, etc. On ne saute pas de niveau " +
@@ -266,7 +282,7 @@ export const s4Html = {
           'Un lien `<a>` vers un site réel (par ex. MDN).',
           'Une image `<img>` (image libre de droits, ou un placeholder comme `https://picsum.photos/400/200`). N’oublie pas l’`alt`.',
           'Une liste à puces `<ul>` de 3 éléments et une liste numérotée `<ol>` de 3 éléments.',
-          'Indente proprement (2 espaces) et vérifie avec **Maj+Alt+F**.',
+          'Indente proprement (une **tabulation** par niveau) et vérifie avec **Maj+Alt+F**.',
           'Ouvre dans le navigateur et vérifie que tout s’affiche.',
         ]},
       ],
@@ -381,13 +397,13 @@ export const s4Html = {
         { type: 'code', language: 'html', title: 'Un formulaire de base',
           code:
             '<form>\n' +
-            '  <label for="prenom">Prenom</label>\n' +
-            '  <input type="text" id="prenom" name="prenom" placeholder="Ton prenom" required>\n\n' +
-            '  <label for="email">E-mail</label>\n' +
-            '  <input type="email" id="email" name="email" required>\n\n' +
-            '  <label for="message">Message</label>\n' +
-            '  <textarea id="message" name="message"></textarea>\n\n' +
-            '  <button type="submit">Envoyer</button>\n' +
+            '\t<label for="prenom">Prenom</label>\n' +
+            '\t<input type="text" id="prenom" name="prenom" placeholder="Ton prenom" required>\n\n' +
+            '\t<label for="email">E-mail</label>\n' +
+            '\t<input type="email" id="email" name="email" required>\n\n' +
+            '\t<label for="message">Message</label>\n' +
+            '\t<textarea id="message" name="message"></textarea>\n\n' +
+            '\t<button type="submit">Envoyer</button>\n' +
             '</form>' },
         { type: 'prose', content: "L'attribut `type` de l'`<input>` change le champ affiché :" },
         { type: 'cards', columns: 2, items: [
@@ -447,7 +463,7 @@ export const s4Html = {
           'Le HTML structure le contenu ; l’apparence, c’est le CSS (S5).',
           'Squelette : <!DOCTYPE>, <html>, <head>, <body>. Commentaire : <!-- ... -->.',
           'Une balise se configure avec des **attributs** : `nom="valeur"` (href, src, alt, id, class...).',
-          'On **imbrique** (parent/enfant) et on **indente** (2 espaces/niveau) ; on ferme la dernière balise ouverte en premier.',
+          'On **imbrique** (parent/enfant) et on **indente** (une **tabulation** par niveau) ; on ferme la dernière balise ouverte en premier.',
           '**Liens** : `href` externe (URL) ou interne (chemin relatif `page.html`, `../`), ancres `#id`, `mailto:`.',
           'Balises **sémantiques** (header, nav, main, section, footer) = du sens.',
           '**Formulaire** : `<label>` + `<input>` reliés par `for`/`id` ; traitement en JS (S7).',
@@ -473,7 +489,7 @@ export const s4Html = {
       'Attributs corrects : `alt` sur les images, `href` sur les liens',
       'Navigation par liens internes relatifs + au moins un lien externe (`target="_blank"`)',
       'Formulaire avec labels associés (`for`/`id`) et types d’input adaptés',
-      'Code propre, bien imbriqué et indenté (2 espaces)',
+      'Code propre, bien imbriqué et indenté (tabulation)',
       'Commits réguliers avec messages clairs',
     ],
     bonus: "Ajouter une section avec <figure>, <img> et <figcaption>, et une ancre « Retour en haut ».",
@@ -487,7 +503,7 @@ export const s4Html = {
             "Crée `index.html` avec le squelette HTML5 et les balises sémantiques (header, nav, main, footer).",
             "Dans le header : un `<h1>` (nom du projet) et une image (logo ou illustration) avec un `alt` pertinent.",
             "Dans le main : une `<section>` « Présentation » avec un `<p>`. Dans le footer : « Projet réalisé par ... ».",
-            "**Indente proprement** (2 espaces par niveau) et formate avec **Maj+Alt+F** avant de committer.",
+            "**Indente proprement** (une **tabulation** par niveau) et formate avec **Maj+Alt+F** avant de committer.",
           ]},
         ],
         done: "La page d'accueil s'affiche avec header / nav / main / footer, une image avec `alt`, et un code bien indenté.",

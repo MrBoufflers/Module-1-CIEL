@@ -450,7 +450,7 @@ body {
 }
 .code-head .lamps { display: inline-flex; gap: 6px; margin-right: 4px; }
 .code-head .lamps i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
-.code-block-v2 pre { margin: 0; padding: 16px 20px; font-family: ui-monospace, monospace; font-size: 13.5px; line-height: 1.7; overflow-x: auto; color: var(--code-text); }
+.code-block-v2 pre { margin: 0; padding: 16px 20px; font-family: ui-monospace, monospace; font-size: 13.5px; line-height: 1.7; overflow-x: auto; color: var(--code-text); tab-size: 2; -moz-tab-size: 2; }
 
 /* =============================================================
    FILE EXPLORER (composant interactif)
