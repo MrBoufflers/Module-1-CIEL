@@ -459,7 +459,7 @@ export const moduleOrientation = {
           <p><strong>« Bachelor » ne veut pas dire « licence ».</strong> Le mot n'est pas protégé. Avant toute inscription dans une école privée, posez trois questions :</p>
           <ol className="list-decimal list-inside">
             <li>Le diplôme <strong>confère-t-il le grade de licence</strong> ?</li>
-            <li>Est-il <strong>visé par l'État</strong> ? (une formation peut être visée sans conférer de grade)</li>
+            <li>Est-il <strong>visé par l'État</strong> (on parle du « visa » du diplôme) ? À ne pas confondre avec un établissement « reconnu par l'État » : ce sont deux statuts différents. Une formation peut être visée sans conférer de grade.</li>
             <li>Est-il <strong>enregistré au RNCP</strong>, et à quel niveau ? (niveau 6 = bac+3)</li>
           </ol>
           <p>Vérifiez un titre RNCP sur France Compétences. Toutes les formations sous contrat avec l'État sont sur Parcoursup.</p>
