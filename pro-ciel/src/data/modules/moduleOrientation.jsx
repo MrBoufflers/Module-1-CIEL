@@ -1,6 +1,5 @@
 /* eslint-disable react-refresh/only-export-components -- module de données : petits composants (encadrés, schéma, quiz) co-localisés avec le contenu exporté */
 import React from 'react';
-import PracticalWork from '../../components/organisms/PraticalWork';
 import { QUIZ_QUESTIONS, computeQuizResult } from './orientationQuiz.js';
 
 // =============================================================================
@@ -675,11 +674,27 @@ export const moduleOrientation = {
     </div>
   ),
   tp: (
-    <PracticalWork
-      title="TP : Exposé sur un métier du numérique"
-      objective="Rechercher, analyser et présenter un métier accessible après le bac pro CIEL (avec ou sans poursuite d'études), pour concrétiser ton projet d'orientation et valider la compétence C01."
-      materials={tpMaterials}
-      steps={tpSteps}
-    />
+    <div className="orientation">
+      <h2>TP : Exposé sur un métier du numérique</h2>
+      <div className="info-box definition">
+        <div className="info-title"><span className="mark" />Objectif</div>
+        <div className="info-content">Rechercher, analyser et présenter un métier accessible après le bac pro CIEL (avec ou sans poursuite d'études), pour concrétiser ton projet d'orientation et valider la compétence C01.</div>
+      </div>
+      <section>
+        <h3>Matériel</h3>
+        <ul>{tpMaterials.map((m, i) => <li key={i}>{m}</li>)}</ul>
+      </section>
+      <section>
+        <h3>Déroulé</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          {tpSteps.map((step, i) => (
+            <div key={i} className="o-phase">
+              <div className="o-phase-title"><span className="num">{i + 1}</span>{step.title.replace(/^Phase \d+\s*:\s*/, '')}</div>
+              <div>{step.description}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
   ),
 };
