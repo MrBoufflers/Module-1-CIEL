@@ -1,7 +1,5 @@
 /* eslint-disable react-refresh/only-export-components -- module de données : petits composants (encadrés, schéma, quiz) co-localisés avec le contenu exporté */
 import React from 'react';
-import Heading from '../../components/atoms/Heading';
-import Card from '../../components/atoms/Card';
 import PracticalWork from '../../components/organisms/PraticalWork';
 import { QUIZ_QUESTIONS, computeQuizResult } from './orientationQuiz.js';
 
@@ -14,53 +12,35 @@ import { QUIZ_QUESTIONS, computeQuizResult } from './orientationQuiz.js';
 // =============================================================================
 
 // ----- Encadrés colorés -----
-const Callout = ({ tone, label, children }) => {
-  const bg = {
-    parents: 'bg-amber-50 border-amber-300',
-    attention: 'bg-red-50 border-red-300',
-    astuce: 'bg-blue-50 border-blue-200',
-  }[tone];
-  const tc = {
-    parents: 'text-amber-900',
-    attention: 'text-red-800',
-    astuce: 'text-blue-800',
-  }[tone];
-  return (
-    <Card className={`${bg} not-prose`}>
-      <p className={`font-semibold mb-2 ${tc}`}>{label}</p>
-      <div className="text-sm text-gray-700 space-y-2">{children}</div>
-    </Card>
-  );
-};
-const Parents = ({ children }) => <Callout tone="parents" label="Pour les parents">{children}</Callout>;
-const Attention = ({ children }) => <Callout tone="attention" label="Attention">{children}</Callout>;
-const Astuce = ({ children }) => <Callout tone="astuce" label="Astuce">{children}</Callout>;
+const Callout = ({ variant, label, children }) => (
+  <div className={`info-box ${variant}`}>
+    <div className="info-title"><span className="mark" />{label}</div>
+    <div className="info-content">{children}</div>
+  </div>
+);
+const Parents = ({ children }) => <Callout variant="parents" label="Pour les parents">{children}</Callout>;
+const Attention = ({ children }) => <Callout variant="attention" label="Attention">{children}</Callout>;
+const Astuce = ({ children }) => <Callout variant="astuce" label="Astuce">{children}</Callout>;
 
 // ----- Accordéon (tableaux détaillés) -----
 const Accordion = ({ summary, children }) => (
-  <details className="not-prose my-4 border border-gray-300 rounded-lg overflow-hidden">
-    <summary className="cursor-pointer select-none px-4 py-3 font-semibold bg-gray-50 hover:bg-gray-100">{summary}</summary>
-    <div className="p-4">{children}</div>
+  <details>
+    <summary>{summary}</summary>
+    <div>{children}</div>
   </details>
 );
 
 // ----- Tableau (cellules pouvant contenir du HTML : liens) -----
 const renderTable = (headers, data) => (
-  <div className="overflow-x-auto not-prose my-6">
-    <table className="w-full text-sm text-left text-gray-600 border-collapse border border-gray-300">
-      <thead className="text-xs text-gray-700 uppercase bg-gray-100">
-        <tr>
-          {headers.map((h) => (
-            <th key={h} scope="col" className="px-3 py-2 border border-gray-300">{h}</th>
-          ))}
-        </tr>
+  <div className="table-wrap">
+    <table className="table-v2">
+      <thead>
+        <tr>{headers.map((h, i) => <th key={i}>{h}</th>)}</tr>
       </thead>
       <tbody>
         {data.map((row, i) => (
-          <tr key={i} className="bg-white border-b hover:bg-gray-50 align-top">
-            {row.map((cell, j) => (
-              <td key={j} className="px-3 py-2 border border-gray-300" dangerouslySetInnerHTML={{ __html: cell }} />
-            ))}
+          <tr key={i}>
+            {row.map((cell, j) => <td key={j} dangerouslySetInnerHTML={{ __html: cell }} />)}
           </tr>
         ))}
       </tbody>
@@ -89,10 +69,10 @@ const Edge = ({ d, tone, dashed }) => (
     strokeDasharray={dashed ? '5 4' : undefined} markerEnd={`url(#arrow-${tone})`} />
 );
 const OrientationSchema = () => (
-  <div className="not-prose my-6 overflow-x-auto">
-    <svg viewBox="0 0 660 430" width="100%" role="img"
+  <div>
+    <svg viewBox="0 0 660 430" width="100%" role="img" className="o-figure"
       aria-label="Schéma des parcours après le bac pro CIEL : bac, bac+2, bac+3, bac+5"
-      style={{ minWidth: 560, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12 }}>
+      style={{ minWidth: 560, display: 'block', padding: 12 }}>
       <defs>
         {['teal', 'ambre', 'gris'].map((t) => (
           <marker key={t} id={`arrow-${t}`} viewBox="0 0 10 10" refX="9" refY="5"
@@ -126,7 +106,7 @@ const OrientationSchema = () => (
       <SchemaNode x={475} y={228} w={150} tone="ambre" href="#but" title="BUT 3e année" sub="grade de licence" />
       <SchemaNode x={250} y={334} w={190} tone="gris" href="#apres-bts" title="École d'ingénieur, master" sub="dossier, concours ou alternance" />
     </svg>
-    <div className="text-xs text-gray-600 mt-2 flex flex-wrap gap-x-6 gap-y-1">
+    <div className="o-figure-legend">
       <span><span style={{ color: C.teal.stroke }}>■</span> Accessible avec un bac pro</span>
       <span><span style={{ color: C.ambre.stroke }}>■</span> Sélectif : très bon dossier</span>
       <span>┄ Sur dossier après le BTS : possible, jamais automatique</span>
@@ -140,10 +120,7 @@ const OrientationQuiz = () => {
   const [result, setResult] = React.useState(null);
   const [error, setError] = React.useState('');
 
-  const pick = (qid, value) => {
-    setAnswers((a) => ({ ...a, [qid]: value }));
-    setError('');
-  };
+  const pick = (qid, value) => { setAnswers((a) => ({ ...a, [qid]: value })); setError(''); };
   const submit = () => {
     if (QUIZ_QUESTIONS.some((q) => !answers[q.id])) { setError('Choisis une réponse'); return; }
     setResult(computeQuizResult(answers));
@@ -152,70 +129,65 @@ const OrientationQuiz = () => {
 
   if (result) {
     return (
-      <Card className="not-prose bg-white border-gray-200">
-        <p className="text-lg font-bold mb-1">Ton résultat</p>
-        <p className="text-xs text-gray-500 mb-4">Une piste, pas une décision. Rien n'a été enregistré.</p>
-        <div className="grid gap-3 sm:grid-cols-2">
-          <a href={result.principale.lien} className="block p-4 rounded-lg bg-green-50 border border-green-300 no-underline">
-            <span className="text-xs uppercase font-bold text-green-700">Voie principale</span>
-            <span className="block font-semibold text-gray-800">{result.principale.bts}</span>
-            <span className="block text-sm text-gray-600">{result.principale.modalite}</span>
+      <div className="o-quiz">
+        <div>
+          <p style={{ fontWeight: 700, fontSize: 17 }}>Ton résultat</p>
+          <p className="o-note">Une piste, pas une décision. Rien n'a été enregistré.</p>
+        </div>
+        <div className="o-res-grid">
+          <a href={result.principale.lien} className="o-card principale">
+            <span className="k">Voie principale</span>
+            <span className="t">{result.principale.bts}</span>
+            <span className="s">{result.principale.modalite}</span>
           </a>
-          <a href={result.alternative.lien} className="block p-4 rounded-lg bg-blue-50 border border-blue-200 no-underline">
-            <span className="text-xs uppercase font-bold text-blue-700">Alternative</span>
-            <span className="block font-semibold text-gray-800">{result.alternative.bts}</span>
+          <a href={result.alternative.lien} className="o-card alt">
+            <span className="k">Alternative</span>
+            <span className="t">{result.alternative.bts}</span>
           </a>
         </div>
-        <div className="mt-4 space-y-2">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {result.ajouts.map((add) => (
-            <a key={add.key} href={add.lien} className="block p-3 rounded-lg bg-gray-50 border border-gray-200 no-underline">
-              <span className="block font-semibold text-gray-800">{add.titre}</span>
-              <span className="block text-sm text-gray-600">{add.texte}</span>
+            <a key={add.key} href={add.lien} className="o-card">
+              <span className="t">{add.titre}</span>
+              <span className="s">{add.texte}</span>
             </a>
           ))}
         </div>
-        <details className="mt-4">
-          <summary className="cursor-pointer font-semibold text-gray-700">Pourquoi ce résultat ?</summary>
-          <ul className="list-disc list-inside text-sm text-gray-600 mt-2 space-y-1">
-            {result.explication.map((e, i) => <li key={i}>{e}</li>)}
-          </ul>
+        <details>
+          <summary>Pourquoi ce résultat ?</summary>
+          <ul>{result.explication.map((e, i) => <li key={i}>{e}</li>)}</ul>
         </details>
-        <button onClick={reset} className="mt-4 px-4 py-2 rounded-lg bg-gray-800 text-white text-sm font-semibold">Recommencer</button>
-      </Card>
+        <div><button onClick={reset} className="btn-ghost">Recommencer</button></div>
+      </div>
     );
   }
 
   return (
-    <Card className="not-prose bg-white border-gray-200">
-      <div className="space-y-5">
-        {QUIZ_QUESTIONS.map((q) => (
-          <fieldset key={q.id}>
-            <legend className="font-semibold text-gray-800 mb-2">{q.label}</legend>
-            <div className="flex flex-wrap gap-2">
-              {q.options.map((o) => {
-                const on = answers[q.id] === o.value;
-                return (
-                  <button key={o.value} type="button" onClick={() => pick(q.id, o.value)}
-                    className={`px-3 py-2 rounded-lg border text-sm text-left ${on ? 'bg-indigo-600 border-indigo-600 text-white' : 'bg-white border-gray-300 text-gray-700 hover:border-indigo-400'}`}>
-                    {o.label}
-                  </button>
-                );
-              })}
-            </div>
-          </fieldset>
-        ))}
-      </div>
-      {error && <p className="text-sm font-semibold text-red-600 mt-3">{error}</p>}
-      <button onClick={submit} className="mt-5 px-5 py-2.5 rounded-lg bg-indigo-600 text-white font-semibold">Voir mon résultat</button>
-      <p className="text-xs text-gray-500 mt-3">Tes réponses ne sont ni enregistrées ni envoyées : tout est calculé dans ton navigateur.</p>
-    </Card>
+    <div className="o-quiz">
+      {QUIZ_QUESTIONS.map((q) => (
+        <fieldset key={q.id}>
+          <legend>{q.label}</legend>
+          <div className="o-opts">
+            {q.options.map((o) => (
+              <button key={o.value} type="button" onClick={() => pick(q.id, o.value)}
+                className={`o-opt ${answers[q.id] === o.value ? 'on' : ''}`}>
+                {o.label}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      {error && <p className="o-err">{error}</p>}
+      <div><button onClick={submit} className="btn-primary">Voir mon résultat</button></div>
+      <p className="o-note">Tes réponses ne sont ni enregistrées ni envoyées : tout est calculé dans ton navigateur.</p>
+    </div>
   );
 };
 
 // =============================================================================
 // Données des tableaux
 // =============================================================================
-const ext = (url, label) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">${label}</a>`;
+const ext = (url, label) => `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
 const psFiche = (cod) => ext(`https://dossierappel.parcoursup.fr/Candidats/public/fiches/afficherFicheFormation?g_ta_cod=${cod}&typeBac=0&originePc=0`, 'Parcoursup');
 
 const cartesHeaders = ['', 'BTS', 'BUT', 'Licence', 'Licence pro', "Bachelor d'école privée"];
@@ -427,13 +399,13 @@ const tpSteps = [
 ];
 
 const SummaryLink = ({ href, children }) => (
-  <li><a href={href} className="text-blue-600 hover:underline no-underline">{children}</a></li>
+  <li><a href={href}>{children}</a></li>
 );
 
 export const moduleOrientation = {
   course: (
-    <div className="space-y-10 prose prose-lg max-w-none prose-headings:font-bold prose-h2:border-b prose-h2:pb-2 prose-a:text-blue-600">
-      <Heading level={1}>Guide d'orientation 2027 — Après le bac pro CIEL</Heading>
+    <div className="orientation">
+      <h1>Guide d'orientation 2027 — Après le bac pro CIEL</h1>
 
       <Attention>
         <p>Ce guide, mis à jour en <strong>septembre 2026</strong> par un professeur de CIEL, est un outil d'aide à l'orientation et non un document officiel.</p>
@@ -446,7 +418,7 @@ export const moduleOrientation = {
       </Attention>
 
       <section>
-        <Heading level={2}>Sommaire</Heading>
+        <h2>Sommaire</h2>
         <ol className="list-decimal list-inside not-prose space-y-1">
           <SummaryLink href="#essentiel">L'essentiel en 30 secondes</SummaryLink>
           <SummaryLink href="#comprendre">Comprendre les études après le bac</SummaryLink>
@@ -463,7 +435,7 @@ export const moduleOrientation = {
       </section>
 
       <section id="essentiel">
-        <Heading level={2}>1. L'essentiel en 30 secondes</Heading>
+        <h2>1. L'essentiel en 30 secondes</h2>
         <ol className="list-decimal list-inside space-y-2">
           <li><strong>Le BTS est fait pour toi.</strong> En 2025, plus de 71 % des bacheliers professionnels ont reçu au moins une proposition en BTS sur Parcoursup.</li>
           <li><strong>Le bac+3 et le bac+5 ne sont pas fermés : ils passent par le BTS.</strong> Licence pro, prépa ATS vers l'école d'ingénieur, 3e année de BUT.</li>
@@ -475,13 +447,13 @@ export const moduleOrientation = {
       </section>
 
       <section id="comprendre">
-        <Heading level={2}>2. Comprendre les études après le bac</Heading>
+        <h2>2. Comprendre les études après le bac</h2>
 
-        <Heading level={3}>2.1. Le schéma à retenir</Heading>
+        <h3>2.1. Le schéma à retenir</h3>
         <OrientationSchema />
         <p><strong>Comment le lire :</strong> tu montes marche par marche. La marche la plus sûre après le bac pro, c'est le BTS. Depuis le BTS, tu peux t'arrêter et travailler, ou continuer vers le bac+3, puis le bac+5.</p>
 
-        <Heading level={3}>2.2. Les diplômes, carte d'identité</Heading>
+        <h3>2.2. Les diplômes, carte d'identité</h3>
         {renderTable(cartesHeaders, cartesData)}
         <Parents>
           <p><strong>« Bachelor » ne veut pas dire « licence ».</strong> Le mot n'est pas protégé. Avant toute inscription dans une école privée, posez trois questions :</p>
@@ -493,7 +465,7 @@ export const moduleOrientation = {
           <p>Vérifiez un titre RNCP sur France Compétences. Toutes les formations sous contrat avec l'État sont sur Parcoursup.</p>
         </Parents>
 
-        <Heading level={3}>2.3. Petit lexique</Heading>
+        <h3>2.3. Petit lexique</h3>
         <ul className="list-disc list-inside space-y-1">
           <li><strong>Bac+2, bac+3…</strong> : années après le bac (niveau 5 = bac+2, niveau 6 = bac+3, niveau 7 = bac+5).</li>
           <li><strong>ECTS</strong> : crédits européens. Une année validée = 60 ECTS.</li>
@@ -507,16 +479,16 @@ export const moduleOrientation = {
       </section>
 
       <section id="questionnaire">
-        <Heading level={2}>3. Trouver ta voie : le questionnaire</Heading>
+        <h2>3. Trouver ta voie : le questionnaire</h2>
         <p>Réponds à 6 questions (2 minutes). Tu obtiens une <strong>voie principale</strong>, une <strong>alternative</strong>, un <strong>plan B</strong> et l'explication de ces choix. Tes réponses ne sont ni enregistrées ni envoyées.</p>
         <Parents><p>Faites-le <strong>avec</strong> votre enfant, puis comparez vos réponses : un bon point de départ pour en parler. Le résultat est une piste, pas une décision.</p></Parents>
         <OrientationQuiz />
       </section>
 
       <section id="bts">
-        <Heading level={2}>4. Le BTS : la voie principale</Heading>
+        <h2>4. Le BTS : la voie principale</h2>
 
-        <Heading level={3}>4.1. Pourquoi le BTS ?</Heading>
+        <h3>4.1. Pourquoi le BTS ?</h3>
         <p>Diplôme de niveau bac+2, préparé en deux ans en lycée ou en CFA. Trois avantages :</p>
         <ul className="list-disc list-inside space-y-1">
           <li><strong>Des places prioritaires pour les bacheliers professionnels</strong>, et un examen prioritaire de ton dossier dans les BTS en lien avec ta spécialité.</li>
@@ -525,18 +497,18 @@ export const moduleOrientation = {
         </ul>
         <p>Deux statuts : <strong>scolaire</strong> (temps plein avec stages) ou <strong>apprentissage</strong> (salarié, formation gratuite).</p>
 
-        <Heading level={3}>4.2. BTS CIEL ou BTS SIO ?</Heading>
+        <h3>4.2. BTS CIEL ou BTS SIO ?</h3>
         <p><strong>BTS CIEL</strong> (Cybersécurité, Informatique et réseaux, Électronique) : la suite directe de ton bac pro.</p>
         {renderTable(cielHeaders, cielData)}
         <p><strong>BTS SIO</strong> (Services informatiques aux organisations) : plus tourné vers les services informatiques en entreprise.</p>
         {renderTable(sioHeaders, sioData)}
         <Astuce><p>Tu hésites entre CIEL option A et SIO SISR ? Les deux mènent à des métiers proches. Le CIEL est plus technique et industriel (et ouvre plus facilement la prépa ATS) ; le SIO est plus orienté services et support. Rien ne t'empêche de mettre des vœux dans les deux.</p></Astuce>
 
-        <Heading level={3}>4.3. Tes chances d'y entrer, et d'en sortir diplômé</Heading>
+        <h3>4.3. Tes chances d'y entrer, et d'en sortir diplômé</h3>
         <p><strong>Y entrer :</strong> en 2025, plus de 71 % des bacheliers professionnels ont reçu au moins une proposition en BTS.</p>
         <p><strong>En sortir diplômé :</strong> parmi les bacheliers pros entrés en BTS en 2017, <strong>40 %</strong> l'ont eu en deux ans et <strong>48 %</strong> en deux ou trois ans (contre 76 % et 79 % pour les bacheliers généraux). Mais parmi les bacheliers pros <strong>présents à l'examen</strong> en 2024, <strong>65 %</strong> l'ont obtenu. Autrement dit : la plupart de ceux qui échouent <strong>abandonnent en cours de route</strong>, souvent en première année.</p>
 
-        <Heading level={3}><span id="reussir-bts" />4.4. Pour réussir ton BTS</Heading>
+        <h3><span id="reussir-bts" />4.4. Pour réussir ton BTS</h3>
         <ul className="list-disc list-inside space-y-1">
           <li><strong>Dès la Terminale</strong>, renforce les matières générales : maths, physique, anglais, expression écrite.</li>
           <li><strong>Choisis un BTS qui te plaît vraiment</strong> : la motivation fait tenir en première année.</li>
@@ -546,10 +518,10 @@ export const moduleOrientation = {
         </ul>
         <Parents><p>La première année de BTS est une marche importante. Votre rôle : aider à organiser le travail, repérer tôt les signes de décrochage (absences, perte de motivation) et encourager à solliciter les enseignants. Le passage en 2e année est le cap décisif.</p></Parents>
 
-        <Heading level={3}>4.5. Les BTS près de chez nous</Heading>
+        <h3>4.5. Les BTS près de chez nous</h3>
         {renderTable(etabHeaders, etabData)}
 
-        <Heading level={3}>4.6. Ce que disent les chiffres d'admission (2024 → 2025)</Heading>
+        <h3>4.6. Ce que disent les chiffres d'admission (2024 → 2025)</h3>
         <ul className="list-disc list-inside space-y-1">
           <li>La pression a fortement augmenté dans le public : le taux d'accès du BTS SIO de Jacques Brel passe de 18 % à 8 %, celui de La Martinière Duchère de 27 % à 16 %.</li>
           <li>Mais un taux d'accès bas ne ferme pas la porte : ces deux formations comptent 64 % et 47 % de bacs pros parmi leurs admis néo-bacheliers en 2025.</li>
@@ -558,10 +530,10 @@ export const moduleOrientation = {
         </ul>
         <Accordion summary="Voir le tableau complet — voie scolaire">
           {renderTable(scoHeaders, scoData)}
-          <p className="text-xs text-gray-500">Le parcours Armée de Terre de Branly (option B) n'a recruté aucun bachelier professionnel sur les deux sessions.</p>
+          <p className="o-faint">Le parcours Armée de Terre de Branly (option B) n'a recruté aucun bachelier professionnel sur les deux sessions.</p>
         </Accordion>
 
-        <Heading level={3} className="!mt-8"><span id="bts-apprentissage" />4.7. Le BTS en apprentissage</Heading>
+        <h3 className="!mt-8"><span id="bts-apprentissage" />4.7. Le BTS en apprentissage</h3>
         <p>En apprentissage, <strong>ce n'est pas l'école qui est difficile à obtenir, c'est l'entreprise.</strong> À Branly en 2025, 419 vœux étaient « en recherche de contrat » pour 16 places en BTS CIEL A. <strong>Commence ta recherche d'entreprise dès le premier trimestre.</strong></p>
         <Parents>
           <p><strong>Combien est payé un apprenti ?</strong> Un pourcentage du SMIC, selon l'âge et l'année de contrat :</p>
@@ -569,21 +541,21 @@ export const moduleOrientation = {
           <p>(grille officielle, août 2026 ; un accord de branche peut prévoir plus). Deux ans après leur sortie, 73 % des anciens apprentis (CAP à BTS) sont en emploi, contre 59 % en voie scolaire.</p>
         </Parents>
         <Accordion summary="Voir le tableau complet — apprentissage">
-          <p className="text-sm text-gray-600">« Vœux en recherche de contrat » = candidats retenus par la formation mais sans contrat signé. Les propositions ne sont enregistrées que si le contrat est saisi, ce qui les sous-estime fortement.</p>
+          <p className="o-muted">« Vœux en recherche de contrat » = candidats retenus par la formation mais sans contrat signé. Les propositions ne sont enregistrées que si le contrat est saisi, ce qui les sous-estime fortement.</p>
           {renderTable(apprHeaders, apprData)}
-          <p className="text-xs text-gray-500">« — » = formation absente du jeu de données cette année-là. Anomalies signalées telles quelles (Diderot : 200 puis 20 places ; Jacques Brel et CIFEP absents en 2025).</p>
+          <p className="o-faint">« — » = formation absente du jeu de données cette année-là. Anomalies signalées telles quelles (Diderot : 200 puis 20 places ; Jacques Brel et CIFEP absents en 2025).</p>
         </Accordion>
       </section>
 
       <section id="but">
-        <Heading level={2}>5. Le BUT : par l'ENEPS ou après le BTS</Heading>
+        <h2>5. Le BUT : par l'ENEPS ou après le BTS</h2>
 
-        <Heading level={3}>5.1. La réalité de l'admission en BUT « classique »</Heading>
+        <h3>5.1. La réalité de l'admission en BUT « classique »</h3>
         <p>Le BUT est un diplôme national de 3 ans (grade de licence, 180 ECTS), en IUT, qui demande un bon niveau en maths et en physique. Les IUT visent 50 % de bacheliers technologiques. Pour les bacheliers professionnels :</p>
         {renderTable(butReelHeaders, butReelData)}
         <p><strong>Conclusion honnête :</strong> en dehors de l'ENEPS, l'entrée directe en BUT après un bac pro est exceptionnelle. Ce n'est <strong>pas</strong> une question de valeur du bac pro : le BUT attend un volume de maths et de physique que le bac pro ne prévoit pas. <strong>Ne mets jamais un BUT classique comme vœu de sécurité.</strong></p>
 
-        <Heading level={3}><span id="eneps" />5.2. L'exception : l'ENEPS, un BUT réservé aux bacs pros</Heading>
+        <h3><span id="eneps" />5.2. L'exception : l'ENEPS, un BUT réservé aux bacs pros</h3>
         <p>L'<strong>ENEPS</strong> (École nationale de l'enseignement professionnel supérieur) est une voie de l'IUT 1 de Grenoble <strong>réservée aux bacheliers professionnels du secteur Production</strong>, dont le bac pro CIEL. Elle recrute dans toute la France. Deux spécialités te concernent :</p>
         {renderTable(enepsHeaders, enepsData)}
         <ul className="list-disc list-inside space-y-1">
@@ -600,16 +572,16 @@ export const moduleOrientation = {
         <Astuce><p>L'ENEPS est sélective (autour d'un candidat sur trois ou sur deux), avec peu de places. C'est un <strong>vœu ambitieux</strong>, à formuler <strong>en plus</strong> de tes vœux de BTS, jamais à leur place.</p></Astuce>
         <Parents><p>Partir à Grenoble à 18 ans implique un logement et un budget. Renseignez-vous tôt sur les logements CROUS et les bourses (dossier social étudiant, pendant la période des vœux). N'hésitez pas à écrire à l'école.</p></Parents>
 
-        <Heading level={3}>5.3. L'autre route : le BUT après le BTS</Heading>
+        <h3>5.3. L'autre route : le BUT après le BTS</h3>
         <p>Après un BTS, tu peux candidater <strong>en 3e année de BUT</strong> (admission parallèle, sur dossier). C'est la route la plus réaliste vers un bac+3 de type BUT, et ton profil technique y est bien plus valorisé qu'à la sortie du bac.</p>
         <Accordion summary="Voir le détail — IUT Lyon 1">
           {renderTable(iutHeaders, iutData)}
-          <p className="text-xs text-gray-500">Le BUT R&T, le plus proche de la composante réseaux du bac pro CIEL, n'est pas proposé par les IUT lyonnais.</p>
+          <p className="o-faint">Le BUT R&T, le plus proche de la composante réseaux du bac pro CIEL, n'est pas proposé par les IUT lyonnais.</p>
         </Accordion>
       </section>
 
       <section id="licence">
-        <Heading level={2}>6. Pourquoi on ne te conseille pas la licence générale</Heading>
+        <h2>6. Pourquoi on ne te conseille pas la licence générale</h2>
         <p>La licence à l'université est souvent peu sélective à l'entrée : facile d'y être accepté, difficile d'y réussir.</p>
         <ul className="list-disc list-inside space-y-1">
           <li>Seuls <strong>12 %</strong> des bacheliers professionnels inscrits en licence obtiennent leur diplôme en 3, 4 ou 5 ans (contre 56 % des bacheliers généraux).</li>
@@ -620,45 +592,45 @@ export const moduleOrientation = {
       </section>
 
       <section id="apres-bts">
-        <Heading level={2}>7. Et après le BTS ?</Heading>
+        <h2>7. Et après le BTS ?</h2>
 
-        <Heading level={3}>7.1. La licence professionnelle (1 an)</Heading>
+        <h3>7.1. La licence professionnelle (1 an)</h3>
         <p>Une formation d'un an après un bac+2, très spécialisée et appréciée des recruteurs, souvent en alternance. Dans la région : <strong>LP ASSR</strong> (administration et sécurité des systèmes et réseaux, IUT Lyon 1), <strong>LP MRIT</strong> (réseaux et télécoms, Lyon 1), <strong>Licence informatique spé cybersécurité</strong> (CNAM Auvergne-Rhône-Alpes, en alternance).</p>
         <p>Ce que gagnent les diplômés (InserSup, promo 2022, 12 mois après le diplôme, salaires <strong>nets mensuels</strong>) :</p>
         {renderTable(lpHeaders, lpData)}
 
-        <Heading level={3}>7.2. La prépa ATS, vers l'école d'ingénieur (1 an)</Heading>
+        <h3>7.2. La prépa ATS, vers l'école d'ingénieur (1 an)</h3>
         <p>Une classe préparatoire d'un an réservée aux titulaires d'un BTS ou d'un BUT : remise à niveau intensive en maths/physique/sciences, puis concours d'entrée en école d'ingénieur. Gratuite en lycée public. La prépa ATS « ingénierie industrielle » vise surtout les BTS industriels, comme le <strong>BTS CIEL</strong>. <strong>Le lycée Branly en a une.</strong></p>
 
-        <Heading level={3}>7.3. La 3e année de BUT</Heading>
+        <h3>7.3. La 3e année de BUT</h3>
         <p>Sur dossier, après un BTS : voir la section 5.3.</p>
 
-        <Heading level={3}>7.4. Les bachelors d'écoles privées</Heading>
+        <h3>7.4. Les bachelors d'écoles privées</h3>
         <p>Par exemple le bachelor Cybersécurité des systèmes industriels et urbains d'ECAM LaSalle, ou celui de la Guardia Cybersecurity School (hors Parcoursup). Avant de t'inscrire, pose les trois questions de l'encadré de la section 2.2.</p>
 
-        <Heading level={3}>7.5. Salaires après un BTS : ce qu'on sait et ce qu'on ne sait pas</Heading>
+        <h3>7.5. Salaires après un BTS : ce qu'on sait et ce qu'on ne sait pas</h3>
         <p>Il n'existe <strong>aucune statistique publique de salaire</strong> pour les diplômés de BTS : InserSup commence au bac+3. Ce qui est mesuré, c'est le <strong>taux d'emploi</strong> : deux ans après leur sortie en 2023, 59 % des sortants de la voie scolaire (CAP au BTS) étaient en emploi, contre 73 % des anciens apprentis. Le taux d'emploi de chaque établissement figure sur sa fiche Parcoursup.</p>
       </section>
 
       <section id="candidater">
-        <Heading level={2}>8. Candidater : calendrier, rétroplanning, dossier</Heading>
+        <h2>8. Candidater : calendrier, rétroplanning, dossier</h2>
 
-        <Heading level={3}>8.1. Le calendrier Parcoursup 2027</Heading>
+        <h3>8.1. Le calendrier Parcoursup 2027</h3>
         <p>La session 2026 s'est achevée le 10 septembre 2026. <strong>Le calendrier officiel de la session 2027 n'est pas encore publié</strong> ({' '}
           <a href="https://www.parcoursup.gouv.fr/calendrier" target="_blank" rel="noopener noreferrer">parcoursup.gouv.fr/calendrier</a>). Les phases, elles, ne changent pas.</p>
         {renderTable(calHeaders, calData)}
         <Astuce><p>En <strong>apprentissage</strong>, le calendrier est plus souple : il est souvent possible de formuler des vœux bien après la date limite de mars. Une vraie seconde chance si tu trouves ton entreprise plus tard.</p></Astuce>
 
-        <Heading level={3}>8.2. Ton rétroplanning de Terminale</Heading>
+        <h3>8.2. Ton rétroplanning de Terminale</h3>
         <p>Le découpage suit le rythme des sessions précédentes : il sert à t'organiser. Seules les dates officielles, encore à venir, font foi.</p>
         {renderTable(retroHeaders, retroData)}
         <Parents><p>Trois dates à noter dès leur publication : la <strong>limite des vœux</strong> (mars), la <strong>limite de confirmation</strong> (fin mars – début avril) et le <strong>début des réponses</strong> (juin). En juin, votre enfant doit répondre vite à chaque proposition, y compris pendant les vacances.</p></Parents>
 
-        <Heading level={3}>8.3. Journées portes ouvertes 2026-2027</Heading>
+        <h3>8.3. Journées portes ouvertes 2026-2027</h3>
         <p>Les dates de JPO n'étaient publiées nulle part à la mise à jour de ce guide. La fiche Parcoursup de chaque formation affiche la date dès qu'elle est connue, avec une option de rappel : c'est la source la plus fiable.</p>
         {renderTable(jpoHeaders, jpoData)}
 
-        <Heading level={3}>8.4. Un dossier Parcoursup efficace</Heading>
+        <h3>8.4. Un dossier Parcoursup efficace</h3>
         <ul className="list-disc list-inside space-y-1">
           <li><strong>Valorise ton bac pro</strong> dans « Activités et centres d'intérêt » : projets techniques, compétences pratiques, stages.</li>
           <li><strong>Un projet motivé par vœu</strong> : explique en quoi ton bac pro CIEL est un atout pour <strong>cette</strong> formation. Les copier-coller se repèrent.</li>
@@ -667,7 +639,7 @@ export const moduleOrientation = {
       </section>
 
       <section id="plan-b">
-        <Heading level={2}>9. Plan B : si ça ne marche pas du premier coup</Heading>
+        <h2>9. Plan B : si ça ne marche pas du premier coup</h2>
         <ul className="list-disc list-inside space-y-1">
           <li><strong>La phase complémentaire</strong> (juin à septembre) : de nouveaux vœux sur les places libres.</li>
           <li><strong>L'apprentissage</strong> : calendrier plus souple, tu peux souvent encore candidater après la phase principale.</li>
@@ -678,7 +650,7 @@ export const moduleOrientation = {
       </section>
 
       <section id="metiers">
-        <Heading level={2}>10. Les métiers</Heading>
+        <h2>10. Les métiers</h2>
         <p>Le bac pro CIEL, consolidé par un BTS et éventuellement une licence pro, ouvre des métiers techniques recherchés (numérique, industrie, télécoms, banque, énergie, secteur public) :</p>
         <ul className="list-disc list-inside space-y-1">
           <li><strong>Administration systèmes et réseaux</strong> : administrateur systèmes et réseaux ; technicien d'infrastructure ; technicien télécoms.</li>
@@ -691,8 +663,8 @@ export const moduleOrientation = {
       </section>
 
       <section id="sources">
-        <Heading level={2}>11. Sources</Heading>
-        <p className="text-sm text-gray-600">Données : jeux ouverts du ministère (Parcoursup 2024 et 2025, apprentissage, InserSup, InserJeunes). Études : Notes Flash SIES (parcours en STS, résultats du BTS), parcours et réussite en licence, Onisep (classe passerelle, prépas ATS). Rémunération des apprentis : La bonne alternance. RNCP / grade / visa : France Compétences.</p>
+        <h2>11. Sources</h2>
+        <p className="o-muted">Données : jeux ouverts du ministère (Parcoursup 2024 et 2025, apprentissage, InserSup, InserJeunes). Études : Notes Flash SIES (parcours en STS, résultats du BTS), parcours et réussite en licence, Onisep (classe passerelle, prépas ATS). Rémunération des apprentis : La bonne alternance. RNCP / grade / visa : France Compétences.</p>
         <ul className="list-disc list-inside text-sm space-y-1">
           <li><a href="https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-parcoursup/" target="_blank" rel="noopener noreferrer">Parcoursup 2025 — vœux et admissions (MESR)</a></li>
           <li><a href="https://data.enseignementsup-recherche.gouv.fr/explore/dataset/fr-esr-parcoursup_2024/" target="_blank" rel="noopener noreferrer">Parcoursup 2024 — vœux et admissions (MESR)</a></li>

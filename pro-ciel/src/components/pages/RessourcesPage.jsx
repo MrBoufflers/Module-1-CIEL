@@ -53,10 +53,10 @@ export default function RessourcesPage() {
                 className="side-link"
                 style={{ padding: '14px 16px', borderRadius: 'var(--radius)', textDecoration: 'none', border: '1px solid var(--border)' }}
               >
-                <span style={{ fontSize: 18, flexShrink: 0 }}>{mod.icon}</span>
+                <span className="seq-badge" style={{ fontSize: 11, flexShrink: 0 }}>G</span>
                 <span className="seq-meta-side" style={{ flex: 1 }}>
                   <span className="t" style={{ fontSize: 14 }}>{mod.title}</span>
-                  <span className="s">{mod.ref.competence}</span>
+                  <span className="s">Guide</span>
                 </span>
               </Link>
             ))}
