@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { IconCompass } from '@tabler/icons-react';
 import { getSequencesByNiveau } from '../../data/sequences/index';
 import legacyModules from '../../data/legacyModules';
 
@@ -50,13 +51,13 @@ export default function RessourcesPage() {
               <Link
                 key={mod.id}
                 to={`/ressources/${mod.id}`}
-                className="side-link"
-                style={{ padding: '14px 16px', borderRadius: 'var(--radius)', textDecoration: 'none', border: '1px solid var(--border)' }}
+                className="side-link guide"
+                style={{ padding: '14px 16px', borderRadius: 'var(--radius)', textDecoration: 'none' }}
               >
-                <span className="seq-badge" style={{ fontSize: 11, flexShrink: 0 }}>G</span>
+                <span className="seq-badge" style={{ flexShrink: 0 }}><IconCompass size={16} stroke={1.8} /></span>
                 <span className="seq-meta-side" style={{ flex: 1 }}>
                   <span className="t" style={{ fontSize: 14 }}>{mod.title}</span>
-                  <span className="s">Guide</span>
+                  <span className="s">Orientation</span>
                 </span>
               </Link>
             ))}
