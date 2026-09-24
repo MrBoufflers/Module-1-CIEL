@@ -1,5 +1,5 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { IconX, IconRocket } from '@tabler/icons-react';
+import { IconX, IconRocket, IconCompass } from '@tabler/icons-react';
 import { getSequencesByNiveau } from '../../data/sequences/index';
 import legacyModules from '../../data/legacyModules';
 
@@ -112,11 +112,12 @@ export default function SidebarV2({ isOpen, onClose }) {
                   key={mod.id}
                   to={`/ressources/${mod.id}`}
                   onClick={onClose}
-                  className={({ isActive }) => `side-link${isActive ? ' active' : ''}`}
+                  className={({ isActive }) => `side-link guide${isActive ? ' active' : ''}`}
                 >
-                  <span className="seq-badge" style={{ fontSize: 11 }}>{mod.title[0]}</span>
+                  <span className="seq-badge"><IconCompass size={16} stroke={1.8} /></span>
                   <span className="seq-meta-side">
                     <span className="t">{mod.title}</span>
+                    <span className="s">Orientation</span>
                   </span>
                 </NavLink>
               ))}
