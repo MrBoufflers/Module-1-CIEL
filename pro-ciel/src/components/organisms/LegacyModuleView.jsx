@@ -1,7 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTheme } from '../../lib/useTheme';
 
 export default function LegacyModuleView({ module }) {
   const [activeTab, setActiveTab] = useState('cours');
+  const { setMode } = useTheme();
+
+  useEffect(() => {
+    setMode('course');
+    return () => setMode('course');
+  }, [setMode]);
 
   if (!module) return null;
 
@@ -19,39 +26,27 @@ export default function LegacyModuleView({ module }) {
   const activeContent = tabsConfig.find(t => t.id === activeTab)?.content;
 
   return (
-    <div className="v1-compat">
-      <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 800, marginBottom: 12, color: 'var(--text)' }}>
-          {module.icon} {module.title}
-        </h1>
-        <div className="info-box definition" style={{ fontSize: 14 }}>
-          <div className="info-content">
-            <p><strong>Compétence :</strong> {module.ref.competence}</p>
-            <p><strong>Savoirs :</strong> {module.ref.savoirs}</p>
-          </div>
-        </div>
-      </div>
+    <div className="seq-wrap reveal">
+      <header className="seq-header">
+        <span className="badge"><span className="dot" />Ressource</span>
+        <h1 className="seq-title">{module.title}</h1>
+      </header>
 
-      <div className="tabs" style={{ marginBottom: 28 }}>
+      <div className="tabs" role="tablist">
         {tabsConfig.map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`tab ${activeTab === tab.id ? 'active' : ''}`}
+            role="tab"
           >
             {tab.label}
           </button>
         ))}
       </div>
 
-      <div style={{
-        background: 'rgba(255,255,255,0.92)', color: '#1a1c2e',
-        borderRadius: 'var(--radius-lg)', padding: '24px 28px',
-        border: '1px solid var(--border)', overflowX: 'auto',
-      }}>
-        <div className="prose max-w-none">
-          {activeContent}
-        </div>
+      <div key={activeTab}>
+        {activeContent}
       </div>
     </div>
   );
