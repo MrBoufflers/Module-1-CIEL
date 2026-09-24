@@ -461,6 +461,7 @@ export const moduleOrientation = {
             <li>Est-il <strong>visé par l'État</strong> (on parle du « visa » du diplôme) ? À ne pas confondre avec un établissement « reconnu par l'État » : ce sont deux statuts différents. Une formation peut être visée sans conférer de grade.</li>
             <li>Est-il <strong>enregistré au RNCP</strong>, et à quel niveau ? (niveau 6 = bac+3)</li>
           </ol>
+          <p><strong>Même logique pour « mastère » et « master ».</strong> Le <strong>master</strong> est un diplôme <strong>national</strong> de niveau bac+5 qui confère le grade de master (université ou école habilitée). Un <strong>« mastère »</strong> (souvent « Mastère Spécialisé » ou « MSc ») est une appellation d'école, non protégée, qui ne confère pas forcément ce grade : posez-lui les mêmes trois questions.</p>
           <p>Vérifiez un titre RNCP sur France Compétences. Toutes les formations sous contrat avec l'État sont sur Parcoursup.</p>
         </Parents>
 
