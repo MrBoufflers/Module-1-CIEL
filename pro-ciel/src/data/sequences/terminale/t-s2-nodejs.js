@@ -25,11 +25,11 @@ export const ts2Nodejs = {
       "Ne jamais faire confiance au client : tout ce que le navigateur envoie (corps de requête, " +
       "paramètres) doit être vérifié côté serveur.",
     evalInfo: {
-      format: 'Évaluation pratique sur poste : créer une API REST fonctionnelle (données en mémoire)',
+      format: "Contrôle pratique sur poste, hors ligne : compléter une API Express à partir d'un code de base et d'un cahier des charges, par paliers de difficulté",
       duree: '3 h',
       competence: 'C08 (Application) · C04 (Application)',
-      ressourcesAutorisees: ['Documentation Node.js', 'Documentation Express', 'MDN', 'Le cours S2'],
-      note: "Évaluation réalisée en classe.",
+      ressourcesAutorisees: ["Le code de départ et le cahier des charges fournis", "Les aides de l'énoncé (req.query, filter, sort, PATCH)", 'Insomnia'],
+      note: "Aucune connexion internet pendant le contrôle. Le format est celui de l'étape 7 du TP : entraîne-toi dessus. Aucun sujet n'est publié sur le site.",
     },
   },
 
