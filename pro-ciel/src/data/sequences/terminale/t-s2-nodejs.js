@@ -25,11 +25,11 @@ export const ts2Nodejs = {
       "Ne jamais faire confiance au client : tout ce que le navigateur envoie (corps de requête, " +
       "paramètres) doit être vérifié côté serveur.",
     evalInfo: {
-      format: 'Évaluation pratique sur poste : créer une API REST fonctionnelle (données en mémoire)',
+      format: "Contrôle pratique sur poste, hors ligne : compléter une API Express à partir d'un code de base et d'un cahier des charges, par paliers de difficulté",
       duree: '3 h',
       competence: 'C08 (Application) · C04 (Application)',
-      ressourcesAutorisees: ['Documentation Node.js', 'Documentation Express', 'MDN', 'Le cours S2'],
-      note: "Évaluation réalisée en classe.",
+      ressourcesAutorisees: ["Le code de départ et le cahier des charges fournis", "Les aides de l'énoncé (req.query, filter, sort, PATCH)", 'Insomnia'],
+      note: "Aucune connexion internet pendant le contrôle. Le format est celui de l'étape 7 du TP : entraîne-toi dessus. Aucun sujet n'est publié sur le site.",
     },
   },
 
@@ -1067,6 +1067,238 @@ export const ts2Nodejs = {
         ],
         done: "L'API `jeux` complète fonctionne : GET (liste + filtre `termine`), GET/:id, POST (avec 400 et 409), PUT, DELETE, chacune avec le bon code de statut. Le tout est poussé sur GitHub.",
         validation: { commit: 'git commit -m "feat: API bibliotheque de jeux (CRUD complet)" && git push' },
+      },
+      {
+        title: "Étape 7 — Entraînement au contrôle : l'API du refuge",
+        body: [
+          { type: 'info', variant: 'attention', title: 'Ce que cette étape prépare',
+            content:
+              "Cette étape a exactement le format du contrôle : un projet de départ avec une seule route, " +
+              "un cahier des charges, et des routes à coder par paliers de difficulté. Différence : ici tu as " +
+              "internet. Le jour du contrôle, tu seras **hors ligne**, sur un autre thème, avec les mêmes aides " +
+              "que ci-dessous. Entraîne-toi donc à chercher d'abord dans ton cours, dans les aides et dans le code " +
+              "fourni, avant d'aller sur internet." },
+
+          { type: 'prose', content: "**Démarrer le projet**" },
+          { type: 'list', ordered: true, items: [
+            "Crée un nouveau dossier `api-refuge` et initialise-le comme aux étapes précédentes (projet Node, Express installé, dépôt Git).",
+            "Dans `package.json`, ajoute (ou remplace) le script `dev` : `\"dev\": \"node --watch server.js\"`.",
+            "Crée `server.js` et copie le code de départ ci-dessous.",
+            "Lance `npm run dev`, puis dans Insomnia teste `GET http://localhost:3000/animaux` : tu dois recevoir la liste des 8 animaux.",
+          ] },
+          { type: 'code', language: 'js', title: 'server.js — code de départ',
+            code: `const express = require("express");
+const app = express();
+app.use(express.json());
+
+// Données en mémoire : elles sont perdues à chaque redémarrage du serveur.
+const soigneurs = [
+  { id: 1, nom: "Camille", specialite: "chiens" },
+  { id: 2, nom: "Yanis", specialite: "chats" },
+  { id: 3, nom: "Inès", specialite: "NAC" },
+  { id: 4, nom: "Théo", specialite: "oiseaux" },
+];
+
+let animaux = [
+  { id: 1, nom: "Rex", espece: "chien", age: 4, adopte: false, soigneurId: 1 },
+  { id: 2, nom: "Mina", espece: "chat", age: 2, adopte: true, soigneurId: 2 },
+  { id: 3, nom: "Pixel", espece: "lapin", age: 1, adopte: false, soigneurId: 3 },
+  { id: 4, nom: "Oslo", espece: "chien", age: 7, adopte: false, soigneurId: 1 },
+  { id: 5, nom: "Luna", espece: "chat", age: 5, adopte: false, soigneurId: 2 },
+  { id: 6, nom: "Biscotte", espece: "cochon d'Inde", age: 3, adopte: true, soigneurId: 3 },
+  { id: 7, nom: "Tank", espece: "chien", age: 1, adopte: false, soigneurId: 1 },
+  { id: 8, nom: "Nala", espece: "chat", age: 9, adopte: false, soigneurId: 2 },
+];
+
+// Route d'exemple : la liste de tous les animaux
+app.get("/animaux", (req, res) => {
+  res.json(animaux);
+});
+
+// À toi de jouer : les routes à coder sont décrites dans le cahier des charges
+
+app.listen(3000, () => {
+  console.log("API du refuge démarrée sur http://localhost:3000");
+});` },
+          { type: 'info', variant: 'definition', title: 'Les données',
+            content:
+              "Deux tableaux : `animaux` et `soigneurs`. Chaque animal a un `soigneurId` qui correspond à l'`id` " +
+              "d'un soigneur : c'est ce qui relie les deux tableaux. Avec `npm run dev`, le serveur redémarre à " +
+              "chaque sauvegarde de `server.js` : observe ce qui arrive aux animaux que tu as créés avec un POST." },
+          { type: 'info', variant: 'astuce', title: 'Organise tes tests dans Insomnia',
+            content:
+              "Crée un dossier « Refuge » dans Insomnia avec une requête par route, **y compris les cas d'erreur** " +
+              "(un id qui n'existe pas, un POST sans nom, une adoption en double). Une route n'est terminée que " +
+              "si elle renvoie le bon code de statut dans tous les cas." },
+          { type: 'table',
+            headers: ['Palier', 'Ce que tu codes', "Points (même barème qu'au contrôle)"],
+            rows: [
+              ['1', 'GET par id, POST avec validation, DELETE', '7'],
+              ['2', 'PATCH, filtres et tri combinables', '5'],
+              ['3', 'Relier animaux et soigneurs, statistiques', '4'],
+              ['4', "Règles métier : adoption, suppression d'un soigneur", '2'],
+              ['5', 'Deux questions écrites dans REPONSES.md', '2'],
+            ] },
+
+          { type: 'prose', content: "**Palier 1 — CRUD de base (7 pts)**" },
+          { type: 'table',
+            headers: ['Méthode', 'Route', 'Comportement attendu'],
+            rows: [
+              ['GET', '/animaux/:id', "200 + l'animal. 404 si l'id n'existe pas."],
+              ['POST', '/animaux', "Corps JSON avec `nom`, `espece`, `age`, `soigneurId`. 400 si l'un manque. Sinon 201 + l'animal créé (nouvel `id`, `adopte` à `false`)."],
+              ['DELETE', '/animaux/:id', "200 + l'animal supprimé. 404 si l'id n'existe pas."],
+            ] },
+          { type: 'list', ordered: false, items: [
+            "`req.params.id` est une **chaîne de caractères**. Convertis-la avec `Number()` avant de la comparer à l'`id` d'un animal.",
+            "`find` retrouve un élément. `findIndex` + `splice` permettent de le retirer du tableau.",
+            "Pour répondre avec un code précis : `res.status(404).json({ erreur: \"...\" })`.",
+            "Pour le nouvel `id`, prends le plus grand `id` existant + 1. Pourquoi pas simplement la longueur du tableau ? Pense à ce qui se passe après une suppression.",
+          ] },
+
+          { type: 'prose', content: "**Palier 2 — Modifier, filtrer, trier (5 pts)**" },
+          { type: 'table',
+            headers: ['Méthode', 'Route', 'Comportement attendu'],
+            rows: [
+              ['PATCH', '/animaux/:id', "Ne modifie que les champs envoyés. L'`id` ne change jamais. 404 si introuvable. 200 + l'animal modifié."],
+              ['GET', '/animaux?espece=chat', 'Filtre par espèce.'],
+              ['GET', '/animaux?adopte=false', "Filtre par statut d'adoption."],
+              ['GET', '/animaux?tri=age', 'Trie par âge croissant.'],
+            ] },
+          { type: 'prose', content:
+              "Les paramètres se combinent : `/animaux?espece=chien&adopte=false&tri=age` doit fonctionner. " +
+              "Sans paramètre, la route renvoie toujours toute la liste. C'est la route `GET /animaux` existante que tu fais évoluer." },
+
+          { type: 'info', variant: 'definition', title: 'Aide — req.query : les paramètres après le ?',
+            content:
+              "**À quoi ça sert :** transmettre des options à une route (filtrer, trier, chercher) sans créer une route par option. " +
+              "**Comment ça marche :** tout ce qui suit le `?` dans l'URL est découpé en paires `clé=valeur`, séparées par `&`, " +
+              "et rangé dans l'objet `req.query`. Un paramètre absent vaut `undefined`, et toutes les valeurs sont des **chaînes**. " +
+              "**Ne pas confondre :** `req.params` contient les morceaux du **chemin** (`/produits/:id`), `req.query` les options " +
+              "**après le ?**. **Quand l'utiliser :** pour des options facultatives et combinables." },
+          { type: 'code', language: 'js', title: 'Exemple (autre sujet que le refuge)',
+            code: `// Requête : GET /produits?couleur=rouge&promo=true
+app.get("/produits", (req, res) => {
+  console.log(req.query);          // { couleur: "rouge", promo: "true" }
+  console.log(req.query.couleur);  // "rouge"
+  console.log(req.query.taille);   // undefined : absent de l'URL
+  console.log(req.query.promo === true);    // false : c'est une chaîne !
+  console.log(req.query.promo === "true");  // true
+  res.json(req.query);
+});` },
+
+          { type: 'info', variant: 'definition', title: 'Aide — filter : garder les éléments qui respectent une condition',
+            content:
+              "**À quoi ça sert :** obtenir **tous** les éléments d'un tableau qui respectent une condition. " +
+              "**Comment ça marche :** `filter` appelle ta fonction sur chaque élément ; si elle renvoie `true`, l'élément est gardé. " +
+              "Il renvoie un **nouveau tableau** (éventuellement vide) et ne modifie pas le tableau d'origine. " +
+              "**Différence avec find :** `find` renvoie le **premier** élément trouvé (ou `undefined`), `filter` les renvoie **tous**, dans un tableau. " +
+              "**Quand l'utiliser :** dès que la réponse peut contenir plusieurs éléments. On peut enchaîner plusieurs `filter` à la suite." },
+          { type: 'code', language: 'js', title: 'Exemple (autre sujet que le refuge)',
+            code: `const eleves = [
+  { nom: "Lina", age: 17, classe: "TCIEL" },
+  { nom: "Adam", age: 18, classe: "TCIEL" },
+  { nom: "Sofia", age: 16, classe: "1CIEL" },
+];
+
+const majeurs = eleves.filter(e => e.age >= 18);
+// [ { nom: "Adam", ... } ]
+
+const terminales = eleves.filter(e => e.classe === "TCIEL");
+// [ { nom: "Lina", ... }, { nom: "Adam", ... } ]
+
+let resultat = eleves;                                 // on part de tout
+resultat = resultat.filter(e => e.classe === "TCIEL"); // 1er filtre
+resultat = resultat.filter(e => e.age >= 18);          // 2e filtre
+// eleves n'a pas été modifié` },
+
+          { type: 'info', variant: 'definition', title: 'Aide — sort : trier un tableau',
+            content:
+              "**À quoi ça sert :** ranger les éléments d'un tableau dans un ordre choisi. " +
+              "**Comment ça marche :** on donne à `sort` une fonction qui compare deux éléments `a` et `b`. Si elle renvoie un nombre " +
+              "**négatif**, `a` passe avant `b` ; **positif**, `b` passe avant `a` ; **0**, l'ordre ne change pas. `a - b` donne donc un tri croissant. " +
+              "**Deux pièges :** `sort` **modifie le tableau** sur lequel on l'appelle, donc trie une copie (`[...tableau]`) pour ne pas " +
+              "déranger les données d'origine ; et sans fonction de comparaison, `sort` trie les nombres comme du texte. " +
+              "**Quand l'utiliser :** pour renvoyer une liste dans un ordre précis (âge, prix, nom...)." },
+          { type: 'code', language: 'js', title: 'Exemple (autre sujet que le refuge)',
+            code: `const notes = [12, 5, 18, 9];
+
+const croissant = [...notes].sort((a, b) => a - b);   // [5, 9, 12, 18]
+const decroissant = [...notes].sort((a, b) => b - a); // [18, 12, 9, 5]
+// notes vaut toujours [12, 5, 18, 9]
+
+[10, 9, 1].sort();               // [1, 10, 9] : trié comme du texte !
+
+const films = [{ titre: "Dune", annee: 2021 }, { titre: "Alien", annee: 1979 }];
+const parAnnee = [...films].sort((a, b) => a.annee - b.annee);
+const parTitre = [...films].sort((a, b) => a.titre.localeCompare(b.titre));` },
+
+          { type: 'info', variant: 'definition', title: 'Aide — PATCH : modifier une partie d’un élément',
+            content:
+              "**À quoi ça sert :** modifier **seulement certains champs** d'un élément existant. " +
+              "**Différence avec PUT :** `PUT` remplace l'élément en entier, `PATCH` ne change que ce qui est envoyé et garde le reste. " +
+              "**Comment ça marche :** la route reçoit l'`id` dans `req.params` et les champs à modifier dans `req.body`. On retrouve " +
+              "l'élément, puis pour **chaque champ autorisé** on vérifie s'il est présent dans `req.body` avant de le recopier. " +
+              "L'`id` n'est jamais modifiable. **Quand l'utiliser :** un formulaire d'édition où l'utilisateur ne change qu'une info." },
+          { type: 'code', language: 'js', title: 'Exemple (autre sujet que le refuge)',
+            code: `// Requête : PATCH /films/2   avec le corps JSON : { "annee": 1986 }
+// Seule l'année change, le titre reste le même.
+
+const film = { id: 2, titre: "Aliens", annee: 1985 };
+
+if (req.body.annee !== undefined) {
+  film.annee = req.body.annee;
+}
+// Même principe pour chacun des autres champs modifiables.
+// On ne recopie jamais req.body.id.` },
+
+          { type: 'prose', content: "**Palier 3 — Relier les données (4 pts)**" },
+          { type: 'table',
+            headers: ['Méthode', 'Route', 'Comportement attendu'],
+            rows: [
+              ['GET', '/animaux/:id/details', "L'animal avec, en plus, un champ `soigneur` contenant l'objet soigneur complet. 404 si l'animal n'existe pas."],
+              ['GET', '/soigneurs/:id/animaux', "Tous les animaux de ce soigneur. 404 si le soigneur n'existe pas."],
+              ['GET', '/stats', "`{ \"total\": 8, \"adoptes\": 2, \"parEspece\": { \"chien\": 3, \"chat\": 3, ... } }`, calculé à partir des données actuelles."],
+            ] },
+          { type: 'list', ordered: false, items: [
+            "Pour `/animaux/:id/details` : trouve l'animal, puis son soigneur dans l'autre tableau grâce à `soigneurId`.",
+            "Pour `/soigneurs/:id/animaux` : c'est un cas pour `filter`.",
+            "Pour `/stats` : parcours les animaux et incrémente un compteur par espèce dans un objet. Aucune valeur ne doit être écrite en dur : si tu ajoutes un animal, les statistiques doivent changer.",
+          ] },
+
+          { type: 'prose', content: "**Palier 4 — Règles métier (2 pts)**" },
+          { type: 'table',
+            headers: ['Méthode', 'Route', 'Comportement attendu'],
+            rows: [
+              ['POST', '/animaux/:id/adoption', "Passe `adopte` à `true`. 404 si l'animal n'existe pas. 409 s'il est déjà adopté."],
+              ['DELETE', '/soigneurs/:id', "404 si le soigneur n'existe pas. 409 s'il a encore des animaux. Sinon 200 + le soigneur supprimé."],
+            ] },
+          { type: 'prose', content:
+              "Avant d'écrire du code, écris sur papier la liste des vérifications et leur **ordre**. " +
+              "Faut-il vérifier « déjà adopté » avant ou après « l'animal existe » ? Que se passe-t-il si on inverse ? " +
+              "Attention : le tableau `soigneurs` est déclaré avec `const`, ce qui n'empêche pas d'en retirer un élément avec `splice`." },
+
+          { type: 'prose', content:
+              "**Palier 5 — Questions (2 pts).** Crée un fichier `REPONSES.md` à la racine de ton projet et réponds par écrit :" },
+          { type: 'list', ordered: true, items: [
+            "Quelle est la différence entre `req.params`, `req.query` et `req.body` ? Donne un exemple de requête pour chacun.",
+            "Quand le serveur redémarre, les animaux que tu as créés disparaissent. Pourquoi ? Que faudrait-il pour qu'ils soient conservés ?",
+          ] },
+
+          { type: 'info', variant: 'astuce', title: 'Versionne au fil des paliers',
+            content:
+              "Un commit à la fin de chaque palier, avec un message clair : `feat: palier 1 - CRUD de base`, " +
+              "`feat: palier 2 - PATCH, filtres et tri`, etc." },
+          { type: 'info', variant: 'definition', title: 'Le jour du contrôle',
+            content:
+              "Même format, autre thème, trois heures, **sans internet**. Le code de départ et les aides sur `req.query`, " +
+              "`filter`, `sort` et `PATCH` seront fournis dans l'énoncé. Le palier 1 correspond à ce que tu as déjà pratiqué ; " +
+              "les paliers suivants demandent de raisonner. Garde ta collection Insomnia : savoir tester vite et bien fait " +
+              "partie de l'épreuve." },
+        ],
+        done:
+          "Les paliers 1 à 3 fonctionnent dans Insomnia avec les bons codes de statut, y compris dans les cas " +
+          "d'erreur, et REPONSES.md est rempli. Le palier 4 est un plus.",
+        validation: { commit: 'git commit -m "feat: palier N - ..." && git push' },
       },
     ],
   },
