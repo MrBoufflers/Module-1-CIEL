@@ -1,7 +1,7 @@
 // =============================================================================
 // Séquence S5 — Le web côté style : CSS (MISE À JOUR : exercices intégrés)
 // Niveau : Première · Durée : 9 h (3h CSS1 + 3h CSS2 + 1,5h TP + 1,5h contrôle)
-// 7 exercices intégrés au cours (4 dans CSS1, 3 dans CSS2), sans correction.
+// 6 exercices intégrés au cours (4 dans CSS1, 2 dans CSS2), sans correction.
 // =============================================================================
 
 export const s5Css = {
@@ -133,7 +133,8 @@ export const s5Css = {
       type: 'section', title: 'd. Le modèle de boîte (Box Model)',
       blocks: [
         { type: 'prose', content:
-          "**Chaque élément HTML est une boîte rectangulaire.** La boîte a 4 couches :" },
+          "**Chaque élément HTML est une boîte rectangulaire.** La boîte a 4 couches, de l'intérieur vers l'extérieur :" },
+        { type: 'component', name: 'BoxModelDiagram' },
         { type: 'cards', columns: 4, items: [
           { title: '1. Contenu', text: "Le texte, l'image." },
           { title: '2. Padding', text: "Espace entre contenu et bordure (rembourrage)." },
@@ -185,7 +186,7 @@ export const s5Css = {
       type: 'section', title: 'Cours 2 — Mise en page et responsive',
       blocks: [
         { type: 'info', variant: 'astuce', title: 'Objectifs du cours 2',
-          content: "Utiliser Flexbox pour aligner, CSS Grid pour les grilles, et les media queries pour s'adapter à tous les écrans." },
+          content: "Utiliser Flexbox pour aligner et disposer les éléments (y compris en galerie avec flex-wrap), et les media queries pour s'adapter à tous les écrans." },
       ],
     },
 
@@ -208,6 +209,8 @@ export const s5Css = {
           ] },
         { type: 'info', variant: 'analogie', title: 'Analogie — L\u2019étagère',
           content: "Flexbox = une étagère. Objets en rang (row) ou empilés (column), poussés à gauche / centre / répartis, avec retour à la ligne quand c'est plein (wrap)." },
+        { type: 'prose', content:
+          "Avec **`flex-wrap: wrap`**, les éléments passent à la ligne quand il n'y a plus de place : c'est ce qui permet de disposer une **galerie de cartes** sur plusieurs rangées (on s'en sert dans la partie responsive)." },
       ],
     },
     {
@@ -225,65 +228,47 @@ export const s5Css = {
       ],
     },
 
-    // --- g. Grid ---
-    {
-      type: 'section', title: 'g. CSS Grid : la grille 2D',
-      blocks: [
-        { type: 'prose', content:
-          "Grid crée une **grille à deux dimensions** (lignes ET colonnes). Parfait pour les galeries et layouts complexes." },
-        { type: 'code', language: 'css', title: 'Exemple Grid',
-          code: '.galerie {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 16px;\n}' },
-        { type: 'info', variant: 'definition', title: 'Flexbox ou Grid ?',
-          content: "**Flexbox** : un axe (nav, ligne de boutons). **Grid** : deux axes (galerie, layout de page). Les deux se combinent." },
-      ],
-    },
-    {
-      type: 'exercise',
-      title: 'Exercice 6 — Une galerie en Grid',
-      body: [
-        { type: 'prose', content: 'Dans ton HTML, crée une `<div class="galerie">` contenant 6 `<div class="carte">` (réutilise le style de carte de l\u2019exercice 4). Puis :' },
-        { type: 'list', ordered: true, items: [
-          'Cible `.galerie` : `display: grid;`, `grid-template-columns: repeat(3, 1fr);`, `gap: 16px;`.',
-          'Vérifie : les 6 cartes doivent s\u2019afficher en grille de 3 colonnes.',
-          'Change `repeat(3, 1fr)` en `repeat(2, 1fr)` : observe le passage à 2 colonnes.',
-          'Remets 3 colonnes.',
-        ]},
-      ],
-    },
 
-    // --- h. Responsive ---
+    // --- g. Responsive ---
     {
-      type: 'section', title: 'h. Le responsive',
+      type: 'section', title: 'g. Le responsive (en Flexbox)',
       blocks: [
         { type: 'prose', content:
           "Un site pro doit être lisible sur un 27 pouces comme sur un smartphone. On utilise les **media queries**." },
-        { type: 'code', language: 'css', title: 'Approche mobile-first',
+        { type: 'code', language: 'css', title: 'Approche mobile-first, en Flexbox',
           code:
-            '/* Mobile par défaut */\n.galerie { display: grid; grid-template-columns: 1fr; gap: 16px; }\n\n' +
-            '/* Tablette (>= 768px) */\n@media (min-width: 768px) {\n  .galerie { grid-template-columns: repeat(2, 1fr); }\n}\n\n' +
-            '/* Desktop (>= 1024px) */\n@media (min-width: 1024px) {\n  .galerie { grid-template-columns: repeat(3, 1fr); }\n}' },
+            '/* Mobile par défaut : 1 carte par ligne, nav empilée */\n' +
+            '.galerie { display: flex; flex-wrap: wrap; gap: 16px; }\n' +
+            '.galerie .carte { flex: 1 1 100%; }\n' +
+            '.nav-links { display: flex; flex-direction: column; gap: 8px; }\n\n' +
+            '/* Tablette et plus (>= 768px) */\n' +
+            '@media (min-width: 768px) {\n' +
+            '  /* chaque carte veut ~250px : flex-wrap place autant de colonnes que possible */\n' +
+            '  .galerie .carte { flex: 1 1 250px; }\n' +
+            '  .nav-links { flex-direction: row; gap: 24px; }\n' +
+            '}' },
         { type: 'info', variant: 'astuce', title: 'Mobile-first',
           content: "On code d'abord pour mobile, puis on ajoute des règles pour les écrans plus grands (`min-width`). Plus simple et plus fiable." },
       ],
     },
     {
       type: 'exercise',
-      title: 'Exercice 7 — Rendre la galerie responsive',
+      title: 'Exercice 6 — Une galerie responsive en Flexbox',
       body: [
-        { type: 'prose', content: 'Reprends la galerie de l\u2019exercice 6 et applique l\u2019approche mobile-first :' },
+        { type: 'prose', content: 'Dans ton HTML, crée une `<div class="galerie">` contenant 6 `<div class="carte">` (réutilise le style de carte de l\u2019exercice 4). Puis applique l\u2019approche mobile-first, en Flexbox :' },
         { type: 'list', ordered: true, items: [
-          'Change la règle `.galerie` pour qu\u2019elle affiche **1 colonne** par défaut.',
-          'Ajoute une `@media (min-width: 768px)` qui passe à **2 colonnes**.',
-          'Ajoute une `@media (min-width: 1024px)` qui passe à **3 colonnes**.',
-          'Redimensionne la fenêtre du navigateur de large à étroit : les colonnes doivent s\u2019adapter progressivement.',
-          'Bonus : dans la media query mobile, passe aussi le `<nav>` en `flex-direction: column` pour que les liens s\u2019empilent.',
+          'Cible `.galerie` : `display: flex;`, `flex-wrap: wrap;`, `gap: 16px;`.',
+          'Par défaut (mobile), fais que chaque `.carte` occupe toute la largeur : `flex: 1 1 100%;` → **1 carte par ligne**.',
+          'Ajoute une `@media (min-width: 768px)` qui met `.carte { flex: 1 1 250px; }` : les cartes se placent alors sur **plusieurs colonnes** selon la largeur disponible.',
+          'Redimensionne la fenêtre de large à étroit : le nombre de cartes par ligne doit s\u2019adapter tout seul grâce à `flex-wrap`.',
+          'Bonus : fais empiler le `<nav>` sur mobile (`flex-direction: column`) et le remettre en ligne (`row`) à partir de 768px.',
         ]},
       ],
     },
 
-    // --- i. Sélecteurs combinés ---
+    // --- h. Sélecteurs combinés ---
     {
-      type: 'section', title: 'i. Les sélecteurs combinés',
+      type: 'section', title: 'h. Les sélecteurs combinés',
       blocks: [
         { type: 'table', headers: ['Syntaxe', 'Nom', 'Cible', 'Exemple'],
           rows: [
@@ -311,7 +296,7 @@ export const s5Css = {
           'CSS = apparence. Un fichier, toutes les pages.',
           'Sélecteurs : `.classe` (le plus courant). Combinaisons : chaîné (A.B), descendant (A B), enfant direct (A > B).',
           'Box Model : contenu → padding → bordure → marge. Toujours `box-sizing: border-box`.',
-          'Flexbox (1 axe) pour aligner, Grid (2 axes) pour les grilles.',
+          'Flexbox pour aligner et disposer ; `flex-wrap` permet les galeries sur plusieurs lignes.',
           'Responsive : `@media (min-width: ...)`, approche mobile-first.',
         ]},
       ],

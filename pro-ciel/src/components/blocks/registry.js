@@ -7,6 +7,7 @@ const registry = {
   ),
   ComponentShowcase: lazy(() => import('../organisms/ComponentShowcase.jsx')),
   SemanticLayoutDiagram: lazy(() => import('../organisms/SemanticLayoutDiagram.jsx')),
+  BoxModelDiagram: lazy(() => import('../organisms/BoxModelDiagram.jsx')),
   FileExplorerComponent: lazy(() =>
     import('../organisms/FileExplorerComponent.jsx').then(m => ({ default: m.FileExplorerComponent }))
   ),
